@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="cabinet" xml:space="preserve">
+    <value>Кабинет</value>
+  </data>
+  <data name="cancel" xml:space="preserve">
+    <value>Отменить</value>
+  </data>
+  <data name="hide" xml:space="preserve">
+    <value>Скрыть</value>
+  </data>
+  <data name="High" xml:space="preserve">
+    <value>Высокая</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="logoff" xml:space="preserve">
+    <value>Выйти</value>
+  </data>
+  <data name="Low" xml:space="preserve">
+    <value>Низкая</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Средняя</value>
+  </data>
+  <data name="register" xml:space="preserve">
+    <value>Зарегистрироваться</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="show" xml:space="preserve">
+    <value>Показать</value>
+  </data>
+  <data name="submit" xml:space="preserve">
+    <value>Подтвердить</value>
+  </data>
+  <data name="VeryHigh" xml:space="preserve">
+    <value>Очень высокая</value>
+  </data>
+  <data name="TaskComplexity" xml:space="preserve">
+    <value>Сложность</value>
+  </data>
+  <data name="TaskDeadline" xml:space="preserve">
+    <value>Необходимо выполнить до</value>
+  </data>
+  <data name="TaskDescription" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="TaskDueDate" xml:space="preserve">
+    <value>Желательно выполнить до</value>
+  </data>
+  <data name="TaskEstimation" xml:space="preserve">
+    <value>Временная оценка</value>
+  </data>
+  <data name="TaskName" xml:space="preserve">
+    <value>Название задания</value>
+  </data>
+  <data name="TaskParentTask" xml:space="preserve">
+    <value>Задание-родитель</value>
+  </data>
+  <data name="TaskPriority" xml:space="preserve">
+    <value>Приоритет</value>
+  </data>
+  <data name="TaskProject" xml:space="preserve">
+    <value>Проект</value>
+  </data>
+  <data name="TaskStartDate" xml:space="preserve">
+    <value>Начать выполнение с</value>
+  </data>
+  <data name="NoUrgentImportant" xml:space="preserve">
+    <value>Не срочно, важно</value>
+  </data>
+  <data name="NoUrgentNoImportant" xml:space="preserve">
+    <value>Не срочно, не важно</value>
+  </data>
+  <data name="UrgentImportant" xml:space="preserve">
+    <value>Срочно, важно</value>
+  </data>
+  <data name="UrgentNoImportant" xml:space="preserve">
+    <value>Срочно, не важно</value>
+  </data>
+  <data name="createTask" xml:space="preserve">
+    <value>Новое задание</value>
+  </data>
+  <data name="execution" xml:space="preserve">
+    <value>Выполение</value>
+  </data>
+  <data name="days" xml:space="preserve">
+    <value>дней</value>
+  </data>
+  <data name="from" xml:space="preserve">
+    <value>С</value>
+  </data>
+  <data name="hours" xml:space="preserve">
+    <value>часов</value>
+  </data>
+  <data name="minutes" xml:space="preserve">
+    <value>минут</value>
+  </data>
+  <data name="need" xml:space="preserve">
+    <value>Требует</value>
+  </data>
+  <data name="to" xml:space="preserve">
+    <value>до</value>
+  </data>
+  <data name="addProject" xml:space="preserve">
+    <value>Добавит проект</value>
+  </data>
+  <data name="advRemark" xml:space="preserve">
+    <value>Забыли все тонкости вашей задачи? Напишите к ней заметку!</value>
+  </data>
+  <data name="advReminders" xml:space="preserve">
+    <value>Напоминания помогут всегда быть в нужное время и в нужном месте!</value>
+  </data>
+  <data name="greeting" xml:space="preserve">
+    <value>Привет</value>
+  </data>
+  <data name="noTodo" xml:space="preserve">
+    <value>На сегодня у Вас еще ничего не запланировано</value>
+  </data>
+  <data name="Remarks" xml:space="preserve">
+    <value>Заметки</value>
+  </data>
+  <data name="Reminders" xml:space="preserve">
+    <value>Напоминания</value>
+  </data>
+  <data name="slogan" xml:space="preserve">
+    <value>Возьми время под контроль!</value>
+  </data>
+  <data name="Projects" xml:space="preserve">
+    <value>Проекты</value>
+  </data>
+  <data name="addSubtask" xml:space="preserve">
+    <value>Добавить подзадачу</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Подробнее</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Отредактировать</value>
+  </data>
+  <data name="DefaultProject" xml:space="preserve">
+    <value>Разное</value>
+  </data>
+  <data name="createDayLimit" xml:space="preserve">
+    <value>Задать рамки дня</value>
+  </data>
+  <data name="freeTime" xml:space="preserve">
+    <value>Свободное время</value>
+  </data>
+  <data name="nothingToDo" xml:space="preserve">
+    <value>Подобрать задание</value>
+  </data>
+  <data name="doToday" xml:space="preserve">
+    <value>Выполнить сегодня</value>
+  </data>
+  <data name="cantAddToList" xml:space="preserve">
+    <value>К сожалению, эта задача не может быть добавлен в список задач. У вас не хватает свободного времени. Попробуйте изменить рамки дня или разбить задание на меньшие подзадачи</value>
+  </data>
+  <data name="back" xml:space="preserve">
+    <value>Вернуться в кабинет</value>
+  </data>
+  <data name="name" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="ParentProject" xml:space="preserve">
+    <value>Родительский проект</value>
+  </data>
+  <data name="ErrorRegulExpr" xml:space="preserve">
+    <value>Это поле может содержать только буквы, цифры, подчеркивания и знаки препинания</value>
+  </data>
+  <data name="ErrorRequired" xml:space="preserve">
+    <value>Это поле должно быть заполнено</value>
+  </data>
+  <data name="ErrorStrLen" xml:space="preserve">
+    <value>Строка привышает позволеную длину</value>
+  </data>
+  <data name="createProject" xml:space="preserve">
+    <value>Новый проект</value>
+  </data>
+  <data name="DeleteQustion" xml:space="preserve">
+    <value>Уверены, что хотите удалить</value>
+  </data>
+  <data name="contains" xml:space="preserve">
+    <value>Содержит</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>Расположение</value>
+  </data>
+  <data name="subprojects" xml:space="preserve">
+    <value>подпроектов</value>
+  </data>
+  <data name="tasks" xml:space="preserve">
+    <value>задач</value>
+  </data>
+  <data name="estimation" xml:space="preserve">
+    <value>Продолжительность</value>
+  </data>
+  <data name="project" xml:space="preserve">
+    <value>проект</value>
+  </data>
+  <data name="task" xml:space="preserve">
+    <value>задание</value>
+  </data>
+  <data name="Readiness" xml:space="preserve">
+    <value>Уровень выполнености</value>
+  </data>
+  <data name="noAvailableTasks" xml:space="preserve">
+    <value>У вас нет невыполненных заданий. Почитайте интересную книгу, займитесь спортом или просто отдохните.</value>
+  </data>
+  <data name="itsPast" xml:space="preserve">
+    <value>Поезд ушел, это время уже в прошлом</value>
+  </data>
+</root>

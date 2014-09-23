@@ -1,0 +1,48 @@
+﻿@model LifeManagement.Models.Project
+@using LifeManagement.Resources
+@{
+    ViewBag.Title = ResourceScr.Edit + Model.Name;
+}
+
+<h2>
+    @ResourceScr.Edit @ResourceScr.project @Model.Name
+</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.UpdatedOn)
+        @Html.HiddenFor(model => model.IsDeleted)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ParentProjectId, ResourceScr.ParentProject, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ParentProjectId", String.Empty)
+                @Html.ValidationMessageFor(model => model.ParentProjectId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@ResourceScr.save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink(ResourceScr.back, "Index", "Cabinet")
+</div>
