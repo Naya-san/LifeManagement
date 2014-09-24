@@ -11,6 +11,7 @@ using LifeManagement.BusinessLogic;
 using Microsoft.AspNet.Identity;
 namespace LifeManagement.Controllers
 {
+    [Localize]
     public class TaskController : Controller
     {
         private LifeManagementContext db = new LifeManagementContext();

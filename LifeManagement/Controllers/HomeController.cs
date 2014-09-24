@@ -50,6 +50,11 @@ namespace LifeManagement.Controllers
             return View();
         }
 
+        public ActionResult ChangeLanguage(string idLeng)
+        {
+           Session["culture"] =  idLeng;
+           return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

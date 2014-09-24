@@ -36,11 +36,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink(@LifeManagement.Resources.ResourceScr.cabinet, "Index", "Cabinet")</li>
-                    <li class="bell"><div class="inbell">1</div>
-                        <ul class="remindersActual">
-                             <li>День Рождения</li>
-                         </ul>
-                    </li>    
+                    <li>@Html.ActionLink("UA", "ChangeLanguage", "Home", new { idLeng = "uk-ua" }, null)</li> 
+                    <li>@Html.ActionLink("RUS", "ChangeLanguage", "Home", new { idLeng = "ru-ru" }, null)</li> 
+                    <li>@Html.ActionLink("ENG", "ChangeLanguage", "Home", new { idLeng = "en-us" }, null)</li> 
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
