@@ -193,6 +193,16 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Entities\DB\ApplicationUser.cs" />
+    <Compile Include="Entities\ApplicationDbContext.cs" />
+    <Compile Include="Entities\DB\Feedback.cs" />
+    <Compile Include="Entities\DB\Alert.cs" />
+    <Compile Include="Entities\DB\Tag.cs" />
+    <Compile Include="Entities\DB\Record.cs" />
+    <Compile Include="Entities\DB\Event.cs" />
+    <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="Entities\DB\Project.cs" />
+    <Compile Include="Entities\DB\Task.cs" />
     <Compile Include="Enums\Complexity.cs" />
     <Compile Include="Enums\ComplexityExtensions.cs" />
     <Compile Include="Enums\FileType.cs" />
@@ -357,6 +367,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Entities\Synchronization\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

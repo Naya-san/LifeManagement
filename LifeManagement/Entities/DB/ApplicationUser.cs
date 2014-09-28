@@ -23,20 +23,25 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System.Collections.Generic;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace LifeManagement.Models
+namespace LifeManagement.Entities.DB
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-    }
+        public virtual ICollection<Alert> Alerts { get; private set; }
+        public virtual ICollection<Project> Projects { get; private set; }
+        public virtual ICollection<Record> Records { get; private set; }
+        public virtual ICollection<Tag> Tags { get; private set; }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public ApplicationDbContext()
-            : base("DefaultConnection")
+        public ApplicationUser()
         {
+          Alerts = new List<Alert>();
+          Projects = new List<Project>();
+          Records = new List<Record>();
+          Tags = new List<Tag>(); 
         }
     }
 }

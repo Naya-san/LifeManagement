@@ -31,7 +31,7 @@ using LifeManagement.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
-using Task = System.Threading.Tasks.Task;
+using Project = LifeManagement.Models.Project;
 
 namespace LifeManagement.Controllers
 {
