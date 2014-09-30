@@ -23,10 +23,12 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System;
+
 namespace LifeManagement.Entities.DB
 {
     public class Event : Record
-    {           
-
+    {
+        public Guid GroupId { get; set; }
     }
 }
