@@ -333,4 +333,10 @@
   <data name="itsPast" xml:space="preserve">
     <value>Поезд ушел, это время уже в прошлом</value>
   </data>
+  <data name="About" xml:space="preserve">
+    <value>Подробнее</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Обратная связь</value>
+  </data>
 </root>

@@ -61,6 +61,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add project.
         /// </summary>
         public static string addProject {
@@ -282,6 +291,15 @@ namespace LifeManagement.Resources {
         public static string execution {
             get {
                 return ResourceManager.GetString("execution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Feedback.
+        /// </summary>
+        public static string Feedback {
+            get {
+                return ResourceManager.GetString("Feedback", resourceCulture);
             }
         }
         

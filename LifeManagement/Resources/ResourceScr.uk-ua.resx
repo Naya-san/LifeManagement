@@ -333,4 +333,10 @@
   <data name="itsPast" xml:space="preserve">
     <value>Потяг пішов, не можна додати справу для минулог часу</value>
   </data>
+  <data name="About" xml:space="preserve">
+    <value>Детальніше</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Зворотній зв'язок</value>
+  </data>
 </root>

@@ -339,4 +339,10 @@
   <data name="itsPast" xml:space="preserve">
     <value>It's too late =(</value>
   </data>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
 </root>

@@ -228,12 +228,12 @@ ol.tree
 	padding: 0 0 0 30px;
 	width: 330px;
 }
-li 
+/*li 
 { 
 	position: relative; 
 	margin-left: -15px;
 	list-style: none;
-}
+}*/
 
 li.folder {
    margin:8px 0 0.225em;
@@ -531,3 +531,78 @@ li.context>input.menuicon:checked~ul{
    display: block;
    position: relative;
 }
+
+/* New menu*/
+#menu {
+    
+    position: absolute;
+    right: 0px;
+}
+#menuBTN {
+    
+    position: absolute;
+    right: 10px;
+}
+#logo {
+
+    position: absolute;
+    left: 10px;
+}
+ #navbar1 ul{
+    display: none;
+    background-color: #17292e;
+    position: absolute;
+    top: 200%;
+}
+#navbar1 li:hover ul { display: block; }
+#navbar1, #navbar1 ul{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+#navbar1 {
+    height: 30px;
+    padding-left: 25px;
+    }
+#navbar1 li {
+    float: left;
+    position: relative;
+    height: 100%;
+    width: 200px;
+    }
+
+#navbar1 li a {
+    display: block;
+    padding: 6px;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    }
+    #navbar1 ul li { float: none; }
+
+    #navbar1 ul li a:hover {color: #428bca; }
+
+.flagContainer {
+    width: 200px;
+    height: 24px;
+}
+
+.ua {
+        background: url(/Content/Images/Ukraine-Flag-icon.png) no-repeat;
+    float: left;
+    margin-left: 40px;
+    }
+.ru {
+        background: url(/Content/Images/Russia-Flag-icon.png)  no-repeat;
+        float: right;
+        margin-right: 23px;
+    }
+.eng {
+        background: url(/Content/Images/United-Kingdom-flag.png)  no-repeat;
+        float: right;
+        margin-right: 40px;
+    }
+.ru, .ua, .eng {
+        height: 24px;
+        width: 24px;
+    }

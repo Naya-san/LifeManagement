@@ -31,6 +31,7 @@ using LifeManagement.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
+using ApplicationUser = LifeManagement.Entities.DB.ApplicationUser;
 using Project = LifeManagement.Models.Project;
 
 namespace LifeManagement.Controllers
@@ -103,7 +104,7 @@ namespace LifeManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName };
+                var user = new ApplicationUser { UserName = model.UserName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
