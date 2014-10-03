@@ -339,4 +339,7 @@
   <data name="Feedback" xml:space="preserve">
     <value>Обратная связь</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
 </root>

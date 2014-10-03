@@ -23,36 +23,36 @@
 </head>
 <body>
     <div class="navbar navbar-inverse">
-        @*<div class="container">*@
-            <div class="navbar-header">
-                <div id="logo"><a href="/"><img src="/content/Images/LogoWithText.png" alt="LifeManagement" align="left"></a></div>
-                  
-             </div>
-            <div id="menu">
+        <div class="navbar-header">
+            <div id="logo"><a href="/"><img src="/content/Images/LogoWithText.png" alt="LifeManagement" ></a></div>
+        </div>
+        <div class="searchContainer">
+            <form action="" method="post" class="search">
+                <input type="search" name="" placeholder="@LifeManagement.Resources.ResourceScr.Search" class="input" />
+                <input type="submit" name="" value="" class="submit" />
+            </form>   
+        </div>
+        <div id="menu">
+            <ul id="navbar1">
+                <li>
+                    <div id="menuBTN"><img src="/content/Images/MenuWhite.png" alt="Menu"></div>
+                    <ul>
+                        <li>
+                            <div class="flagContainer">
+                                @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "uk-ua" }, new { @class = "ua" })
+                                @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "en-us" }, new { @class = "eng" })
+                                @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "ru-ru" }, new { @class = "ru" })
+                            </div>
+                        </li>
 
-
-                <ul id="navbar1">
-                    <li>
-                        <div id="menuBTN"><img src="/content/Images/MenuWhite.png" alt="LifeManagement" align="left"></div>
-
-                        <ul>
-                            <li>
-                                <div class="flagContainer">
-                                    @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "uk-ua" }, new { @class = "ua" })
-                                    @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "en-us" }, new { @class = "eng" })
-                                    @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "ru-ru" }, new { @class = "ru" })
-                                </div>
-                            </li>
-
-                            @Html.Partial("_LoginPartial")
-                            <li>@Html.ActionLink(@LifeManagement.Resources.ResourceScr.cabinet, "Index", "Cabinet")</li>
-                            <li><a href="/">@LifeManagement.Resources.ResourceScr.About</a></li>
-                            <li><a href="/">@LifeManagement.Resources.ResourceScr.Feedback</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        @*</div>*@
+                        @Html.Partial("_LoginPartial")
+                        <li>@Html.ActionLink(@LifeManagement.Resources.ResourceScr.cabinet, "Index", "Cabinet")</li>
+                        <li><a href="/">@LifeManagement.Resources.ResourceScr.About</a></li>
+                        <li><a href="/">@LifeManagement.Resources.ResourceScr.Feedback</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="container body-content">
         @RenderBody()
