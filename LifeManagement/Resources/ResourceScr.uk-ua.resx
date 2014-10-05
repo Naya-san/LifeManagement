@@ -342,4 +342,22 @@
   <data name="Search" xml:space="preserve">
     <value>Пошук</value>
   </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Повторіть пароль</value>
+  </data>
+  <data name="IfNoAccount" xml:space="preserve">
+    <value>якщо досі немає акаунту</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="RegisterForm" xml:space="preserve">
+    <value>Реєстрація</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Запам'ятати мене?</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Логін</value>
+  </data>
 </root>

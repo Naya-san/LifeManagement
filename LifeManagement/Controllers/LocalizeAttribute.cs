@@ -23,7 +23,7 @@ namespace LifeManagement.Controllers
             //base.OnActionExecuting(filterContext);
             string culture = (filterContext.HttpContext.Session["culture"] != null)
               ? filterContext.HttpContext.Session["culture"].ToString()
-              : "ru-ru";
+              : "uk-ua";
 
             CultureInfo cultureInfo = new CultureInfo(culture);
             Thread.CurrentThread.CurrentCulture = cultureInfo;
