@@ -606,6 +606,9 @@ li.context>input.menuicon:checked~ul{
         height: 24px;
         width: 24px;
     }
+.ru:hover, .ua:hover, .eng:hover {
+    border: 1px solid #428bca;
+    }
 /*Search*/
 .searchContainer {
     width: 15%;
@@ -630,9 +633,7 @@ li.context>input.menuicon:checked~ul{
 
 /* стили для поля ввода */
 .search .input {
-	/* растягиваем поле ввода на всю ширину формы */
 	width: 100%;
-
 	/* за счет верхнего (8px) и нижнего (9px) внутренних отступов
 	** регулируем высоту формы
 	** внутренний отступ справа (37px) делаем больше левого,
