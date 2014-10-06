@@ -186,6 +186,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="ObsoleteBusinessLogic\DateTimeProvider.cs" />
     <Compile Include="ObsoleteBusinessLogic\DayLimitActivity.cs" />
     <Compile Include="ObsoleteBusinessLogic\RoutineActivity.cs" />
@@ -377,6 +378,11 @@
     <Content Include="Views\Projects\Details.cshtml" />
     <Content Include="Views\Projects\Edit.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\Tags\Create.cshtml" />
+    <Content Include="Views\Tags\Delete.cshtml" />
+    <Content Include="Views\Tags\Details.cshtml" />
+    <Content Include="Views\Tags\Edit.cshtml" />
+    <Content Include="Views\Tags\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

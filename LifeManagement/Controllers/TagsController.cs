@@ -13,61 +13,61 @@ namespace LifeManagement.Controllers
 {
     [Authorize]
     [Localize]
-    public class ProjectsController : Controller
+    public class TagsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Projects
+        // GET: Tags
         public async Task<ActionResult> Index()
         {
             var userId = User.Identity.GetUserId();
-            var projects = db.Projects.Where(x => x.UserId == userId).Include(p => p.ParentProject).Include(p => p.User);
-            return View(await projects.ToListAsync());
+            var tags = db.Tags.Where(x => x.UserId == userId).Include(t => t.User);
+            return View(await tags.ToListAsync());
         }
 
-        // GET: Projects/Details/5
+        // GET: Tags/Details/5
         public async Task<ActionResult> Details(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = await db.Projects.FindAsync(id);
-            if (project == null)
+
+            var tag = await db.Tags.FindAsync(id);
+            if (tag == null)
             {
                 return HttpNotFound();
             }
-            return View(project);
+
+            return View(tag);
         }
 
-        // GET: Projects/Create
+        // GET: Tags/Create
         public ActionResult Create()
         {
-            ViewBag.ParentProjectId = new SelectList(db.Projects, "Id", "Path");
             return View();
         }
 
-        // POST: Projects/Create
+        // POST: Tags/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ParentProjectId,Name")] Project project)
+        public async Task<ActionResult> Create([Bind(Include = "Name")] Tag tag)
         {
             if (ModelState.IsValid)
             {
-                project.Id = Guid.NewGuid();
-                project.UserId = User.Identity.GetUserId();
-                db.Projects.Add(project);
+                tag.Id = Guid.NewGuid();
+                tag.UserId = User.Identity.GetUserId();
+                db.Tags.Add(tag);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id), "Id", "Path", project.ParentProjectId);
-            return View(project);
+            return View(tag);
         }
 
-        // GET: Projects/Edit/5
+        // GET: Tags/Edit/5
         public async Task<ActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -75,35 +75,34 @@ namespace LifeManagement.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var project = await db.Projects.FindAsync(id);
-            if (project == null)
+            var tag = await db.Tags.FindAsync(id);
+            if (tag == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id), "Id", "Path", project.ParentProjectId);
-            return View(project);
+            return View(tag);
         }
 
-        // POST: Projects/Edit/5
+        // POST: Tags/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,ParentProjectId,UserId,Name")] Project project)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,UserId,Name")] Tag tag)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(project).State = EntityState.Modified;
+                tag.UserId = User.Identity.GetUserId();
+                db.Entry(tag).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id), "Id", "Path", project.ParentProjectId);
-            return View(project);
+            return View(tag);
         }
 
-        // GET: Projects/Delete/5
+        // GET: Tags/Delete/5
         public async Task<ActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -111,23 +110,23 @@ namespace LifeManagement.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var project = await db.Projects.FindAsync(id);
-            if (project == null)
+            var tag = await db.Tags.FindAsync(id);
+            if (tag == null)
             {
                 return HttpNotFound();
             }
 
-            return View(project);
+            return View(tag);
         }
 
-        // POST: Projects/Delete/5
+        // POST: Tags/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
-            var project = await db.Projects.FindAsync(id);
-            db.Projects.RemoveRange(project.ChildProjects);
-            db.Projects.Remove(project);
+            var tag = await db.Tags.FindAsync(id);
+#warning Нужно удалять теги у всех записей, у которых они есть. Могут быть проблемы с каскадами.
+            db.Tags.Remove(tag);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

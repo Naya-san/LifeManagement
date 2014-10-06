@@ -1,4 +1,4 @@
-﻿@model LifeManagement.Models.DB.Project
+﻿@model LifeManagement.Models.DB.Tag
 
 @{
     ViewBag.Title = "Edit";
@@ -11,19 +11,11 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Project</h4>
+        <h4>Tag</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.UserId)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ParentProjectId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ParentProjectId", String.Empty)
-                @Html.ValidationMessageFor(model => model.ParentProjectId)
-            </div>
-        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
