@@ -27,7 +27,7 @@ using System.Web.Mvc;
 using LifeManagement.Attributes;
 using LifeManagement.ObsoleteModels;
 
-namespace LifeManagement.ObsoleteControllers
+namespace LifeManagement.Controllers
 {
     [Localize]    
     public class HomeController : Controller
@@ -35,15 +35,6 @@ namespace LifeManagement.ObsoleteControllers
         private LifeManagementContext db = new LifeManagementContext();
         public ActionResult Index()
         {
-
-            //Category category = new Category();
-            //category.Id = Guid.NewGuid();
-            //category.IsDeleted = false;
-            //category.Name = "Work";
-            //category.UpdatedOn = DateTime.Now;
-            //category.UserId = Guid.NewGuid();
-            //db.Categories.Add(category);
-            //db.SaveChanges(); 
             return View();
         }
 
@@ -51,19 +42,6 @@ namespace LifeManagement.ObsoleteControllers
         {
            Session["culture"] =  idLeng;
            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
-        }
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }

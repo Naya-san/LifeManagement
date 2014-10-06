@@ -432,9 +432,9 @@ namespace LifeManagement.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
-        public static string name {
+        public static string Name {
             get {
-                return ResourceManager.GetString("name", resourceCulture);
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         

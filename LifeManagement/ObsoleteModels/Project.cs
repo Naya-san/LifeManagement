@@ -40,8 +40,7 @@ namespace LifeManagement.ObsoleteModels
 
         [Required(ErrorMessageResourceName = "ErrorRequired", ErrorMessageResourceType = typeof(ResourceScr))]
         [StringLength(25, ErrorMessageResourceName = "ErrorStrLen", ErrorMessageResourceType = typeof(ResourceScr))]
-        [RegularExpression(@"[A-Za-zА-Яа-яА-Яа-я0-9,:._\-()\s\""]+",
-        ErrorMessageResourceName = "ErrorRegulExpr", ErrorMessageResourceType = typeof(ResourceScr))]
+        [RegularExpression(@"[A-Za-zА-Яа-яА-Яа-я0-9,:._\-()\s\""]+", ErrorMessageResourceName = "ErrorRegulExpr", ErrorMessageResourceType = typeof(ResourceScr))]
         [Display(Name = "name", ResourceType = typeof(ResourceScr))]
         public string Name { get; set; }
         public Guid UserId { get; set; }

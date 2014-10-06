@@ -184,13 +184,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="ObsoleteBusinessLogic\DateTimeProvider.cs" />
     <Compile Include="ObsoleteBusinessLogic\DayLimitActivity.cs" />
     <Compile Include="ObsoleteBusinessLogic\RoutineActivity.cs" />
     <Compile Include="ObsoleteBusinessLogic\UserTimeConverter.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="ObsoleteControllers\CabinetController.cs" />
-    <Compile Include="ObsoleteControllers\HomeController.cs" />
+    <Compile Include="ObsoleteControllers\ObsoleteHomeController.cs" />
     <Compile Include="ObsoleteControllers\ProjectController.cs" />
     <Compile Include="ObsoleteControllers\TaskController.cs" />
     <Compile Include="Models\DB\ApplicationUser.cs" />
@@ -214,7 +216,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\TickerHub.cs" />
-    <Compile Include="ProjectsController.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ObsoleteModels\Article.cs" />
     <Compile Include="ObsoleteModels\Attachment.cs" />
@@ -370,6 +371,7 @@
     <Content Include="ObsoleteViews\Project\Edit.cshtml" />
     <Content Include="ObsoleteViews\Project\Index.cshtml" />
     <Content Include="ObsoleteViews\Task\QuickCreate.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Projects\Create.cshtml" />
     <Content Include="Views\Projects\Delete.cshtml" />
     <Content Include="Views\Projects\Details.cshtml" />

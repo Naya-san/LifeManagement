@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using LifeManagement.Models;
 using LifeManagement.Models.DB;
+using Microsoft.AspNet.Identity;
 
-namespace LifeManagement
+namespace LifeManagement.Controllers
 {
     public class ProjectsController : Controller
     {
@@ -19,8 +17,6 @@ namespace LifeManagement
         // GET: Projects
         public async Task<ActionResult> Index()
         {
-            db.Projects.Add(new Project {Name = "test", UserId = Guid.NewGuid().ToString()});
-            db.SaveChanges();
             var projects = db.Projects.Include(p => p.ParentProject).Include(p => p.User);
             return View(await projects.ToListAsync());
         }
@@ -43,8 +39,7 @@ namespace LifeManagement
         // GET: Projects/Create
         public ActionResult Create()
         {
-            ViewBag.ParentProjectId = new SelectList(db.Projects, "Id", "UserId");
-            ViewBag.UserId = new SelectList(db.Users, "Id", "UserName");
+            ViewBag.ParentProjectId = new SelectList(db.Projects, "Id", "Path");
             return View();
         }
 
@@ -53,18 +48,18 @@ namespace LifeManagement
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,ParentProjectId,UserId,Name")] Project project)
+        public async Task<ActionResult> Create([Bind(Include = "ParentProjectId,Name")] Project project)
         {
             if (ModelState.IsValid)
             {
                 project.Id = Guid.NewGuid();
+                project.UserId = User.Identity.GetUserId();
                 db.Projects.Add(project);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ParentProjectId = new SelectList(db.Projects, "Id", "UserId", project.ParentProjectId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", project.UserId);
+            ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id), "Id", "Path", project.ParentProjectId);
             return View(project);
         }
 
@@ -75,13 +70,14 @@ namespace LifeManagement
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = await db.Projects.FindAsync(id);
+
+            var project = await db.Projects.FindAsync(id);
             if (project == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ParentProjectId = new SelectList(db.Projects, "Id", "UserId", project.ParentProjectId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", project.UserId);
+
+            ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id), "Id", "Path", project.ParentProjectId);
             return View(project);
         }
 
@@ -90,7 +86,7 @@ namespace LifeManagement
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,ParentProjectId,UserId,Name")] Project project)
+        public async Task<ActionResult> Edit([Bind(Include = "ParentProjectId,Name")] Project project)
         {
             if (ModelState.IsValid)
             {
@@ -98,8 +94,8 @@ namespace LifeManagement
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ParentProjectId = new SelectList(db.Projects, "Id", "UserId", project.ParentProjectId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "UserName", project.UserId);
+
+            ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id), "Id", "Path", project.ParentProjectId);
             return View(project);
         }
 
@@ -110,11 +106,13 @@ namespace LifeManagement
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = await db.Projects.FindAsync(id);
+
+            var project = await db.Projects.FindAsync(id);
             if (project == null)
             {
                 return HttpNotFound();
             }
+
             return View(project);
         }
 
@@ -123,7 +121,8 @@ namespace LifeManagement
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
-            Project project = await db.Projects.FindAsync(id);
+            var project = await db.Projects.FindAsync(id);
+            db.Projects.RemoveRange(project.ChildProjects);
             db.Projects.Remove(project);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

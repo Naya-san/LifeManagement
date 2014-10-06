@@ -282,7 +282,7 @@
   <data name="back" xml:space="preserve">
     <value>Повернутись в кабінет</value>
   </data>
-  <data name="name" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>Назва</value>
   </data>
   <data name="ParentProject" xml:space="preserve">

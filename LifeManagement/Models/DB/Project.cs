@@ -25,21 +25,42 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using LifeManagement.Resources;
 
 namespace LifeManagement.Models.DB
 {
     public class Project : IEntity
     {
         public Guid Id { get; set; }
+
+        [Display(Name = "ParentProject", ResourceType = typeof(ResourceScr))]
         public Guid? ParentProjectId { get; set; }
+
         public string UserId { get; set; }
 
+
+        [Required(ErrorMessageResourceName = "ErrorRequired", ErrorMessageResourceType = typeof(ResourceScr))]
+        [StringLength(25, ErrorMessageResourceName = "ErrorStrLen", ErrorMessageResourceType = typeof(ResourceScr))]
+        [RegularExpression(@"[A-Za-zА-Яа-яА-Яа-я0-9,:._\-()\s\""]+", ErrorMessageResourceName = "ErrorRegulExpr", ErrorMessageResourceType = typeof(ResourceScr))]
+        [Display(Name = "Name", ResourceType = typeof(ResourceScr))]
         public string Name { get; set; }
+
 
         public virtual Project ParentProject { get; set; }
         public virtual ApplicationUser User { get; set; }
         public virtual ICollection<Project> ChildProjects { get; private set; }
         public virtual ICollection<Task> Tasks { get; private set; }
+
+
+        [NotMapped]
+        [Display(Name = "Path", ResourceType = typeof(ResourceScr))]
+        public String Path
+        {
+            get { return ParentProjectId == null ? Name : String.Concat(ParentProject.Path, "\\", Name); }
+        }
+
 
         public Project()
         {

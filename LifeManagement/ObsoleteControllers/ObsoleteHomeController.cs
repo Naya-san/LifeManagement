@@ -23,29 +23,47 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using System.Data.Entity;
-using LifeManagement.Models.DB;
-using Microsoft.AspNet.Identity.EntityFramework;
+using System.Web.Mvc;
+using LifeManagement.Attributes;
+using LifeManagement.ObsoleteModels;
 
-namespace LifeManagement.Models
+namespace LifeManagement.ObsoleteControllers
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    [Localize]    
+    public class ObsoleteHomeController : Controller
     {
-        public virtual DbSet<Alert> Alerts { get; set; }
-        public virtual DbSet<Feedback> Feedbacks { get; set; }
-        public virtual DbSet<Project> Projects { get; set; }
-        public virtual DbSet<Tag> Tags { get; set; }
-        public virtual DbSet<Record> Records { get; set; }
-
-        public ApplicationDbContext()
-            : base("DefaultConnection")
+        private LifeManagementContext db = new LifeManagementContext();
+        public ActionResult Index()
         {
+
+            //Category category = new Category();
+            //category.Id = Guid.NewGuid();
+            //category.IsDeleted = false;
+            //category.Name = "Work";
+            //category.UpdatedOn = DateTime.Now;
+            //category.UserId = Guid.NewGuid();
+            //db.Categories.Add(category);
+            //db.SaveChanges(); 
+            return View();
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        public ActionResult ChangeLanguage(string idLeng)
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
-            base.OnModelCreating(modelBuilder);
+           Session["culture"] =  idLeng;
+           return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+        }
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
         }
     }
 }
