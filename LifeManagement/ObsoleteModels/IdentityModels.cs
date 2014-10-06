@@ -22,53 +22,21 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
-using System.Web.Mvc;
-using LifeManagement.ObsoleteControllers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using LifeManagement.Controllers;
 
-namespace LifeManagement.Tests.Controllers
+using Microsoft.AspNet.Identity.EntityFramework;
+
+namespace LifeManagement.ObsoleteModels
 {
-    [TestClass]
-    public class HomeControllerTest
+    // You can add profile data for the user by adding more properties to your ObsoleteApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
+    public class ObsoleteApplicationUser : IdentityUser
     {
-        [TestMethod]
-        public void Index()
+    }
+
+    public class ApplicationDbContext : IdentityDbContext<ObsoleteApplicationUser>
+    {
+        public ApplicationDbContext()
+            : base("DefaultConnection")
         {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
-
-        [TestMethod]
-        public void About()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-        }
-
-        [TestMethod]
-        public void Contact()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
         }
     }
 }

@@ -27,12 +27,13 @@ using System;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using LifeManagement.Attributes;
 using LifeManagement.Models;
+using LifeManagement.Models.DB;
+using LifeManagement.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
-using ApplicationUser = LifeManagement.Entities.DB.ApplicationUser;
-using Project = LifeManagement.Models.Project;
 
 namespace LifeManagement.Controllers
 {
@@ -110,14 +111,13 @@ namespace LifeManagement.Controllers
                 {
                     await SignInAsync(user, isPersistent: false);
 
-                    using (var db = new LifeManagementContext())
+                    using (var db = new ApplicationDbContext())
                     {
                         db.Projects.Add(new Project
                         {
                             Id = Guid.NewGuid(),
-                            UpdatedOn = DateTime.UtcNow,
-                            UserId = Guid.Parse(user.Id),
-                            Name = Resources.ResourceScr.DefaultProject,
+                            UserId = user.Id,
+                            Name = Resources.ResourceScr.DefaultProject
                         });
 
                         db.SaveChanges();
@@ -318,7 +318,7 @@ namespace LifeManagement.Controllers
                 }
                 AddErrors(result);
             }
-
+            
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }

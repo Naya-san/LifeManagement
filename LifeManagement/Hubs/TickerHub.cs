@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using LifeManagement.Models;
+using LifeManagement.ObsoleteModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;

@@ -1,0 +1,98 @@
+﻿@model LifeManagement.ObsoleteModels.Task
+@using LifeManagement.Enums
+@using LifeManagement.Resources
+@{
+    ViewBag.Title = ResourceScr.Delete+" "+Model.Name;
+}
+
+<h3>@ResourceScr.DeleteQustion @ResourceScr.task @Model.Name?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Priority)
+        </dt>
+
+        <dd>
+            @Model.Priority.ToLocalizedString()
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Complexity)
+        </dt>
+
+        <dd>
+            @Model.Complexity.ToLocalizedString()
+        </dd>
+
+        <dt>
+           @ResourceScr.estimation
+        </dt>
+
+        <dd>
+            @if (Model.Estimation.Days > 0)
+            {
+              @Model.Estimation.Days @ResourceScr.days
+            }
+            @if (Model.Estimation.Hours> 0)
+            {
+                @Model.Estimation.Hours @ResourceScr.hours
+            }
+            @if (Model.Estimation.Minutes > 0)
+            {
+                @Model.Estimation.Minutes @ResourceScr.minutes
+            }
+           
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpentTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Readiness) %
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Project.Path)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Project.Path)
+        </dd>
+        @if (Model.ParentTask != null)
+        {
+            <dt>
+                @ResourceScr.TaskParentTask
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ParentTask.Name)
+            </dd>
+        }
+        <dt>
+            @ResourceScr.contains
+        </dt>
+        <dd>
+            @Model.ChildTasks.Count(t => !t.IsDeleted) @ResourceScr.tasks
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="@ResourceScr.Delete" class="btn btn-default" />
+        </div>
+    }
+</div>
+<div>
+    <br>
+    @Html.ActionLink(ResourceScr.back, "Index", "Cabinet")
+</div>

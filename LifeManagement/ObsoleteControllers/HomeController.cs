@@ -22,53 +22,48 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
+
 using System.Web.Mvc;
-using LifeManagement.ObsoleteControllers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using LifeManagement.Controllers;
+using LifeManagement.Attributes;
+using LifeManagement.ObsoleteModels;
 
-namespace LifeManagement.Tests.Controllers
+namespace LifeManagement.ObsoleteControllers
 {
-    [TestClass]
-    public class HomeControllerTest
+    [Localize]    
+    public class HomeController : Controller
     {
-        [TestMethod]
-        public void Index()
+        private LifeManagementContext db = new LifeManagementContext();
+        public ActionResult Index()
         {
-            // Arrange
-            HomeController controller = new HomeController();
 
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
+            //Category category = new Category();
+            //category.Id = Guid.NewGuid();
+            //category.IsDeleted = false;
+            //category.Name = "Work";
+            //category.UpdatedOn = DateTime.Now;
+            //category.UserId = Guid.NewGuid();
+            //db.Categories.Add(category);
+            //db.SaveChanges(); 
+            return View();
         }
 
-        [TestMethod]
-        public void About()
+        public ActionResult ChangeLanguage(string idLeng)
         {
-            // Arrange
-            HomeController controller = new HomeController();
+           Session["culture"] =  idLeng;
+           return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+        }
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
 
-            // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+            return View();
         }
 
-        [TestMethod]
-        public void Contact()
+        public ActionResult Contact()
         {
-            // Arrange
-            HomeController controller = new HomeController();
+            ViewBag.Message = "Your contact page.";
 
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
+            return View();
         }
     }
 }

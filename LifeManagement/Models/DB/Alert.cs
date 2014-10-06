@@ -22,53 +22,26 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
-using System.Web.Mvc;
-using LifeManagement.ObsoleteControllers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using LifeManagement.Controllers;
 
-namespace LifeManagement.Tests.Controllers
+using System;
+
+namespace LifeManagement.Models.DB
 {
-    [TestClass]
-    public class HomeControllerTest
+    public class Alert : IEntity
     {
-        [TestMethod]
-        public void Index()
+        public Guid Id { get; set; }
+        public Guid RecordId { get; set; }
+        public string UserId { get; set; }
+
+        public string Name { get; set; }
+        public DateTime Date { get; set; }
+
+        public virtual Record Record { get; set; }
+        public virtual ApplicationUser User { get; set; }
+
+        public Alert()
         {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
-
-        [TestMethod]
-        public void About()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-        }
-
-        [TestMethod]
-        public void Contact()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
+            Id = Guid.NewGuid();
         }
     }
 }

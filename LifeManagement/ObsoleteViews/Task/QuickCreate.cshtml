@@ -1,0 +1,128 @@
+﻿@model LifeManagement.ObsoleteModels.Task
+
+@{
+    ViewBag.Title = ResourceScr.createTask;
+}
+<script type='text/javascript' src="@Url.Content("~/Scripts/availableFields.js")"></script>
+@using LifeManagement.Enums;
+@using LifeManagement.Resources;
+<h2>@ResourceScr.createTask</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Priority, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        <fieldset>
+            @Html.ValidationMessageFor(model => model.Priority)
+            @{
+    Priority[] priorities = (Priority[])Enum.GetValues(typeof(Priority));
+
+    bool first = true;
+    foreach (Priority value in priorities.Reverse())
+    {
+        if (first)
+        {
+            first = false;
+            <input type="radio" name="priorityChoice" value="@value" checked> @value.ToLocalizedString() <br>
+        }
+        else
+        {
+            <input type="radio" name="priorityChoice" value="@value"> @value.ToLocalizedString() <br>
+        }
+    }
+        }
+            </fieldset>
+</div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Complexity, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <fieldset>
+                    @Html.ValidationMessageFor(model => model.Complexity)
+                    @{
+    Complexity[] values = (Complexity[])Enum.GetValues(typeof(Complexity));
+    first = true;
+    foreach (Complexity value in values)
+    {
+        if (first)
+        {
+            first = false;
+            <input type="radio" name="complexityChoice" value="@value" checked> @value.ToLocalizedString() <br>
+        }
+        else
+        {
+            <input type="radio" name="complexityChoice" value="@value"> @value.ToLocalizedString() <br>
+        }
+    }
+    }
+                    </fieldset>
+</div>
+        </div>
+
+        <div class="form-group">
+            <b class="control-label col-md-2">@ResourceScr.execution</b>
+            <div class="col-md-10">
+                @ResourceScr.from
+                <input type="datetime-local" name="Start" value="@ViewBag.StartDate" max="@ViewBag.StartDateMax" min="@ViewBag.StartDate" onchange="limitEnd()" />
+                @ResourceScr.to
+                <input type="datetime-local" name="End" value="@ViewBag.EndDate" max="@ViewBag.EndDate" min="@ViewBag.EndDateMin" onchange="limitStart()" />
+            </div>
+        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Description, new { style = "width:300px ;height:100px" })
+                    @Html.ValidationMessageFor(model => model.Description)
+                </div>
+            </div>
+
+        <div class="form-group">
+            <div class="col-md-2 location">
+                <input type="radio" name="position" value="project" checked onchange="disProject()" class="checkboxPosition" />
+                @Html.LabelFor(model => model.ProjectId, @ResourceScr.TaskProject, new { @class = "mylabelhavy" })
+
+            </div>
+            <div class="col-md-10">
+                @Html.DropDownList("ProjectId")
+                @Html.ValidationMessageFor(model => model.ProjectId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-2 location">
+                <input type="radio" name="position" value="task" onchange="disProject()" class="checkboxPosition" />
+                @Html.LabelFor(model => model.ParentTaskId, @ResourceScr.TaskParentTask, new { @class = "mylabelhavy" })
+            </div>
+            <div class="col-md-10">
+                @Html.DropDownList("ParentTaskId", null, new { disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.ParentTaskId)
+            </div>
+        </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="@ResourceScr.submit" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+}
+
+<div>
+    <br>
+    @Html.ActionLink(ResourceScr.back, "Index", "Cabinet")
+</div>

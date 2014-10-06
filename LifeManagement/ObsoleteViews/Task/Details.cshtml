@@ -1,0 +1,123 @@
+﻿@model LifeManagement.ObsoleteModels.Task
+@using LifeManagement.Resources;
+@{
+    ViewBag.Title = "Details";
+}
+
+@using LifeManagement.Enums
+<h2>@Model.Name </h2>
+
+<div>
+    <h4>@ResourceScr.Details</h4>
+	<hr />
+    <dl class="dl-horizontal">
+ 
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Project.Path)
+        </dd>
+        
+        @if (Model.ParentTask != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.ParentTaskId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ParentTask.Name)
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Priority)
+        </dt>
+
+        <dd>
+            @Model.Priority.ToLocalizedString()
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Complexity)
+        </dt>
+
+        <dd>
+            @Model.Complexity.ToLocalizedString()
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstimationTicks)
+        </dt>
+
+        <dd>
+            @if(Model.Estimation.Days > 0){
+             @Model.Estimation.Days @ResourceScr.days 
+            }
+            @if (Model.Estimation.Hours > 0)
+            {
+                @Model.Estimation.Hours  @ResourceScr.hours 
+            }
+            @if (Model.Estimation.Minutes > 0)
+            {
+                @Model.Estimation.Minutes  @ResourceScr.minutes
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Readiness)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Readiness) %
+        </dd>
+        @if (Model.DesiredStartDate != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.DesiredStartDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DesiredStartDate)
+            </dd>
+        }
+
+        @if (Model.DesiredDueDate != null)
+        {
+          <dt>
+            @Html.DisplayNameFor(model => model.DesiredDueDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DesiredDueDate)
+        </dd>  
+        }
+        
+        @if (Model.Deadline != null)
+        {
+            <dt>
+                 @Html.DisplayNameFor(model => model.Deadline)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Deadline)
+            </dd>  
+        }
+        
+        
+    </dl>
+</div>
+<p>
+    
+    @Html.ActionLink(ResourceScr.Edit, "Edit", new { id = Model.Id }) |
+    @Html.ActionLink(ResourceScr.back, "Index", "Cabinet")
+</p>

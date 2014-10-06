@@ -1,0 +1,50 @@
+﻿@model LifeManagement.ObsoleteModels.Project
+@using LifeManagement.Resources
+@{
+    ViewBag.Title = ResourceScr.Delete +" "+Model.Name;
+}
+
+<h3>@ResourceScr.DeleteQustion @ResourceScr.project @Model.Name?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           @Html.DisplayNameFor(model => model.Path) 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentProject.Path)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+           @ResourceScr.contains 
+        </dt>
+
+        <dd>
+            @Model.ChildProjects.Count(p=>!p.IsDeleted) @ResourceScr.subprojects
+        </dd>
+        <dd>
+            @Model.Tasks.Count(p => !p.IsDeleted) @ResourceScr.tasks
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="@ResourceScr.Delete" class="btn btn-default" /> 
+        </div>
+    }
+    <div><br>
+        @Html.ActionLink(ResourceScr.back, "Index", "Cabinet")
+    </div>
+</div>

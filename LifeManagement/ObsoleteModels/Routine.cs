@@ -22,53 +22,46 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
-using System.Web.Mvc;
-using LifeManagement.ObsoleteControllers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using LifeManagement.Controllers;
 
-namespace LifeManagement.Tests.Controllers
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using LifeManagement.Enums;
+using Newtonsoft.Json;
+
+namespace LifeManagement.ObsoleteModels
 {
-    [TestClass]
-    public class HomeControllerTest
+    public class Routine : ISynchronizableEntity
     {
-        [TestMethod]
-        public void Index()
+        public virtual Guid Id { get; set; }
+        public DateTime UpdatedOn { get; set; }
+        public bool IsDeleted { get; set; }
+
+        public RoutineType Type { get; set; }
+
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+
+        [NotMapped]
+        public String TimeString
         {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
+            get
+            {
+                string s = StartDate.ToString("t");
+                if(!StartDate.Date.Equals(EndDate.Date))
+                {
+                    s += " " + StartDate.ToString("d");
+                }
+                s += " - " + EndDate.ToString("t") + " " + EndDate.ToString("d");
+                return s;
+            }
         }
+        public Guid UserId { get; set; }
 
-        [TestMethod]
-        public void About()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
+        public Guid TaskId { get; set; }
+        public Guid DayLimitId { get; set; }
 
-            // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-        }
-
-        [TestMethod]
-        public void Contact()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
+        [JsonIgnore]
+        public virtual DayLimit DayLimit { get; set; }
+        public virtual Task Task { get; set; }
     }
 }

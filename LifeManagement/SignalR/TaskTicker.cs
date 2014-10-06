@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using LifeManagement.Models;
+using LifeManagement.ObsoleteModels;
 using Microsoft.AspNet.SignalR;
 using System.Threading;
 using Microsoft.AspNet.SignalR.Hubs;

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using LifeManagement.BusinessLogic;
-using LifeManagement.Models;
+using LifeManagement.ObsoleteBusinessLogic;
+using LifeManagement.ObsoleteModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
