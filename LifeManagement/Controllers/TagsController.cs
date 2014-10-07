@@ -21,7 +21,7 @@ namespace LifeManagement.Controllers
         public async Task<ActionResult> Index()
         {
             var userId = User.Identity.GetUserId();
-            var tags = db.Tags.Where(x => x.UserId == userId).Include(t => t.User);
+            var tags = db.Tags.Where(x => x.UserId == userId);
             return View(await tags.ToListAsync());
         }
 

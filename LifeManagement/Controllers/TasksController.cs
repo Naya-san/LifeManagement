@@ -1,75 +1,78 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using LifeManagement.Attributes;
 using LifeManagement.Models;
-using LifeManagement.Models.DB;
 using Microsoft.AspNet.Identity;
+using Task = LifeManagement.Models.DB.Task;
 
 namespace LifeManagement.Controllers
 {
     [Authorize]
     [Localize]
-    public class ProjectsController : Controller
+    public class TasksController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Projects
+        // GET: Tasks
         public async Task<ActionResult> Index()
         {
             var userId = User.Identity.GetUserId();
-            var projects = db.Projects.Where(x => x.UserId == userId).Include(p => p.ParentProject);
-            return View(await projects.ToListAsync());
+            var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().Include(t => t.Project);
+            return View(await records.ToListAsync());
         }
 
-        // GET: Projects/Details/5
+        // GET: Tasks/Details/5
         public async Task<ActionResult> Details(Guid? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Project project = await db.Projects.FindAsync(id);
-            if (project == null)
+
+            var task = await db.Records.FindAsync(id) as Task;
+            if (task == null)
             {
                 return HttpNotFound();
             }
-            return View(project);
+
+            return View(task);
         }
 
-        // GET: Projects/Create
+        // GET: Tasks/Create
         public ActionResult Create()
         {
-            ViewBag.ParentProjectId = new SelectList(db.Projects, "Id", "Path");
+            var userId = User.Identity.GetUserId();
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path");
             return View();
         }
 
-        // POST: Projects/Create
+        // POST: Tasks/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ParentProjectId,Name")] Project project)
+        public async Task<ActionResult> Create([Bind(Include = "Name,Note,StartDate,EndDate,IsUrgent,ProjectId")] Task task)
         {
             var userId = User.Identity.GetUserId();
 
             if (ModelState.IsValid)
             {
-                project.Id = Guid.NewGuid();
-                project.UserId = userId;
-                db.Projects.Add(project);
+                task.Id = Guid.NewGuid();
+                task.UserId = userId;
+                db.Records.Add(task);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id && x.UserId == userId), "Id", "Path", project.ParentProjectId);
-            return View(project);
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path", task.ProjectId);
+            return View(task);
         }
 
-        // GET: Projects/Edit/5
+        // GET: Tasks/Edit/5
         public async Task<ActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -77,35 +80,37 @@ namespace LifeManagement.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var project = await db.Projects.FindAsync(id);
-            if (project == null)
+            var task = await db.Records.FindAsync(id) as Task;
+            if (task == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id), "Id", "Path", project.ParentProjectId);
-            return View(project);
+            var userId = User.Identity.GetUserId();
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path", task.ProjectId);
+            return View(task);
         }
 
-        // POST: Projects/Edit/5
+        // POST: Tasks/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,ParentProjectId,UserId,Name")] Project project)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,UserId,Name,Note,StartDate,EndDate,IsUrgent,ProjectId")] Task task)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(project).State = EntityState.Modified;
+                db.Entry(task).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id), "Id", "Path", project.ParentProjectId);
-            return View(project);
+            var userId = User.Identity.GetUserId();
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path", task.ProjectId);
+            return View(task);
         }
 
-        // GET: Projects/Delete/5
+        // GET: Tasks/Delete/5
         public async Task<ActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -113,23 +118,23 @@ namespace LifeManagement.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var project = await db.Projects.FindAsync(id);
-            if (project == null)
+            var task = await db.Records.FindAsync(id) as Task;
+            if (task == null)
             {
                 return HttpNotFound();
             }
 
-            return View(project);
+            return View(task);
         }
 
-        // POST: Projects/Delete/5
+        // POST: Tasks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
-            var project = await db.Projects.FindAsync(id);
-            db.Projects.RemoveRange(project.ChildProjects);
-            db.Projects.Remove(project);
+            var task = await db.Records.FindAsync(id);
+#warning Нужно удалять алерты
+            db.Records.Remove(task);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
