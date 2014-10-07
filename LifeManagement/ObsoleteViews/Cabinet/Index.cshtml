@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = LifeManagement.Resources.ResourceScr.cabinet;
 }
-@using LifeManagement.Enums
+@using LifeManagement.ObsoleteEnums
 @model IEnumerable<LifeManagement.ObsoleteModels.Routine>
 
 @if (null != TempData["alertMessage"])
@@ -24,7 +24,7 @@
             @{
                 foreach (var routine in Model.Where(x => !x.IsDeleted))
                 {
-                    if (routine.Type == RoutineType.Free)
+                    if (routine.Type == RecordType.Free)
                     {
                         <div class="free" style="height: 70px">
                             <h6>@LifeManagement.Resources.ResourceScr.freeTime</h6>

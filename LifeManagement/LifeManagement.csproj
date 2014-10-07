@@ -188,18 +188,20 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AlertsController.cs" />
+    <Compile Include="Controllers\CabinetController.cs" />
     <Compile Include="Controllers\FeedbacksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Models\UserTimeConverter.cs" />
     <Compile Include="ObsoleteBusinessLogic\DateTimeProvider.cs" />
     <Compile Include="ObsoleteBusinessLogic\DayLimitActivity.cs" />
     <Compile Include="ObsoleteBusinessLogic\RoutineActivity.cs" />
     <Compile Include="ObsoleteBusinessLogic\UserTimeConverter.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="ObsoleteControllers\CabinetController.cs" />
+    <Compile Include="ObsoleteControllers\ObsoleteCabinetController.cs" />
     <Compile Include="ObsoleteControllers\ObsoleteHomeController.cs" />
     <Compile Include="ObsoleteControllers\ProjectController.cs" />
     <Compile Include="ObsoleteControllers\TaskController.cs" />
@@ -213,13 +215,13 @@
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\DB\Project.cs" />
     <Compile Include="Models\DB\Task.cs" />
-    <Compile Include="Enums\Complexity.cs" />
-    <Compile Include="Enums\ComplexityExtensions.cs" />
-    <Compile Include="Enums\FileType.cs" />
-    <Compile Include="Enums\Priority.cs" />
+    <Compile Include="ObsoleteEnums\Complexity.cs" />
+    <Compile Include="ObsoleteEnums\ComplexityExtensions.cs" />
+    <Compile Include="ObsoleteEnums\FileType.cs" />
+    <Compile Include="ObsoleteEnums\Priority.cs" />
     <Compile Include="Attributes\LocalizeAttribute.cs" />
-    <Compile Include="Enums\PriorityExtensions.cs" />
-    <Compile Include="Enums\RoutineType.cs" />
+    <Compile Include="ObsoleteEnums\PriorityExtensions.cs" />
+    <Compile Include="ObsoleteEnums\RecordType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -410,6 +412,8 @@
     <Content Include="Views\Alerts\Details.cshtml" />
     <Content Include="Views\Alerts\Edit.cshtml" />
     <Content Include="Views\Alerts\Index.cshtml" />
+    <Content Include="Views\Cabinet\Index.cshtml" />
+    <Content Include="Views\Cabinet\Sidebar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,15 +5,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LifeManagement.Attributes;
-using LifeManagement.Enums;
 using LifeManagement.ObsoleteBusinessLogic;
+using LifeManagement.ObsoleteEnums;
 using LifeManagement.ObsoleteModels;
 using Microsoft.AspNet.Identity;
 
 namespace LifeManagement.ObsoleteControllers
 {
     [Localize]
-    public class CabinetController : Controller
+    public class ObsoleteCabinetController : Controller
     {
         private LifeManagementContext db = new LifeManagementContext();
         //
@@ -37,13 +37,13 @@ namespace LifeManagement.ObsoleteControllers
             var temp = dayLimit.Routines == null ? null : dayLimit.Routines.Where(x => !x.IsDeleted).OrderBy(x => x.StartDate).ToList();
                 if (temp == null || !temp.Any())
                 {
-                    routines.Add(new Routine {Type = RoutineType.Free, StartDate = dayLimit.StartDate, EndDate = dayLimit.EndDate});
+                    routines.Add(new Routine {Type = RecordType.Free, StartDate = dayLimit.StartDate, EndDate = dayLimit.EndDate});
                 }
                 else
                 {
                     if ((temp[0].StartDate - dayLimit.StartDate).TotalMinutes > activityRest)
                     {
-                        routines.Add(new Routine {Type = RoutineType.Free, StartDate = dayLimit.StartDate, EndDate = temp[0].StartDate});
+                        routines.Add(new Routine {Type = RecordType.Free, StartDate = dayLimit.StartDate, EndDate = temp[0].StartDate});
                     }
 
                     for (var i = 0; i < temp.Count - 1; i++)
@@ -51,7 +51,7 @@ namespace LifeManagement.ObsoleteControllers
                         routines.Add(temp[i]);
                         if ((temp[i + 1].StartDate - temp[i].EndDate).TotalMinutes > activityRest)
                         {
-                            routines.Add(new Routine { Type = RoutineType.Free, StartDate = temp[i].EndDate, EndDate = temp[i+1].StartDate });
+                            routines.Add(new Routine { Type = RecordType.Free, StartDate = temp[i].EndDate, EndDate = temp[i+1].StartDate });
                         }
                     }
 
@@ -59,7 +59,7 @@ namespace LifeManagement.ObsoleteControllers
                     
                     if ((dayLimit.EndDate - temp.Last().EndDate).TotalMinutes > activityRest)
                     {
-                        routines.Add(new Routine {Type = RoutineType.Free, StartDate = temp.Last().EndDate, EndDate = dayLimit.EndDate});
+                        routines.Add(new Routine {Type = RecordType.Free, StartDate = temp.Last().EndDate, EndDate = dayLimit.EndDate});
                     }
                 }
 

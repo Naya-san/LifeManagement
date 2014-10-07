@@ -5,8 +5,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LifeManagement.Attributes;
-using LifeManagement.Enums;
 using LifeManagement.ObsoleteBusinessLogic;
+using LifeManagement.ObsoleteEnums;
 using LifeManagement.ObsoleteModels;
 using Microsoft.AspNet.Identity;
 
@@ -182,7 +182,7 @@ namespace LifeManagement.ObsoleteControllers
                               IsDeleted = false,
                               UserId = task.UserId,
                               UpdatedOn = DateTime.UtcNow,
-                              Type = RoutineType.Hard
+                              Type = RecordType.Event
                           };
                 routine.DayLimitId = (new DayLimitActivity(db)).FindOrDefault(routine.StartDate, routine.EndDate, task.UserId,  System.Web.HttpContext.Current.Request).Id;
                 task.Estimation = routine.EndDate.Subtract(routine.StartDate);
@@ -275,7 +275,7 @@ namespace LifeManagement.ObsoleteControllers
                     IsDeleted = false,
                     UserId = task.UserId,
                     UpdatedOn = DateTime.UtcNow,
-                    Type = RoutineType.Hard,
+                    Type = RecordType.Event,
                     TaskId = task.Id
                 };
             routine.DayLimitId = (new DayLimitActivity(db)).FindOrDefault(routine.StartDate, routine.EndDate, task.UserId, System.Web.HttpContext.Current.Request).Id;
@@ -473,7 +473,7 @@ namespace LifeManagement.ObsoleteControllers
                     IsDeleted = false,
                     UserId = userId,
                     UpdatedOn = DateTime.UtcNow,
-                    Type = RoutineType.Soft,
+                    Type = RecordType.Task,
                     TaskId = task.Id
                 };
                 routine.DayLimitId = dayLimit.Id;

@@ -22,13 +22,13 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
-namespace LifeManagement.Enums
+namespace LifeManagement.ObsoleteEnums
 {
-    public enum Priority
+    public enum Complexity
     {
-       NoUrgentNoImportant = 0,
-       UrgentNoImportant = 1,
-       NoUrgentImportant = 2,
-       UrgentImportant = 3
+        Low = 0,
+        Medium = 1,
+        High = 2,
+        VeryHigh = 3
     }
 }

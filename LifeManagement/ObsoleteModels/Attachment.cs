@@ -24,7 +24,7 @@
 #endregion
 
 using System;
-using LifeManagement.Enums;
+using LifeManagement.ObsoleteEnums;
 
 namespace LifeManagement.ObsoleteModels
 {

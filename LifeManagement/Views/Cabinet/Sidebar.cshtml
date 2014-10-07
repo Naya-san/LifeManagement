@@ -1,0 +1,74 @@
+﻿@{
+    Layout = null;
+}
+
+@using LifeManagement.Models.DB
+@model IEnumerable<Project>
+
+<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type='text/javascript' src="@Url.Content("~/Scripts/tabs_cookies.js")"></script>
+
+
+@helper TreeViewTask(IEnumerable<Task> taskTree)
+{
+    foreach (var item in taskTree)
+    {
+        
+        <li class="context Task">
+            @item.Name 
+            <input class="menuicon" type="checkbox">
+            <ul>
+                <li>@Html.ActionLink(LifeManagement.Resources.ResourceScr.Details, "Details", "Tasks", new { id = item.Id }, null) </li>
+                <li>@Html.ActionLink(LifeManagement.Resources.ResourceScr.Edit, "Edit", "Tasks", new { id = item.Id }, null)</li>
+                <li>@Html.ActionLink(LifeManagement.Resources.ResourceScr.Delete, "Delete", "Tasks", new { id = item.Id }, null)</li>
+            </ul>           
+        </li>
+    }
+}
+
+@helper TreeView(IEnumerable<Project> projectTree)
+{
+    foreach (var item in projectTree)
+    {
+        <li class="context folder">
+            <input class="menuicon" type="checkbox">
+
+            <label class="folder">
+                @item.Name
+            </label> <input type="checkbox" id="folder" />
+
+            <ul>
+                <li>@Html.ActionLink(LifeManagement.Resources.ResourceScr.Edit, "Edit", "Projects", new { id = item.Id }, null)</li>
+                <li>@Html.ActionLink(LifeManagement.Resources.ResourceScr.addProject, "Create", "Projects", new { parentId = item.Id }, null)</li>
+                <li>@Html.ActionLink(LifeManagement.Resources.ResourceScr.addSubtask, "Create", "Tasks", new { projectId = item.Id}, null)</li>
+                <li>@Html.ActionLink(LifeManagement.Resources.ResourceScr.Delete, "Delete", "Projects", new { id = item.Id }, null)</li>
+            </ul>
+            <ol>
+                @if (item.ChildProjects.Count > 0)
+                {
+                    @TreeView(item.ChildProjects)
+                } 
+            </ol>
+        </li>
+    }
+}
+
+<div class="section">
+    <ul class="tabs">
+        <li class="current">@LifeManagement.Resources.ResourceScr.Projects</li>
+        <li>Напоминания</li>
+    </ul>
+    <div class="box visible">
+        <ol class="tree">
+            <li>@Html.ActionLink(LifeManagement.Resources.ResourceScr.addProject, "Create", "Projects")</li>
+            @TreeView(Model)
+        </ol>
+
+
+    </div>
+    <div class="box">
+        Перечень напоминаний
+    </div>
+</div>

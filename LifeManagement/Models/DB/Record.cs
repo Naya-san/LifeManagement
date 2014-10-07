@@ -25,6 +25,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using LifeManagement.Resources;
 
 namespace LifeManagement.Models.DB
 {
@@ -33,9 +35,24 @@ namespace LifeManagement.Models.DB
         public Guid Id { get; set; }
         public string UserId { get; set; }
 
+
+        [Required(ErrorMessageResourceName = "ErrorRequired", ErrorMessageResourceType = typeof(ResourceScr))]
+        [StringLength(25, ErrorMessageResourceName = "ErrorStrLen", ErrorMessageResourceType = typeof(ResourceScr))]
+        [RegularExpression(@"[A-Za-zА-Яа-яА-Яа-я0-9,:._()\-\s\""]+",
+        ErrorMessageResourceName = "ErrorRegulExpr", ErrorMessageResourceType = typeof(ResourceScr))]
+        [Display(Name = "TaskName", ResourceType = typeof(ResourceScr))]
         public string Name { get; set; }
+
+        [RegularExpression(@"[A-Za-zА-Яа-яА-Яа-я0-9,:._()\-\s\""]+",
+        ErrorMessageResourceName = "ErrorRegulExpr", ErrorMessageResourceType = typeof(ResourceScr))]
+        [StringLength(700, ErrorMessageResourceName = "ErrorStrLen", ErrorMessageResourceType = typeof(ResourceScr))]
+        [Display(Name = "TaskDescription", ResourceType = typeof(ResourceScr))]
         public string Note { get; set; }
+
+        [Display(Name = "TaskStartDate", ResourceType = typeof(ResourceScr))]
         public DateTime? StartDate { get; set; }
+
+        [Display(Name = "TaskDueDate", ResourceType = typeof(ResourceScr))]
         public DateTime? EndDate { get; set; }
         public bool IsUrgent { get; set; }
 

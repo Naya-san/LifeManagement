@@ -24,11 +24,14 @@
 #endregion
 
 using System;
+using System.ComponentModel.DataAnnotations;
+using LifeManagement.Resources;
 
 namespace LifeManagement.Models.DB
 {
     public class Task : Record
     {
+        [Display(Name = "TaskProject", ResourceType = typeof(ResourceScr))]
         public Guid ProjectId { get; set; }
 
         public DateTime? CompletedOn { get; set; }

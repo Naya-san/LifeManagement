@@ -25,7 +25,7 @@
 
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using LifeManagement.Enums;
+using LifeManagement.ObsoleteEnums;
 using Newtonsoft.Json;
 
 namespace LifeManagement.ObsoleteModels
@@ -36,7 +36,7 @@ namespace LifeManagement.ObsoleteModels
         public DateTime UpdatedOn { get; set; }
         public bool IsDeleted { get; set; }
 
-        public RoutineType Type { get; set; }
+        public RecordType Type { get; set; }
 
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

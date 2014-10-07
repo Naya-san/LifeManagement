@@ -25,6 +25,21 @@ namespace LifeManagement.Controllers
             return View(await records.ToListAsync());
         }
 
+        public async Task<ActionResult> Complete(Guid taskId)
+        {
+            var userId = User.Identity.GetUserId();
+            var task = await db.Records.FirstOrDefaultAsync(x => x.Id == taskId && x.UserId == userId) as Task;
+
+            if (task != null)
+            {
+                task.CompletedOn = DateTime.UtcNow;
+                db.Entry(task).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Index", "Cabinet");
+        }
+
         // GET: Tasks/Details/5
         public async Task<ActionResult> Details(Guid? id)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using LifeManagement.ObsoleteEnums;
 using LifeManagement.ObsoleteModels;
 
 namespace LifeManagement.ObsoleteBusinessLogic
@@ -80,7 +81,7 @@ namespace LifeManagement.ObsoleteBusinessLogic
                 Id = Guid.NewGuid(),
                 StartDate = newStartDate,
                 EndDate = newEndDate,
-                Type = Enums.RoutineType.Soft,
+                Type = RecordType.Task,
                 Task = task,
                 UserId = task.UserId,
                 UpdatedOn = _dateTimeProvider.UtcNow
