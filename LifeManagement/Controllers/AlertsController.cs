@@ -1,32 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using LifeManagement.Attributes;
 using LifeManagement.Models;
 using LifeManagement.Models.DB;
 using Microsoft.AspNet.Identity;
-using Task = System.Threading.Tasks.Task;
 
 namespace LifeManagement.Controllers
 {
     [Authorize]
     [Localize]
-    public class EventsController : Controller
+    public class AlertsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Events
+        // GET: Alerts
         public async Task<ActionResult> Index()
         {
             var userId = User.Identity.GetUserId();
-            var records = db.Records.Where(x => x.UserId == userId).OfType<Event>();
-            return View(await records.ToListAsync());
+            var alerts = db.Alerts.Where(x => x.UserId == userId).Include(a => a.Record);
+            return View(await alerts.ToListAsync());
         }
 
-        // GET: Events/Details/5
+        // GET: Alerts/Details/5
         public async Task<ActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -34,43 +36,45 @@ namespace LifeManagement.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var @event = await db.Records.FindAsync(id) as Event;
-            if (@event == null)
+            var alert = await db.Alerts.FindAsync(id);
+            if (alert == null)
             {
                 return HttpNotFound();
             }
 
-            return View(@event);
+            return View(alert);
         }
 
-        // GET: Events/Create
+        // GET: Alerts/Create
         public ActionResult Create()
         {
+            var userId = User.Identity.GetUserId();
+            ViewBag.RecordId = new SelectList(db.Records.Where(x => x.UserId == userId), "Id", "Name");
             return View();
         }
 
-        // POST: Events/Create
+        // POST: Alerts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Name,Note,StartDate,EndDate,IsUrgent")] Event @event)
+        public async Task<ActionResult> Create([Bind(Include = "RecordId,Name,Date")] Alert alert)
         {
             var userId = User.Identity.GetUserId();
-
             if (ModelState.IsValid)
             {
-                @event.Id = Guid.NewGuid();
-                @event.UserId = userId;
-                db.Records.Add(@event);
+                alert.Id = Guid.NewGuid();
+                alert.UserId = userId;
+                db.Alerts.Add(alert);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(@event);
+            ViewBag.RecordId = new SelectList(db.Records.Where(x => x.UserId == userId), "Id", "Name", alert.RecordId);
+            return View(alert);
         }
 
-        // GET: Events/Edit/5
+        // GET: Alerts/Edit/5
         public async Task<ActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -78,33 +82,37 @@ namespace LifeManagement.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var @event = await db.Records.FindAsync(id) as Event;
-            if (@event == null)
+            var alert = await db.Alerts.FindAsync(id);
+            if (alert == null)
             {
                 return HttpNotFound();
             }
 
-            return View(@event);
+            var userId = User.Identity.GetUserId();
+            ViewBag.RecordId = new SelectList(db.Records.Where(x => x.UserId == userId), "Id", "Name", alert.RecordId);
+            return View(alert);
         }
 
-        // POST: Events/Edit/5
+        // POST: Alerts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,UserId,Name,Note,StartDate,EndDate,IsUrgent")] Event @event)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,RecordId,UserId,Name,Date")] Alert alert)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(@event).State = EntityState.Modified;
+                db.Entry(alert).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(@event);
+            var userId = User.Identity.GetUserId();
+            ViewBag.RecordId = new SelectList(db.Records.Where(x => x.UserId == userId), "Id", "UserId", alert.RecordId);
+            return View(alert);
         }
 
-        // GET: Events/Delete/5
+        // GET: Alerts/Delete/5
         public async Task<ActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -112,22 +120,22 @@ namespace LifeManagement.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var task = await db.Records.FindAsync(id) as Event;
-            if (task == null)
+            var alert = await db.Alerts.FindAsync(id);
+            if (alert == null)
             {
                 return HttpNotFound();
             }
 
-            return View(task);
+            return View(alert);
         }
 
-        // POST: Events/Delete/5
+        // POST: Alerts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
-            var task = await db.Records.FindAsync(id);
-            db.Records.Remove(task);
+            var alert = await db.Alerts.FindAsync(id);
+            db.Alerts.Remove(alert);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

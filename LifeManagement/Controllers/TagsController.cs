@@ -125,7 +125,6 @@ namespace LifeManagement.Controllers
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
             var tag = await db.Tags.FindAsync(id);
-#warning Нужно удалять теги у всех записей, у которых они есть. Могут быть проблемы с каскадами.
             db.Tags.Remove(tag);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

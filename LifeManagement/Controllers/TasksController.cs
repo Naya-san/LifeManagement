@@ -133,7 +133,6 @@ namespace LifeManagement.Controllers
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
             var task = await db.Records.FindAsync(id);
-#warning Нужно удалять алерты
             db.Records.Remove(task);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
