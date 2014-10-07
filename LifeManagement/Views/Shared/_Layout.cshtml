@@ -47,8 +47,7 @@
 
                         @Html.Partial("_LoginPartial")
                         <li>@Html.ActionLink(@LifeManagement.Resources.ResourceScr.cabinet, "Index", "Cabinet")</li>
-                        <li><a href="/">@LifeManagement.Resources.ResourceScr.About</a></li>
-                        <li><a href="/">@LifeManagement.Resources.ResourceScr.Feedback</a></li>
+                        <li>@Html.ActionLink(@LifeManagement.Resources.ResourceScr.Feedback, "Create", "Feedbacks")</li>
                     </ul>
                 </li>
             </ul>
