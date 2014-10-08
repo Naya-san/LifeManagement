@@ -3,12 +3,11 @@
 }
 
 @using LifeManagement.Models.DB
+@using LifeManagement.Resources
 @model IEnumerable<Project>
 
 <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script type='text/javascript' src="@Url.Content("~/Scripts/tabs_cookies.js")"></script>
+<script type='text/javascript' src="@Url.Content("~/Scripts/tree.js")"></script>
 
 
 @helper TreeViewTask(IEnumerable<Task> taskTree)
@@ -20,9 +19,9 @@
             @item.Name 
             <input class="menuicon" type="checkbox">
             <ul>
-                <li>@Html.ActionLink(LifeManagement.Resources.ResourceScr.Details, "Details", "Tasks", new { id = item.Id }, null) </li>
-                <li>@Html.ActionLink(LifeManagement.Resources.ResourceScr.Edit, "Edit", "Tasks", new { id = item.Id }, null)</li>
-                <li>@Html.ActionLink(LifeManagement.Resources.ResourceScr.Delete, "Delete", "Tasks", new { id = item.Id }, null)</li>
+                <li>@Html.ActionLink(ResourceScr.Details, "Details", "Tasks", new { id = item.Id }, null) </li>
+                <li>@Html.ActionLink(ResourceScr.Edit, "Edit", "Tasks", new { id = item.Id }, null)</li>
+                <li>@Html.ActionLink(ResourceScr.Delete, "Delete", "Tasks", new { id = item.Id }, null)</li>
             </ul>           
         </li>
     }
@@ -55,20 +54,30 @@
     }
 }
 
-<div class="section">
-    <ul class="tabs">
-        <li class="current">@LifeManagement.Resources.ResourceScr.Projects</li>
-        <li>Напоминания</li>
-    </ul>
-    <div class="box visible">
-        <ol class="tree">
-            <li>@Html.ActionLink(LifeManagement.Resources.ResourceScr.addProject, "Create", "Projects")</li>
+<div>
+    <div>
+        <ul class="tree">
+            <li>All task</li>
+            <li>All events</li>
+            <li>Focus</li>
+            
             @TreeView(Model)
-        </ol>
-
-
-    </div>
-    <div class="box">
-        Перечень напоминаний
+            <li>
+                <div id="chapter_img1" onclick="doMenu('1');" class="closeBlock">@ResourceScr.Projects</div>
+                <ul id="chapter1" class="subtree">
+                    <li>Раздел 2.1</li>
+                    <li>Раздел 2.2</li>
+                    <li>@Html.ActionLink(ResourceScr.addProject, "Create", "Projects")</li>
+                </ul>
+            </li>
+            <li>
+                <div id="chapter_img2" onclick="doMenu('2');" class="closeBlock">@ResourceScr.Tags</div>
+                <ul id="chapter2" class="subtree">
+                    <li>Раздел 3.1</li>
+                    <li>Раздел 3.2</li>
+                    <li>@Html.ActionLink(ResourceScr.addTag, "Create", "Tags")</li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </div>

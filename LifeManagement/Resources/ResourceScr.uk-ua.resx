@@ -223,7 +223,7 @@
     <value>до</value>
   </data>
   <data name="addProject" xml:space="preserve">
-    <value>Додати проект</value>
+    <value>Створити проект</value>
   </data>
   <data name="advRemark" xml:space="preserve">
     <value>Забули все тонкощі вашого завдання? Напишіть до неї нотатки!</value>
@@ -359,5 +359,11 @@
   </data>
   <data name="UserName" xml:space="preserve">
     <value>Логін</value>
+  </data>
+  <data name="addTag" xml:space="preserve">
+    <value>Створити мітку</value>
+  </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Мітки</value>
   </data>
 </root>

@@ -88,6 +88,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add tag.
+        /// </summary>
+        public static string addTag {
+            get {
+                return ResourceManager.GetString("addTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Have you forgot the details of your task? Write a remark for it!.
         /// </summary>
         public static string advRemark {
@@ -642,6 +651,15 @@ namespace LifeManagement.Resources {
         public static string subprojects {
             get {
                 return ResourceManager.GetString("subprojects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tags.
+        /// </summary>
+        public static string Tags {
+            get {
+                return ResourceManager.GetString("Tags", resourceCulture);
             }
         }
         

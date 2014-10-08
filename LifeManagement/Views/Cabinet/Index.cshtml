@@ -11,35 +11,39 @@
     </script>
 }
 
-<h2>Дела</h2>
-
-@Html.ActionLink(@LifeManagement.Resources.ResourceScr.createTask, "Create", "Tasks")
 <div id="wrap">
-    <div id="maincontent">
+ @*   <div id="maincontent">*@
 
         <div id="linkblock">
             @{Html.RenderAction("Sidebar", "Cabinet");}
         </div>
-        <div class="timetable">
-            @{
-                foreach (var routine in Model)
-                {
-                    <div class="task" style="height: 100px; position: relative">
-                            <h6><span style="float: left;">@routine.Name</span></h6>
-                            <br />
-                            @if ((routine is Task) && ((routine as Task).CompletedOn == null))
-                            {
-                                <div data-link=@routine.Id>
-                                    @Html.ActionLink(@LifeManagement.Resources.ResourceScr.done, "Complete", "Tasks", new { taskId = routine.Id }, new { @class = "done" })
-                                </div>
-                            }
+    <div id="maincontent">
+
+            
+
+            
+
+        @Html.ActionLink(@LifeManagement.Resources.ResourceScr.createTask, "Create", "Tasks")
+        @{
+            foreach (var routine in Model)
+            {
+                <div class="task" style="height: 100px; position: relative">
+                    <h6><span style="float: left;">@routine.Name</span></h6>
+                    <br />
+                    @if ((routine is Task) && ((routine as Task).CompletedOn == null))
+                    {
+                        <div data-link=@routine.Id>
+                            @Html.ActionLink(@LifeManagement.Resources.ResourceScr.done, "Complete", "Tasks", new { taskId = routine.Id }, new { @class = "done" })
                         </div>
                     }
-                }
-        </div>
+                </div>
+            }
+        }
     </div>
-</div>
+    <div class="clear"> </div>
+    </div>
+@*</div>*@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.signalR-2.0.3.js"></script>
 <script src="~/signalr/hubs"></script>
-<script src="~/Scripts/SignalR/TaskTicker.js"></script>
+@*<script src="~/Scripts/SignalR/TaskTicker.js"></script>*@

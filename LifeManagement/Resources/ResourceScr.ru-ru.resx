@@ -360,4 +360,10 @@
   <data name="UserName" xml:space="preserve">
     <value>Логин</value>
   </data>
+  <data name="addTag" xml:space="preserve">
+    <value>Добавить метку</value>
+  </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Метки</value>
+  </data>
 </root>

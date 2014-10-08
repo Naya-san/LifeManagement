@@ -38,41 +38,41 @@ namespace LifeManagement.SignalR
 
         private void UpdateSpentTime(object state)
         {
-            lock (_updateLock)
-            {
-                if (!_updating)
-                {
-                    _updating = true;
-                    db = new LifeManagementContext();
-                    DateTime dateTime = DateTime.UtcNow;
-                    List<DayLimit> dayList = db.DayLimits.Where(r => !r.IsDeleted && DateTime.Compare(r.StartDate, dateTime) <= 0 && DateTime.Compare(r.EndDate, dateTime) >= 0).ToList();
-                   List<Routine> routines = new List<Routine>();
-                    foreach (var dayLimit in dayList)
-                    {
-                        routines.Clear();
-                        routines.AddRange(dayLimit.Routines.Where(r => !r.IsDeleted && r.Task.CompletedOn == null).OrderBy(r => r.StartDate));
-                        foreach (var routine in routines)
-                        {
-                            if (routine.StartDate > dateTime)
-                            {
-                                break;
-                            }
+            //lock (_updateLock)
+            //{
+            //    if (!_updating)
+            //    {
+            //        _updating = true;
+            //        db = new LifeManagementContext();
+            //        DateTime dateTime = DateTime.UtcNow;
+            //        List<DayLimit> dayList = db.DayLimits.Where(r => !r.IsDeleted && DateTime.Compare(r.StartDate, dateTime) <= 0 && DateTime.Compare(r.EndDate, dateTime) >= 0).ToList();
+            //       List<Routine> routines = new List<Routine>();
+            //        foreach (var dayLimit in dayList)
+            //        {
+            //            routines.Clear();
+            //            routines.AddRange(dayLimit.Routines.Where(r => !r.IsDeleted && r.Task.CompletedOn == null).OrderBy(r => r.StartDate));
+            //            foreach (var routine in routines)
+            //            {
+            //                if (routine.StartDate > dateTime)
+            //                {
+            //                    break;
+            //                }
                             
-                            routine.Task.SpentTime = routine.Task.SpentTime.Add(DateTime.Compare(dateTime.Add(_updateInterval), routine.EndDate) > 0 ? _updateInterval.Subtract(routine.EndDate.Subtract(dateTime)) : _updateInterval);
+            //                routine.Task.SpentTime = routine.Task.SpentTime.Add(DateTime.Compare(dateTime.Add(_updateInterval), routine.EndDate) > 0 ? _updateInterval.Subtract(routine.EndDate.Subtract(dateTime)) : _updateInterval);
 
-                            if (Math.Abs(routine.Task.Readiness - 100) < 0.01)
-                            {
-                                routine.Task.CompletedOn = routine.EndDate;
-                                routine.Task.UpdatedOn = dateTime;
-                            }
+            //                if (Math.Abs(routine.Task.Readiness - 100) < 0.01)
+            //                {
+            //                    routine.Task.CompletedOn = routine.EndDate;
+            //                    routine.Task.UpdatedOn = dateTime;
+            //                }
 
-                        }
-                    }
-                    db.SaveChanges();
-                    BroadcastSpentTime();
-                    _updating = false;
-                }
-            }
+            //            }
+            //        }
+            //        db.SaveChanges();
+            //        BroadcastSpentTime();
+            //        _updating = false;
+            //    }
+            //}
         }
 
         private void BroadcastSpentTime()

@@ -111,7 +111,7 @@ namespace LifeManagement.Controllers
                 {
                     await SignInAsync(user, isPersistent: false);
 
-                    using (var db = new ApplicationDbContext())
+                 /*   using (var db = new ApplicationDbContext())
                     {
                         db.Projects.Add(new Project
                         {
@@ -122,7 +122,7 @@ namespace LifeManagement.Controllers
 
                         db.SaveChanges();
                     }
-
+                    */
                     return RedirectToAction("Index", "Home");
                 }
                 else
