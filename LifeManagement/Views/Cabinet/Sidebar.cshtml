@@ -9,73 +9,27 @@
 <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
 <script type='text/javascript' src="@Url.Content("~/Scripts/tree.js")"></script>
 
-
-@helper TreeViewTask(IEnumerable<Task> taskTree)
-{
-    foreach (var item in taskTree)
-    {
-        
-        <li class="context Task">
-            @item.Name 
-            <input class="menuicon" type="checkbox">
-            <ul>
-                <li>@Html.ActionLink(ResourceScr.Details, "Details", "Tasks", new { id = item.Id }, null) </li>
-                <li>@Html.ActionLink(ResourceScr.Edit, "Edit", "Tasks", new { id = item.Id }, null)</li>
-                <li>@Html.ActionLink(ResourceScr.Delete, "Delete", "Tasks", new { id = item.Id }, null)</li>
-            </ul>           
-        </li>
-    }
-}
-
-@helper TreeView(IEnumerable<Project> projectTree)
-{
-    foreach (var item in projectTree)
-    {
-        <li class="context folder">
-            <input class="menuicon" type="checkbox">
-
-            <label class="folder">
-                @item.Name
-            </label> <input type="checkbox" id="folder" />
-
-            <ul>
-                <li>@Html.ActionLink(LifeManagement.Resources.ResourceScr.Edit, "Edit", "Projects", new { id = item.Id }, null)</li>
-                <li>@Html.ActionLink(LifeManagement.Resources.ResourceScr.addProject, "Create", "Projects", new { parentId = item.Id }, null)</li>
-                <li>@Html.ActionLink(LifeManagement.Resources.ResourceScr.addSubtask, "Create", "Tasks", new { projectId = item.Id}, null)</li>
-                <li>@Html.ActionLink(LifeManagement.Resources.ResourceScr.Delete, "Delete", "Projects", new { id = item.Id }, null)</li>
-            </ul>
-            <ol>
-                @if (item.ChildProjects.Count > 0)
-                {
-                    @TreeView(item.ChildProjects)
-                } 
-            </ol>
-        </li>
-    }
-}
-
 <div>
     <div>
         <ul class="tree">
-            <li>All task</li>
-            <li>All events</li>
-            <li>Focus</li>
+            <li>@ResourceScr.Focus</li>
+            <li>@ResourceScr.AllTask</li>
+            <li>@ResourceScr.AllEvents</li>            
             
-            @TreeView(Model)
             <li>
                 <div id="chapter_img1" onclick="doMenu('1');" class="closeBlock">@ResourceScr.Projects</div>
                 <ul id="chapter1" class="subtree">
-                    <li>Раздел 2.1</li>
-                    <li>Раздел 2.2</li>
-                    <li>@Html.ActionLink(ResourceScr.addProject, "Create", "Projects")</li>
+                    @foreach (var item in Model)
+                    {
+                        <li class="subpunct">@Html.ActionLink(" ", "Edit", "Projects", new { id = item.Id }, new { @class = "edit" }) @Html.ActionLink(item.Name, "GetTasks", "Projects", new { id = item.Id }, null) </li>
+                    }
+                    <li>@Html.ActionLink(ResourceScr.addProject, "Create", "Projects", null, new { @class = "addBlock" })</li>
                 </ul>
             </li>
             <li>
                 <div id="chapter_img2" onclick="doMenu('2');" class="closeBlock">@ResourceScr.Tags</div>
                 <ul id="chapter2" class="subtree">
-                    <li>Раздел 3.1</li>
-                    <li>Раздел 3.2</li>
-                    <li>@Html.ActionLink(ResourceScr.addTag, "Create", "Tags")</li>
+                    @{Html.RenderAction("TagsList", "Cabinet");}
                 </ul>
             </li>
         </ul>

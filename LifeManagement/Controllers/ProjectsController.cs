@@ -25,6 +25,19 @@ namespace LifeManagement.Controllers
             return View(await projects.ToListAsync());
         }
 
+        public async Task<ActionResult> GetTasks(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Project project = await db.Projects.FindAsync(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+            return View(project.Tasks);
+        }
         // GET: Projects/Details/5
         public async Task<ActionResult> Details(Guid? id)
         {

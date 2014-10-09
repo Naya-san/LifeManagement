@@ -366,4 +366,13 @@
   <data name="Tags" xml:space="preserve">
     <value>Метки</value>
   </data>
+  <data name="AllEvents" xml:space="preserve">
+    <value>Все мероприятия</value>
+  </data>
+  <data name="AllTask" xml:space="preserve">
+    <value>Все задания</value>
+  </data>
+  <data name="Focus" xml:space="preserve">
+    <value>В фокусе</value>
+  </data>
 </root>

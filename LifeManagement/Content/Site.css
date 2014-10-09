@@ -78,54 +78,31 @@ a.simple:hover{
 footer {
     background: #17292e;
     color: #ffffff;
-    position: absolute;
-	
+    width: 100%;
     padding-right: 10px;
     padding-top: 3px;
     text-align: right;
-    clear:both;
-
+    position: absolute;
+    bottom: 0px;
 }
 /* Sidebar*/
-div#wrap {
-
-    min-height: 300px;
-    /*height: 1px;*/
-    min-width: 200px;
-    width: 1px;
-    float: left;
-}
-
-a#controlbtn{
-    color: #333;
-    text-decoration: none;
-    display: inline-block;
-    padding-left: 20px;
-}
-
-div#linkblock {
-    padding-top: 5px;
-    border-right: 1px solid #17292e;
-    float: left;
-    width: 350px;
-    position: absolute;
-    height: 90%;
-    overflow: hidden;
-    font: 15px "Comic Sans MS", Tahoma, Arial, sans-serif;
-    /*margin-left: -360px;*/
-}
 
 div#maincontent {
-        padding-top: 5px;
-    height: 90%;
+    padding-top: 5px;
+    padding-left: 10px;
+    display: table-cell;
     width: 100%;
-    position: relative;
-    margin-left: 360px;
-    float: left;
+
 }
-.clear {clear: both;}
-
-
+div#linkblock{
+    padding-top: 5px;
+    display: table-cell;
+    min-width: 350px;
+    height: 90%;
+    margin: 0 0 0 610px; 
+    border-right: 1px solid #17292e;
+    font: 15px "Comic Sans MS", Tahoma, Arial, sans-serif;
+}
 .menuicon{
     z-index: 0;
     width:10px;
@@ -449,13 +426,13 @@ input[type="search"] {
 
 
 
-/*Tree*/
+/*Sidebar*/
 .closeBlock {
-    background: url(/Content/Images/monotone_arrow_right.png) no-repeat;
+    background: url(/Content/Images/monotone_arrow_right.png) 0 no-repeat;
 }
 
 .openBlock {
-    background: url(/Content/Images/monotone_arrow_down.png) no-repeat;
+    background: url(/Content/Images/monotone_arrow_down.png) 0 no-repeat;
 }
 .closeBlock, .openBlock {
     padding-left: 15px;
@@ -465,10 +442,41 @@ ul.tree {
    margin-left: 0; /* Отступ слева в браузере IE и Opera */
    padding-left: 0;  
 }
+ul.tree>li {
+    list-style-type: none; 
+}
+
 ul.subtree {
-    margin-left: 20px; /* Отступ слева в браузере IE и Opera */
-   padding-left: 20px;
+    margin-left: 10px; /* Отступ слева в браузере IE и Opera */
+   padding-left: 10px;
 }
 ul.subtree>li {
     list-style-type: none; 
+}
+uL.subtree > li > a:hover {
+    text-decoration: none;
+    font-weight: bolder;
+    color: #428bca;
+}
+ul.subtree > li.subpunct>.edit:hover {
+    background: url(/Content/Images/Edit.png) 0px no-repeat;
+    padding-left: 15px;
+}
+.edit {
+    width: 10px;
+    height: 21px;
+    float: left;
+}
+
+.addBlock {
+    background: url(/Content/Images/Plus.png) 0px no-repeat;
+    padding-left: 15px;
+    margin-left: 10px;
+}
+/*Timetable*/
+.title {
+    width: 100%;
+    border-bottom: 1px solid #17292e;
+    font-weight: bolder;
+    font-size: 14px;
 }

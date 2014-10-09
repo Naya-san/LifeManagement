@@ -47,5 +47,13 @@ namespace LifeManagement.Controllers
             var projects = db.Projects.Where(p => p.UserId == userId && p.ParentProjectId == null).Include(p => p.Tasks).Include(p => p.ChildProjects);
             return View(projects.ToList());
         }
+
+        [Authorize]
+        public ActionResult TagsList()
+        {
+            var userId = User.Identity.GetUserId();
+            var tags = db.Tags.Where(p => p.UserId == userId);
+            return View(tags.ToList());
+        }
 	}
 }

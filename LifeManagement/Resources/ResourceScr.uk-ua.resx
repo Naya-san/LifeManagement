@@ -366,4 +366,13 @@
   <data name="Tags" xml:space="preserve">
     <value>Мітки</value>
   </data>
+  <data name="AllEvents" xml:space="preserve">
+    <value>Всі заходи</value>
+  </data>
+  <data name="AllTask" xml:space="preserve">
+    <value>Всі завдання</value>
+  </data>
+  <data name="Focus" xml:space="preserve">
+    <value>У фокусі</value>
+  </data>
 </root>

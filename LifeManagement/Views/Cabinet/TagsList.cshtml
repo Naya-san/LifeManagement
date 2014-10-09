@@ -1,0 +1,10 @@
+﻿@{
+    Layout = null;
+}
+@using LifeManagement.Resources
+@model IEnumerable<LifeManagement.Models.DB.Tag>
+
+@foreach (var item in Model) {
+     <li class="subpunct">@Html.ActionLink(" ", "Edit", "Tags", new { id = item.Id }, new { @class = "edit" }) @Html.ActionLink(item.Name, "GetRecords", "Tags", new { id = item.Id }, null) </li>
+}
+<li>@Html.ActionLink(ResourceScr.addTag, "Create", "Tags", null, new { @class = "addBlock" })</li>

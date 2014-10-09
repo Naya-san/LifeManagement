@@ -25,6 +25,20 @@ namespace LifeManagement.Controllers
             return View(await tags.ToListAsync());
         }
 
+        public async Task<ActionResult> GetRecords(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Tag tag = await db.Tags.FindAsync(id);
+            if (tag == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tag.Records);
+        }
+
         // GET: Tags/Details/5
         public async Task<ActionResult> Details(Guid? id)
         {
