@@ -367,6 +367,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Future.
+        /// </summary>
+        public static string Future {
+            get {
+                return ResourceManager.GetString("Future", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hello.
         /// </summary>
         public static string greeting {
@@ -525,6 +534,15 @@ namespace LifeManagement.Resources {
         public static string NoUrgentNoImportant {
             get {
                 return ResourceManager.GetString("NoUrgentNoImportant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overdue.
+        /// </summary>
+        public static string Overdue {
+            get {
+                return ResourceManager.GetString("Overdue", resourceCulture);
             }
         }
         
@@ -813,6 +831,24 @@ namespace LifeManagement.Resources {
         public static string toBacklog {
             get {
                 return ResourceManager.GetString("toBacklog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Today.
+        /// </summary>
+        public static string Today {
+            get {
+                return ResourceManager.GetString("Today", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tomorrow.
+        /// </summary>
+        public static string Tomorrow {
+            get {
+                return ResourceManager.GetString("Tomorrow", resourceCulture);
             }
         }
         

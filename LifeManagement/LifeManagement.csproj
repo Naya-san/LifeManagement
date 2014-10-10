@@ -270,17 +270,21 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\1.png" />
+    <Content Include="Content\Images\AddEvent.png" />
+    <Content Include="Content\Images\AddTask.png" />
     <Content Include="Content\Images\arrow_next_down_16x16.png" />
     <Content Include="Content\Images\arrow_next_right.png" />
     <Content Include="Content\Images\arrow_next_right_16x16.png" />
     <Content Include="Content\Images\bell.png" />
     <Content Include="Content\Images\check.png" />
     <Content Include="Content\Images\document.png" />
+    <Content Include="Content\Images\Edit.png" />
     <Content Include="Content\Images\folder-horizontal.png" />
     <Content Include="Content\Images\folder_blue_backup.png" />
     <Content Include="Content\Images\format-indent-more.png" />
     <Content Include="Content\Images\format-indent-more12.png" />
     <Content Include="Content\Images\go.png" />
+    <Content Include="Content\Images\info.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\LogoWithText.png" />
     <Content Include="Content\Images\menu.png" />
@@ -292,11 +296,13 @@
     <Content Include="Content\Images\monotone_arrow_left_32x32.png" />
     <Content Include="Content\Images\monotone_arrow_right.png" />
     <Content Include="Content\Images\monotone_arrow_right_32x32.png" />
+    <Content Include="Content\Images\Plus.png" />
     <Content Include="Content\Images\Russia-Flag-icon.png" />
     <Content Include="Content\Images\suitcaseNoUrgentImportant.png" />
     <Content Include="Content\Images\suitcaseNoUrgentNoImportant.png" />
     <Content Include="Content\Images\suitcaseUrgentImportant.png" />
     <Content Include="Content\Images\suitcaseUrgentNoImportant.png" />
+    <Content Include="Content\Images\Tag.png" />
     <Content Include="Content\Images\taskNoUrgentImportant.png" />
     <Content Include="Content\Images\taskNoUrgentNoImportant.png" />
     <Content Include="Content\Images\taskUrgentImportant.png" />
@@ -424,6 +430,9 @@
     <Content Include="Views\Alerts\Index.cshtml" />
     <Content Include="Views\Cabinet\Index.cshtml" />
     <Content Include="Views\Cabinet\Sidebar.cshtml" />
+    <Content Include="Views\Projects\GetTasks.cshtml" />
+    <Content Include="Views\Cabinet\TagsList.cshtml" />
+    <Content Include="Views\Tags\GetRecords.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

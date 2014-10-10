@@ -375,4 +375,16 @@
   <data name="Focus" xml:space="preserve">
     <value>У фокусі</value>
   </data>
+  <data name="Future" xml:space="preserve">
+    <value>Майбутні</value>
+  </data>
+  <data name="Overdue" xml:space="preserve">
+    <value>Просрочено</value>
+  </data>
+  <data name="Today" xml:space="preserve">
+    <value>Сьогодні</value>
+  </data>
+  <data name="Tomorrow" xml:space="preserve">
+    <value>Завтра</value>
+  </data>
 </root>

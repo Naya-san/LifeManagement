@@ -8,9 +8,9 @@
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
-    padding-right: 15px;
+    /*padding-right: 15px;*/
     font-family:  Verdana, Helvetica, Arial, sans-serif;
-    
+    min-height: 90%;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -45,13 +45,6 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 
-#topmenu
-{
-    text-align: end;
-    color: lightskyblue;
-	float: right;   
-	margin: 25px 10% 30px auto;
-}
 
 #logo
 {
@@ -67,14 +60,6 @@ input[type="checkbox"].input-validation-error {
 }
 
 
-a.simple{
-	color: lightskyblue;
-	text-decoration: none;
-}
-
-a.simple:hover{
-	text-decoration: underline;
-}
 footer {
     background: #17292e;
     color: #ffffff;
@@ -88,206 +73,26 @@ footer {
 /* Sidebar*/
 
 div#maincontent {
-    padding-top: 5px;
-    padding-left: 10px;
+        border-top: 1px solid #fff;
     display: table-cell;
     width: 100%;
+    color: #f19645;
 
 }
 div#linkblock{
-    padding-top: 5px;
+        border-top: 1px solid #fff;
+    padding-top: 1px;
     display: table-cell;
     min-width: 350px;
     height: 90%;
     margin: 0 0 0 610px; 
     border-right: 1px solid #17292e;
     font: 15px "Comic Sans MS", Tahoma, Arial, sans-serif;
-}
-.menuicon{
-    z-index: 0;
-    width:10px;
-    height:10px;    
-    float:right;
-    padding-bottom:20px;
-    opacity: 100;
-    position: relative;
+    vertical-align: top;
+    color: #4e888a;
 }
 
 
-
-a.menuicon:hover{
-    background: url(/Content/Images/menuLight.png) 0px no-repeat;
-    width:16px;
-    height:16px;    
-    float:right;
-}
-
-li.context a {
-   text-decoration: none;
-   display: block;
-}
- 
-li.context ul {
-   text-align:right;
-    margin-right: 15px;
-   font-size: 10px;	
-   display: none;	/*срываем вложенные пункты*/
-}
- 
-/*Выпадающее меню*/
-
-li.context>a:hover~ul, li.context>ul:hover {
-   display: block;
-}
- 
-li.context>a:hover~ul,li.context>ul:hover {
-  position: relative;
-}
-
-/*для тасков*/
-.task{
-    font-size: 12px;
-    padding-top: 2px;
-    padding-left: 10px;
-    padding-right: 10px;
-    color: #FFF;
-    margin-bottom: 2px;
-    min-height: 60px;
-}
-
-.time {
-    font-size: 10px;
-    align-self: flex-start;
-}
-.readiness {
-    float: right;
-}
-
-.task h6{
-    font-family:  Verdana, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    font-weight: bold;   
-}
-.Soft{
--webkit-border-top-left-radius: 10px; 
--webkit-border-top-right-radius: 10px; 
--webkit-border-bottom-right-radius: 10px; 
--webkit-border-bottom-left-radius: 10px;
-}
-
-.Hard{
-    border: 1px solid #17292e;
-}
-.UrgentImportant{
-    background : #fe2d36;
-}
-.UrgentNoImportant{
-    background : #f19645;
-}
-.NoUrgentImportant{
-    background : #4e888a;
-}
-.NoUrgentNoImportant{
-    background : #6aacce;
-}
-.free{
-    font-size: 12px;
-    padding: 10px;
-    margin-bottom: 30px;
-    color: #17292e;
-}
-
-/*For check box*/
-.location {
-    position: relative;
-}
-.checkboxPosition {
-    position: absolute; 
-    top:0px; 
-    left: 0;
-
-}
-
-.mylabel {
-    margin-top: 0px;
-    font-weight: normal;
-    width: 160px;
-}
-.mylabelhavy {
-    font-weight: bold;
-    margin-top: 0px;
-    width: 160px;
-}
-
-/*Выпадающее меню напоминания*/
-
-
-
-.remindersActual {
-     display: none;
-    width: 400px;
-    margin-top: 5px;	
-}
-li.bell:hover>ul, li.bell>ul:hover{
-   display: block;
-    position: relative;
-    background-color: #17292e;
-    color: lightblue;
-}
-
-/*Other*/
-
-fieldset
-{
-	border: #9b9993 1px solid;
-	padding: 0 10px;
-	margin-bottom: 10px;
-	clear: left;
-    width: 400px;
-}
-a.done {     
-     background: url(/Content/Images/check.png) no-repeat top left;
-     display: block;       
-     width: 12px;       
-     height: 12px;       
-     text-indent: -9999px; /* hides the link text */
-     position: absolute; 
-     bottom: 5px; 
-     left: 10px
- } 
-a.toBacklog {     
-     background: url(/Content/Images/toBackLog.png) no-repeat top left;
-     display: block;       
-     width: 14px;       
-     height: 14px;       
-     text-indent: -9999px; /* hides the link text */
-     position: absolute; 
-     bottom: 5px; 
-     right: 10px
- } 
-
-label.tar {
-    width:16px;
-    height:16px;
-    display: block; 
-    position: relative;
-    float: right;
-}
-input[type="checkbox"].menuicon + span {
-    position: absolute;
-    left: 0; top: 0;
-     width: 100%;
-    height: 100%;
-    background: url(/Content/Images/menuLightBrightFill.png) 0px no-repeat;
-    cursor: pointer;
-    opacity: 50;
-}
-
-
-li.context>input.menuicon:checked~ul{
-   display: block;
-   position: relative;
-}
 
 /* New menu*/
 #menu {
@@ -337,7 +142,7 @@ li.context>input.menuicon:checked~ul{
     }
     #navbar1 ul li { float: none; }
 
-    #navbar1 ul li a:hover {color: #428bca; }
+    #navbar1 ul li a:hover {color: #4e888a; }
 
 .flagContainer {
     width: 200px;
@@ -453,10 +258,10 @@ ul.subtree {
 ul.subtree>li {
     list-style-type: none; 
 }
-uL.subtree > li > a:hover {
+ul.subtree > li > a:hover {
     text-decoration: none;
     font-weight: bolder;
-    color: #428bca;
+    color: #5f9ea0;
 }
 ul.subtree > li.subpunct>.edit:hover {
     background: url(/Content/Images/Edit.png) 0px no-repeat;
@@ -476,7 +281,131 @@ ul.subtree > li.subpunct>.edit:hover {
 /*Timetable*/
 .title {
     width: 100%;
+    height: 30px;
+    background: #17292e;
+}
+.title > h2 {
+   /*color: #4e888a;*/
+   font-size: 16px;
+   font-weight: bold;
+   margin-top: 3px;
+   margin-bottom: 8px;
+   float:left;
+   padding-left: 10px;
+}
+.addTaskIcon {
+    background: url(/Content/Images/AddTask.png) 0px no-repeat;
+    position: absolute;
+    right: 55px;
+}
+.addEventIcon {
+    background: url(/Content/Images/AddEvent.png) 0px no-repeat;
+    position: absolute;
+    right: 20px;
+}
+.addEventIcon, .addTaskIcon {
+    height: 28px;
+    width: 28px;
+    float: left;
+}
+.subtitle {
+    width: 100%;
     border-bottom: 1px solid #17292e;
-    font-weight: bolder;
-    font-size: 14px;
+    height: 25px;
+}
+.subtitle > h3 {
+   /*color: #4e888a;*/
+   font-size: 14px;
+   font-weight: bold;
+   margin-top: 5px;
+   margin-bottom: 8px;
+   float:left; 
+   padding-left: 10px;
+}
+
+
+/*для тасков*/
+
+
+
+.task{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 4px;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    min-height: 60px;
+    background-color: #f19645;
+    border: 1px solid #17292e;
+    color: #fff;
+    -webkit-border-top-left-radius: 10px; 
+    -webkit-border-top-right-radius: 10px; 
+    -webkit-border-bottom-right-radius: 10px; 
+    -webkit-border-bottom-left-radius: 10px;
+}
+input[type="checkbox"].taskcomp {
+    display: table-cell;
+    float: left;
+    height: 50px;
+    width: 30px;
+    margin-top: 5px;
+    color: #f19645;
+}
+.taskInfo {
+    display: table-cell;
+    padding-left: 10px;
+}
+
+
+
+.time {
+    font-size: 10px;
+    align-self: flex-start;
+    font-family:  Verdana, Helvetica, Arial, sans-serif;
+    float: left;
+}
+
+.name{
+    font-family:  Verdana, Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    padding-top: 2px;
+    vertical-align: top; 
+}
+
+.tags {
+    background: url(/Content/Images/Tag.png) 0px no-repeat;
+    padding-left: 15px;
+    color: #fefefe;
+    font-size: 10px;
+    position: relative;
+    vertical-align: bottom;
+    margin-top: 22px;
+}
+.moreInfoIcon{
+    background: url(/Content/Images/info.png) 0px no-repeat;
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    right: 20px;
+}
+
+.UrgentImportant{
+    background : #fe2d36;
+}
+.UrgentNoImportant{
+    background : #f19645;
+}
+.NoUrgentImportant{
+    background : #4e888a;
+}
+.NoUrgentNoImportant{
+    background : #6aacce;
+}
+.free{
+    font-size: 12px;
+    padding: 10px;
+    margin-bottom: 30px;
+    color: #17292e;
 }

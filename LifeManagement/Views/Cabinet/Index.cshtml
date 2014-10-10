@@ -15,23 +15,37 @@
     @{Html.RenderAction("Sidebar", "Cabinet");}
 </div>
 <div id="maincontent">
-    <div class="title"> <h2>@LifeManagement.Resources.ResourceScr.Focus</h2> </div>
-    @Html.ActionLink(@LifeManagement.Resources.ResourceScr.createTask, "Create", "Tasks")
-    @{
-        foreach (var routine in Model)
-        {
-            <div class="task" style="height: 100px; position: relative">
-                <h6><span style="float: left;">@routine.Name</span></h6>
-                <br />
-                @if ((routine is Task) && ((routine as Task).CompletedOn == null))
-                {
-                    <div data-link=@routine.Id>
-                        @Html.ActionLink(@LifeManagement.Resources.ResourceScr.done, "Complete", "Tasks", new { taskId = routine.Id }, new { @class = "done" })
-                    </div>
-                }
-            </div>
+        <div class="title">
+            <h2>@LifeManagement.Resources.ResourceScr.Focus</h2>
+            @Html.ActionLink(" ", "Create", "Tasks", null, new { @class = "addTaskIcon" })
+            @Html.ActionLink(" ", "Create", "Events", null, new { @class = "addEventIcon" })
+        </div>
+    <div class="subtitle"><h3>@LifeManagement.Resources.ResourceScr.Overdue</h3></div>
+    <div class="task">
+        <input type="checkbox" class="taskcomp"/>
+        <div class="taskInfo">
+            <div class="name">Jersey Girl</div>
+            <div class="moreInfoIcon"></div>
+            <span class="time">till 12:00 4 Sept</span>
+            <div class="tags">Home Joy</div>
+        </div>
+        
+    </div>
+        @{
+            foreach (var routine in Model)
+            {
+                <div class="task" style="height: 100px; position: relative">
+                    <h6><span style="float: left;">@routine.Name</span></h6>
+                    <br />
+                    @if ((routine is Task) && ((routine as Task).CompletedOn == null))
+                    {
+                        <div data-link=@routine.Id>
+                            @Html.ActionLink(@LifeManagement.Resources.ResourceScr.done, "Complete", "Tasks", new { taskId = routine.Id }, new { @class = "done" })
+                        </div>
+                    }
+                </div>
+            }
         }
-    }
 </div>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.signalR-2.0.3.js"></script>
