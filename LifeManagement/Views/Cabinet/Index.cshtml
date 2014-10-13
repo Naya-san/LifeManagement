@@ -3,6 +3,7 @@
 }
 @using LifeManagement.Models.DB
 @model IEnumerable<Record>
+@Scripts.Render("~/bundles/Dialog")
 
 @if (null != TempData["alertMessage"])
 {
@@ -10,7 +11,6 @@
         alert("@TempData["alertMessage"]");
     </script>
 }
-
 <div id="linkblock">
     @{Html.RenderAction("Sidebar", "Cabinet");}
 </div>
@@ -34,20 +34,24 @@
         @{
             foreach (var routine in Model)
             {
-                <div class="task" style="height: 100px; position: relative">
-                    <h6><span style="float: left;">@routine.Name</span></h6>
-                    <br />
-                    @if ((routine is Task) && ((routine as Task).CompletedOn == null))
-                    {
-                        <div data-link=@routine.Id>
-                            @Html.ActionLink(@LifeManagement.Resources.ResourceScr.done, "Complete", "Tasks", new { taskId = routine.Id }, new { @class = "done" })
+                <div class="task">
+                    <div class="taskInfo">
+                        <div class="name">@routine.Name</div>
+                        <div class="moreInfoIcon">@Html.ActionLink(" ", "Edit", "Tasks", new { id = routine.Id }, null)</div>
+                        <span class="time">@routine.StartDate - @routine.EndDate</span>
+                        <div class="tags">
+                            @foreach (var tag in routine.Tags)
+                            {
+                                <text>@tag.Name</text>      
+                            }
                         </div>
-                    }
+                    </div>
                 </div>
             }
         }
 </div>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+@Scripts.Render("~/bundles/Dialog")
 <script src="~/Scripts/jquery.signalR-2.0.3.js"></script>
 <script src="~/signalr/hubs"></script>
 @*<script src="~/Scripts/SignalR/TaskTicker.js"></script>*@

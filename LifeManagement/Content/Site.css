@@ -48,6 +48,7 @@ input[type="checkbox"].input-validation-error {
 
 #logo
 {
+    margin-top: 10px;
     float: right;
     margin-right: 30px;
 
@@ -92,8 +93,6 @@ div#linkblock{
     color: #4e888a;
 }
 
-
-
 /* New menu*/
 #menu {
     
@@ -101,7 +100,7 @@ div#linkblock{
     right: 0px;
 }
 #menuBTN {
-    
+    margin-top: 5px;
     position: absolute;
     right: 10px;
 }
@@ -179,6 +178,7 @@ div#linkblock{
     top: 17px;
 }
 .search {
+    margin-top: 5px;
 	width: 100%;
 	position: relative;
 }
@@ -223,8 +223,6 @@ div#linkblock{
 	opacity: 0.8;
 }
 
-/* данное свойство необходимо для того, чтобы в браузерах
-** Chrome и Safari можно было стилизовать инпуты */
 input[type="search"] {
 	-webkit-appearance: none;
 }
@@ -408,4 +406,28 @@ input[type="checkbox"].taskcomp {
     padding: 10px;
     margin-bottom: 30px;
     color: #17292e;
+}
+.openDialog {
+    
+}
+
+
+
+.forma {
+    margin-left: 0px;
+    margin-top: 20px;
+}
+div.forma >input[type="text"]{
+    /*border: none;*/
+    border: 1px solid #e8e8e8;
+    margin-left: 20px;
+    background-color: #f8f1d4;
+}
+
+div.forma > input[type="text"]:active, div.forma >input[type="text"]:hover {
+    background-color: #ffffff;
+}
+
+div.forma > .btn{
+    margin-left: 10px;
 }

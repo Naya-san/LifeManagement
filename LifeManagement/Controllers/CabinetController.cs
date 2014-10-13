@@ -44,7 +44,7 @@ namespace LifeManagement.Controllers
         public ActionResult Sidebar()
         {
             var userId = User.Identity.GetUserId();
-            var projects = db.Projects.Where(p => p.UserId == userId && p.ParentProjectId == null).Include(p => p.Tasks).Include(p => p.ChildProjects);
+            var projects = db.Projects.Where(p => p.UserId == userId);
             return View(projects.ToList());
         }
 

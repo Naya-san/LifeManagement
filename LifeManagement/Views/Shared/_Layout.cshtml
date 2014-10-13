@@ -1,15 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.UI.WebControls
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    @*@Styles.Render("~/Content/bootstrap.css")*@
-    @Styles.Render("~/Content/skeleton.css")
-    @Styles.Render("~/Content/Site.css")
+    
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
     @Scripts.Render("~/bundles/modernizr")
     <script type='text/javascript' src="@Url.Content("~/Scripts/tree.js")"></script>
-    @*@Scripts.Render("~/Scripts/bootstrap.js")*@
+
     <link rel="icon" href="/Content/Images/1.png" type="ico"> 
     <script language="javascript">
         function setCookie(cookieName, cookieValue, nDays) {
@@ -64,7 +65,7 @@
     <footer>
         <p>&copy; @DateTime.Now.Year</p>
     </footer>
-    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jquery")*@
     @RenderSection("scripts", required: false)
 </body>
 </html>

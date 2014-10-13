@@ -56,8 +56,13 @@ namespace LifeManagement.Controllers
         // GET: Projects/Create
         public ActionResult Create()
         {
-            ViewBag.ParentProjectId = new SelectList(db.Projects, "Id", "Path");
-            return View();
+            var userId = User.Identity.GetUserId();
+            ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path");
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Create");
+            }
+            return RedirectToAction("Index", "Cabinet");
         }
 
         // POST: Projects/Create
@@ -75,7 +80,7 @@ namespace LifeManagement.Controllers
                 project.UserId = userId;
                 db.Projects.Add(project);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Cabinet");
             }
 
             ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id && x.UserId == userId), "Id", "Path", project.ParentProjectId);
@@ -96,7 +101,11 @@ namespace LifeManagement.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id), "Id", "Path", project.ParentProjectId);
+            ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id && x.UserId.Equals(project.UserId)), "Id", "Path", project.ParentProjectId);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Edit", project);
+            }
             return View(project);
         }
 
@@ -111,10 +120,10 @@ namespace LifeManagement.Controllers
             {
                 db.Entry(project).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Cabinet");
             }
 
-            ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id), "Id", "Path", project.ParentProjectId);
+            ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id && x.UserId.Equals(project.UserId)), "Id", "Path", project.ParentProjectId);
             return View(project);
         }
 
@@ -132,6 +141,10 @@ namespace LifeManagement.Controllers
                 return HttpNotFound();
             }
 
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Delete", project);
+            }
             return View(project);
         }
 
@@ -144,7 +157,7 @@ namespace LifeManagement.Controllers
             db.Projects.RemoveRange(project.ChildProjects);
             db.Projects.Remove(project);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Cabinet");
         }
 
         protected override void Dispose(bool disposing)

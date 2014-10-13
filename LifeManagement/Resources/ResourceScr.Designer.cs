@@ -493,6 +493,24 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New project.
+        /// </summary>
+        public static string newProject {
+            get {
+                return ResourceManager.GetString("newProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New tag.
+        /// </summary>
+        public static string newTag {
+            get {
+                return ResourceManager.GetString("newTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, there are no available tasks. You can read interesting book or just relax. .
         /// </summary>
         public static string noAvailableTasks {
@@ -696,6 +714,15 @@ namespace LifeManagement.Resources {
         public static string subprojects {
             get {
                 return ResourceManager.GetString("subprojects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tag.
+        /// </summary>
+        public static string tag {
+            get {
+                return ResourceManager.GetString("tag", resourceCulture);
             }
         }
         

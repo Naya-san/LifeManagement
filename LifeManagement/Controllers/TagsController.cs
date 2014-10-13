@@ -59,7 +59,11 @@ namespace LifeManagement.Controllers
         // GET: Tags/Create
         public ActionResult Create()
         {
-            return View();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Create");
+            }
+            return RedirectToAction("Index", "Cabinet");
         }
 
         // POST: Tags/Create
@@ -88,14 +92,16 @@ namespace LifeManagement.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
             var tag = await db.Tags.FindAsync(id);
             if (tag == null)
             {
                 return HttpNotFound();
             }
-
-            return View(tag);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Edit", tag);
+            }
+            return RedirectToAction("Index", "Cabinet");
         }
 
         // POST: Tags/Edit/5
@@ -110,10 +116,10 @@ namespace LifeManagement.Controllers
                 tag.UserId = User.Identity.GetUserId();
                 db.Entry(tag).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Cabinet");
             }
 
-            return View(tag);
+            return PartialView("Edit", tag);
         }
 
         // GET: Tags/Delete/5
@@ -130,7 +136,11 @@ namespace LifeManagement.Controllers
                 return HttpNotFound();
             }
 
-            return View(tag);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Delete", tag);
+            }
+            return RedirectToAction("Index", "Cabinet");
         }
 
         // POST: Tags/Delete/5
@@ -141,7 +151,7 @@ namespace LifeManagement.Controllers
             var tag = await db.Tags.FindAsync(id);
             db.Tags.Remove(tag);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Cabinet");
         }
 
         protected override void Dispose(bool disposing)

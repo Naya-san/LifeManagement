@@ -393,4 +393,13 @@
   <data name="Tomorrow" xml:space="preserve">
     <value>Tomorrow</value>
   </data>
+  <data name="newTag" xml:space="preserve">
+    <value>New tag</value>
+  </data>
+  <data name="tag" xml:space="preserve">
+    <value>tag</value>
+  </data>
+  <data name="newProject" xml:space="preserve">
+    <value>New project</value>
+  </data>
 </root>

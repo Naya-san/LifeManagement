@@ -387,4 +387,13 @@
   <data name="Tomorrow" xml:space="preserve">
     <value>Завтра</value>
   </data>
+  <data name="newTag" xml:space="preserve">
+    <value>Новий тег</value>
+  </data>
+  <data name="tag" xml:space="preserve">
+    <value>мітку</value>
+  </data>
+  <data name="newProject" xml:space="preserve">
+    <value>Новий проект</value>
+  </data>
 </root>

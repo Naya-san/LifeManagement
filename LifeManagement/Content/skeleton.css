@@ -4018,7 +4018,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar {
   position: relative;
   z-index: 1000;
-  min-height: 70px;
+  min-height: 80px;
   margin-top: -50px;
   /*margin-bottom: 20px;*/
     border-top: 1px solid #fff;
