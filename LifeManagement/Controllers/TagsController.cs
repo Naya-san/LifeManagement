@@ -36,6 +36,7 @@ namespace LifeManagement.Controllers
             {
                 return HttpNotFound();
             }
+            
             return View(tag.Records);
         }
 
@@ -52,7 +53,6 @@ namespace LifeManagement.Controllers
             {
                 return HttpNotFound();
             }
-
             return View(tag);
         }
 
@@ -79,7 +79,7 @@ namespace LifeManagement.Controllers
                 tag.UserId = User.Identity.GetUserId();
                 db.Tags.Add(tag);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Cabinet");
             }
 
             return View(tag);

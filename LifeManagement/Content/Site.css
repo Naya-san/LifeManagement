@@ -13,13 +13,13 @@
     min-height: 90%;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
+/* Set width on the form input elements since they're 100% wide by default 
 input,
 select,
 textarea {
     max-width: 280px;
 }
-
+*/
 /* styles for validation helpers */
 .field-validation-error {
     color: #b94a48;
@@ -414,20 +414,42 @@ input[type="checkbox"].taskcomp {
 
 
 .forma {
-    margin-left: 0px;
-    margin-top: 20px;
 }
 div.forma >input[type="text"]{
     /*border: none;*/
     border: 1px solid #e8e8e8;
-    margin-left: 20px;
     background-color: #f8f1d4;
+}
+div.forma >select {
+    border: 1px solid #e8e8e8;
+    background-color: #f8f1d4;
+}
+
+div.forma > select:active, div.forma > select:hover {
+    background-color: #ffffff;
 }
 
 div.forma > input[type="text"]:active, div.forma >input[type="text"]:hover {
     background-color: #ffffff;
 }
 
-div.forma > .btn{
-    margin-left: 10px;
+.col-md {
+    width: 220px;
+    padding-right: 10px;
+    float: left;
+}
+.col-md-min {
+    width: 120px;
+    padding-right: 10px;
+    float: left;
+}
+.halfsize {
+    width: 49%;
+     margin:10px auto;
+}
+.fullsize {
+    width: 100%;
+}
+.buttonbar {
+    margin:10px auto;
 }
