@@ -53,11 +53,17 @@
                 @Html.ValidationMessageFor(model => model.IsUrgent)
             </div>
         </div>
-        
+
         <div class="form-group">
-            @Html.Label("Нагадати", htmlAttributes: new { @class = "control-label col-md-3" })
+            @Html.Label(LifeManagement.Resources.ResourceScr.Tags, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
-                @Html.CheckBox("NeedAlert")
+                @Html.ListBox("Tags")
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label(@LifeManagement.Resources.ResourceScr.Alerts, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.DropDownList("Alerts")
             </div>
         </div>
 

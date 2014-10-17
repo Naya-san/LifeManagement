@@ -115,6 +115,24 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alert.
+        /// </summary>
+        public static string Alert {
+            get {
+                return ResourceManager.GetString("Alert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alerts.
+        /// </summary>
+        public static string Alerts {
+            get {
+                return ResourceManager.GetString("Alerts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All events.
         /// </summary>
         public static string AllEvents {
@@ -129,6 +147,78 @@ namespace LifeManagement.Resources {
         public static string AllTask {
             get {
                 return ResourceManager.GetString("AllTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 10 minutes before.
+        /// </summary>
+        public static string b10m {
+            get {
+                return ResourceManager.GetString("b10m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 15 minutes before.
+        /// </summary>
+        public static string b15m {
+            get {
+                return ResourceManager.GetString("b15m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 day before.
+        /// </summary>
+        public static string b1d {
+            get {
+                return ResourceManager.GetString("b1d", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 hour before.
+        /// </summary>
+        public static string b1h {
+            get {
+                return ResourceManager.GetString("b1h", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2 day before.
+        /// </summary>
+        public static string b2d {
+            get {
+                return ResourceManager.GetString("b2d", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2 hours before.
+        /// </summary>
+        public static string b2h {
+            get {
+                return ResourceManager.GetString("b2h", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 30 minutes before.
+        /// </summary>
+        public static string b30m {
+            get {
+                return ResourceManager.GetString("b30m", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5 minutes before.
+        /// </summary>
+        public static string b5m {
+            get {
+                return ResourceManager.GetString("b5m", resourceCulture);
             }
         }
         
@@ -502,6 +592,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New alert.
+        /// </summary>
+        public static string newAlert {
+            get {
+                return ResourceManager.GetString("newAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New project.
         /// </summary>
         public static string newProject {
@@ -520,11 +619,29 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have no alerts.
+        /// </summary>
+        public static string NoAlerts {
+            get {
+                return ResourceManager.GetString("NoAlerts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, there are no available tasks. You can read interesting book or just relax. .
         /// </summary>
         public static string noAvailableTasks {
             get {
                 return ResourceManager.GetString("noAvailableTasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string None {
+            get {
+                return ResourceManager.GetString("None", resourceCulture);
             }
         }
         
@@ -696,6 +813,15 @@ namespace LifeManagement.Resources {
         public static string show {
             get {
                 return ResourceManager.GetString("show", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Simultaneously.
+        /// </summary>
+        public static string Simultaneously {
+            get {
+                return ResourceManager.GetString("Simultaneously", resourceCulture);
             }
         }
         
@@ -921,6 +1047,15 @@ namespace LifeManagement.Resources {
         public static string VeryHigh {
             get {
                 return ResourceManager.GetString("VeryHigh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to week before.
+        /// </summary>
+        public static string wb {
+            get {
+                return ResourceManager.GetString("wb", resourceCulture);
             }
         }
     }

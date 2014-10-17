@@ -405,4 +405,49 @@
   <data name="IsUrgent" xml:space="preserve">
     <value>Is urgent</value>
   </data>
+  <data name="Alert" xml:space="preserve">
+    <value>Alert</value>
+  </data>
+  <data name="Alerts" xml:space="preserve">
+    <value>Alerts</value>
+  </data>
+  <data name="b10m" xml:space="preserve">
+    <value>10 minutes before</value>
+  </data>
+  <data name="b15m" xml:space="preserve">
+    <value>15 minutes before</value>
+  </data>
+  <data name="b1d" xml:space="preserve">
+    <value>1 day before</value>
+  </data>
+  <data name="b1h" xml:space="preserve">
+    <value>1 hour before</value>
+  </data>
+  <data name="b2d" xml:space="preserve">
+    <value>2 day before</value>
+  </data>
+  <data name="b2h" xml:space="preserve">
+    <value>2 hours before</value>
+  </data>
+  <data name="b30m" xml:space="preserve">
+    <value>30 minutes before</value>
+  </data>
+  <data name="b5m" xml:space="preserve">
+    <value>5 minutes before</value>
+  </data>
+  <data name="newAlert" xml:space="preserve">
+    <value>New alert</value>
+  </data>
+  <data name="NoAlerts" xml:space="preserve">
+    <value>You have no alerts</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="Simultaneously" xml:space="preserve">
+    <value>Simultaneously</value>
+  </data>
+  <data name="wb" xml:space="preserve">
+    <value>week before</value>
+  </data>
 </root>

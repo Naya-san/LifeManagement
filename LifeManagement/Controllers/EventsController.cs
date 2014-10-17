@@ -5,6 +5,8 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using LifeManagement.Attributes;
+using LifeManagement.Enums;
+using LifeManagement.Extensions;
 using LifeManagement.Models;
 using LifeManagement.Models.DB;
 using Microsoft.AspNet.Identity;
@@ -48,6 +50,7 @@ namespace LifeManagement.Controllers
         {
             var userId = User.Identity.GetUserId();
             ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name");
+            ViewBag.Alerts = AlertPosition.None.ToSelectList();
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Create");

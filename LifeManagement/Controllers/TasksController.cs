@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using LifeManagement.Attributes;
+using LifeManagement.Enums;
 using LifeManagement.Models;
 using LifeManagement.Extensions;
 using LifeManagement.Models.DB;
@@ -68,6 +69,7 @@ namespace LifeManagement.Controllers
             var userId = User.Identity.GetUserId();
             ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path");
             ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name");
+            ViewBag.Alerts = AlertPosition.None.ToSelectList();
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Create");
@@ -101,16 +103,28 @@ namespace LifeManagement.Controllers
                     task.Tags.Add(await db.Tags.FindAsync(new Guid(s)));
                 }
             }
+            int alertPosition = Int32.MinValue;
+            if (Request["Alerts"] != null)
+            {
+                alertPosition = Convert.ToInt32(Request["Alerts"]);
+            }
+
             if (ModelState.IsValid)
             {
                 task.Id = Guid.NewGuid();
                 task.UserId = userId;
+                if (alertPosition >= 0)
+                {
+                    var alert = new Alert { UserId = userId, RecordId = task.Id, Id = Guid.NewGuid(), Date = (task.StartDate != null) ? task.StartDate.Value.AddMinutes(-1 * alertPosition) : task.EndDate.Value.AddMinutes(-1 * alertPosition), Name = task.Name};
+                    db.Alerts.Add(alert);
+                }
                 db.Records.Add(task);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index", "Cabinet");
             }
             //ViewBag.Min = System.Web.HttpContext.Current.Request.GetUserLocalTimeFromUtc(DateTime.UtcNow.Date);
             ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path", task.ProjectId);
+            ViewBag.Alerts = AlertPosition.None.ToSelectList();
             ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name", listTag);
             return View(task);
         }

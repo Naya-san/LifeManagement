@@ -399,4 +399,49 @@
   <data name="IsUrgent" xml:space="preserve">
     <value>Срочно</value>
   </data>
+  <data name="Alert" xml:space="preserve">
+    <value>Напоминание</value>
+  </data>
+  <data name="Alerts" xml:space="preserve">
+    <value>Напоминания</value>
+  </data>
+  <data name="b10m" xml:space="preserve">
+    <value>За 10 минут</value>
+  </data>
+  <data name="b15m" xml:space="preserve">
+    <value>За 15 минут</value>
+  </data>
+  <data name="b1d" xml:space="preserve">
+    <value>За 1 день</value>
+  </data>
+  <data name="b1h" xml:space="preserve">
+    <value>За 1 час</value>
+  </data>
+  <data name="b2d" xml:space="preserve">
+    <value>За 2 дня</value>
+  </data>
+  <data name="b2h" xml:space="preserve">
+    <value>За 2 часа</value>
+  </data>
+  <data name="b30m" xml:space="preserve">
+    <value>За 30 минут</value>
+  </data>
+  <data name="b5m" xml:space="preserve">
+    <value>За 5 минут</value>
+  </data>
+  <data name="newAlert" xml:space="preserve">
+    <value>Новое напоминание</value>
+  </data>
+  <data name="NoAlerts" xml:space="preserve">
+    <value>У Вас нет напоминаний</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Не нужно</value>
+  </data>
+  <data name="Simultaneously" xml:space="preserve">
+    <value>В это же время</value>
+  </data>
+  <data name="wb" xml:space="preserve">
+    <value>За неделю</value>
+  </data>
 </root>

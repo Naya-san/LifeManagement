@@ -36,15 +36,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
-                @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Date)
+                @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Date, htmlAttributes: new { @onchange = "dis()"})
                 @Html.ValidationMessageFor(model => model.StartDate)
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
-                @Html.Html5Editor("EndTime", InputTypes.InputType.Time, htmlAttributes: new {@value = "00:00"})
-                @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Date)
+                @Html.Html5Editor("EndTime", InputTypes.InputType.Time, htmlAttributes: new { @value = "00:00", @min = "00:00" })
+                @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Date, htmlAttributes: new {@onchange ="dis()"})
                 @Html.ValidationMessageFor(model => model.EndDate)
             </div>
         </div>
@@ -60,7 +60,12 @@
             @Html.Label(LifeManagement.Resources.ResourceScr.Tags, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
                 @Html.ListBox("Tags")
-
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label(LifeManagement.Resources.ResourceScr.Alert, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.DropDownList("Alerts", (IEnumerable<SelectListItem>)ViewBag.Alerts, new { @disabled = "true" })
             </div>
         </div>
 

@@ -1,4 +1,18 @@
 ﻿function dis() {
+    if (document.getElementsByName("EndDate")[0].value == "" && document.getElementsByName("StartDate")[0].value == "") {
+        document.getElementsByName("Alerts")[0].disabled = true;
+    } else {
+        document.getElementsByName("Alerts")[0].disabled = false;
+    }
+}
+
+//document.getElementsByName("EndTime")[0].disabled = false;
+//document.getElementsByName("EndTime")[0].required = true;
+//} else {
+//    document.getElementsByName("EndTime")[0].disabled = true;
+//    document.getElementsByName("EndTime")[0].required = false;
+//}
+function dis2() {
     if (document.getElementsByName("location")[0].checked == true) {
         document.getElementsByName("Start")[0].disabled = true;
         document.getElementsByName("End")[0].disabled = true;
