@@ -444,4 +444,7 @@
   <data name="wb" xml:space="preserve">
     <value>За неделю</value>
   </data>
+  <data name="newEvent" xml:space="preserve">
+    <value>Новое мероприятие</value>
+  </data>
 </root>

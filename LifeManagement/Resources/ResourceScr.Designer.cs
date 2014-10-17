@@ -601,6 +601,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New event.
+        /// </summary>
+        public static string newEvent {
+            get {
+                return ResourceManager.GetString("newEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New project.
         /// </summary>
         public static string newProject {

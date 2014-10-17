@@ -450,4 +450,7 @@
   <data name="wb" xml:space="preserve">
     <value>week before</value>
   </data>
+  <data name="newEvent" xml:space="preserve">
+    <value>New event</value>
+  </data>
 </root>

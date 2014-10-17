@@ -283,6 +283,7 @@ ul.subtree > li.subpunct>.edit:hover {
     background: #17292e;
 }
 .title > h2 {
+    color: #f19645;
    /*color: #4e888a;*/
    font-size: 16px;
    font-weight: bold;
@@ -370,6 +371,7 @@ input[type="checkbox"].taskcomp {
 .taskInfo {
     display: table-cell;
     padding-left: 10px;
+    float: left;
 }
 
 
@@ -480,4 +482,43 @@ div.forma > input[type="text"]:active, div.forma >input[type="text"]:hover {
 
 .longer {
     width: 265px;
+}
+
+.closeIcon{
+    background: url(/Content/Images/close.png) 0px no-repeat;
+    height: 40px;
+    width: 20px;
+    display: table-cell;
+    float: right;
+   
+}
+.alertLM{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 2px;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    min-height: 40px;
+    background-color: #4e888a;
+    color: #fff;
+}
+
+.AlertsBox {
+    min-height: 30px;
+    max-height: 70px; /* высота нашего блока */
+    border: 1px solid #C1C1C1; /* размер и цвет границы блока */
+    overflow-y: scroll; /* прокрутка по вертикали */
+}
+
+.Сompleted {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 2px;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    min-height: 40px;
+    background-color: #e8e8e8;
+    color: #17292e;
 }

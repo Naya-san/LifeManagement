@@ -183,7 +183,7 @@ namespace LifeManagement.Controllers
             task.StartDate = request.GetUtcFromUserLocalTime(task.StartDate);
 
             db.Records.Attach(task);
-            
+
             if (Request["Tags"] != "" && Request["Tags"] != null)
             {
                 foreach (var tag in task.Tags.ToList())
@@ -197,7 +197,7 @@ namespace LifeManagement.Controllers
                     task.Tags.Add(await db.Tags.FindAsync(new Guid(s)));
                 }
             }
-            
+
             if (ModelState.IsValid)
             {
                 db.Entry(task).State = EntityState.Modified;

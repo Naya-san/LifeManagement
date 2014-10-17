@@ -21,11 +21,11 @@ namespace LifeManagement.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Alerts
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
             var alerts = db.Alerts.Where(x => x.UserId == userId).Include(a => a.Record);
-            return View(await alerts.ToListAsync());
+            return View(alerts.ToList());
         }
 
         // GET: Alerts/Details/5
@@ -115,6 +115,9 @@ namespace LifeManagement.Controllers
         // GET: Alerts/Delete/5
         public async Task<ActionResult> Delete(Guid? id)
         {
+
+
+            //return View(alert);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -125,8 +128,9 @@ namespace LifeManagement.Controllers
             {
                 return HttpNotFound();
             }
-
-            return View(alert);
+            db.Alerts.Remove(alert);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index", "Cabinet");
         }
 
         // POST: Alerts/Delete/5

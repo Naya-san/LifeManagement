@@ -10,60 +10,28 @@
     @{Html.RenderAction("Sidebar", "Cabinet");}
 </div>
 <div id="maincontent">
-        <div class="title">
-            <h2>@ResourceScr.Focus</h2>
-            @Html.ActionLink(" ", "Create", "Tasks", null, new { 
-                                      @class = "addTaskIcon openDialog",
-                                      data_dialog_id = "31",
-                                      data_dialog_title = ResourceScr.createTask,
-                                      data_dialog_width = "700",
-                                      data_dialog_height = "auto" 
-            })
-            @Html.ActionLink(" ", "Create", "Events", null, new { @class = "addEventIcon  openDialog",
-                                      data_dialog_id = "41",
-                                      data_dialog_title = ResourceScr.createDayLimit,
-                                      data_dialog_width = "700",
-                                      data_dialog_height = "auto"  
-            })
-        </div>
+    @{Html.RenderAction("Index", "Alerts");}
+    <div class="title">
+        <h2>@ResourceScr.Focus</h2>
+        @Html.ActionLink(" ", "Create", "Tasks", null, new { 
+            @class = "addTaskIcon openDialog",
+            data_dialog_id = "31",
+            data_dialog_title = ResourceScr.createTask,
+            data_dialog_width = "700",
+            data_dialog_height = "auto" 
+        })
+        @Html.ActionLink(" ", "Create", "Events", null, new { @class = "addEventIcon  openDialog",
+            data_dialog_id = "41",
+            data_dialog_title = ResourceScr.newEvent,
+            data_dialog_width = "700",
+            data_dialog_height = "auto"  
+        })
+    </div>
     <div class="subtitle"><h3>@ResourceScr.Today</h3></div>
     @{Html.RenderAction("Index", "Tasks");}
-    @*@{Html.RenderAction("Index", "Events");}*@
+    @{Html.RenderAction("Index", "Events");}
     
-    @foreach (var item in Model)
-    {
-        <div class="task">
-            <input type="checkbox" class="taskcomp" />
-            <div class="taskInfo">
-                <div class="name">
-                    @if (item.IsUrgent)
-                    {
-                        <div class="Urgent"></div>
-                    }
-                    @item.Name
-                </div>
-                <div>
-                    @Html.ActionLink(" ", "Edit", "Tasks", new { id = item.Id },
-                            new
-                            {
-                                @class = "moreInfoIcon openDialog",
-                                data_dialog_id = "32",
-                                data_dialog_title = ResourceScr.Details,
-                                data_dialog_width = "700",
-                                data_dialog_height = "auto"
-                            })
-            </div>
-            <span class="time">@item.StartDate - @item.EndDate</span>
-            <div class="tags">
-                @foreach (var tag in item.Tags)
-                {
-                    <text>@tag.Name </text>
-                }
-            </div>
-        </div>
-    </div>
-    }
-    
+   
 
    
 </div>

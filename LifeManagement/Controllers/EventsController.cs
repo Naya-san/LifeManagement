@@ -21,11 +21,11 @@ namespace LifeManagement.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Events
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
             var records = db.Records.Where(x => x.UserId == userId).OfType<Event>();
-            return PartialView(await records.ToListAsync());
+            return PartialView(records.ToList());
         }
 
         // GET: Events/Details/5
@@ -93,7 +93,11 @@ namespace LifeManagement.Controllers
                 return HttpNotFound();
             }
 
-            return View(@event);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Edit");
+            }
+            return RedirectToAction("Index", "Cabinet");
         }
 
         // POST: Events/Edit/5
@@ -107,7 +111,7 @@ namespace LifeManagement.Controllers
             {
                 db.Entry(@event).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Cabinet");
             }
 
             return View(@event);
@@ -138,7 +142,7 @@ namespace LifeManagement.Controllers
             var task = await db.Records.FindAsync(id);
             db.Records.Remove(task);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Cabinet");
         }
 
         protected override void Dispose(bool disposing)
