@@ -23,11 +23,11 @@ namespace LifeManagement.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Tasks
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
             var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().Include(t => t.Project).Include(t => t.Tags);
-            return PartialView(await records.ToListAsync());
+            return PartialView(records.ToList());
         }
 
         public async Task<ActionResult> Complete(Guid taskId)
