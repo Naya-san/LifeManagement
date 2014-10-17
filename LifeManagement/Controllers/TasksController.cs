@@ -24,11 +24,11 @@ namespace LifeManagement.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Tasks
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
             var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().Include(t => t.Project).Include(t => t.Tags);
-            return PartialView(await records.ToListAsync());
+            return PartialView(records.ToList());
         }
 
         public async Task<ActionResult> Complete(Guid taskId)
@@ -137,7 +137,6 @@ namespace LifeManagement.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            db.Configuration.LazyLoadingEnabled = false;
             var task = await db.Records.Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == id) as Task;
             if (task == null)
             {
@@ -182,7 +181,10 @@ namespace LifeManagement.Controllers
             HttpRequest request = System.Web.HttpContext.Current.Request;
             task.EndDate = request.GetUtcFromUserLocalTime(task.EndDate);
             task.StartDate = request.GetUtcFromUserLocalTime(task.StartDate);
-            if (Request["Tags"] != "" && Request["Tag"] != null)
+
+            db.Records.Attach(task);
+            
+            if (Request["Tags"] != "" && Request["Tags"] != null)
             {
                 foreach (var tag in task.Tags.ToList())
                 {
@@ -195,8 +197,7 @@ namespace LifeManagement.Controllers
                     task.Tags.Add(await db.Tags.FindAsync(new Guid(s)));
                 }
             }
-
-
+            
             if (ModelState.IsValid)
             {
                 db.Entry(task).State = EntityState.Modified;
@@ -207,7 +208,6 @@ namespace LifeManagement.Controllers
             var userId = User.Identity.GetUserId();
             ViewBag.Time = task.EndDate.toTimeFormat();
             ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path", task.ProjectId);
-            db.Configuration.LazyLoadingEnabled = true;
             return View(task);
         }
 
