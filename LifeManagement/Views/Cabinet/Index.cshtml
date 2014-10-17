@@ -1,54 +1,71 @@
 ﻿@{
-    ViewBag.Title = LifeManagement.Resources.ResourceScr.cabinet;
+    ViewBag.Title = ResourceScr.cabinet;
 }
 @using LifeManagement.Models.DB
+@using LifeManagement.Resources
 @model IEnumerable<Record>
-@Scripts.Render("~/bundles/Dialog")
 
-@if (null != TempData["alertMessage"])
-{
-    <script type="text/javascript">
-        alert("@TempData["alertMessage"]");
-    </script>
-}
+
 <div id="linkblock">
     @{Html.RenderAction("Sidebar", "Cabinet");}
 </div>
 <div id="maincontent">
         <div class="title">
-            <h2>@LifeManagement.Resources.ResourceScr.Focus</h2>
-            @Html.ActionLink(" ", "Create", "Tasks", null, new { @class = "addTaskIcon" })
-            @Html.ActionLink(" ", "Create", "Events", null, new { @class = "addEventIcon" })
+            <h2>@ResourceScr.Focus</h2>
+            @Html.ActionLink(" ", "Create", "Tasks", null, new { 
+                                      @class = "addTaskIcon openDialog",
+                                      data_dialog_id = "31",
+                                      data_dialog_title = ResourceScr.createTask,
+                                      data_dialog_width = "700",
+                                      data_dialog_height = "auto" 
+            })
+            @Html.ActionLink(" ", "Create", "Events", null, new { @class = "addEventIcon  openDialog",
+                                      data_dialog_id = "41",
+                                      data_dialog_title = ResourceScr.createDayLimit,
+                                      data_dialog_width = "700",
+                                      data_dialog_height = "auto"  
+            })
         </div>
-    <div class="subtitle"><h3>@LifeManagement.Resources.ResourceScr.Overdue</h3></div>
-    <div class="task">
-        <input type="checkbox" class="taskcomp"/>
-        <div class="taskInfo">
-            <div class="name">Jersey Girl</div>
-            <div class="moreInfoIcon"></div>
-            <span class="time">till 12:00 4 Sept</span>
-            <div class="tags">Home Joy</div>
-        </div>
-        
-    </div>
-        @{
-            foreach (var routine in Model)
-            {
-                <div class="task">
-                    <div class="taskInfo">
-                        <div class="name">@routine.Name</div>
-                        <div class="moreInfoIcon">@Html.ActionLink(" ", "Edit", "Tasks", new { id = routine.Id }, null)</div>
-                        <span class="time">@routine.StartDate - @routine.EndDate</span>
-                        <div class="tags">
-                            @foreach (var tag in routine.Tags)
-                            {
-                                <text>@tag.Name</text>      
-                            }
-                        </div>
-                    </div>
+    <div class="subtitle"><h3>@ResourceScr.Today</h3></div>
+    @*@{Html.RenderAction("Index", "Tasks");}
+    @{Html.RenderAction("Index", "Events");}*@
+    
+    @foreach (var item in Model)
+    {
+        <div class="task">
+            <input type="checkbox" class="taskcomp" />
+            <div class="taskInfo">
+                <div class="name">
+                    @if (item.IsUrgent)
+                    {
+                        <div class="Urgent"></div>
+                    }
+                    @item.Name
                 </div>
-            }
-        }
+                <div>
+                    @Html.ActionLink(" ", "Edit", "Tasks", new { id = item.Id },
+                            new
+                            {
+                                @class = "moreInfoIcon openDialog",
+                                data_dialog_id = "32",
+                                data_dialog_title = ResourceScr.Details,
+                                data_dialog_width = "700",
+                                data_dialog_height = "auto"
+                            })
+            </div>
+            <span class="time">@item.StartDate - @item.EndDate</span>
+            <div class="tags">
+                @foreach (var tag in item.Tags)
+                {
+                    <text>@tag.Name </text>
+                }
+            </div>
+        </div>
+    </div>
+    }
+    
+
+   
 </div>
 @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
 @Scripts.Render("~/bundles/Dialog")

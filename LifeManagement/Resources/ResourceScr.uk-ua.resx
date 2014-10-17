@@ -396,4 +396,7 @@
   <data name="newProject" xml:space="preserve">
     <value>Новий проект</value>
   </data>
+  <data name="IsUrgent" xml:space="preserve">
+    <value>Терміново</value>
+  </data>
 </root>

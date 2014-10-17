@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using LifeManagement.Attributes;
 using LifeManagement.Models;
+using LifeManagement.Models.DB;
 using Microsoft.AspNet.Identity;
 
 namespace LifeManagement.Controllers
@@ -22,7 +22,7 @@ namespace LifeManagement.Controllers
             var userGuid = Guid.Parse(userId);
 
             var request = System.Web.HttpContext.Current.Request;
-            var records = db.Records.Where(x => x.UserId == userId).OrderBy(x => x.StartDate).ToList();
+            var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().OrderBy(x => x.StartDate).ToList();
 
             foreach (var record in records)
             {
@@ -36,8 +36,9 @@ namespace LifeManagement.Controllers
                     record.EndDate = UserTimeConverter.GetUserLocalTimeFromUtc(userGuid, request, record.EndDate.Value);
                 }
             }
-            
+
             return View(records);
+            //return View();
         }
 
         [Authorize]

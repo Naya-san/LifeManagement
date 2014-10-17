@@ -421,6 +421,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is urgent.
+        /// </summary>
+        public static string IsUrgent {
+            get {
+                return ResourceManager.GetString("IsUrgent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to It&apos;s too late =(.
         /// </summary>
         public static string itsPast {

@@ -16,7 +16,7 @@
         <hr />
         @Html.ValidationSummary(true)
         <div class="form-group">
-            @Html.LabelFor(model => model.RecordId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RecordId, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-10">
                 @Html.DropDownList("RecordId")
                 @Html.ValidationMessageFor(model => model.RecordId)
@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name)
                 @Html.ValidationMessageFor(model => model.Name)
@@ -32,7 +32,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-10">
                 @Html.Html5EditorFor(model => model.Date, InputTypes.InputType.Date)
                 @Html.ValidationMessageFor(model => model.Date)

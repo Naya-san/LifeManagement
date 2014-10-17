@@ -827,7 +827,7 @@ pre code {
 .col-sm-11,
 .col-sm-12,
 .col-md-1,
-.col-md-2,
+.col-md-3,
 .col-md-3,
 .col-md-4,
 .col-md-5,
@@ -1077,7 +1077,7 @@ pre code {
     /*max-width: 970px;*/
   }
   .col-md-1,
-  .col-md-2,
+  .col-md-3,
   .col-md-3,
   .col-md-4,
   .col-md-5,
@@ -1092,7 +1092,7 @@ pre code {
   .col-md-1 {
     width: 8.333333333333332%;
   }
-  .col-md-2 {
+  .col-md-3 {
     width: 16.666666666666664%;
   }
   .col-md-3 {

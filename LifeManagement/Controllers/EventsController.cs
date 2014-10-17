@@ -23,7 +23,7 @@ namespace LifeManagement.Controllers
         {
             var userId = User.Identity.GetUserId();
             var records = db.Records.Where(x => x.UserId == userId).OfType<Event>();
-            return View(await records.ToListAsync());
+            return PartialView(await records.ToListAsync());
         }
 
         // GET: Events/Details/5
@@ -46,7 +46,13 @@ namespace LifeManagement.Controllers
         // GET: Events/Create
         public ActionResult Create()
         {
-            return View();
+            var userId = User.Identity.GetUserId();
+            ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name");
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Create");
+            }
+            return RedirectToAction("Index", "Cabinet");
         }
 
         // POST: Events/Create
@@ -64,7 +70,7 @@ namespace LifeManagement.Controllers
                 @event.UserId = userId;
                 db.Records.Add(@event);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Cabinet");
             }
 
             return View(@event);

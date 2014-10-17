@@ -402,4 +402,7 @@
   <data name="newProject" xml:space="preserve">
     <value>New project</value>
   </data>
+  <data name="IsUrgent" xml:space="preserve">
+    <value>Is urgent</value>
+  </data>
 </root>

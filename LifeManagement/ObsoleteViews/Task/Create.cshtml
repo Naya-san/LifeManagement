@@ -17,7 +17,7 @@
 
         <div class="form-group">
             <div class="form-group">
-                @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-3" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Name)
                     @Html.ValidationMessageFor(model => model.Name)
@@ -25,7 +25,7 @@
             </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Priority, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Priority, new { @class = "control-label col-md-3" })
     <div class="col-md-10">
         <fieldset>
             @Html.ValidationMessageFor(model => model.Priority)
@@ -50,7 +50,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Complexity, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Complexity, new { @class = "control-label col-md-3" })
             <div class="col-md-10">
                 <fieldset>
                     @Html.ValidationMessageFor(model => model.Complexity)
@@ -76,7 +76,7 @@
         <div class="form-group">
             
                 <div class="form-group">
-                    <b class="control-label col-md-2">@ResourceScr.execution</b>
+                    <b class="control-label col-md-3">@ResourceScr.execution</b>
                     <div class="col-md-10">
                         <input type="radio" name="location" value="soft" checked onchange="dis()" id="softType" /> @ResourceScr.need &nbsp;
                         <input type="number" name="Days" value="0" size="3" min="0" max="365" required="true" onchange="checkdate()"/>@ResourceScr.days &nbsp;
@@ -85,7 +85,7 @@
                         <br>
                         <br>
     <div class="form-group">
-        <div class="col-md-2 location">
+        <div class="col-md-3 location">
             <input type="checkbox" name="onStartDate" onchange="disStartDate()" class="checkboxPosition" />
             @Html.LabelFor(model => model.DesiredStartDate , new { @class = "mylabel" })
         </div>
@@ -95,7 +95,7 @@
     </div>
 
                         <div class="form-group">
-                            <div class="col-md-2 location">
+                            <div class="col-md-3 location">
                                 <input type="checkbox" name="onDueDate" onchange="disDueDate()" class="checkboxPosition" />
                                 @Html.LabelFor(model => model.DesiredDueDate, new { @class = "mylabel" })
                             </div>
@@ -105,7 +105,7 @@
                         </div>
 
     <div class="form-group">
-        <div class="col-md-2 location">
+        <div class="col-md-3 location">
             <input type="checkbox" name="onDeadline" onchange="disDeadline()" class="checkboxPosition" />
             @Html.LabelFor(model => model.Deadline, new { @class = "mylabel" })
         </div>
@@ -125,7 +125,7 @@
 
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Description, new { @class = "control-label col-md-3" })
                     <div class="col-md-10">
                         @Html.TextAreaFor(model => model.Description, new { style = "width:300px ;height:100px" })
                         @Html.ValidationMessageFor(model => model.Description)
@@ -135,7 +135,7 @@
                 @if (Session["container"].Equals("project"))
                 {
                          <div class="form-group">
-                             <div class="col-md-2 location">
+                             <div class="col-md-3 location">
                                  <input type="radio" name="position" value="project" checked onchange="disProject()" class="checkboxPosition" />
                                  @Html.LabelFor(model => model.ProjectId, @ResourceScr.TaskProject, new { @class = "mylabelhavy" })
 
@@ -147,7 +147,7 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-2 location">
+                            <div class="col-md-3 location">
                                 <input type="radio" name="position" value="task" onchange="disProject()" class="checkboxPosition" />
                                 @Html.LabelFor(model => model.ParentTaskId, @ResourceScr.TaskParentTask, new { @class = "mylabelhavy" })
                             </div>
@@ -161,7 +161,7 @@
                     if (Session["container"].Equals("projectOnly"))
                      {
                          <div class="form-group">
-                            @Html.LabelFor(model => model.ProjectId, @LifeManagement.Resources.ResourceScr.TaskProject, new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.ProjectId, @LifeManagement.Resources.ResourceScr.TaskProject, new { @class = "control-label col-md-3" })
                             <div class="col-md-10">
                                 @Html.DropDownList("ProjectId")
                                 @Html.ValidationMessageFor(model => model.ProjectId)
@@ -171,7 +171,7 @@
                 else
                 {
                     <div class="form-group">
-                        <div class="col-md-2 location">
+                        <div class="col-md-3 location">
                             <input type="radio" name="position" value="project"  onchange="disProject()" class="checkboxPosition" />
                             @Html.LabelFor(model => model.ProjectId, @ResourceScr.TaskProject, new { @class = "mylabelhavy" })
 
@@ -183,7 +183,7 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-2 location">
+                            <div class="col-md-3 location">
                                 <input type="radio" name="position" value="task" checked onchange="disProject()" class="checkboxPosition" />
                                 @Html.LabelFor(model => model.ParentTaskId, @ResourceScr.TaskParentTask, new { @class = "mylabelhavy" })
                             </div>

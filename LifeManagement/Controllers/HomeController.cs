@@ -35,6 +35,10 @@ namespace LifeManagement.Controllers
         private LifeManagementContext db = new LifeManagementContext();
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Cabinet");
+            }
             return View();
         }
 

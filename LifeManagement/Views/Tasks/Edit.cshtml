@@ -1,79 +1,85 @@
 ﻿@using System.Web.Mvc.Html5
+@using LifeManagement.Resources
 @model LifeManagement.Models.DB.Task
 
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Task</h4>
-        <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.UserId)
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProjectId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ProjectId", String.Empty)
-                @Html.ValidationMessageFor(model => model.ProjectId)
-            </div>
-        </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9 forma">
                 @Html.EditorFor(model => model.Name)
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.ProjectId, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9 forma">
+                @Html.DropDownList("ProjectId")
+                @Html.ValidationMessageFor(model => model.ProjectId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9 forma">
                 @Html.EditorFor(model => model.Note)
                 @Html.ValidationMessageFor(model => model.Note)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9  forma">
                 @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Date, new { @Value = Model.StartDate != null ? Model.StartDate.Value.ToString("yyyy-MM-dd") : "" })
                 @Html.ValidationMessageFor(model => model.StartDate)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9  forma">
+                @Html.Html5Editor("EndTime", InputTypes.InputType.Time, htmlAttributes: new { @value = ViewBag.Time })
                 @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Date, new { @Value = Model.EndDate != null ? Model.EndDate.Value.ToString("yyyy-MM-dd") : "" })
                 @Html.ValidationMessageFor(model => model.EndDate)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IsUrgent, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.IsUrgent, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9 forma">
                 @Html.EditorFor(model => model.IsUrgent)
                 @Html.ValidationMessageFor(model => model.IsUrgent)
             </div>
         </div>
-
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            @Html.Label(ResourceScr.Tags, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
+                @Html.ListBox("Tags")
+
             </div>
         </div>
+        <div class="buttonbar">
+            <input type="submit" value="@ResourceScr.save" class="btn btn-default halfsize" />
+            @Html.ActionLink(ResourceScr.Delete, "Delete", new { id = Model.Id }, new
+            {
+                @class = "btn btn-default halfsize openDialog",
+                data_dialog_id = "13",
+                data_dialog_title = ResourceScr.Delete,
+                data_dialog_width = "500",
+                data_dialog_height = "auto"
+            })
+       </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
