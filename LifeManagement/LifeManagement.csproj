@@ -277,6 +277,7 @@
     <Content Include="Content\Images\arrow_next_right_16x16.png" />
     <Content Include="Content\Images\bell.png" />
     <Content Include="Content\Images\check.png" />
+    <Content Include="Content\Images\close.png" />
     <Content Include="Content\Images\document.png" />
     <Content Include="Content\Images\Edit.png" />
     <Content Include="Content\Images\folder-horizontal.png" />
@@ -315,6 +316,7 @@
     <Content Include="Content\Images\toggle_plus.png" />
     <Content Include="Content\Images\Ukraine-Flag-icon.png" />
     <Content Include="Content\Images\United-Kingdom-flag.png" />
+    <Content Include="Content\Images\Urgent.png" />
     <Content Include="Content\skeleton.css" />
     <Content Include="Content\skeleton.min.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
