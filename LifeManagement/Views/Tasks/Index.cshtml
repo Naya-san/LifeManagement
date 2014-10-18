@@ -7,8 +7,11 @@
 
 
 @foreach (var item in Model) {
-    <div class="task">
-            <input type="checkbox" class="taskcomp" />
+    if (item.CompletedOn.HasValue)
+    {
+        <div class="task">
+            <div>@Html.ActionLink(" ", "Complete", "Tasks", new {taskId = item.Id}, new {@class = "taskChackBox"})</div>
+            @*<input type="checkbox" class="taskcomp" onchange="" />*@
             <div class="taskInfo">
                 <div class="name">
                     @if (item.IsUrgent)
@@ -17,20 +20,47 @@
                     }
                     @item.Name
                 </div>
-                <div>@Html.ActionLink(" ", "Edit", "Tasks", new { id = item.Id }, 
-                            new { @class = "moreInfoIcon openDialog",
-                                data_dialog_id = "32",
-                                data_dialog_title = ResourceScr.Details,
-                                data_dialog_width = "700",
-                                data_dialog_height = "auto"  })
+                <div>@Html.ActionLink(" ", "Edit", "Tasks", new {id = item.Id},
+                         new
+                         {
+                             @class = "moreInfoIcon openDialog",
+                             data_dialog_id = "32",
+                             data_dialog_title = ResourceScr.Details,
+                             data_dialog_width = "700",
+                             data_dialog_height = "auto"
+                         })
                 </div>
                 <span class="time">@item.StartDate - @item.EndDate</span>
                 <div class="tags">
                     @foreach (var tag in item.Tags)
                     {
-                        <text>@tag.Name </text>      
+                        <text>@tag.Name </text>
                     }
                 </div>
             </div>
+        </div>
+    }
+    else
+    {
+        <div class="Сompleted">
+            <input type="checkbox" class="taskcomp" checked="true" disabled="false"/>
+            <div class="taskInfo">
+                <div class="name">
+                    @if (item.IsUrgent)
+                    {
+                        <div class="Urgent"></div>
+                    }
+                    @item.Name
+                </div>
+            <span class="time">@item.CompletedOn</span>
+            <div class="tags">
+                @foreach (var tag in item.Tags)
+                {
+                    <text>@tag.Name </text>
+                }
+            </div>
+        </div>
     </div>
+    }
+
 }

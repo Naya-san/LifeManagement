@@ -3,7 +3,6 @@
 }
 @using LifeManagement.Models.DB
 @using LifeManagement.Resources
-@model IEnumerable<Record>
 
 
 <div id="linkblock">
@@ -12,6 +11,7 @@
 <div id="maincontent">
     @{Html.RenderAction("Index", "Alerts");}
     <div class="title">
+        <h2>@Session["CabinetState"]</h2>
         <h2>@ResourceScr.Focus</h2>
         @Html.ActionLink(" ", "Create", "Tasks", null, new { 
             @class = "addTaskIcon openDialog",

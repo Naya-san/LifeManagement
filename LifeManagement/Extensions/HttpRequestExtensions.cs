@@ -40,21 +40,22 @@ namespace LifeManagement.Extensions
 
         public static DateTime? GetUtcFromUserLocalTime(this HttpRequest request, DateTime? dateTime)
         {
-            if (dateTime == null)
+            if (dateTime.HasValue)
             {
-                return dateTime;
+                DateTime dt = new DateTime(dateTime.Value.Ticks);
+                return request.GetUtcFromUserLocalTime(dt); 
             }
-            DateTime dt = new DateTime(dateTime.Value.Ticks);
-            return request.GetUtcFromUserLocalTime(dt);
+            return dateTime;
         }
         public static DateTime? GetUserLocalTimeFromUtc(this HttpRequest request, DateTime? dateTime)
         {
-            if (dateTime == null)
+            if (dateTime.HasValue)
             {
-                return dateTime;
+                DateTime dt = new DateTime(dateTime.Value.Ticks);
+                return request.GetUserLocalTimeFromUtc(dt);
+                
             }
-            DateTime dt = new DateTime(dateTime.Value.Ticks);
-            return request.GetUserLocalTimeFromUtc(dt);
+            return dateTime;
 
         }
     }

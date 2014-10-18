@@ -368,6 +368,14 @@ input[type="checkbox"].taskcomp {
     margin-top: 5px;
     color: #f19645;
 }
+.taskChackBox {
+    background: url(/Content/Images/chackCell.png) 0px no-repeat;
+    display: table-cell;
+    float: left;
+    height: 50px;
+    width: 30px;
+    margin-top: 5px;
+}
 .taskInfo {
     display: table-cell;
     padding-left: 10px;
@@ -518,7 +526,10 @@ div.forma > input[type="text"]:active, div.forma >input[type="text"]:hover {
     font-size: 12px;
     padding-left: 10px;
     padding-right: 10px;
-    min-height: 40px;
+    min-height: 60px;
     background-color: #e8e8e8;
+    color: #17292e;
+}
+.Сompleted>.taskInfo> .tags {
     color: #17292e;
 }

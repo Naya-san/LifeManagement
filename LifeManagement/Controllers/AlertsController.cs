@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using LifeManagement.Attributes;
+using LifeManagement.Extensions;
 using LifeManagement.Models;
 using LifeManagement.Models.DB;
 using Microsoft.AspNet.Identity;
@@ -25,6 +26,11 @@ namespace LifeManagement.Controllers
         {
             var userId = User.Identity.GetUserId();
             var alerts = db.Alerts.Where(x => x.UserId == userId).Include(a => a.Record);
+            HttpRequest request = System.Web.HttpContext.Current.Request;
+            foreach (var alert in alerts)
+            {
+                alert.Date = request.GetUserLocalTimeFromUtc(alert.Date);
+            }
             return View(alerts.ToList());
         }
 

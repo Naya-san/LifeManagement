@@ -27,7 +27,21 @@ namespace LifeManagement.Controllers
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
+            var request = System.Web.HttpContext.Current.Request;
             var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().Include(t => t.Project).Include(t => t.Tags);
+            foreach (var record in records)
+            {
+                if (record.StartDate.HasValue)
+                {
+                    record.StartDate = request.GetUserLocalTimeFromUtc(record.StartDate.Value);
+                }
+
+                if (record.EndDate.HasValue)
+                {
+                    record.EndDate = request.GetUserLocalTimeFromUtc(record.EndDate.Value);
+                }
+                record.CompletedOn = request.GetUserLocalTimeFromUtc(record.CompletedOn);
+            }
             return PartialView(records.ToList());
         }
 
@@ -86,7 +100,7 @@ namespace LifeManagement.Controllers
         {
             var userId = User.Identity.GetUserId();
             HttpRequest request = System.Web.HttpContext.Current.Request;
-            if (task.EndDate != null && Request["EndTime"] != "")
+            if (task.EndDate.HasValue && Request["EndTime"] != "")
             {
                     var time = Request["EndTime"].Split(':');
                     var timeSpan = new TimeSpan(0, Convert.ToInt32(time[0]), Convert.ToInt32(time[1]), 0);
@@ -95,7 +109,7 @@ namespace LifeManagement.Controllers
             task.EndDate = request.GetUtcFromUserLocalTime(task.EndDate);
             task.StartDate = request.GetUtcFromUserLocalTime(task.StartDate);
             string[] listTag = new[] {""};
-            if (Request["Tags"] != "" && Request["Tag"] != null)
+            if (Request["Tags"] != "" && Request["Tags"] != null)
             {
                 listTag = Request["Tags"].Split(',');
                 foreach (string s in listTag)
@@ -115,7 +129,7 @@ namespace LifeManagement.Controllers
                 task.UserId = userId;
                 if (alertPosition >= 0)
                 {
-                    var alert = new Alert { UserId = userId, RecordId = task.Id, Id = Guid.NewGuid(), Date = (task.StartDate != null) ? task.StartDate.Value.AddMinutes(-1 * alertPosition) : task.EndDate.Value.AddMinutes(-1 * alertPosition), Name = task.Name};
+                    var alert = new Alert { UserId = userId, RecordId = task.Id, Id = Guid.NewGuid(), Date = (task.StartDate.HasValue) ? task.StartDate.Value.AddMinutes(-1 * alertPosition) : task.EndDate.Value.AddMinutes(-1 * alertPosition), Name = task.Name};
                     db.Alerts.Add(alert);
                 }
                 db.Records.Add(task);
