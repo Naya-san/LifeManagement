@@ -453,4 +453,7 @@
   <data name="newEvent" xml:space="preserve">
     <value>New event</value>
   </data>
+  <data name="NoDueDate" xml:space="preserve">
+    <value>No Due Date</value>
+  </data>
 </root>

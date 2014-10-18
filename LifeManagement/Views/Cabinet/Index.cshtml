@@ -11,8 +11,7 @@
 <div id="maincontent">
     @{Html.RenderAction("Index", "Alerts");}
     <div class="title">
-        <h2>@Session["CabinetState"]</h2>
-        <h2>@ResourceScr.Focus</h2>
+        <h2 id="maintitle">@ResourceScr.Focus</h2>
         @Html.ActionLink(" ", "Create", "Tasks", null, new { 
             @class = "addTaskIcon openDialog",
             data_dialog_id = "31",
@@ -27,9 +26,44 @@
             data_dialog_height = "auto"  
         })
     </div>
-    <div class="subtitle"><h3>@ResourceScr.Today</h3></div>
-    @{Html.RenderAction("Index", "Tasks");}
-    @{Html.RenderAction("Index", "Events");}
+    
+    <div id="Overdue">
+        <div class="subtitle"><h3>@ResourceScr.Overdue</h3></div>
+    </div>
+    <div id="Today">
+        <div class="subtitle"><h3>@ResourceScr.Today</h3></div>
+        <div id="TodayTask">
+            @{Html.RenderAction("Index", "Tasks");}
+        </div>
+        <div id="TodayEvent">
+            @{Html.RenderAction("Index", "Events");}
+        </div>
+    </div>
+    <div id="Tomorrow">
+        <div class="subtitle"><h3>@ResourceScr.Tomorrow</h3></div>
+        <div id="TomorrowTask">
+
+        </div>
+        <div id="TomorrowEvent">
+       
+        </div>
+    </div>
+    <div id="FutureTask">
+        <div class="subtitle"><h3>@ResourceScr.Future</h3></div>
+
+    </div>
+    <div id="FutureEvent">
+        <div class="subtitle"><h3>@ResourceScr.Future</h3></div>
+
+    </div>
+    <div id="NoDueDate">
+        <div class="subtitle"><h3>@ResourceScr.NoDueDate</h3></div>
+
+    </div>
+
+
+
+   
     
    
 

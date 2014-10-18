@@ -447,4 +447,7 @@
   <data name="newEvent" xml:space="preserve">
     <value>Новое мероприятие</value>
   </data>
+  <data name="NoDueDate" xml:space="preserve">
+    <value>Без сроков</value>
+  </data>
 </root>

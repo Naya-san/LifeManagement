@@ -15,7 +15,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
-                @Html.EditorFor(model => model.Name)
+               @Html.Html5EditorFor(model => model.Name, htmlAttributes: new { @required = "true" })
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>

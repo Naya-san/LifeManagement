@@ -447,4 +447,7 @@
   <data name="newEvent" xml:space="preserve">
     <value>Новий захід</value>
   </data>
+  <data name="NoDueDate" xml:space="preserve">
+    <value>Без сроків</value>
+  </data>
 </root>

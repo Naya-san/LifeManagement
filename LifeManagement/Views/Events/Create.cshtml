@@ -15,7 +15,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
-                @Html.EditorFor(model => model.Name)
+                @Html.Html5EditorFor(model => model.Name, htmlAttributes: new {@required = "true" })
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
@@ -32,7 +32,7 @@
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
                 @Html.Html5Editor("StartTime", InputTypes.InputType.Time, htmlAttributes: new { @value = "00:00" , @required = "true"})
-                @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Date, htmlAttributes: new {@required = "true"})
+                @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Date, htmlAttributes: new {@required = "true", @value = ViewBag.Date})
                 @Html.ValidationMessageFor(model => model.StartDate)
             </div>
         </div>
@@ -41,7 +41,7 @@
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
                 @Html.Html5Editor("EndTime", InputTypes.InputType.Time, htmlAttributes: new { @value = "00:00", @required = "true" })
-                @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Date, htmlAttributes: new {@required = "true"})
+                @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Date, htmlAttributes: new { @required = "true", @value = ViewBag.Date })
                 @Html.ValidationMessageFor(model => model.EndDate)
             </div>
         </div>

@@ -65,6 +65,8 @@ namespace LifeManagement.Controllers
             var userId = User.Identity.GetUserId();
             ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name");
             ViewBag.Alerts = AlertPosition.None.ToSelectList();
+            HttpRequest request = System.Web.HttpContext.Current.Request;
+            ViewBag.Date = request.GetUserLocalTimeFromUtc(DateTime.UtcNow).Date.ToString("yyyy-MM-dd");
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Create");
@@ -139,7 +141,9 @@ namespace LifeManagement.Controllers
             {
                 return HttpNotFound();
             }
-
+            var userId = User.Identity.GetUserId();
+            ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name");
+            ViewBag.Alerts = AlertPosition.None.ToSelectList();
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Edit");
