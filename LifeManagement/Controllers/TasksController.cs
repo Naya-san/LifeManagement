@@ -197,14 +197,15 @@ namespace LifeManagement.Controllers
             task.StartDate = request.GetUtcFromUserLocalTime(task.StartDate);
 
             db.Records.Attach(task);
+            db.Entry(task).Collection(x => x.Tags).Load();
+
+            foreach (var tag in task.Tags.ToList())
+            {
+                task.Tags.Remove(tag);
+            }
 
             if (Request["Tags"] != "" && Request["Tags"] != null)
             {
-                foreach (var tag in task.Tags.ToList())
-                {
-                    task.Tags.Remove(tag);
-                }
-
                 var listTag = Request["Tags"].Split(',');
                 foreach (string s in listTag)
                 {
