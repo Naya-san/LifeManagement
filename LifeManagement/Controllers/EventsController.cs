@@ -82,7 +82,7 @@ namespace LifeManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Name,Note,StartDate,EndDate,IsUrgent")] Event @event)
+        public async Task<ActionResult> Create([Bind(Include = "Name,Note,StartDate,EndDate,IsUrgent,StopRepeatDate")] Event @event)
         {
             var userId = User.Identity.GetUserId();
             HttpRequest request = System.Web.HttpContext.Current.Request;
