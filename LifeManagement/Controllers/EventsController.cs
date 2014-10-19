@@ -113,7 +113,7 @@ namespace LifeManagement.Controllers
             }
 
             var repeatPosition = (RepeatPosition)Enum.Parse(typeof(RepeatPosition), Request["RepeatList"], true);
-
+            @event.RepeatPosition = repeatPosition;
             if (ModelState.IsValid)
             {
                 @event.Id = Guid.NewGuid();
@@ -128,6 +128,7 @@ namespace LifeManagement.Controllers
                 if (repeatPosition != RepeatPosition.None)
                 {
                     var dateFinish = DateTime.Parse(Request["RepeatEnd"]);
+                    @event.StopRepeatDate = dateFinish;
                     var dateIter = new DateTime(@event.StartDate.Value.Ticks);
                     @event.GroupId = Guid.NewGuid();
                     while (dateIter.AddDays((int)repeatPosition) < dateFinish)
@@ -139,7 +140,9 @@ namespace LifeManagement.Controllers
                             Name = @event.Name,
                             Note = @event.Note,
                             UserId = @event.UserId,
-                            IsUrgent = @event.IsUrgent
+                            IsUrgent = @event.IsUrgent,
+                            RepeatPosition = @event.RepeatPosition,
+                            StopRepeatDate = @event.StopRepeatDate
                         };
                         foreach (var tag in @event.Tags)
                         {
@@ -208,11 +211,15 @@ namespace LifeManagement.Controllers
                 return HttpNotFound();
             }
             var userId = User.Identity.GetUserId();
+            HttpRequest request = System.Web.HttpContext.Current.Request;
+            @event.EndDate = request.GetUserLocalTimeFromUtc(@event.EndDate);
+            @event.StartDate = request.GetUserLocalTimeFromUtc(@event.StartDate);
             ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name");
             ViewBag.Alerts = AlertPosition.None.ToSelectList();
+            ViewBag.RepeatList = RepeatPosition.None.ToSelectList();
             if (Request.IsAjaxRequest())
             {
-                return PartialView("Edit");
+                return PartialView("Edit", @event);
             }
             return RedirectToAction("Index", "Cabinet");
         }
@@ -224,6 +231,18 @@ namespace LifeManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,UserId,Name,Note,StartDate,EndDate,IsUrgent")] Event @event)
         {
+            HttpRequest request = System.Web.HttpContext.Current.Request;
+            var time = Request["EndTime"].Split(':');
+            var timeSpan = new TimeSpan(0, Convert.ToInt32(time[0]), Convert.ToInt32(time[1]), 0);
+            @event.EndDate = new DateTime(@event.EndDate.Value.Ticks).Add(timeSpan);
+            time = Request["StartTime"].Split(':');
+            timeSpan = new TimeSpan(0, Convert.ToInt32(time[0]), Convert.ToInt32(time[1]), 0);
+            @event.StartDate = new DateTime(@event.StartDate.Value.Ticks).Add(timeSpan);
+            @event.EndDate = request.GetUtcFromUserLocalTime(@event.EndDate);
+            @event.StartDate = request.GetUtcFromUserLocalTime(@event.StartDate);
+
+
+
             if (ModelState.IsValid)
             {
                 db.Entry(@event).State = EntityState.Modified;
