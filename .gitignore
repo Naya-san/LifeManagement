@@ -160,3 +160,5 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+LifeManagement/App_Data/DefaultConnection.mdf
+LifeManagement/App_Data/DefaultConnection_log.ldf
