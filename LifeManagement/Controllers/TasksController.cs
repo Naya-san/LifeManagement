@@ -84,7 +84,7 @@ namespace LifeManagement.Controllers
             var userId = User.Identity.GetUserId();
             if (!db.Projects.Any(x => x.UserId == userId))
             {
-                var project = new Project { Name ="Text", Id = Guid.NewGuid(), UserId = userId };
+                var project = new Project { Name =ResourceScr.DefaultProject, Id = Guid.NewGuid(), UserId = userId };
 
                 if (ModelState.IsValid)
                 {
@@ -147,7 +147,6 @@ namespace LifeManagement.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index", "Cabinet");
             }
-            //ViewBag.Min = System.Web.HttpContext.Current.Request.GetUserLocalTimeFromUtc(DateTime.UtcNow.Date);
             ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path", task.ProjectId);
             ViewBag.Alerts = AlertPosition.None.ToSelectList();
             ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name", listTag);
