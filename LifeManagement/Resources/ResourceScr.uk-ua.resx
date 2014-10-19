@@ -450,4 +450,25 @@
   <data name="NoDueDate" xml:space="preserve">
     <value>Без сроків</value>
   </data>
+  <data name="E2w" xml:space="preserve">
+    <value>Кожні два тижні</value>
+  </data>
+  <data name="Ed" xml:space="preserve">
+    <value>Кожен день</value>
+  </data>
+  <data name="Em" xml:space="preserve">
+    <value>Кожен місяць</value>
+  </data>
+  <data name="Ew" xml:space="preserve">
+    <value>Кожен тиждень</value>
+  </data>
+  <data name="Ey" xml:space="preserve">
+    <value>Кожен рік</value>
+  </data>
+  <data name="Repeat" xml:space="preserve">
+    <value>Повторювати</value>
+  </data>
+  <data name="till" xml:space="preserve">
+    <value>до</value>
+  </data>
 </root>

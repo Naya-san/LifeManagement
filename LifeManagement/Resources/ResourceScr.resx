@@ -456,4 +456,25 @@
   <data name="NoDueDate" xml:space="preserve">
     <value>No Due Date</value>
   </data>
+  <data name="E2w" xml:space="preserve">
+    <value>Every two week</value>
+  </data>
+  <data name="Ed" xml:space="preserve">
+    <value>Every day</value>
+  </data>
+  <data name="Em" xml:space="preserve">
+    <value>Every month</value>
+  </data>
+  <data name="Ew" xml:space="preserve">
+    <value>Every week</value>
+  </data>
+  <data name="Ey" xml:space="preserve">
+    <value>Every year</value>
+  </data>
+  <data name="Repeat" xml:space="preserve">
+    <value>Repeat</value>
+  </data>
+  <data name="till" xml:space="preserve">
+    <value>till</value>
+  </data>
 </root>

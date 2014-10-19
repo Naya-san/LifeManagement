@@ -65,8 +65,11 @@ namespace LifeManagement.Controllers
             var userId = User.Identity.GetUserId();
             ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name");
             ViewBag.Alerts = AlertPosition.None.ToSelectList();
+            ViewBag.RepeatList = RepeatPosition.None.ToSelectList();
+
             HttpRequest request = System.Web.HttpContext.Current.Request;
             ViewBag.Date = request.GetUserLocalTimeFromUtc(DateTime.UtcNow).Date.ToString("yyyy-MM-dd");
+            ViewBag.DateR = request.GetUserLocalTimeFromUtc(DateTime.UtcNow.AddYears(1)).Date.ToString("yyyy-MM-dd");
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Create");
@@ -109,6 +112,7 @@ namespace LifeManagement.Controllers
                 alertPosition = Convert.ToInt32(Request["Alerts"]);
             }
 
+            var repeatPosition = (RepeatPosition)Enum.Parse(typeof(RepeatPosition), Request["RepeatList"], true);
 
             if (ModelState.IsValid)
             {
@@ -117,10 +121,72 @@ namespace LifeManagement.Controllers
                 if (alertPosition >= 0)
                 {
                     var alert = new Alert { UserId = userId, RecordId = @event.Id, Id = Guid.NewGuid(), Date = @event.StartDate.Value.AddMinutes(-1 * alertPosition), Name = @event.Name };
+                    @event.Alerts.Add(alert);
                     db.Alerts.Add(alert);
                 }
+                
+                if (repeatPosition != RepeatPosition.None)
+                {
+                    var dateFinish = DateTime.Parse(Request["RepeatEnd"]);
+                    var dateIter = new DateTime(@event.StartDate.Value.Ticks);
+                    @event.GroupId = Guid.NewGuid();
+                    while (dateIter.AddDays((int)repeatPosition) < dateFinish)
+                    {
+                        var newEvent = new Event
+                        {
+                            Id = Guid.NewGuid(),
+                            GroupId = @event.GroupId,
+                            Name = @event.Name,
+                            Note = @event.Note,
+                            UserId = @event.UserId,
+                            IsUrgent = @event.IsUrgent
+                        };
+                        foreach (var tag in @event.Tags)
+                        {
+                            newEvent.Tags.Add(tag);
+                        }
+                        switch (repeatPosition)
+                        {
+                            case RepeatPosition.Ed:
+                                dateIter = dateIter.AddDays(1);
+                                newEvent.StartDate = new DateTime(dateIter.Ticks);
+                                newEvent.EndDate = new DateTime(dateIter.Add(@event.EndDate.Value - @event.StartDate.Value).AddDays(1).Ticks);
+                                break;
+                            case RepeatPosition.Ew:
+                                dateIter = dateIter.AddDays(7);
+                                newEvent.StartDate = new DateTime(dateIter.Ticks);
+                                newEvent.EndDate = new DateTime(dateIter.Add(@event.EndDate.Value - @event.StartDate.Value).AddDays(7).Ticks);
+                                break;
+                            case RepeatPosition.E2w:
+                                dateIter = dateIter.AddDays(14);
+                                newEvent.StartDate = new DateTime(dateIter.Ticks);
+                                newEvent.EndDate = new DateTime(dateIter.Add(@event.EndDate.Value - @event.StartDate.Value).AddDays(14).Ticks);
+                                break;
+                            case RepeatPosition.Em:
+                                dateIter = dateIter.AddMonths(1);
+                                newEvent.StartDate = new DateTime(dateIter.Ticks);
+                                newEvent.EndDate = new DateTime(dateIter.Add(@event.EndDate.Value - @event.StartDate.Value).AddMonths(1).Ticks);
+                                break;
+                            case RepeatPosition.Ey:
+                                dateIter = dateIter.AddYears(1);
+                                newEvent.StartDate = new DateTime(dateIter.Ticks);
+                                newEvent.EndDate = new DateTime(dateIter.Add(@event.EndDate.Value - @event.StartDate.Value).AddYears(1).Ticks);
+                                break;
+                        }
+                        foreach (var aler in @event.Alerts)
+                        {
+                            var newAlert = new Alert() { UserId = userId, RecordId = newEvent.Id, Id = Guid.NewGuid(), Date = newEvent.StartDate.Value.AddMinutes(-1 * alertPosition), Name = @event.Name };
+                            newEvent.Alerts.Add(newAlert);
+                            db.Alerts.Add(newAlert);
+                        }
+                        db.Records.Add(newEvent);
 
+                    } 
+
+                }
+                
                 db.Records.Add(@event);
+                
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index", "Cabinet");
             }

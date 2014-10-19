@@ -7,7 +7,7 @@
 
 
 @foreach (var item in Model) {
-    if (item.CompletedOn.HasValue)
+    if (!item.CompletedOn.HasValue)
     {
         <div class="task">
             <div>@Html.ActionLink(" ", "Complete", "Tasks", new {taskId = item.Id}, new {@class = "taskChackBox"})</div>

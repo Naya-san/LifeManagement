@@ -54,12 +54,12 @@ namespace LifeManagement.Extensions
                 new Pair(){ ID =(int) AlertPosition.B2D , Text = AlertPosition.B2D.ToLocalizedString()},
                 new Pair(){ ID =(int) AlertPosition.Wb , Text = AlertPosition.Wb.ToLocalizedString()}
             };
-            return new SelectList(positions, "ID", "Text", (int)AlertPosition.None);
+            return new SelectList(positions, "ID", "Text", (int)alert);
 
         }
     }
 
-    class Pair
+    public class Pair
     {
         public int ID { set; get; }
         public String Text { set; get; }

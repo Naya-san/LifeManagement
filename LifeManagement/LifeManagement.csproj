@@ -197,10 +197,11 @@
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Enums\AlertPosition.cs" />
     <Compile Include="Enums\CabinetState.cs" />
-    <Compile Include="Enums\RepeatList.cs" />
+    <Compile Include="Enums\RepeatPosition.cs" />
     <Compile Include="Extensions\AlertPositionExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\HttpRequestExtensions.cs" />
+    <Compile Include="Extensions\RepeatPositionExtensions.cs" />
     <Compile Include="Models\UserTimeConverter.cs" />
     <Compile Include="ObsoleteBusinessLogic\DateTimeProvider.cs" />
     <Compile Include="ObsoleteBusinessLogic\DayLimitActivity.cs" />

@@ -15,7 +15,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
-               @Html.Html5EditorFor(model => model.Name, htmlAttributes: new { @required = "true" })
+               @Html.Html5EditorFor(model => model.Name, htmlAttributes: new { @required = "true", @class = "longer"})
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
@@ -36,14 +36,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
-                @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Date, htmlAttributes: new { @onchange = "dis()"})
+                @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Date, htmlAttributes: new { @onchange = "dis()", @class = "longer" })
                 @Html.ValidationMessageFor(model => model.StartDate)
             </div>
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
-                @Html.Html5Editor("EndTime", InputTypes.InputType.Time, htmlAttributes: new { @value = "00:00", @min = "00:00" })
+                @Html.Html5Editor("EndTime", InputTypes.InputType.Time, htmlAttributes: new { @value = "23:59", @min = "00:00" })
                 @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Date, htmlAttributes: new {@onchange ="dis()"})
                 @Html.ValidationMessageFor(model => model.EndDate)
             </div>

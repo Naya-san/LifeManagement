@@ -367,11 +367,38 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Every two week.
+        /// </summary>
+        public static string E2w {
+            get {
+                return ResourceManager.GetString("E2w", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Every day.
+        /// </summary>
+        public static string Ed {
+            get {
+                return ResourceManager.GetString("Ed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Every month.
+        /// </summary>
+        public static string Em {
+            get {
+                return ResourceManager.GetString("Em", resourceCulture);
             }
         }
         
@@ -412,11 +439,29 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Every week.
+        /// </summary>
+        public static string Ew {
+            get {
+                return ResourceManager.GetString("Ew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Execution.
         /// </summary>
         public static string execution {
             get {
                 return ResourceManager.GetString("execution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Every year.
+        /// </summary>
+        public static string Ey {
+            get {
+                return ResourceManager.GetString("Ey", resourceCulture);
             }
         }
         
@@ -808,6 +853,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Repeat.
+        /// </summary>
+        public static string Repeat {
+            get {
+                return ResourceManager.GetString("Repeat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string save {
@@ -993,6 +1047,15 @@ namespace LifeManagement.Resources {
         public static string TaskStartDate {
             get {
                 return ResourceManager.GetString("TaskStartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to till.
+        /// </summary>
+        public static string till {
+            get {
+                return ResourceManager.GetString("till", resourceCulture);
             }
         }
         
