@@ -24,11 +24,15 @@
 #endregion
 
 using System;
+using LifeManagement.Enums;
 
 namespace LifeManagement.Models.DB
 {
     public class Event : Record
     {
         public Guid GroupId { get; set; }
+        public RepeatPosition RepeatPosition { get; set; }
+
+        public DateTime? StopRepeatDate { get; set; }
     }
 }
