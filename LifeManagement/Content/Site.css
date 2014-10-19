@@ -470,6 +470,10 @@ div.forma > input[type="text"]:active, div.forma >input[type="text"]:hover {
     padding-right: 10px;
     float: left;
 }
+.thirdsize {
+    width: 33%;
+    margin:10px auto;
+}
 .halfsize {
     width: 49%;
      margin:10px auto;

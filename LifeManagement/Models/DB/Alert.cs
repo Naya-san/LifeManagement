@@ -24,6 +24,7 @@
 #endregion
 
 using System;
+using LifeManagement.Enums;
 
 namespace LifeManagement.Models.DB
 {
@@ -36,6 +37,7 @@ namespace LifeManagement.Models.DB
         public string Name { get; set; }
         public DateTime Date { get; set; }
 
+        public AlertPosition Position { get; set; }
         public virtual Record Record { get; set; }
         public virtual ApplicationUser User { get; set; }
 
