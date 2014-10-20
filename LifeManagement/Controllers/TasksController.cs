@@ -112,7 +112,7 @@ namespace LifeManagement.Controllers
             if (alert == null) return;
 
             var hubContext = GlobalHost.ConnectionManager.GetHubContext<AlertsHub>();
-            hubContext.Clients.All.addAlert(new AlertViewModel { Id = alert.Id, Name = alert.Name, Date = userLocalTime.ToString() });
+            hubContext.Clients.User(alert.User.UserName).addAlert(new AlertViewModel { Id = alert.Id, Name = alert.Name, Date = userLocalTime.ToString() });
         }
 
         // POST: Tasks/Create
@@ -155,7 +155,7 @@ namespace LifeManagement.Controllers
 
                 if (alertPosition >= 0)
                 {
-                    var alert = new Alert { UserId = userId, Position = (AlertPosition) alertPosition ,RecordId = task.Id, Id = Guid.NewGuid(), Date = (task.StartDate.HasValue) ? task.StartDate.Value.AddMinutes(-1 * alertPosition) : task.EndDate.Value.AddMinutes(-1 * alertPosition), Name = task.Name};
+                    alert = new Alert { UserId = userId, Position = (AlertPosition) alertPosition ,RecordId = task.Id, Id = Guid.NewGuid(), Date = (task.StartDate.HasValue) ? task.StartDate.Value.AddMinutes(-1 * alertPosition) : task.EndDate.Value.AddMinutes(-1 * alertPosition), Name = task.Name};
                     db.Alerts.Add(alert);
                 }
                 db.Records.Add(task);

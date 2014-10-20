@@ -217,6 +217,7 @@
     <Compile Include="Extensions\HttpRequestExtensions.cs" />
     <Compile Include="Extensions\RepeatPositionExtensions.cs" />
     <Compile Include="Hubs\AlertsHub.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\UserTimeConverter.cs" />
     <Compile Include="ObsoleteBusinessLogic\DateTimeProvider.cs" />
     <Compile Include="ObsoleteBusinessLogic\DayLimitActivity.cs" />
