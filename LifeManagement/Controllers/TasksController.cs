@@ -15,6 +15,7 @@ using LifeManagement.Models;
 using LifeManagement.Extensions;
 using LifeManagement.Models.DB;
 using LifeManagement.ViewModels;
+using LifeManagement.Resources;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.SignalR;
 using Task = LifeManagement.Models.DB.Task;
@@ -85,6 +86,16 @@ namespace LifeManagement.Controllers
         public ActionResult Create()
         {
             var userId = User.Identity.GetUserId();
+            if (!db.Projects.Any(x => x.UserId == userId))
+            {
+                var project = new Project { Name =ResourceScr.DefaultProject, Id = Guid.NewGuid(), UserId = userId };
+
+                if (ModelState.IsValid)
+                {
+                    db.Projects.Add(project);
+                    db.SaveChanges();
+                }
+            }
             ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path");
             ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name");
             ViewBag.Alerts = AlertPosition.None.ToSelectList();
@@ -144,7 +155,7 @@ namespace LifeManagement.Controllers
 
                 if (alertPosition >= 0)
                 {
-                    alert = new Alert { UserId = userId, RecordId = task.Id, Id = Guid.NewGuid(), Date = (task.StartDate.HasValue) ? task.StartDate.Value.AddMinutes(-1 * alertPosition) : task.EndDate.Value.AddMinutes(-1 * alertPosition), Name = task.Name};
+                    var alert = new Alert { UserId = userId, Position = (AlertPosition) alertPosition ,RecordId = task.Id, Id = Guid.NewGuid(), Date = (task.StartDate.HasValue) ? task.StartDate.Value.AddMinutes(-1 * alertPosition) : task.EndDate.Value.AddMinutes(-1 * alertPosition), Name = task.Name};
                     db.Alerts.Add(alert);
                 }
                 db.Records.Add(task);
@@ -163,7 +174,6 @@ namespace LifeManagement.Controllers
 
                 return RedirectToAction("Index", "Cabinet");
             }
-            //ViewBag.Min = System.Web.HttpContext.Current.Request.GetUserLocalTimeFromUtc(DateTime.UtcNow.Date);
             ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path", task.ProjectId);
             ViewBag.Alerts = AlertPosition.None.ToSelectList();
             ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name", listTag);
@@ -194,6 +204,8 @@ namespace LifeManagement.Controllers
                 i++;
             }
             ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name", selected);
+            var alert = await db.Alerts.FirstOrDefaultAsync(x => x.UserId == userId && x.RecordId == task.Id);
+            ViewBag.Alerts = alert == null ? AlertPosition.None.ToSelectList() : alert.Position.ToSelectList();
             HttpRequest request = System.Web.HttpContext.Current.Request;
             task.EndDate = request.GetUserLocalTimeFromUtc(task.EndDate);
             task.StartDate = request.GetUserLocalTimeFromUtc(task.StartDate);
@@ -225,6 +237,7 @@ namespace LifeManagement.Controllers
 
             db.Records.Attach(task);
             db.Entry(task).Collection(x => x.Tags).Load();
+            db.Entry(task).Collection(x => x.Alerts).Load();
 
             foreach (var tag in task.Tags.ToList())
             {
@@ -240,6 +253,37 @@ namespace LifeManagement.Controllers
                 }
             }
 
+            int alertPosition = Int32.MinValue;
+            if (Request["Alerts"] != null)
+            {
+                alertPosition = Convert.ToInt32(Request["Alerts"]);
+            }
+            var date = task.StartDate.HasValue ? task.StartDate.Value : task.EndDate;
+            Alert alert = (task.Alerts != null && task.Alerts.Any())? task.Alerts.ToArray()[0]: null;
+            if (alertPosition >= 0 && date != null && alert != null)
+            {
+                if (alertPosition != (int) alert.Position)
+                {
+                    alert.Date = date.Value.AddMinutes(-1*alertPosition);
+                    alert.Position = (AlertPosition)alertPosition;
+                }
+            }
+            else
+            {
+                if (alertPosition >= 0 && date != null && alert == null)
+                {
+                    alert = new Alert { UserId = task.UserId, Position = (AlertPosition)alertPosition, RecordId = task.Id, Id = Guid.NewGuid(), Date = (task.StartDate.HasValue) ? task.StartDate.Value.AddMinutes(-1 * alertPosition) : task.EndDate.Value.AddMinutes(-1 * alertPosition), Name = task.Name };
+                    db.Alerts.Add(alert);
+                }
+                else
+                {
+                    if ((alertPosition < 0 || date == null) && alert != null)
+                    {
+                        db.Alerts.Remove(alert);
+                    }
+                }
+            }
+           
             if (ModelState.IsValid)
             {
                 db.Entry(task).State = EntityState.Modified;

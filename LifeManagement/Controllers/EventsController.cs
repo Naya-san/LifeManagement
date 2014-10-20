@@ -82,7 +82,7 @@ namespace LifeManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Name,Note,StartDate,EndDate,IsUrgent")] Event @event)
+        public async Task<ActionResult> Create([Bind(Include = "Name,Note,StartDate,EndDate,IsUrgent,StopRepeatDate")] Event @event)
         {
             var userId = User.Identity.GetUserId();
             HttpRequest request = System.Web.HttpContext.Current.Request;
@@ -127,11 +127,9 @@ namespace LifeManagement.Controllers
                 
                 if (repeatPosition != RepeatPosition.None)
                 {
-                    var dateFinish = DateTime.Parse(Request["RepeatEnd"]);
-                    @event.StopRepeatDate = dateFinish;
                     var dateIter = new DateTime(@event.StartDate.Value.Ticks);
                     @event.GroupId = Guid.NewGuid();
-                    while (dateIter.AddDays((int)repeatPosition) < dateFinish)
+                    while (dateIter.AddDays((int)repeatPosition) < @event.StopRepeatDate)
                     {
                         var newEvent = new Event
                         {
@@ -178,7 +176,7 @@ namespace LifeManagement.Controllers
                         }
                         foreach (var aler in @event.Alerts)
                         {
-                            var newAlert = new Alert() { UserId = userId, RecordId = newEvent.Id, Id = Guid.NewGuid(), Date = newEvent.StartDate.Value.AddMinutes(-1 * alertPosition), Name = @event.Name };
+                            var newAlert = new Alert() { UserId = userId, Position = (AlertPosition) alertPosition, RecordId = newEvent.Id, Id = Guid.NewGuid(), Date = newEvent.StartDate.Value.AddMinutes(-1 * alertPosition), Name = @event.Name };
                             newEvent.Alerts.Add(newAlert);
                             db.Alerts.Add(newAlert);
                         }
@@ -189,7 +187,6 @@ namespace LifeManagement.Controllers
                 }
                 
                 db.Records.Add(@event);
-                
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index", "Cabinet");
             }
@@ -211,12 +208,23 @@ namespace LifeManagement.Controllers
                 return HttpNotFound();
             }
             var userId = User.Identity.GetUserId();
+
+            var selected = new string[@event.Tags.Count];
+            int i = 0;
+            foreach (var tag in @event.Tags)
+            {
+                selected[i] = tag.Id.ToString();
+                i++;
+            }
+            ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name", selected);
+            var alert = await db.Alerts.FirstOrDefaultAsync(x => x.UserId == userId && x.RecordId == @event.Id);
+            ViewBag.Alerts = alert == null ? AlertPosition.None.ToSelectList() : alert.Position.ToSelectList();
+            ViewBag.RepeatPosition = @event.RepeatPosition.ToSelectList();
+
             HttpRequest request = System.Web.HttpContext.Current.Request;
             @event.EndDate = request.GetUserLocalTimeFromUtc(@event.EndDate);
             @event.StartDate = request.GetUserLocalTimeFromUtc(@event.StartDate);
-            ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name");
-            ViewBag.Alerts = AlertPosition.None.ToSelectList();
-            ViewBag.RepeatList = RepeatPosition.None.ToSelectList();
+
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Edit", @event);
@@ -253,6 +261,31 @@ namespace LifeManagement.Controllers
             return View(@event);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditAll([Bind(Include = "Id,UserId,Name,Note,StartDate,EndDate,IsUrgent")] Event @event)
+        {
+            HttpRequest request = System.Web.HttpContext.Current.Request;
+            var time = Request["EndTime"].Split(':');
+            var timeSpan = new TimeSpan(0, Convert.ToInt32(time[0]), Convert.ToInt32(time[1]), 0);
+            @event.EndDate = new DateTime(@event.EndDate.Value.Ticks).Add(timeSpan);
+            time = Request["StartTime"].Split(':');
+            timeSpan = new TimeSpan(0, Convert.ToInt32(time[0]), Convert.ToInt32(time[1]), 0);
+            @event.StartDate = new DateTime(@event.StartDate.Value.Ticks).Add(timeSpan);
+            @event.EndDate = request.GetUtcFromUserLocalTime(@event.EndDate);
+            @event.StartDate = request.GetUtcFromUserLocalTime(@event.StartDate);
+
+
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(@event).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index", "Cabinet");
+            }
+
+            return RedirectToAction("Edit",@event);
+        }
         // GET: Events/Delete/5
         public async Task<ActionResult> Delete(Guid? id)
         {

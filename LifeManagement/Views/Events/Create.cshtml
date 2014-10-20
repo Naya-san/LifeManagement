@@ -72,7 +72,7 @@
                 @Html.DropDownList("RepeatList")
              
                     @LifeManagement.Resources.ResourceScr.till
-                    @Html.Html5Editor("RepeatEnd", InputTypes.InputType.Date, htmlAttributes: new { @required = "true", @value = ViewBag.DateR })
+                    @Html.Html5EditorFor(model => model.StopRepeatDate, InputTypes.InputType.Date, htmlAttributes: new { @required = "true", @value = ViewBag.DateR })
         
                
             </div>

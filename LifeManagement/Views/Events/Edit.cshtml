@@ -1,4 +1,5 @@
 ﻿@using System.Web.Mvc.Html5
+@using LifeManagement.Enums
 @using LifeManagement.Extensions
 @using LifeManagement.Resources
 @model LifeManagement.Models.DB.Event
@@ -20,7 +21,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
-                @Html.EditorFor(model => model.Name)
+                @Html.Html5EditorFor(model => model.Name, htmlAttributes: new { @required = "true", @class = "longer" })
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
@@ -28,7 +29,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
-                @Html.EditorFor(model => model.Note)
+                @Html.TextAreaFor(model => model.Note, htmlAttributes: new {@class = "longer" })
                 @Html.ValidationMessageFor(model => model.Note)
             </div>
         </div>
@@ -74,26 +75,49 @@
         <div class="form-group">
             @Html.Label(@LifeManagement.Resources.ResourceScr.Repeat, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9">
-                @Html.DropDownList("RepeatList")
-
+                @Html.DropDownList("RepeatPosition")
                 @LifeManagement.Resources.ResourceScr.till
-                @Html.Html5Editor("RepeatEnd", InputTypes.InputType.Date, htmlAttributes: new { @required = "true", @value = ViewBag.DateR })
-
-
+                @Html.Html5EditorFor(model => model.StopRepeatDate, InputTypes.InputType.Date, htmlAttributes: new { @required = "true", @value = Model.StopRepeatDate.HasValue ? Model.StopRepeatDate.Value.Date.ToString("yyyy-MM-dd") : Model.EndDate.Value.AddYears(1).ToString("yyyy-MM-dd") })
             </div>
-        </div>
+         </div>
 
       <div class="buttonbar">
+         @if (Model.RepeatPosition == RepeatPosition.None)
+         {
+             <input type="submit" value="@ResourceScr.save" class="btn btn-default halfsize" />
+             @Html.ActionLink(ResourceScr.Delete, "Delete", new {id = Model.Id}, new
+             {
+                 @class = "btn btn-default halfsize openDialog",
+                 data_dialog_id = "43",
+                 data_dialog_title = ResourceScr.Delete,
+                 data_dialog_width = "700",
+                 data_dialog_height = "auto"
+             })
+         }
+         else
+         {
+                       <input type="submit" value="@ResourceScr.save" class="btn btn-default thirdsize" />
+          @Html.ActionLink(ResourceScr.Delete, "EditAll", new { id = Model.Id }, new
+                {
+                    @class = "btn btn-default thirdsize openDialog",
+                    data_dialog_id = "43",
+                    data_dialog_title = ResourceScr.Delete,
+                    data_dialog_width = "700",
+                    data_dialog_height = "auto"
+                })
 
-          <input type="submit" value="@ResourceScr.save" class="btn btn-default halfsize" />
+
           @Html.ActionLink(ResourceScr.Delete, "Delete", new { id = Model.Id }, new
-            {
-                @class = "btn btn-default halfsize openDialog",
-                data_dialog_id = "43",
-                data_dialog_title = ResourceScr.Delete,
-                data_dialog_width = "700",
-                data_dialog_height = "auto"
-            })
+                {
+                    @class = "btn btn-default thirdsize openDialog",
+                    data_dialog_id = "43",
+                    data_dialog_title = ResourceScr.Delete,
+                    data_dialog_width = "700",
+                    data_dialog_height = "auto"
+                })
+         }
+
+
 
         </div>
     </div>
