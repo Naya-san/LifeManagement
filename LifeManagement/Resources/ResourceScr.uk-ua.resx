@@ -471,4 +471,13 @@
   <data name="till" xml:space="preserve">
     <value>до</value>
   </data>
+  <data name="at" xml:space="preserve">
+    <value> о </value>
+  </data>
+  <data name="EditAll" xml:space="preserve">
+    <value>Зберегти зміни для всіх</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>захід</value>
+  </data>
 </root>

@@ -477,4 +477,13 @@
   <data name="till" xml:space="preserve">
     <value>till</value>
   </data>
+  <data name="at" xml:space="preserve">
+    <value> at </value>
+  </data>
+  <data name="EditAll" xml:space="preserve">
+    <value>Save for all</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>event</value>
+  </data>
 </root>

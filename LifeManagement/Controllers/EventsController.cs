@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -10,6 +12,7 @@ using LifeManagement.Enums;
 using LifeManagement.Extensions;
 using LifeManagement.Models;
 using LifeManagement.Models.DB;
+using LifeManagement.Resources;
 using Microsoft.AspNet.Identity;
 using Task = System.Threading.Tasks.Task;
 
@@ -77,6 +80,78 @@ namespace LifeManagement.Controllers
             return RedirectToAction("Index", "Cabinet");
         }
 
+        private void AddReperts(Event @event, int alertPosition, HttpRequest request)
+        {
+            db.Records.Attach(@event);
+            db.Entry(@event).Collection(x => x.Tags).Load();
+            db.Entry(@event).Collection(x => x.Alerts).Load();
+
+            if (@event.RepeatPosition != RepeatPosition.None)
+            {
+                var dateIter = new DateTime(@event.StartDate.Value.Ticks);
+                if (@event.GroupId.Equals(Guid.Empty))
+                {
+                    @event.GroupId = Guid.NewGuid();
+                }
+                
+                while (dateIter.AddDays((int)@event.RepeatPosition) < @event.StopRepeatDate)
+                {
+                    var newEvent = new Event
+                    {
+                        Id = Guid.NewGuid(),
+                        GroupId = @event.GroupId,
+                        Name = @event.Name,
+                        Note = @event.Note,
+                        UserId = @event.UserId,
+                        IsUrgent = @event.IsUrgent,
+                        RepeatPosition = @event.RepeatPosition,
+                        StopRepeatDate = @event.StopRepeatDate
+                    };
+                    foreach (var tag in @event.Tags)
+                    {
+                        newEvent.Tags.Add(tag);
+                    }
+                    switch (@event.RepeatPosition)
+                    {
+                        case RepeatPosition.Ed:
+                            dateIter = dateIter.AddDays(1);
+                            newEvent.StartDate = new DateTime(dateIter.Ticks);
+                            newEvent.EndDate = new DateTime(newEvent.StartDate.Value.Add(@event.EndDate.Value - @event.StartDate.Value).Ticks);
+                            break;
+                        case RepeatPosition.Ew:
+                            dateIter = dateIter.AddDays(7);
+                            newEvent.StartDate = new DateTime(dateIter.Ticks);
+                            newEvent.EndDate = new DateTime(newEvent.StartDate.Value.Add(@event.EndDate.Value - @event.StartDate.Value).Ticks);
+                            break;
+                        case RepeatPosition.E2w:
+                            dateIter = dateIter.AddDays(14);
+                            newEvent.StartDate = new DateTime(dateIter.Ticks);
+                            newEvent.EndDate = new DateTime(newEvent.StartDate.Value.Add(@event.EndDate.Value - @event.StartDate.Value).Ticks);
+                            break;
+                        case RepeatPosition.Em:
+                            dateIter = dateIter.AddMonths(1);
+                            newEvent.StartDate = new DateTime(dateIter.Ticks);
+                            newEvent.EndDate = new DateTime(newEvent.StartDate.Value.Add(@event.EndDate.Value - @event.StartDate.Value).Ticks);
+                            break;
+                        case RepeatPosition.Ey:
+                            dateIter = dateIter.AddYears(1);
+                            newEvent.StartDate = new DateTime(dateIter.Ticks);
+                            newEvent.EndDate = new DateTime(newEvent.StartDate.Value.Add(@event.EndDate.Value - @event.StartDate.Value).Ticks);
+                            break;
+                    }
+                    foreach (var aler in @event.Alerts)
+                    {
+                        var newAlert = new Alert() { UserId = @event.UserId, Position = (AlertPosition)alertPosition, RecordId = newEvent.Id, Id = Guid.NewGuid(), Date = newEvent.StartDate.Value.AddMinutes(-1 * alertPosition), Name = String.Concat(@event.Name, Resources.ResourceScr.at, request.GetUserLocalTimeFromUtc(newEvent.StartDate).Value.ToString("g")) };
+                        newEvent.Alerts.Add(newAlert);
+                        db.Alerts.Add(newAlert);
+                    }
+                    db.Records.Add(newEvent);
+
+                }
+
+            }
+        }
+
         // POST: Events/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -93,6 +168,7 @@ namespace LifeManagement.Controllers
             time = Request["StartTime"].Split(':');
             timeSpan = new TimeSpan(0, Convert.ToInt32(time[0]), Convert.ToInt32(time[1]), 0);
             @event.StartDate = new DateTime(@event.StartDate.Value.Ticks).Add(timeSpan);
+            string startString = @event.StartDate.Value.ToString("g");
             @event.EndDate = request.GetUtcFromUserLocalTime(@event.EndDate);
             @event.StartDate = request.GetUtcFromUserLocalTime(@event.StartDate);
 
@@ -120,72 +196,12 @@ namespace LifeManagement.Controllers
                 @event.UserId = userId;
                 if (alertPosition >= 0)
                 {
-                    var alert = new Alert { UserId = userId, RecordId = @event.Id, Id = Guid.NewGuid(), Date = @event.StartDate.Value.AddMinutes(-1 * alertPosition), Name = @event.Name };
+                    var alert = new Alert { UserId = userId, RecordId = @event.Id, Id = Guid.NewGuid(), Date = @event.StartDate.Value.AddMinutes(-1 * alertPosition), Name = String.Concat(@event.Name, Resources.ResourceScr.at, startString) };
                     @event.Alerts.Add(alert);
                     db.Alerts.Add(alert);
                 }
-                
-                if (repeatPosition != RepeatPosition.None)
-                {
-                    var dateIter = new DateTime(@event.StartDate.Value.Ticks);
-                    @event.GroupId = Guid.NewGuid();
-                    while (dateIter.AddDays((int)repeatPosition) < @event.StopRepeatDate)
-                    {
-                        var newEvent = new Event
-                        {
-                            Id = Guid.NewGuid(),
-                            GroupId = @event.GroupId,
-                            Name = @event.Name,
-                            Note = @event.Note,
-                            UserId = @event.UserId,
-                            IsUrgent = @event.IsUrgent,
-                            RepeatPosition = @event.RepeatPosition,
-                            StopRepeatDate = @event.StopRepeatDate
-                        };
-                        foreach (var tag in @event.Tags)
-                        {
-                            newEvent.Tags.Add(tag);
-                        }
-                        switch (repeatPosition)
-                        {
-                            case RepeatPosition.Ed:
-                                dateIter = dateIter.AddDays(1);
-                                newEvent.StartDate = new DateTime(dateIter.Ticks);
-                                newEvent.EndDate = new DateTime(dateIter.Add(@event.EndDate.Value - @event.StartDate.Value).AddDays(1).Ticks);
-                                break;
-                            case RepeatPosition.Ew:
-                                dateIter = dateIter.AddDays(7);
-                                newEvent.StartDate = new DateTime(dateIter.Ticks);
-                                newEvent.EndDate = new DateTime(dateIter.Add(@event.EndDate.Value - @event.StartDate.Value).AddDays(7).Ticks);
-                                break;
-                            case RepeatPosition.E2w:
-                                dateIter = dateIter.AddDays(14);
-                                newEvent.StartDate = new DateTime(dateIter.Ticks);
-                                newEvent.EndDate = new DateTime(dateIter.Add(@event.EndDate.Value - @event.StartDate.Value).AddDays(14).Ticks);
-                                break;
-                            case RepeatPosition.Em:
-                                dateIter = dateIter.AddMonths(1);
-                                newEvent.StartDate = new DateTime(dateIter.Ticks);
-                                newEvent.EndDate = new DateTime(dateIter.Add(@event.EndDate.Value - @event.StartDate.Value).AddMonths(1).Ticks);
-                                break;
-                            case RepeatPosition.Ey:
-                                dateIter = dateIter.AddYears(1);
-                                newEvent.StartDate = new DateTime(dateIter.Ticks);
-                                newEvent.EndDate = new DateTime(dateIter.Add(@event.EndDate.Value - @event.StartDate.Value).AddYears(1).Ticks);
-                                break;
-                        }
-                        foreach (var aler in @event.Alerts)
-                        {
-                            var newAlert = new Alert() { UserId = userId, Position = (AlertPosition) alertPosition, RecordId = newEvent.Id, Id = Guid.NewGuid(), Date = newEvent.StartDate.Value.AddMinutes(-1 * alertPosition), Name = @event.Name };
-                            newEvent.Alerts.Add(newAlert);
-                            db.Alerts.Add(newAlert);
-                        }
-                        db.Records.Add(newEvent);
-
-                    } 
-
-                }
-                
+                AddReperts(@event, alertPosition, request);
+              
                 db.Records.Add(@event);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index", "Cabinet");
@@ -237,7 +253,7 @@ namespace LifeManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,UserId,Name,Note,StartDate,EndDate,IsUrgent")] Event @event)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,UserId,GroupId,Name,Note,StartDate,EndDate,IsUrgent,RepeatPosition,StopRepeatDate")] Event @event)
         {
             HttpRequest request = System.Web.HttpContext.Current.Request;
             var time = Request["EndTime"].Split(':');
@@ -246,13 +262,135 @@ namespace LifeManagement.Controllers
             time = Request["StartTime"].Split(':');
             timeSpan = new TimeSpan(0, Convert.ToInt32(time[0]), Convert.ToInt32(time[1]), 0);
             @event.StartDate = new DateTime(@event.StartDate.Value.Ticks).Add(timeSpan);
+            string startString = @event.StartDate.Value.ToString("g");
             @event.EndDate = request.GetUtcFromUserLocalTime(@event.EndDate);
             @event.StartDate = request.GetUtcFromUserLocalTime(@event.StartDate);
+            
 
+            db.Records.Attach(@event);
+            db.Entry(@event).Collection(x => x.Tags).Load();
+            db.Entry(@event).Collection(x => x.Alerts).Load();
 
-
+            bool flagNeedRewrite = true;
             if (ModelState.IsValid)
             {
+                if (Request["Tags"] != "" && Request["Tags"] != null)
+                {
+                    List<Tag> newTags = new List<Tag>();
+                    var tags = Request["Tags"].Split(',');
+                    foreach (string s in tags)
+                    {
+                        newTags.Add(await db.Tags.FindAsync(new Guid(s)));
+                    }
+                    List<Tag> newTagsTmp = @event.Tags.ToList();
+                    foreach (var tag in newTagsTmp)
+                    {
+                        if (!newTags.Contains(tag))
+                        {
+                            @event.Tags.Remove(tag);
+                        }
+                    }
+                    foreach (var tag in newTags)
+                    {
+                        if (!@event.Tags.Contains(tag))
+                        {
+                            @event.Tags.Add(tag);
+                        }
+                    }
+                }
+                int alertPosition = Int32.MinValue;
+                if (Request["Alerts"] != null)
+                {
+                    alertPosition = Convert.ToInt32(Request["Alerts"]);
+                }
+                Alert alert = (@event.Alerts != null && @event.Alerts.Any()) ? @event.Alerts.ToArray()[0] : null;
+                if (alertPosition >= 0 && alert != null)
+                {
+                    if (alertPosition != (int)alert.Position || (@event.StartDate.Value - alert.Date).TotalMinutes != alertPosition)
+                    {
+                        alert.Name = String.Concat(@event.Name, ResourceScr.at, startString);
+                        alert.Date = @event.StartDate.Value.AddMinutes(-1 * alertPosition);
+                        alert.Position = (AlertPosition)alertPosition;
+                    }
+                }
+                else
+                {
+                    if (alertPosition >= 0 && alert == null)
+                    {
+                        alert = new Alert { UserId = @event.UserId, Position = (AlertPosition)alertPosition, RecordId = @event.Id, Id = Guid.NewGuid(), 
+                            Date = @event.StartDate.Value.AddMinutes(-1 * alertPosition), Name = String.Concat(@event.Name, ResourceScr.at, startString) };
+                        db.Alerts.Add(alert);
+                    }
+                    else
+                    {
+                        if (alertPosition < 0 && alert != null)
+                        {
+                            db.Alerts.Remove(alert);
+                        }
+                    }
+                }
+                if (@event.RepeatPosition == RepeatPosition.None && !@event.GroupId.Equals(Guid.Empty))
+                {
+                    var repeatsList =
+                        db.Records.Where(x => x.UserId == @event.UserId)
+                            .OfType<Event>()
+                            .Where(x => x.GroupId == @event.GroupId && x.StartDate > @event.StartDate)
+                            .ToList();
+                    
+                    foreach (var _event in repeatsList)
+                    {
+                        db.Records.Attach(_event);
+                        db.Records.Remove(_event);
+                    }
+                    @event.GroupId = Guid.Empty;
+                    flagNeedRewrite = false;
+                }
+                else
+                {
+                    if (@event.RepeatPosition != RepeatPosition.None && @event.GroupId.Equals(Guid.Empty))
+                    {
+                        AddReperts(@event, alertPosition, request);
+                        flagNeedRewrite = false;
+                    }
+                    else
+                    {
+                        var repeatsList =
+                            db.Records.Where(x => x.UserId == @event.UserId)
+                                .OfType<Event>()
+                                .Where(x => x.GroupId == @event.GroupId)
+                                .ToList();
+                        if (repeatsList[0].RepeatPosition != @event.RepeatPosition ||
+                            repeatsList[0].StopRepeatDate != @event.StopRepeatDate)
+                        {
+                            foreach (var _event in repeatsList.Where(x => x.StartDate > @event.StartDate))
+                            {
+                                db.Records.Attach(_event);
+                                db.Records.Remove(_event);
+                            }
+                            @event.GroupId = Guid.NewGuid();
+                            AddReperts(@event, alertPosition, request);
+                            flagNeedRewrite = false;
+                        }
+                    }
+                }
+                if (Request["ForAll"] != null)
+                {
+                    bool forAll = !Request["ForAll"].Equals("false");
+                    if (forAll && flagNeedRewrite && !@event.GroupId.Equals(Guid.Empty))
+                    {
+                        var repeatsList = db.Records.Where(x => x.UserId == @event.UserId).OfType<Event>().Where(x => x.GroupId == @event.GroupId && x.StartDate > @event.StartDate).ToList();
+                        if (repeatsList != null && repeatsList.Any())
+                        {
+                            foreach (var _event in repeatsList)
+                            {
+                                db.Records.Attach(_event);
+                                db.Records.Remove(_event);
+                            }
+                            AddReperts(@event, alertPosition, request);
+                        }
+                    }
+                }
+               
                 db.Entry(@event).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index", "Cabinet");
@@ -261,31 +399,6 @@ namespace LifeManagement.Controllers
             return View(@event);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditAll([Bind(Include = "Id,UserId,Name,Note,StartDate,EndDate,IsUrgent")] Event @event)
-        {
-            HttpRequest request = System.Web.HttpContext.Current.Request;
-            var time = Request["EndTime"].Split(':');
-            var timeSpan = new TimeSpan(0, Convert.ToInt32(time[0]), Convert.ToInt32(time[1]), 0);
-            @event.EndDate = new DateTime(@event.EndDate.Value.Ticks).Add(timeSpan);
-            time = Request["StartTime"].Split(':');
-            timeSpan = new TimeSpan(0, Convert.ToInt32(time[0]), Convert.ToInt32(time[1]), 0);
-            @event.StartDate = new DateTime(@event.StartDate.Value.Ticks).Add(timeSpan);
-            @event.EndDate = request.GetUtcFromUserLocalTime(@event.EndDate);
-            @event.StartDate = request.GetUtcFromUserLocalTime(@event.StartDate);
-
-
-
-            if (ModelState.IsValid)
-            {
-                db.Entry(@event).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index", "Cabinet");
-            }
-
-            return RedirectToAction("Edit",@event);
-        }
         // GET: Events/Delete/5
         public async Task<ActionResult> Delete(Guid? id)
         {
@@ -299,8 +412,11 @@ namespace LifeManagement.Controllers
             {
                 return HttpNotFound();
             }
-
-            return View(task);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Delete", task);
+            }
+            return RedirectToAction("Index", "Cabinet");
         }
 
         // POST: Events/Delete/5

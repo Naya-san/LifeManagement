@@ -117,6 +117,7 @@ namespace LifeManagement.Controllers
                     var timeSpan = new TimeSpan(0, Convert.ToInt32(time[0]), Convert.ToInt32(time[1]), 0);
                     task.EndDate = new DateTime(task.EndDate.Value.Ticks).Add(timeSpan);
             }
+            string startString = task.StartDate.HasValue? task.StartDate.Value.ToString("g") : task.EndDate.HasValue? task.EndDate.Value.ToString("g") : "";
             task.EndDate = request.GetUtcFromUserLocalTime(task.EndDate);
             task.StartDate = request.GetUtcFromUserLocalTime(task.StartDate);
             string[] listTag = new[] {""};
@@ -140,7 +141,7 @@ namespace LifeManagement.Controllers
                 task.UserId = userId;
                 if (alertPosition >= 0)
                 {
-                    var alert = new Alert { UserId = userId, Position = (AlertPosition) alertPosition ,RecordId = task.Id, Id = Guid.NewGuid(), Date = (task.StartDate.HasValue) ? task.StartDate.Value.AddMinutes(-1 * alertPosition) : task.EndDate.Value.AddMinutes(-1 * alertPosition), Name = task.Name};
+                    var alert = new Alert { UserId = userId, Position = (AlertPosition)alertPosition, RecordId = task.Id, Id = Guid.NewGuid(), Date = (task.StartDate.HasValue) ? task.StartDate.Value.AddMinutes(-1 * alertPosition) : task.EndDate.Value.AddMinutes(-1 * alertPosition), Name = String.Concat(task.Name, Resources.ResourceScr.at, startString)};
                     db.Alerts.Add(alert);
                 }
                 db.Records.Add(task);
@@ -203,7 +204,7 @@ namespace LifeManagement.Controllers
                 var timeSpan = new TimeSpan(0, Convert.ToInt32(time[0]), Convert.ToInt32(time[1]), 0);
                 task.EndDate = new DateTime(task.EndDate.Value.Ticks).Add(timeSpan);
             }
-
+            string startString = task.StartDate.HasValue ? task.StartDate.Value.ToString("g") : task.EndDate.HasValue ? task.EndDate.Value.ToString("g") : "";
             HttpRequest request = System.Web.HttpContext.Current.Request;
             task.EndDate = request.GetUtcFromUserLocalTime(task.EndDate);
             task.StartDate = request.GetUtcFromUserLocalTime(task.StartDate);
@@ -211,20 +212,31 @@ namespace LifeManagement.Controllers
             db.Records.Attach(task);
             db.Entry(task).Collection(x => x.Tags).Load();
             db.Entry(task).Collection(x => x.Alerts).Load();
-
-            foreach (var tag in task.Tags.ToList())
-            {
-                task.Tags.Remove(tag);
-            }
-
             if (Request["Tags"] != "" && Request["Tags"] != null)
             {
-                var listTag = Request["Tags"].Split(',');
-                foreach (string s in listTag)
+                List<Tag> newTags = new List<Tag>();
+                var tags = Request["Tags"].Split(',');
+                foreach (string s in tags)
                 {
-                    task.Tags.Add(await db.Tags.FindAsync(new Guid(s)));
+                    newTags.Add(await db.Tags.FindAsync(new Guid(s)));
+                }
+                List<Tag> newTagsTmp = task.Tags.ToList();
+                foreach (var tag in newTagsTmp)
+                {
+                    if (!newTags.Contains(tag))
+                    {
+                        task.Tags.Remove(tag);
+                    }
+                }
+                foreach (var tag in newTags)
+                {
+                    if (!task.Tags.Contains(tag))
+                    {
+                        task.Tags.Add(tag);
+                    }
                 }
             }
+
 
             int alertPosition = Int32.MinValue;
             if (Request["Alerts"] != null)
@@ -235,8 +247,9 @@ namespace LifeManagement.Controllers
             Alert alert = (task.Alerts != null && task.Alerts.Any())? task.Alerts.ToArray()[0]: null;
             if (alertPosition >= 0 && date != null && alert != null)
             {
-                if (alertPosition != (int) alert.Position)
+                if (alertPosition != (int)alert.Position || (date.Value - alert.Date).TotalMinutes != alertPosition)
                 {
+                    alert.Name = String.Concat(task.Name, ResourceScr.at, startString);
                     alert.Date = date.Value.AddMinutes(-1*alertPosition);
                     alert.Position = (AlertPosition)alertPosition;
                 }
@@ -245,7 +258,7 @@ namespace LifeManagement.Controllers
             {
                 if (alertPosition >= 0 && date != null && alert == null)
                 {
-                    alert = new Alert { UserId = task.UserId, Position = (AlertPosition)alertPosition, RecordId = task.Id, Id = Guid.NewGuid(), Date = (task.StartDate.HasValue) ? task.StartDate.Value.AddMinutes(-1 * alertPosition) : task.EndDate.Value.AddMinutes(-1 * alertPosition), Name = task.Name };
+                    alert = new Alert { UserId = task.UserId, Position = (AlertPosition)alertPosition, RecordId = task.Id, Id = Guid.NewGuid(), Date = (task.StartDate.HasValue) ? task.StartDate.Value.AddMinutes(-1 * alertPosition) : task.EndDate.Value.AddMinutes(-1 * alertPosition), Name = String.Concat(task.Name, ResourceScr.at, startString) };
                     db.Alerts.Add(alert);
                 }
                 else

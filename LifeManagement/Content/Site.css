@@ -310,7 +310,7 @@ ul.subtree > li.subpunct>.edit:hover {
 .subtitle {
     width: 100%;
     border-bottom: 1px solid #17292e;
-    height: 25px;
+    height: 30px;
 }
 .subtitle > h3 {
    /*color: #4e888a;*/
@@ -442,12 +442,9 @@ input[type="checkbox"].taskcomp {
 
 .forma {
 }
-div.forma >input[type="text"]{
-    /*border: none;*/
-    border: 1px solid #e8e8e8;
-    background-color: #f8f1d4;
-}
-div.forma >select {
+
+div.forma > select,
+ div.forma > input, div.forma > textarea {
     border: 1px solid #e8e8e8;
     background-color: #f8f1d4;
 }
@@ -456,7 +453,8 @@ div.forma > select:active, div.forma > select:hover {
     background-color: #ffffff;
 }
 
-div.forma > input[type="text"]:active, div.forma >input[type="text"]:hover {
+div.forma > input:active, div.forma >input:hover,
+div.forma >  textarea:active, div.forma > textarea:hover {
     background-color: #ffffff;
 }
 
