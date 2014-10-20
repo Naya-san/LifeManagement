@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
-namespace LifeManagement.SignalR
+namespace LifeManagement.ObsoleteSignalR
 {
     public class ConnectionMapping<T>
     {

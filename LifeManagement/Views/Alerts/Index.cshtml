@@ -1,34 +1,62 @@
-﻿@using LifeManagement.Resources
+﻿@using System.Web.Script.Serialization
+@using LifeManagement.Resources
 @{
     Layout = null;
 }
 
-@model IEnumerable<LifeManagement.Models.DB.Alert>
+@model IEnumerable<LifeManagement.ViewModels.AlertViewModel>
 
 @{
     ViewBag.Title = "Index";
 }
+
+<script src="~/Scripts/knockout-3.2.0.js"></script>
+
+<script type="text/javascript">
+
+
+    var models = @Html.Raw(Json.Encode(Model));
+
+    function ViewModel() {
+        var self = this;
+
+        self.alerts = ko.observableArray(models);
+    };
+
+    var viewModel = new ViewModel();
+
+    $(function () {
+        var hub = $.connection.alertsHub;
+        hub.client.addAlert = function (alert) {
+            viewModel.alerts.unshift(alert);
+        };
+
+        $.connection.hub.start();
+    });
+
+</script>
+
 <div class="title">
-    <h2>@ResourceScr.Alerts</h2>
-</div>
-<div class="AlertsBox">
-    @foreach (var item in Model)
-    {
-        <div class="alertLM">
-            <div class="taskInfo">
-                <div class="name">
-                    @item.Name
-                </div>
-                
-                <span class="time">@item.Date</span>
-            </div>
-            <div>
-                @Html.ActionLink(" ", "Delete", "Alerts", new { id = item.Id }, new {@class = "closeIcon"})
-            </div>
+        <h2>@ResourceScr.Alerts</h2>
+    </div>
+<div class="AlertsBox" id="alertsBox" data-bind="foreach: alerts, visible: alerts().length > 0">
+
+    <div class="alertLM">
+        <div class="taskInfo">
+            <div class="name" data-bind="text: Name"></div>
+            <span class="time" data-bind="text: Date"></span>
         </div>
-    }
-    @if (!Model.Any())
-    {
-        <h4 style="text-align: center;">@ResourceScr.NoAlerts</h4>
-    }
+            <div>
+                <a data-bind="attr: { 'href': '@Url.Action("Delete", "Alerts")/' + Id }" class="closeIcon"></a>
+            </div>
+    </div>
 </div>
+
+<div class="AlertsBox" data-bind="visible: alerts().length == 0">
+    <h4 style="text-align: center;" id="noAlerts"></h4>
+</div>
+
+<script>
+    $('#noAlerts').html('@ResourceScr.NoAlerts');
+    ko.applyBindings(viewModel);
+</script>

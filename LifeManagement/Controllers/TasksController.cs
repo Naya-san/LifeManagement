@@ -7,17 +7,21 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Hangfire;
 using LifeManagement.Attributes;
 using LifeManagement.Enums;
+using LifeManagement.Hubs;
 using LifeManagement.Models;
 using LifeManagement.Extensions;
 using LifeManagement.Models.DB;
+using LifeManagement.ViewModels;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.SignalR;
 using Task = LifeManagement.Models.DB.Task;
 
 namespace LifeManagement.Controllers
 {
-    [Authorize]
+    [System.Web.Mvc.Authorize]
     [Localize]
     public class TasksController : Controller
     {
@@ -91,6 +95,15 @@ namespace LifeManagement.Controllers
             return RedirectToAction("Index", "Cabinet");
         }
 
+        public void SendAlertToClient(Guid alertId, DateTime userLocalTime)
+        {
+            var alert = db.Alerts.FirstOrDefault(x => x.Id == alertId);
+            if (alert == null) return;
+
+            var hubContext = GlobalHost.ConnectionManager.GetHubContext<AlertsHub>();
+            hubContext.Clients.All.addAlert(new AlertViewModel { Id = alert.Id, Name = alert.Name, Date = userLocalTime.ToString() });
+        }
+
         // POST: Tasks/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -127,13 +140,27 @@ namespace LifeManagement.Controllers
             {
                 task.Id = Guid.NewGuid();
                 task.UserId = userId;
+                Alert alert = null;
+
                 if (alertPosition >= 0)
                 {
-                    var alert = new Alert { UserId = userId, RecordId = task.Id, Id = Guid.NewGuid(), Date = (task.StartDate.HasValue) ? task.StartDate.Value.AddMinutes(-1 * alertPosition) : task.EndDate.Value.AddMinutes(-1 * alertPosition), Name = task.Name};
+                    alert = new Alert { UserId = userId, RecordId = task.Id, Id = Guid.NewGuid(), Date = (task.StartDate.HasValue) ? task.StartDate.Value.AddMinutes(-1 * alertPosition) : task.EndDate.Value.AddMinutes(-1 * alertPosition), Name = task.Name};
                     db.Alerts.Add(alert);
                 }
                 db.Records.Add(task);
                 await db.SaveChangesAsync();
+
+                if (alert == null)
+                {
+                    return RedirectToAction("Index", "Cabinet");
+                }
+
+                var timespan = alert.Date - DateTime.UtcNow;
+                if (timespan.TotalSeconds > 0)
+                {
+                    BackgroundJob.Schedule(() => SendAlertToClient(alert.Id, request.GetUserLocalTimeFromUtc(alert.Date)), timespan);
+                }
+
                 return RedirectToAction("Index", "Cabinet");
             }
             //ViewBag.Min = System.Web.HttpContext.Current.Request.GetUserLocalTimeFromUtc(DateTime.UtcNow.Date);

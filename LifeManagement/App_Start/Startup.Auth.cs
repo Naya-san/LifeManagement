@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using Hangfire;
+using Hangfire.SqlServer;
 using LifeManagement;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
@@ -59,10 +61,14 @@ namespace LifeManagement
             //   appSecret: "");
 
             //app.UseGoogleAuthentication();
+
+            app.UseHangfire(config =>
+            {
+                config.UseSqlServerStorage("ApplicationDbContext");
+                config.UseServer();
+            });
+
+            app.MapSignalR();
         }
-        //public void Configuration(IAppBuilder app)
-        //{
-        //    app.MapSignalR();
-        //}
     }
 }
