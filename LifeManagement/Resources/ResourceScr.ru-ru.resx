@@ -489,4 +489,7 @@
   <data name="Subject" xml:space="preserve">
     <value>Тема</value>
   </data>
+  <data name="More" xml:space="preserve">
+    <value>Хотите еще настроек?</value>
+  </data>
 </root>

@@ -13,109 +13,18 @@ function showDate() {
         document.getElementById("ForHide").style.display = "block";
     }
 }
-
-
-
-//document.getElementsByName("EndTime")[0].disabled = false;
-//document.getElementsByName("EndTime")[0].required = true;
-//} else {
-//    document.getElementsByName("EndTime")[0].disabled = true;
-//    document.getElementsByName("EndTime")[0].required = false;
-//}
-function dis2() {
-    if (document.getElementsByName("location")[0].checked == true) {
-        document.getElementsByName("Start")[0].disabled = true;
-        document.getElementsByName("End")[0].disabled = true;
-        document.getElementsByName("Days")[0].disabled = false;
-        document.getElementsByName("Hours")[0].disabled = false;
-        document.getElementsByName("Minutes")[0].disabled = false;
-        document.getElementsByName("onStartDate")[0].disabled = false;
-        document.getElementsByName("onDueDate")[0].disabled = false;
-        document.getElementsByName("onDeadline")[0].disabled = false;
-        disDueDate();
-        disDeadline();
-        disStartDate();
-        document.getElementsByName("Days")[0].required = true;
-        document.getElementsByName("Hours")[0].required = true;
-        document.getElementsByName("Minutes")[0].required = true;
-
-        document.getElementsByName("End")[0].required = false;
-        document.getElementsByName("Start")[0].required = false;
-    } else {
-        document.getElementsByName("End")[0].required = true;
-        document.getElementsByName("Start")[0].required = true;
-        document.getElementsByName("Start")[0].disabled = false;
-        document.getElementsByName("End")[0].disabled = false;
-        document.getElementsByName("Days")[0].disabled = true;
-        document.getElementsByName("Hours")[0].disabled = true;
-        document.getElementsByName("Minutes")[0].disabled = true;
-        document.getElementsByName("onStartDate")[0].disabled = true;
-        document.getElementsByName("onDueDate")[0].disabled = true;
-        document.getElementsByName("onDeadline")[0].disabled = true;
-        document.getElementsByName("StartDate")[0].disabled = true;
-        document.getElementsByName("DueDate")[0].disabled = true;
-        document.getElementsByName("Deadline")[0].disabled = true;
-        document.getElementsByName("Days")[0].required = false;
-        document.getElementsByName("Hours")[0].required = false;
-        document.getElementsByName("Minutes")[0].required = false;
+function showMore() {
+    var obj = document.getElementById('editionalInfo');
+    var label = document.getElementById('moreLabel');
+    if (obj.style.display == 'none') {
+        obj.style.display = 'block';
+        label.className = 'openBlock';
+    }
+    else {
+        obj.style.display = 'none';
+        label.className = 'closeBlock';
     }
 }
-
-function disDeadline() {
-    if (document.getElementsByName("onDeadline")[0].checked == true) {
-        document.getElementsByName("Deadline")[0].disabled = false;
-        document.getElementsByName("Deadline")[0].required = true;
-    } else {
-        document.getElementsByName("Deadline")[0].disabled = true;
-        document.getElementsByName("Deadline")[0].required = false;
-    }
-}
-
-function disDueDate() {
-    if (document.getElementsByName("onDueDate")[0].checked == true) {
-        document.getElementsByName("DueDate")[0].disabled = false;
-        document.getElementsByName("DueDate")[0].required = true;
-        limitStartDate();
-    } else {
-        document.getElementsByName("DueDate")[0].disabled = true;
-        document.getElementsByName("DueDate")[0].required = false;
-    }
-}
-
-function disStartDate() {
-    if (document.getElementsByName("onStartDate")[0].checked == true) {
-        document.getElementsByName("StartDate")[0].disabled = false;
-        document.getElementsByName("StartDate")[0].required = true;
-        limitDueDate();
-
-    } else {
-        document.getElementsByName("StartDate")[0].disabled = true;
-        document.getElementsByName("StartDate")[0].required = false;
-    }
-}
-
-function disStartDate() {
-    if (document.getElementsByName("onStartDate")[0].checked == true) {
-        document.getElementsByName("StartDate")[0].disabled = false;
-        document.getElementsByName("StartDate")[0].required = true;
-
-    } else {
-        document.getElementsByName("StartDate")[0].disabled = true;
-        document.getElementsByName("StartDate")[0].required = false;
-    }
-}
-
-function disProject() {
-    if (document.getElementsByName("position")[0].checked == true) {
-        document.getElementsByName("ParentTaskId")[0].disabled = true;
-        document.getElementsByName("ProjectId")[0].disabled = false;
-    } else {
-        document.getElementsByName("ParentTaskId")[0].disabled = false;
-        document.getElementsByName("ProjectId")[0].disabled = true;
-    }
-}
-
-
 
 function limitEnd() {
 
@@ -200,15 +109,4 @@ function limitMinutes() {
     } else {
         document.getElementsByName("Minutes")[0].min = 0;
     }
-}
-
-function checkdate() {
-    limitMinutes();
-    if (document.getElementsByName("onDueDate")[0].checked == true || document.getElementsByName("onDeadline")[0].checked == true) {
-        limitStartDate();
-    }
-    if (document.getElementsByName("onStartDate")[0].checked == true) {
-        limitDueDate();
-    }
-    
 }

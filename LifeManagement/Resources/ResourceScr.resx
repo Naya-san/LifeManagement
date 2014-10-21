@@ -495,4 +495,7 @@
   <data name="Subject" xml:space="preserve">
     <value>Subject</value>
   </data>
+  <data name="More" xml:space="preserve">
+    <value>Do you need more settings?</value>
+  </data>
 </root>
