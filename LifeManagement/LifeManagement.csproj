@@ -220,15 +220,7 @@
     <Compile Include="Hubs\AlertsHub.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\UserTimeConverter.cs" />
-    <Compile Include="ObsoleteBusinessLogic\DateTimeProvider.cs" />
-    <Compile Include="ObsoleteBusinessLogic\DayLimitActivity.cs" />
-    <Compile Include="ObsoleteBusinessLogic\RoutineActivity.cs" />
-    <Compile Include="ObsoleteBusinessLogic\UserTimeConverter.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="ObsoleteControllers\ObsoleteCabinetController.cs" />
-    <Compile Include="ObsoleteControllers\ObsoleteHomeController.cs" />
-    <Compile Include="ObsoleteControllers\ProjectController.cs" />
-    <Compile Include="ObsoleteControllers\TaskController.cs" />
     <Compile Include="Models\DB\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\DB\Feedback.cs" />
@@ -239,34 +231,11 @@
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\DB\Project.cs" />
     <Compile Include="Models\DB\Task.cs" />
-    <Compile Include="ObsoleteEnums\Complexity.cs" />
-    <Compile Include="ObsoleteEnums\ComplexityExtensions.cs" />
-    <Compile Include="ObsoleteEnums\FileType.cs" />
-    <Compile Include="ObsoleteEnums\Priority.cs" />
     <Compile Include="Attributes\LocalizeAttribute.cs" />
-    <Compile Include="ObsoleteEnums\PriorityExtensions.cs" />
-    <Compile Include="ObsoleteEnums\RecordType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ObsoleteSignalR\TickerHub.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
-    <Compile Include="ObsoleteModels\Article.cs" />
-    <Compile Include="ObsoleteModels\Attachment.cs" />
-    <Compile Include="ObsoleteModels\Category.cs" />
-    <Compile Include="ObsoleteModels\Comment.cs" />
-    <Compile Include="ObsoleteModels\DayLimit.cs" />
-    <Compile Include="ObsoleteModels\IdentityModels.cs" />
-    <Compile Include="ObsoleteModels\IEntity.cs" />
-    <Compile Include="ObsoleteModels\ISynchronizableEntity.cs" />
-    <Compile Include="ObsoleteModels\LifeManagementContext.cs" />
-    <Compile Include="ObsoleteModels\Project.cs" />
-    <Compile Include="ObsoleteModels\Reminder.cs" />
-    <Compile Include="ObsoleteModels\Routine.cs" />
-    <Compile Include="ObsoleteModels\Task.cs" />
-    <Compile Include="ObsoleteModels\TaskCategory.cs" />
-    <Compile Include="ObsoleteModels\TaskExtensions.cs" />
-    <Compile Include="ObsoleteModels\Transfer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ResourceScr.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -283,9 +252,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ResourceScr.uk-ua.resx</DependentUpon>
     </Compile>
-    <Compile Include="ObsoleteSignalR\ConnectionMapping.cs" />
-    <Compile Include="ObsoleteSignalR\RoutineTaskInfo.cs" />
-    <Compile Include="ObsoleteSignalR\TaskTicker.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AlertViewModel.cs" />
   </ItemGroup>
@@ -433,7 +399,6 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="ObsoleteSignalR\SignalR\TaskTicker.js" />
     <Content Include="Scripts\tree.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
@@ -451,9 +416,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="ObsoleteViews\Home\About.cshtml" />
-    <Content Include="ObsoleteViews\Home\Contact.cshtml" />
-    <Content Include="ObsoleteViews\Home\Index.cshtml" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
@@ -464,18 +426,6 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="ObsoleteViews\Cabinet\Index.cshtml" />
-    <Content Include="ObsoleteViews\Cabinet\Sidebar.cshtml" />
-    <Content Include="ObsoleteViews\Task\Create.cshtml" />
-    <Content Include="ObsoleteViews\Task\Delete.cshtml" />
-    <Content Include="ObsoleteViews\Task\Details.cshtml" />
-    <Content Include="ObsoleteViews\Task\Edit.cshtml" />
-    <Content Include="ObsoleteViews\Task\Index.cshtml" />
-    <Content Include="ObsoleteViews\Project\Create.cshtml" />
-    <Content Include="ObsoleteViews\Project\Delete.cshtml" />
-    <Content Include="ObsoleteViews\Project\Edit.cshtml" />
-    <Content Include="ObsoleteViews\Project\Index.cshtml" />
-    <Content Include="ObsoleteViews\Task\QuickCreate.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Projects\Create.cshtml" />
     <Content Include="Views\Projects\Delete.cshtml" />
