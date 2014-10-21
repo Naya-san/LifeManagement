@@ -477,4 +477,22 @@
   <data name="till" xml:space="preserve">
     <value>till</value>
   </data>
+  <data name="at" xml:space="preserve">
+    <value> at </value>
+  </data>
+  <data name="EditAll" xml:space="preserve">
+    <value>Save for all</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>event</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
 </root>

@@ -151,6 +151,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  at .
+        /// </summary>
+        public static string at {
+            get {
+                return ResourceManager.GetString("at", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 10 minutes before.
         /// </summary>
         public static string b10m {
@@ -394,6 +403,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save for all.
+        /// </summary>
+        public static string EditAll {
+            get {
+                return ResourceManager.GetString("EditAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Every month.
         /// </summary>
         public static string Em {
@@ -435,6 +453,15 @@ namespace LifeManagement.Resources {
         public static string estimation {
             get {
                 return ResourceManager.GetString("estimation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to event.
+        /// </summary>
+        public static string Event {
+            get {
+                return ResourceManager.GetString("Event", resourceCulture);
             }
         }
         
@@ -606,6 +633,15 @@ namespace LifeManagement.Resources {
         public static string Medium {
             get {
                 return ResourceManager.GetString("Medium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        public static string Message {
+            get {
+                return ResourceManager.GetString("Message", resourceCulture);
             }
         }
         
@@ -880,6 +916,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        public static string Send {
+            get {
+                return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show.
         /// </summary>
         public static string show {
@@ -903,6 +948,15 @@ namespace LifeManagement.Resources {
         public static string slogan {
             get {
                 return ResourceManager.GetString("slogan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subject.
+        /// </summary>
+        public static string Subject {
+            get {
+                return ResourceManager.GetString("Subject", resourceCulture);
             }
         }
         

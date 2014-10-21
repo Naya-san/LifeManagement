@@ -24,6 +24,8 @@
 #endregion
 
 using System;
+using System.ComponentModel.DataAnnotations;
+using LifeManagement.Resources;
 
 namespace LifeManagement.Models.DB
 {
@@ -32,7 +34,10 @@ namespace LifeManagement.Models.DB
         public Guid Id { get; set; }
         public string UserId { get; set; }
 
+        [Display(Name = "Subject", ResourceType = typeof(ResourceScr))]
         public string Subject { get; set; }
+
+        [Display(Name = "Message", ResourceType = typeof(ResourceScr))]
         public string Message { get; set; }
         public DateTime Date { get; set; }
 
