@@ -56,6 +56,15 @@ namespace LifeManagement.Controllers
             return PartialView("Index", records);
         }
 
+        public ActionResult GetTasksByText(string text)
+        {
+            var userId = User.Identity.GetUserId();
+            var request = System.Web.HttpContext.Current.Request;
+            var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().ToList().Where(x => x.Name.Contains(text));
+            ConvertTasksToUserLocalTime(request, records);
+            return PartialView("Index", records);
+        }
+
         // GET: Tasks
         public ActionResult Index()
         {
