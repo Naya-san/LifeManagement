@@ -6,6 +6,16 @@
     }
 }
 
+function showDate() {
+    if (document.getElementsByName("RepeatPosition")[0].value == "-1") {
+        document.getElementById("ForHide").style.display = "none";
+    } else {
+        document.getElementById("ForHide").style.display = "block";
+    }
+}
+
+
+
 //document.getElementsByName("EndTime")[0].disabled = false;
 //document.getElementsByName("EndTime")[0].required = true;
 //} else {

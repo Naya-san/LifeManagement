@@ -68,7 +68,7 @@ namespace LifeManagement.Controllers
             var userId = User.Identity.GetUserId();
             ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name");
             ViewBag.Alerts = AlertPosition.None.ToSelectList();
-            ViewBag.RepeatList = RepeatPosition.None.ToSelectList();
+            ViewBag.RepeatPosition = RepeatPosition.None.ToSelectList();
 
             HttpRequest request = System.Web.HttpContext.Current.Request;
             ViewBag.Date = request.GetUserLocalTimeFromUtc(DateTime.UtcNow).Date.ToString("yyyy-MM-dd");
@@ -188,7 +188,7 @@ namespace LifeManagement.Controllers
                 alertPosition = Convert.ToInt32(Request["Alerts"]);
             }
 
-            var repeatPosition = (RepeatPosition)Enum.Parse(typeof(RepeatPosition), Request["RepeatList"], true);
+            var repeatPosition = (RepeatPosition)Enum.Parse(typeof(RepeatPosition), Request["RepeatPosition"], true);
             @event.RepeatPosition = repeatPosition;
             if (ModelState.IsValid)
             {

@@ -4,6 +4,8 @@
 @using LifeManagement.Resources
 @model LifeManagement.Models.DB.Event
 
+<script type='text/javascript' src="@Url.Content("~/Scripts/availableFields.js")"></script>
+
 @{
     ViewBag.Title = "Edit";
 }
@@ -75,10 +77,30 @@
         <div class="form-group">
             @Html.Label(@LifeManagement.Resources.ResourceScr.Repeat, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9 forma">
-                @Html.DropDownList("RepeatPosition")
-                @LifeManagement.Resources.ResourceScr.till
-                @Html.Html5EditorFor(model => model.StopRepeatDate, InputTypes.InputType.Date, 
-                htmlAttributes: new { @required = "true", @value = Model.StopRepeatDate.HasValue ? Model.StopRepeatDate.Value.Date.ToString("yyyy-MM-dd") : Model.EndDate.Value.AddYears(1).ToString("yyyy-MM-dd") })
+                <table>
+                    <tr>
+                        <td class="forma">
+                            @Html.DropDownList("RepeatPosition", null, htmlAttributes: new { @onchange = "showDate()" })
+                        </td>
+                        <td>
+                            @if (Model.RepeatPosition == RepeatPosition.None)
+                            {
+                              ViewBag.style = "none";
+                            }
+                            else
+                            {
+                                ViewBag.style = "block";
+                            }
+                            <div id="ForHide" style="display: @ViewBag.style" class="forma">
+                                @LifeManagement.Resources.ResourceScr.till
+                                @Html.Html5EditorFor(model => model.StopRepeatDate, InputTypes.InputType.Date,
+                                        htmlAttributes: new { @required = "true", @value = Model.StopRepeatDate.HasValue ? Model.StopRepeatDate.Value.Date.ToString("yyyy-MM-dd") : Model.EndDate.Value.AddYears(1).ToString("yyyy-MM-dd") })
+                            </div> 
+
+                        </td>
+                    </tr>
+                </table>
+               
             </div>
         </div>
         @if(Model.RepeatPosition != RepeatPosition.None){

@@ -443,18 +443,18 @@ input[type="checkbox"].taskcomp {
 .forma {
 }
 
-div.forma > select,
- div.forma > input, div.forma > textarea {
+.forma > select,
+.forma > input, .forma > textarea {
     border: 1px solid #e8e8e8;
     background-color: #f8f1d4;
 }
 
-div.forma > select:active, div.forma > select:hover {
+.forma > select:active, .forma > select:hover {
     background-color: #ffffff;
 }
 
-div.forma > input:active, div.forma >input:hover,
-div.forma >  textarea:active, div.forma > textarea:hover {
+.forma > input:active, .forma >input:hover,
+.forma >  textarea:active, .forma > textarea:hover {
     background-color: #ffffff;
 }
 
