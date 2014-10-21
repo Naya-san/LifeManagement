@@ -26,7 +26,7 @@ $(document).ready(function () {
                 height: $(this).attr("data-dialog-height"),
                 modal: true,
                 resizable: false,
-                draggable: false,
+                draggable: true,
                 position: ['center', 'center']
             })
             .load(loadRoute, function (response, status, xhr) {

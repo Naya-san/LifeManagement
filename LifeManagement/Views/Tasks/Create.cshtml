@@ -26,49 +26,51 @@
                 @Html.ValidationMessageFor(model => model.ProjectId)
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9">
-                @Html.TextAreaFor(model => model.Note)
-                @Html.ValidationMessageFor(model => model.Note)
+        <a href="javascript:void(0)" onclick="showMore()" class="closeBlock" id="moreLabel">@LifeManagement.Resources.ResourceScr.More</a>
+        <div id="editionalInfo" style="display: none">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextAreaFor(model => model.Note)
+                    @Html.ValidationMessageFor(model => model.Note)
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9">
-                @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Date, htmlAttributes: new { @onchange = "dis()", @class = "longer" })
-                @Html.ValidationMessageFor(model => model.StartDate)
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Date, htmlAttributes: new { @onchange = "dis()", @class = "longer" })
+                    @Html.ValidationMessageFor(model => model.StartDate)
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9">
-                @Html.Html5Editor("EndTime", InputTypes.InputType.Time, htmlAttributes: new { @value = "23:59", @min = "00:00" })
-                @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Date, htmlAttributes: new {@onchange ="dis()"})
-                @Html.ValidationMessageFor(model => model.EndDate)
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.Html5Editor("EndTime", InputTypes.InputType.Time, htmlAttributes: new { @value = "23:59", @min = "00:00" })
+                    @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Date, htmlAttributes: new { @onchange = "dis()" })
+                    @Html.ValidationMessageFor(model => model.EndDate)
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsUrgent, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9">
-                @Html.EditorFor(model => model.IsUrgent)
-                @Html.ValidationMessageFor(model => model.IsUrgent)
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsUrgent, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.IsUrgent)
+                    @Html.ValidationMessageFor(model => model.IsUrgent)
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.Label(LifeManagement.Resources.ResourceScr.Tags, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9">
-                @Html.ListBox("Tags")
+            <div class="form-group">
+                @Html.Label(LifeManagement.Resources.ResourceScr.Tags, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.ListBox("Tags")
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label(LifeManagement.Resources.ResourceScr.Alert, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.DropDownList("Alerts", (IEnumerable<SelectListItem>)ViewBag.Alerts, new { @disabled = "true" })
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            @Html.Label(LifeManagement.Resources.ResourceScr.Alert, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9">
-                @Html.DropDownList("Alerts", (IEnumerable<SelectListItem>)ViewBag.Alerts, new { @disabled = "true" })
-            </div>
-        </div>
-
         <div class="buttonbar">
                 <input type="submit" value="@LifeManagement.Resources.ResourceScr.submit" class="btn btn-default fullsize" />
         </div>
