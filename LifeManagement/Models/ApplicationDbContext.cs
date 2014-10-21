@@ -24,6 +24,7 @@
 #endregion
 
 using System.Data.Entity;
+using LifeManagement.Migrations;
 using LifeManagement.Models.DB;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -44,7 +45,7 @@ namespace LifeManagement.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
             base.OnModelCreating(modelBuilder);
         }
     }

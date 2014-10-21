@@ -7,15 +7,19 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Hangfire;
 using LifeManagement.Attributes;
 using LifeManagement.Extensions;
+using LifeManagement.Hubs;
 using LifeManagement.Models;
 using LifeManagement.Models.DB;
+using LifeManagement.ViewModels;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.SignalR;
 
 namespace LifeManagement.Controllers
 {
-    [Authorize]
+    [System.Web.Mvc.Authorize]
     [Localize]
     public class AlertsController : Controller
     {
@@ -25,12 +29,10 @@ namespace LifeManagement.Controllers
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
-            var alerts = db.Alerts.Where(x => x.UserId == userId).Include(a => a.Record);
-            HttpRequest request = System.Web.HttpContext.Current.Request;
-            foreach (var alert in alerts)
-            {
-                alert.Date = request.GetUserLocalTimeFromUtc(alert.Date);
-            }
+            var request = System.Web.HttpContext.Current.Request;
+            var alerts = db.Alerts.Where(x => x.UserId == userId && x.Date <= DateTime.UtcNow).ToList()
+                .Select(x => new AlertViewModel{ Id = x.Id, Name = x.Name, Date = request.GetUserLocalTimeFromUtc(x.Date).ToString()});
+
             return View(alerts.ToList());
         }
 
@@ -70,9 +72,11 @@ namespace LifeManagement.Controllers
             if (ModelState.IsValid)
             {
                 alert.Id = Guid.NewGuid();
+                alert.Date = System.Web.HttpContext.Current.Request.GetUtcFromUserLocalTime(alert.Date);
                 alert.UserId = userId;
                 db.Alerts.Add(alert);
                 await db.SaveChangesAsync();
+                
                 return RedirectToAction("Index");
             }
 

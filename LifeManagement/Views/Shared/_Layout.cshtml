@@ -1,71 +1,78 @@
 ﻿@using System.Web.UI.WebControls
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title</title>
     
-    @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/themes/base/css")
-    @Scripts.Render("~/bundles/modernizr")
-    <script type='text/javascript' src="@Url.Content("~/Scripts/tree.js")"></script>
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/themes/base/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        <script type='text/javascript' src="@Url.Content("~/Scripts/tree.js")"></script>
 
-    <link rel="icon" href="/Content/Images/1.png" type="ico"> 
-    <script language="javascript">
-        function setCookie(cookieName, cookieValue, nDays) {
-            var today = new Date();
-            var expire = new Date();
-            if (nDays == null || nDays == 0) nDays = 1;
-            expire.setTime(today.getTime() + 3600000 * 24 * nDays);
-            document.cookie = cookieName + "=" + escape(cookieValue) + ";expires=" + expire.toGMTString();
-        }
+        <link rel="icon" href="/Content/Images/1.png" type="ico"> 
+        <script language="javascript">
+            function setCookie(cookieName, cookieValue, nDays) {
+                var today = new Date();
+                var expire = new Date();
+                if (nDays == null || nDays == 0) nDays = 1;
+                expire.setTime(today.getTime() + 3600000 * 24 * nDays);
+                document.cookie = cookieName + "=" + escape(cookieValue) + ";expires=" + expire.toGMTString();
+            }
 
-        var __date = new Date();
-        setCookie('timeZoneOffset', __date.getTimezoneOffset(), 1);
-    </script>
-</head>
-<body onload="onBodyLoad()">
-    <div class="navbar navbar-inverse">
-        <div class="navbar-header">
-            <div id="logo"><a href="/"><img src="/content/Images/LogoWithText.png" alt="LifeManagement" ></a></div>
-        </div>
-        <div class="searchContainer">
-            <form action="" method="post" class="search">
-                <input type="search" name="" placeholder="@LifeManagement.Resources.ResourceScr.Search" class="input" />
-                <input type="submit" name="" value="" class="submit" />
-            </form>   
-        </div>
-        <div id="menu">
-            <ul id="navbar1">
-                <li>
-                    <div id="menuBTN"><img src="/content/Images/MenuWhite.png" alt="Menu"></div>
-                    <ul>
-                        <li>
-                            <div class="flagContainer">
-                                @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "uk-ua" }, new { @class = "ua" })
-                                @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "en-us" }, new { @class = "eng" })
-                                @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "ru-ru" }, new { @class = "ru" })
-                            </div>
-                        </li>
+            var __date = new Date();
+            setCookie('timeZoneOffset', __date.getTimezoneOffset(), 1);
+        </script>
 
-                        @Html.Partial("_LoginPartial")
-                        <li>@Html.ActionLink(@LifeManagement.Resources.ResourceScr.cabinet, "Index", "Cabinet")</li>
-                        <li>@Html.ActionLink(@LifeManagement.Resources.ResourceScr.Feedback, "Create", "Feedbacks")</li>
-                    </ul>
-                </li>
-            </ul>
+    </head>
+    <body onload="onBodyLoad()">
+        <div class="navbar navbar-inverse">
+            <div class="navbar-header">
+                <div id="logo"><a href="/"><img src="/content/Images/LogoWithText.png" alt="LifeManagement" ></a></div>
+            </div>
+            <div class="searchContainer">
+                <form action="" method="post" class="search">
+                    <input type="search" name="" placeholder="@LifeManagement.Resources.ResourceScr.Search" class="input" />
+                    <input type="submit" name="" value="" class="submit" />
+                </form>   
+            </div>
+            <div id="menu">
+                <ul id="navbar1">
+                    <li>
+                        <div id="menuBTN"><img src="/content/Images/MenuWhite.png" alt="Menu"></div>
+                        <ul>
+                            <li>
+                                <div class="flagContainer">
+                                    @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "uk-ua" }, new { @class = "ua" })
+                                    @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "en-us" }, new { @class = "eng" })
+                                    @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "ru-ru" }, new { @class = "ru" })
+                                </div>
+                            </li>
+
+                            @Html.Partial("_LoginPartial")
+                            <li>@Html.ActionLink(@LifeManagement.Resources.ResourceScr.cabinet, "Index", "Cabinet")</li>
+                            <li>@Html.ActionLink(@LifeManagement.Resources.ResourceScr.Feedback, "Create", "Feedbacks")</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div class="body-content">
-        @RenderBody()
-        <hr />
+        <div class="body-content">
+            @RenderBody()
+            <hr />
   
-    </div>
-    @*<footer>
+        </div>
+        @*<footer>
         <p>&copy; @DateTime.Now.Year</p>
     </footer>*@
-    @*@Scripts.Render("~/bundles/jquery")*@
-    @RenderSection("scripts", required: false)
-</body>
+        @*@Scripts.Render("~/bundles/jquery")*@
+        @RenderSection("scripts", required: false)
+
+        <script src="~/Scripts/jquery.signalR-2.1.2.min.js"></script>
+        <script src="~/signalr/hubs"></script>
+    
+    </body>
 </html>
+

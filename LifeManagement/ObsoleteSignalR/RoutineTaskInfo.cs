@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using LifeManagement.Resources;
 
-namespace LifeManagement.SignalR
+namespace LifeManagement.ObsoleteSignalR
 {
     public class RoutineTaskInfo
     {
