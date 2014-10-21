@@ -480,4 +480,13 @@
   <data name="Event" xml:space="preserve">
     <value>мероприятие</value>
   </data>
+  <data name="Message" xml:space="preserve">
+    <value>Сообщение</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Тема</value>
+  </data>
 </root>

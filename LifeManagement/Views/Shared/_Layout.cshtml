@@ -1,4 +1,5 @@
 ﻿@using System.Web.UI.WebControls
+@using LifeManagement.Resources
 <!DOCTYPE html>
 <html>
     <head>
@@ -52,8 +53,18 @@
                             </li>
 
                             @Html.Partial("_LoginPartial")
-                            <li>@Html.ActionLink(@LifeManagement.Resources.ResourceScr.cabinet, "Index", "Cabinet")</li>
-                            <li>@Html.ActionLink(@LifeManagement.Resources.ResourceScr.Feedback, "Create", "Feedbacks")</li>
+                            <li>@Html.ActionLink(ResourceScr.cabinet, "Index", "Cabinet")</li>
+                            <li>@Html.ActionLink(ResourceScr.Feedback, "Create", "Feedbacks", null, new
+                                {
+                                    @class = "openDialog",
+                                    data_dialog_id = "41",
+                                    data_dialog_title = ResourceScr.newEvent,
+                                    data_dialog_width = "600",
+                                    data_dialog_height = "auto"
+                                })
+                            </li>
+                            
+
                         </ul>
                     </li>
                 </ul>
@@ -64,9 +75,7 @@
             <hr />
   
         </div>
-        @*<footer>
-        <p>&copy; @DateTime.Now.Year</p>
-    </footer>*@
+        @Scripts.Render("~/bundles/Dialog")
         @*@Scripts.Render("~/bundles/jquery")*@
         @RenderSection("scripts", required: false)
 

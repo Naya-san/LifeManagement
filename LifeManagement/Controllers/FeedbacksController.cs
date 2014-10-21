@@ -48,7 +48,11 @@ namespace LifeManagement.Controllers
         // GET: Feedbacks/Create
         public ActionResult Create()
         {
-            return View();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Create");
+            }
+            return RedirectToAction("Index", "Cabinet");
         }
 
         // POST: Feedbacks/Create
@@ -65,7 +69,7 @@ namespace LifeManagement.Controllers
                 feedback.UserId = User.Identity.GetUserId();
                 db.Feedbacks.Add(feedback);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Cabinet");
             }
 
             return View(feedback);
