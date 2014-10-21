@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = ResourceScr.cabinet;
 }
-@using LifeManagement.Models.DB
+@using LifeManagement.Enums
 @using LifeManagement.Resources
 
 
@@ -29,36 +29,38 @@
     
     <div id="Overdue">
         <div class="subtitle"><h3>@ResourceScr.Overdue</h3></div>
+        @{Html.RenderAction("FilterTasks", "Tasks", new RouteValueDictionary { { "recordFilter", RecordFilter.Overdue } });}
     </div>
     <div id="Today">
         <div class="subtitle"><h3>@ResourceScr.Today</h3></div>
         <div id="TodayTask">
-            @{Html.RenderAction("Index", "Tasks");}
+            @{Html.RenderAction("FilterTasks", "Tasks", new RouteValueDictionary { { "recordFilter", RecordFilter.Today } });}
         </div>
         <div id="TodayEvent">
-            @{Html.RenderAction("Index", "Events");}
+            @{Html.RenderAction("FilterEvents", "Events", new RouteValueDictionary { { "recordFilter", RecordFilter.Today } });}
         </div>
     </div>
     <div id="Tomorrow">
         <div class="subtitle"><h3>@ResourceScr.Tomorrow</h3></div>
         <div id="TomorrowTask">
-
+            @{Html.RenderAction("FilterTasks", "Tasks", new RouteValueDictionary { { "recordFilter", RecordFilter.Tomorrow } });}
         </div>
         <div id="TomorrowEvent">
-       
+            @{Html.RenderAction("FilterEvents", "Events", new RouteValueDictionary { { "recordFilter", RecordFilter.Tomorrow } });}
         </div>
     </div>
-    <div id="FutureTask">
+    <div id="Future">
         <div class="subtitle"><h3>@ResourceScr.Future</h3></div>
-
-    </div>
-    <div id="FutureEvent">
-        <div class="subtitle"><h3>@ResourceScr.Future</h3></div>
-
+        <div id="FutureTask">
+            @{Html.RenderAction("FilterTasks", "Tasks", new RouteValueDictionary { { "recordFilter", RecordFilter.Future } });}
+        </div>
+        <div id="FutureEvent">
+            @{Html.RenderAction("FilterEvents", "Events", new RouteValueDictionary { { "recordFilter", RecordFilter.Future } });}
+        </div>
     </div>
     <div id="NoDueDate">
         <div class="subtitle"><h3>@ResourceScr.NoDueDate</h3></div>
-
+        @{Html.RenderAction("FilterTasks", "Tasks", new RouteValueDictionary { { "recordFilter", RecordFilter.NoDueDate } });}
     </div>
 
 
@@ -69,6 +71,3 @@
 
    
 </div>
-@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
-@*@Scripts.Render("~/bundles/Dialog")*@
-@*<script src="~/Scripts/SignalR/TaskTicker.js"></script>*@

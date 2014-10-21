@@ -10,7 +10,9 @@
         @Styles.Render("~/Content/css")
         @Styles.Render("~/Content/themes/base/css")
         @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/Dialog")
+        <script src="~/Scripts/jquery.signalR-2.1.2.min.js"></script>
+        <script src="~/signalr/hubs"></script>
         <script type='text/javascript' src="@Url.Content("~/Scripts/tree.js")"></script>
 
         <link rel="icon" href="/Content/Images/1.png" type="ico"> 
@@ -75,12 +77,7 @@
             <hr />
   
         </div>
-        @Scripts.Render("~/bundles/Dialog")
-        @*@Scripts.Render("~/bundles/jquery")*@
         @RenderSection("scripts", required: false)
-
-        <script src="~/Scripts/jquery.signalR-2.1.2.min.js"></script>
-        <script src="~/signalr/hubs"></script>
     
     </body>
 </html>

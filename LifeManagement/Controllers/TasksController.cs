@@ -28,26 +28,42 @@ namespace LifeManagement.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult FilterTasks(RecordFilter recordFilter)
+        {
+            var userId = User.Identity.GetUserId();
+            var request = System.Web.HttpContext.Current.Request;
+            var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().Where(x => x.CompletedOn == null).ToList();
+            records = FilterRecords(records, recordFilter);
+            ConvertTasksToUserLocalTime(request, records);
+            return PartialView("Index", records);
+        }
+
+        public ActionResult GetTasksByProject(Guid projectId)
+        {
+            var userId = User.Identity.GetUserId();
+            var request = System.Web.HttpContext.Current.Request;
+            var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().Where(x => x.CompletedOn == null && x.ProjectId == projectId).ToList();
+            ConvertTasksToUserLocalTime(request, records);
+            return PartialView("Index", records);
+        }
+
+        public ActionResult GetTasksByTag(Guid tagId)
+        {
+            var userId = User.Identity.GetUserId();
+            var request = System.Web.HttpContext.Current.Request;
+            var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().Where(x => x.CompletedOn == null).Include(x => x.Tags).Where(x => x.Tags.Any(y => y.Id == tagId)).ToList();
+            ConvertTasksToUserLocalTime(request, records);
+            return PartialView("Index", records);
+        }
+
         // GET: Tasks
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
             var request = System.Web.HttpContext.Current.Request;
-            var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().Include(t => t.Project).Include(t => t.Tags);
-            foreach (var record in records)
-            {
-                if (record.StartDate.HasValue)
-                {
-                    record.StartDate = request.GetUserLocalTimeFromUtc(record.StartDate.Value);
-                }
-
-                if (record.EndDate.HasValue)
-                {
-                    record.EndDate = request.GetUserLocalTimeFromUtc(record.EndDate.Value);
-                }
-                record.CompletedOn = request.GetUserLocalTimeFromUtc(record.CompletedOn);
-            }
-            return PartialView(records.ToList());
+            var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().ToList();
+            ConvertTasksToUserLocalTime(request, records);
+            return PartialView(records);
         }
 
         public async Task<ActionResult> Complete(Guid taskId)
@@ -350,5 +366,68 @@ namespace LifeManagement.Controllers
             }
             base.Dispose(disposing);
         }
+
+        protected void ConvertTasksToUserLocalTime(HttpRequest request, IEnumerable<Task> records)
+        {
+            foreach (var record in records)
+            {
+                if (record.StartDate.HasValue)
+                {
+                    record.StartDate = request.GetUserLocalTimeFromUtc(record.StartDate.Value);
+                }
+
+                if (record.EndDate.HasValue)
+                {
+                    record.EndDate = request.GetUserLocalTimeFromUtc(record.EndDate.Value);
+                }
+                record.CompletedOn = request.GetUserLocalTimeFromUtc(record.CompletedOn);
+            }
+        }
+
+        protected List<Task> FilterRecords(List<Task> records, RecordFilter recordFilter)
+        {
+            switch (recordFilter)
+            {
+                case RecordFilter.Today:
+                    {
+                        var dueDate = DateTime.UtcNow.Date;
+                        return
+                            records.Where(
+                                x =>
+                                    (x.StartDate != null && x.StartDate.Value.Date <= dueDate) ||
+                                    (x.EndDate != null && x.EndDate.Value.Date == dueDate)).ToList();
+                    }
+                case RecordFilter.Overdue:
+                    return
+                        records.Where(
+                            x =>
+                                (x.EndDate != null && x.EndDate.Value.Date < DateTime.UtcNow.Date)).ToList();
+                case RecordFilter.Tomorrow:
+                    {
+                        var dueDate = DateTime.UtcNow.Date.AddDays(1);
+                        return
+                            records.Where(
+                                x =>
+                                    (x.StartDate != null && x.StartDate.Value.Date <= dueDate) ||
+                                    (x.EndDate != null && x.EndDate.Value.Date == dueDate)).ToList();
+                    }
+                case RecordFilter.Future:
+                    {
+                        var dueDate = DateTime.UtcNow.Date;
+                        return
+                            records.Where(
+                                x =>
+                                    (x.StartDate != null && x.StartDate.Value.Date > dueDate) ||
+                                    (x.EndDate != null && x.EndDate.Value.Date > dueDate)).ToList();
+                    }
+                case RecordFilter.NoDueDate:
+                    return
+                        records.Where(
+                            x =>
+                                (x.StartDate == null && x.EndDate == null)).ToList();
+                default:
+                    return records;
+            }
+        } 
     }
 }
