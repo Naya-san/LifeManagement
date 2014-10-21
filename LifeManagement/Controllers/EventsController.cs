@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -11,7 +12,6 @@ using LifeManagement.Extensions;
 using LifeManagement.Models;
 using LifeManagement.Models.DB;
 using Microsoft.AspNet.Identity;
-using Task = System.Threading.Tasks.Task;
 
 namespace LifeManagement.Controllers
 {
@@ -21,25 +21,33 @@ namespace LifeManagement.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public ActionResult FilterEvents(RecordFilter recordFilter)
+        {
+            var userId = User.Identity.GetUserId();
+            var request = System.Web.HttpContext.Current.Request;
+            var records = db.Records.Where(x => x.UserId == userId).OfType<Event>().ToList();
+            records = FilterRecords(records, recordFilter);
+            ConvertEventsToUserLocalTime(request, records);
+            return PartialView("Index", records);
+        }
+
+        public ActionResult GetEventsByTag(Guid tagId)
+        {
+            var userId = User.Identity.GetUserId();
+            var request = System.Web.HttpContext.Current.Request;
+            var records = db.Records.Where(x => x.UserId == userId).OfType<Event>().Include(x => x.Tags).ToList().Where(x => x.Tags.Any(y => y.Id == tagId) && x.EndDate != null && x.EndDate.Value >= DateTime.UtcNow);
+            ConvertEventsToUserLocalTime(request, records);
+            return PartialView("Index", records);
+        }
+
         // GET: Events
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
             var request = System.Web.HttpContext.Current.Request;
-            var records = db.Records.Where(x => x.UserId == userId).OfType<Event>();
-            foreach (var record in records)
-            {
-                if (record.StartDate.HasValue)
-                {
-                    record.StartDate = request.GetUserLocalTimeFromUtc(record.StartDate.Value);
-                }
-
-                if (record.EndDate.HasValue)
-                {
-                    record.EndDate = request.GetUserLocalTimeFromUtc(record.EndDate.Value);
-                }
-            }
-            return PartialView(records.ToList());
+            var records = db.Records.Where(x => x.UserId == userId).OfType<Event>().ToList();
+            ConvertEventsToUserLocalTime(request, records);
+            return PartialView(records);
         }
 
         // GET: Events/Details/5
@@ -322,5 +330,56 @@ namespace LifeManagement.Controllers
             }
             base.Dispose(disposing);
         }
+
+        protected void ConvertEventsToUserLocalTime(HttpRequest request, IEnumerable<Event> records)
+        {
+            foreach (var record in records)
+            {
+                if (record.StartDate.HasValue)
+                {
+                    record.StartDate = request.GetUserLocalTimeFromUtc(record.StartDate.Value);
+                }
+
+                if (record.EndDate.HasValue)
+                {
+                    record.EndDate = request.GetUserLocalTimeFromUtc(record.EndDate.Value);
+                }
+            }
+        }
+
+        protected List<Event> FilterRecords(List<Event> records, RecordFilter recordFilter)
+        {
+            switch (recordFilter)
+            {
+                case RecordFilter.Today:
+                    {
+                        var dueDate = DateTime.UtcNow;
+                        return
+                            records.Where(
+                                x =>
+                                    (x.StartDate != null && x.StartDate.Value.Date <= dueDate) &&
+                                    (x.EndDate != null && x.EndDate.Value.Date >= dueDate)).ToList();
+                    }
+                case RecordFilter.Tomorrow:
+                    {
+                        var dueDate = DateTime.UtcNow.Date.AddDays(1);
+                        return
+                            records.Where(
+                                x =>
+                                    (x.StartDate != null && x.StartDate.Value.Date <= dueDate) &&
+                                    (x.EndDate != null && x.EndDate.Value.Date >= dueDate)).ToList();
+                    }
+                case RecordFilter.Future:
+                    {
+                        var dueDate = DateTime.UtcNow.Date;
+                        return
+                            records.Where(
+                                x =>
+                                    (x.StartDate != null && x.StartDate.Value.Date > dueDate)).ToList();
+                    }
+                default:
+                    return records;
+            }
+        } 
     }
 }
