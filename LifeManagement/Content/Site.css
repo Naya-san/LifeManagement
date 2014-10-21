@@ -175,7 +175,6 @@ div#linkblock{
     width: 15%;
     position: absolute;
     left: 420px;
-    top: 17px;
 }
 .search {
     margin-top: 5px;
@@ -248,7 +247,13 @@ ul.tree {
 ul.tree>li {
     list-style-type: none; 
 }
-
+ul.tree>li>a {
+    text-decoration: none;
+}
+ul.tree>li>a:hover {
+    text-decoration: none;
+    font-weight: bolder;
+}
 ul.subtree {
     margin-left: 10px; /* Отступ слева в браузере IE и Opera */
    padding-left: 10px;
@@ -309,7 +314,8 @@ ul.subtree > li.subpunct>.edit:hover {
 }
 .subtitle {
     width: 100%;
-    border-bottom: 1px solid #17292e;
+    margin-top: 5px;
+    border-top: 1px solid #17292e;
     height: 30px;
 }
 .subtitle > h3 {

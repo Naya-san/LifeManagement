@@ -498,4 +498,7 @@
   <data name="More" xml:space="preserve">
     <value>Do you need more settings?</value>
   </data>
+  <data name="SearchResult" xml:space="preserve">
+    <value>Search result</value>
+  </data>
 </root>

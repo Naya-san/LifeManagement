@@ -210,7 +210,6 @@
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Enums\AlertPosition.cs" />
-    <Compile Include="Enums\CabinetState.cs" />
     <Compile Include="Enums\RepeatPosition.cs" />
     <Compile Include="Enums\RecordFilter.cs" />
     <Compile Include="Extensions\AlertPositionExtensions.cs" />
@@ -462,6 +461,9 @@
     <Content Include="Views\Projects\GetTasks.cshtml" />
     <Content Include="Views\Cabinet\TagsList.cshtml" />
     <Content Include="Views\Tags\GetRecords.cshtml" />
+    <Content Include="Views\Cabinet\AllTasks.cshtml" />
+    <Content Include="Views\Cabinet\AllEvents.cshtml" />
+    <Content Include="Views\Cabinet\SearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

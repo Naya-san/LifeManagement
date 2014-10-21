@@ -19,29 +19,23 @@ namespace LifeManagement.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            //var userId = User.Identity.GetUserId();
-            //var userGuid = Guid.Parse(userId);
+            return View();
+        }
+        [Authorize]
+        public ActionResult AllTasks()
+        {
+            return View();
+        }
+        [Authorize]
+        public ActionResult AllEvents()
+        {
+            return View();
+        }
 
-            //var request = System.Web.HttpContext.Current.Request;
-            //var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().OrderBy(x => x.StartDate).ToList();
-
-            //foreach (var record in records)
-            //{
-            //    if (record.StartDate.HasValue)
-            //    {
-            //        record.StartDate = UserTimeConverter.GetUserLocalTimeFromUtc(userGuid, request, record.StartDate.Value);
-            //    }
-
-            //    if (record.EndDate.HasValue)
-            //    {
-            //        record.EndDate = UserTimeConverter.GetUserLocalTimeFromUtc(userGuid, request, record.EndDate.Value);
-            //    }
-            //}
-            //return View(records);
-            if (Session["CabinetState"] == null)
-            {
-                Session["CabinetState"] = CabinetState.Focus;
-            }
+        [HttpPost]
+        public ActionResult SearchResult()
+        {
+            ViewBag.Text = Request["TextForSearch"];
             return View();
         }
 

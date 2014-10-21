@@ -36,10 +36,10 @@
                 <div id="logo"><a href="/"><img src="/content/Images/LogoWithText.png" alt="LifeManagement" ></a></div>
             </div>
             <div class="searchContainer">
-                <form action="" method="post" class="search">
-                    <input type="search" name="" placeholder="@LifeManagement.Resources.ResourceScr.Search" class="input" />
+                @Html.BeginForm("SearchResult", "Cabinet", FormMethod.Post, htmlAttributes: new { @class="search" }){
+                    <input type="search" name="TextForSearch" id="TextForSearch" placeholder="@ResourceScr.Search" class="input" required="true"/>
                     <input type="submit" name="" value="" class="submit" />
-                </form>   
+                }
             </div>
             <div id="menu">
                 <ul id="navbar1">

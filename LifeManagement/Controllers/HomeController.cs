@@ -25,14 +25,14 @@
 
 using System.Web.Mvc;
 using LifeManagement.Attributes;
-using LifeManagement.ObsoleteModels;
+using LifeManagement.Models;
 
 namespace LifeManagement.Controllers
 {
     [Localize]    
     public class HomeController : Controller
     {
-        private LifeManagementContext db = new LifeManagementContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
             if (User.Identity.IsAuthenticated)

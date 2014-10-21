@@ -492,4 +492,7 @@
   <data name="More" xml:space="preserve">
     <value>Хотите еще настроек?</value>
   </data>
+  <data name="SearchResult" xml:space="preserve">
+    <value>Результат поиска</value>
+  </data>
 </root>

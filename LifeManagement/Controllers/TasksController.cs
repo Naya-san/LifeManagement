@@ -87,7 +87,7 @@ namespace LifeManagement.Controllers
                 await db.SaveChangesAsync();
             }
 
-            return RedirectToAction("Index", "Cabinet");
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
         }
 
         // GET: Tasks/Details/5
@@ -128,7 +128,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Create");
             }
-            return RedirectToAction("Index", "Cabinet");
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
         }
 
         public void SendAlertToClient(Guid alertId, DateTime userLocalTime)
@@ -189,7 +189,7 @@ namespace LifeManagement.Controllers
 
                 if (alert == null)
                 {
-                    return RedirectToAction("Index", "Cabinet");
+                    return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
                 }
 
                 var timespan = alert.Date - DateTime.UtcNow;
@@ -198,7 +198,7 @@ namespace LifeManagement.Controllers
                     BackgroundJob.Schedule(() => SendAlertToClient(alert.Id, request.GetUserLocalTimeFromUtc(alert.Date)), timespan);
                 }
 
-                return RedirectToAction("Index", "Cabinet");
+                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
             }
             ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path", task.ProjectId);
             ViewBag.Alerts = AlertPosition.None.ToSelectList();
@@ -240,7 +240,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Edit", task);
             }
-            return RedirectToAction("Index", "Cabinet");
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
         }
 
         // POST: Tasks/Edit/5
