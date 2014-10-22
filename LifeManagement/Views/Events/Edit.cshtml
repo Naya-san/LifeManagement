@@ -5,6 +5,14 @@
 @model LifeManagement.Models.DB.Event
 
 <script type='text/javascript' src="@Url.Content("~/Scripts/availableFields.js")"></script>
+<script>
+    $(function () {
+        $(".datepicker").datepicker({ dateFormat: 'dd.mm.yy' }).val();
+    });
+    $(function () {
+        $(".timepicker").timepicker();
+    });
+</script>
 
 @{
     ViewBag.Title = "Edit";
@@ -39,8 +47,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9 forma">
-                @Html.Html5Editor("StartTime", InputTypes.InputType.Time, htmlAttributes: new { @value = Model.StartDate.toTimeFormat(), @required = "true" })
-                @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Date, new { @required = "true", @value = Model.StartDate.HasValue ? Model.StartDate.Value.ToString("yyyy-MM-dd") : "" })
+                @Html.Html5Editor("StartTime", InputTypes.InputType.Text, htmlAttributes: new { @value = Model.StartDate.toTimeFormat(), @required = "true", @class = "timepicker" })
+                @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Text, new { @required = "true", @value = Model.StartDate.HasValue ? Model.StartDate.Value.ToString("dd.MM.yyyy") : "", @class = "datepicker" })
                 @Html.ValidationMessageFor(model => model.StartDate)
             </div>
         </div>
@@ -48,8 +56,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-3" })
             <div class="col-md-9 forma">
-                @Html.Html5Editor("EndTime", InputTypes.InputType.Time, htmlAttributes: new { @value = Model.EndDate.toTimeFormat(), @required = "true" })
-                @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Date, new { @required = "true", @value = Model.EndDate.HasValue ? Model.EndDate.Value.ToString("yyyy-MM-dd") : "" })
+                @Html.Html5Editor("EndTime", InputTypes.InputType.Text, htmlAttributes: new { @value = Model.EndDate.toTimeFormat(), @required = "true", @class = "timepicker" })
+                @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Text, new { @required = "true", @value = Model.EndDate.HasValue ? Model.EndDate.Value.ToString("dd.MM.yyyy") : "", @class = "datepicker" })
                 @Html.ValidationMessageFor(model => model.EndDate)
             </div>
         </div>
@@ -93,8 +101,8 @@
                             }
                             <div id="ForHide" style="display: @ViewBag.style" class="forma">
                                 @LifeManagement.Resources.ResourceScr.till
-                                @Html.Html5EditorFor(model => model.StopRepeatDate, InputTypes.InputType.Date,
-                                        htmlAttributes: new { @required = "true", @value = Model.StopRepeatDate.HasValue ? Model.StopRepeatDate.Value.Date.ToString("yyyy-MM-dd") : Model.EndDate.Value.AddYears(1).ToString("yyyy-MM-dd") })
+                                @Html.Html5EditorFor(model => model.StopRepeatDate, InputTypes.InputType.Text,
+                 htmlAttributes: new { @required = "true", @value = Model.StopRepeatDate.HasValue ? Model.StopRepeatDate.Value.Date.ToString("dd.MM.yyyy") : Model.EndDate.Value.AddYears(1).ToString("dd.MM.yyyy"), @class = "datepicker" })
                             </div> 
 
                         </td>
