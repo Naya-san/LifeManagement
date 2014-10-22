@@ -37,7 +37,7 @@ namespace LifeManagement.Controllers
                 return HttpNotFound();
             }
             
-            return View(tag.Records);
+            return View(tag);
         }
 
         // GET: Tags/Details/5

@@ -175,6 +175,7 @@ div#linkblock{
     width: 15%;
     position: absolute;
     left: 420px;
+    top: 17px;
 }
 .search {
     margin-top: 5px;
@@ -248,9 +249,11 @@ ul.tree>li {
     list-style-type: none; 
 }
 ul.tree>li>a {
+    color: #4e888a;
     text-decoration: none;
 }
 ul.tree>li>a:hover {
+    color: #4e888a;
     text-decoration: none;
     font-weight: bolder;
 }

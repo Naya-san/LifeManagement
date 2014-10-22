@@ -36,7 +36,7 @@ namespace LifeManagement.Controllers
             {
                 return HttpNotFound();
             }
-            return View(project.Tasks);
+            return View(project);
         }
         // GET: Projects/Details/5
         public async Task<ActionResult> Details(Guid? id)
