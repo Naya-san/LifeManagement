@@ -1,7 +1,6 @@
 ﻿@{
     ViewBag.Title = ResourceScr.cabinet;
 }
-@using LifeManagement.Enums
 @using LifeManagement.Resources
 
 
@@ -32,10 +31,10 @@
 
     <div id="SearchResult">
         <div>
-            @{ Html.RenderAction("GetTasksByText", "Tasks", new {text = ViewBag.Text});}
+            @{ Html.RenderAction("GetTasksByText", "Tasks", new { text = Session["Text"] });}
         </div>
         <div>
-            @{ Html.RenderAction("GetEventsByText", "Events", new {text = ViewBag.Text});}
+            @{ Html.RenderAction("GetEventsByText", "Events", new { text = Session["Text"] });}
         </div>
     </div>
 </div>

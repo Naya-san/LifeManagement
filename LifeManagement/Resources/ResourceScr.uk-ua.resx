@@ -495,4 +495,7 @@
   <data name="SearchResult" xml:space="preserve">
     <value>Результат пошуку</value>
   </data>
+  <data name="Tag1" xml:space="preserve">
+    <value>Мітка</value>
+  </data>
 </root>

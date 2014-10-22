@@ -326,7 +326,7 @@ namespace LifeManagement.Controllers
             {
                 db.Entry(task).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", "Cabinet");
+                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
             }
 
             var userId = User.Identity.GetUserId();
@@ -353,7 +353,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Delete", task);
             }
-            return RedirectToAction("Index", "Cabinet");
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
         }
 
         // POST: Tasks/Delete/5
