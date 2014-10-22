@@ -87,8 +87,8 @@ namespace LifeManagement.Controllers
             ViewBag.RepeatPosition = RepeatPosition.None.ToSelectList();
 
             HttpRequest request = System.Web.HttpContext.Current.Request;
-            ViewBag.Date = request.GetUserLocalTimeFromUtc(DateTime.UtcNow).Date.ToString("yyyy-MM-dd");
-            ViewBag.DateR = request.GetUserLocalTimeFromUtc(DateTime.UtcNow.AddYears(1)).Date.ToString("yyyy-MM-dd");
+            ViewBag.Date = request.GetUserLocalTimeFromUtc(DateTime.UtcNow).Date;
+            ViewBag.DateR = request.GetUserLocalTimeFromUtc(DateTime.UtcNow.AddYears(1)).Date;
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Create");

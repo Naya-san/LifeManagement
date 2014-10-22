@@ -50,6 +50,8 @@ namespace LifeManagement
             bundles.Add(new ScriptBundle("~/bundles/Dialog").Include(
                                        "~/Scripts/jquery-1.8.2.min.js",
                                        "~/Scripts/jquery-ui-1.8.24.js",
+                                       "~/Scripts/jquery.ui.datepicker.js",
+                                       "~/Scripts/jquery.ui.timepicker.js",
                                        "~/Scripts/Dialog.js"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
@@ -62,7 +64,8 @@ namespace LifeManagement
                         "~/Content/themes/base/jquery.ui.dialog.css",
                         //"~/Content/themes/base/jquery.ui.slider.css",
                         //"~/Content/themes/base/jquery.ui.tabs.css",
-                        //"~/Content/themes/base/jquery.ui.datepicker.css",
+                        "~/Content/themes/base/jquery.ui.datepicker.css",
+                        "~/Content/themes/base/jquery.ui.timepicker.css",
                         //"~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
         }
