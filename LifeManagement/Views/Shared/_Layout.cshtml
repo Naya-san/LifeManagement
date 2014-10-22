@@ -36,7 +36,7 @@
                 <div id="logo"><a href="/"><img src="/content/Images/LogoWithText.png" alt="LifeManagement" ></a></div>
             </div>
             <div class="searchContainer">
-                @Html.BeginForm("SearchResult", "Cabinet", FormMethod.Post, htmlAttributes: new { @class="search" }){
+                @using (@Html.BeginForm("SearchResult", "Cabinet", FormMethod.Post, new { @class = "search" })) {
                     <input type="search" name="TextForSearch" id="TextForSearch" placeholder="@ResourceScr.Search" class="input" required="true"/>
                     <input type="submit" name="" value="" class="submit" />
                 }

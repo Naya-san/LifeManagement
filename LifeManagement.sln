@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeManagement", "LifeManagement\LifeManagement.csproj", "{0AF1AC97-36CA-45E4-8F80-E6BCC656DFF8}"
 EndProject
@@ -12,21 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{5BA966
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeManagement.Tests", "LifeManagement.Tests\LifeManagement.Tests.csproj", "{2E67399C-A7FE-4D95-941A-A9957ED16E7B}"
-EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://schevokin.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = LifeManagement\\LifeManagement.csproj
-		SccProjectName1 = LifeManagement
-		SccLocalPath1 = LifeManagement
-		SccProjectUniqueName2 = LifeManagement.Tests\\LifeManagement.Tests.csproj
-		SccProjectName2 = LifeManagement.Tests
-		SccLocalPath2 = LifeManagement.Tests
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -36,10 +22,6 @@ Global
 		{0AF1AC97-36CA-45E4-8F80-E6BCC656DFF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AF1AC97-36CA-45E4-8F80-E6BCC656DFF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AF1AC97-36CA-45E4-8F80-E6BCC656DFF8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E67399C-A7FE-4D95-941A-A9957ED16E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E67399C-A7FE-4D95-941A-A9957ED16E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E67399C-A7FE-4D95-941A-A9957ED16E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E67399C-A7FE-4D95-941A-A9957ED16E7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
