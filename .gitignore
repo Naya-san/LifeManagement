@@ -162,3 +162,4 @@ $RECYCLE.BIN/
 .DS_Store
 LifeManagement/App_Data/DefaultConnection.mdf
 LifeManagement/App_Data/DefaultConnection_log.ldf
+LifeManagement/LifeManagement.csproj

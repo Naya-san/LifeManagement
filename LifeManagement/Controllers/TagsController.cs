@@ -40,22 +40,6 @@ namespace LifeManagement.Controllers
             return View(tag);
         }
 
-        // GET: Tags/Details/5
-        public async Task<ActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var tag = await db.Tags.FindAsync(id);
-            if (tag == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tag);
-        }
-
         // GET: Tags/Create
         public ActionResult Create()
         {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -123,23 +122,6 @@ namespace LifeManagement.Controllers
             }
 
             return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
-        }
-
-        // GET: Tasks/Details/5
-        public async Task<ActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var task = await db.Records.FindAsync(id) as Task;
-            if (task == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(task);
         }
 
         // GET: Tasks/Create

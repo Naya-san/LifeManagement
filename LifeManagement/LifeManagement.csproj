@@ -265,12 +265,8 @@
     <Content Include="Content\Images\chackCell.png" />
     <Content Include="Content\Images\check.png" />
     <Content Include="Content\Images\close.png" />
-    <Content Include="Content\Images\document.png" />
     <Content Include="Content\Images\Edit.png" />
     <Content Include="Content\Images\folder-horizontal.png" />
-    <Content Include="Content\Images\folder_blue_backup.png" />
-    <Content Include="Content\Images\format-indent-more.png" />
-    <Content Include="Content\Images\format-indent-more12.png" />
     <Content Include="Content\Images\go.png" />
     <Content Include="Content\Images\info.png" />
     <Content Include="Content\Images\logo.png" />
@@ -388,6 +384,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\Dialog.js" />
     <Content Include="Scripts\easing.js" />
+    <Content Include="Content\Images\AddTask.psd" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
@@ -421,7 +418,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -436,33 +432,21 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Projects\Create.cshtml" />
     <Content Include="Views\Projects\Delete.cshtml" />
-    <Content Include="Views\Projects\Details.cshtml" />
     <Content Include="Views\Projects\Edit.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\Tags\Create.cshtml" />
     <Content Include="Views\Tags\Delete.cshtml" />
-    <Content Include="Views\Tags\Details.cshtml" />
     <Content Include="Views\Tags\Edit.cshtml" />
     <Content Include="Views\Tags\Index.cshtml" />
     <Content Include="Views\Feedbacks\Create.cshtml" />
-    <Content Include="Views\Feedbacks\Delete.cshtml" />
-    <Content Include="Views\Feedbacks\Details.cshtml" />
-    <Content Include="Views\Feedbacks\Edit.cshtml" />
-    <Content Include="Views\Feedbacks\Index.cshtml" />
     <Content Include="Views\Tasks\Create.cshtml" />
     <Content Include="Views\Tasks\Delete.cshtml" />
-    <Content Include="Views\Tasks\Details.cshtml" />
     <Content Include="Views\Tasks\Edit.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Events\Create.cshtml" />
     <Content Include="Views\Events\Delete.cshtml" />
-    <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
-    <Content Include="Views\Alerts\Create.cshtml" />
-    <Content Include="Views\Alerts\Delete.cshtml" />
-    <Content Include="Views\Alerts\Details.cshtml" />
-    <Content Include="Views\Alerts\Edit.cshtml" />
     <Content Include="Views\Alerts\Index.cshtml" />
     <Content Include="Views\Cabinet\Index.cshtml" />
     <Content Include="Views\Cabinet\Sidebar.cshtml" />

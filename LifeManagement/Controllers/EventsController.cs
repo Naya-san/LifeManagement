@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -59,23 +58,6 @@ namespace LifeManagement.Controllers
             var records = db.Records.Where(x => x.UserId == userId).OfType<Event>().ToList();
             ConvertEventsToUserLocalTime(request, records);
             return PartialView(records);
-        }
-
-        // GET: Events/Details/5
-        public async Task<ActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var @event = await db.Records.FindAsync(id) as Event;
-            if (@event == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(@event);
         }
 
         // GET: Events/Create
