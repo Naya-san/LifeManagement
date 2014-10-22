@@ -317,7 +317,7 @@ ul.subtree > li.subpunct>.edit:hover {
 }
 .subtitle {
     width: 100%;
-    margin-top: 5px;
+   
     border-top: 1px solid #17292e;
     height: 30px;
 }
@@ -340,6 +340,7 @@ ul.subtree > li.subpunct>.edit:hover {
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 4px;
+    margin-bottom: 4px;
     font-size: 12px;
     padding-left: 10px;
     padding-right: 10px;
@@ -357,6 +358,7 @@ ul.subtree > li.subpunct>.edit:hover {
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 4px;
+    margin-bottom: 4px;
     font-size: 12px;
     padding-left: 10px;
     padding-right: 10px;
@@ -534,6 +536,7 @@ input[type="checkbox"].taskcomp {
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 2px;
+    margin-bottom: 4px;
     font-size: 12px;
     padding-left: 10px;
     padding-right: 10px;
