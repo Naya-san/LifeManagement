@@ -79,14 +79,37 @@ namespace LifeManagement.Controllers
         {
             var userId = User.Identity.GetUserId();
             var request = System.Web.HttpContext.Current.Request;
-            var today = DateTime.UtcNow.Date;
+            var today = DateTime.UtcNow.Date.AddMinutes(1439);
             var dueDate = today.AddDays(7);
             var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().Where(x => x.CompletedOn == null && 
-                ((x.IsUrgent && x.StartDate == null) || 
-                (x.EndDate != null && x.EndDate <= dueDate && x.EndDate > today))).OrderBy(x => x.IsUrgent).ToList();
+                ((x.IsUrgent && x.StartDate == null) ||
+                (x.EndDate != null && x.EndDate <= dueDate && x.EndDate > today && (x.StartDate == null || (x.StartDate != null && x.StartDate > today))))).OrderBy(x => x.IsUrgent).ToList();
             ConvertTasksToUserLocalTime(request, records);
-            return View();
+            return PartialView(records);
         }
+
+        [HttpPost]
+        public ActionResult MakeTask(Guid[] TasksId)
+        {
+            if (TasksId == null)
+            {
+                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            }
+            var today = DateTime.UtcNow.Date;
+            foreach (var guid in TasksId)
+            {
+                var task = db.Records.Find(guid);
+                if (task != null)
+                {
+                    task.StartDate = today;
+                    db.Entry(task).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+            }
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+        }
+
         public async Task<ActionResult> Complete(Guid taskId)
         {
             var userId = User.Identity.GetUserId();
@@ -407,6 +430,7 @@ namespace LifeManagement.Controllers
 
         protected List<Task> FilterRecords(List<Task> records, RecordFilter recordFilter)
         {
+            var today = DateTime.UtcNow.Date;
             switch (recordFilter)
             {
                 case RecordFilter.Today:
@@ -429,7 +453,7 @@ namespace LifeManagement.Controllers
                         return
                             records.Where(
                                 x =>
-                                    (x.StartDate != null && x.StartDate.Value.Date <= dueDate) ||
+                                    (x.StartDate != null && x.StartDate.Value.Date == dueDate && (x.EndDate == null || (x.EndDate != null && x.EndDate > today))) ||
                                     (x.EndDate != null && x.EndDate.Value.Date == dueDate)).ToList();
                     }
                 case RecordFilter.Future:
@@ -439,7 +463,7 @@ namespace LifeManagement.Controllers
                             records.Where(
                                 x =>
                                     (x.StartDate != null && x.StartDate.Value.Date > dueDate) ||
-                                    (x.EndDate != null && x.EndDate.Value.Date > dueDate)).ToList();
+                                    (x.EndDate != null && x.EndDate.Value.Date > dueDate && (x.StartDate == null || (x.StartDate != null && x.StartDate > today)))).ToList();
                     }
                 case RecordFilter.NoDueDate:
                     return

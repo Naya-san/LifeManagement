@@ -8,7 +8,6 @@
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
-    /*padding-right: 15px;*/
     font-family:  Verdana, Helvetica, Arial, sans-serif;
     min-height: 90%;
 }
@@ -374,9 +373,8 @@ ul.subtree > li.subpunct>.edit:hover {
 input[type="checkbox"].taskcomp {
     display: table-cell;
     float: left;
-    height: 50px;
+    height: 30px;
     width: 30px;
-    margin-top: 5px;
     color: #f19645;
 }
 .taskChackBox {
@@ -446,10 +444,7 @@ input[type="checkbox"].taskcomp {
     color: #17292e;
 }
 .openDialog {
-    
 }
-
-
 
 .forma {
 }
@@ -557,4 +552,22 @@ a#moreLabel:hover {
     text-decoration: none;
     font-weight: bolder;
     color: #5f9ea0;
+}
+
+.elem {
+    width: 95%;
+    height: 40px;
+    border-bottom: 2px #c1c1c1 dashed;
+}
+
+a.Nothing {
+    background: url(/Content/Images/Nothing.png) 0px no-repeat;
+    padding-left: 30px;
+    margin-left: 30px;
+    color: #f19645;
+}
+a.Nothing:hover {
+    text-decoration: none;
+    font-weight: bold;
+    color: #f19645;
 }

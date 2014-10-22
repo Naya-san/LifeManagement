@@ -11,7 +11,6 @@
     {
         <div class="task">
             <div>@Html.ActionLink(" ", "Complete", "Tasks", new {taskId = item.Id}, new {@class = "taskChackBox"})</div>
-            @*<input type="checkbox" class="taskcomp" onchange="" />*@
             <div class="taskInfo">
                 <div class="name">
                     @if (item.IsUrgent)

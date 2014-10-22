@@ -6,16 +6,33 @@
 @model IEnumerable<LifeManagement.Models.DB.Task>
 
 
-@foreach (var item in Model)
+@if (Model.Any())
 {
-    <div>
-        <div class="name">
-            @if (item.IsUrgent)
-            {
-                <div class="Urgent"></div>
-            }
-            @item.Name
+    using (@Html.BeginForm("MakeTask", "Tasks", FormMethod.Post))
+    {
+        foreach (var item in Model)
+        {
+
+            <div class ="elem">
+                <input type="checkbox" name="TasksId" class="taskcomp" value="@item.Id" />
+                <div class="taskInfo">
+                    <div class="name">
+                        @if (item.IsUrgent)
+                        {
+                            <div class="Urgent"></div>
+                        }
+                        @item.Name
+                    </div>
+                    <span class="time">@item.StartDate - @item.EndDate</span>
+                </div>
+            </div>
+        }
+        <div class="buttonbar">
+            <input type="submit" value="@ResourceScr.doToday" class="submit" />
         </div>
-        <span class="time">@item.StartDate - @item.EndDate</span>
-    </div>
+    }
+}
+else
+{
+    <h3>@ResourceScr.noAvailableTasks</h3>
 }

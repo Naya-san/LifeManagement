@@ -39,6 +39,14 @@
         <div id="TodayEvent">
             @{Html.RenderAction("FilterEvents", "Events", new RouteValueDictionary { { "recordFilter", RecordFilter.Today } });}
         </div>
+        @Html.ActionLink(ResourceScr.nothingToDo, "NothingToDoTask", "Tasks", null, new
+           {
+               @class = "Nothing openDialog",
+               data_dialog_id = "51",
+               data_dialog_title = ResourceScr.nothingToDo,
+               data_dialog_width = "500",
+               data_dialog_height = "auto"
+           })
     </div>
     <div id="Tomorrow">
         <div class="subtitle"><h3>@ResourceScr.Tomorrow</h3></div>
@@ -48,18 +56,5 @@
         <div id="TomorrowEvent">
             @{Html.RenderAction("FilterEvents", "Events", new RouteValueDictionary { { "recordFilter", RecordFilter.Tomorrow } });}
         </div>
-    </div>
-    <div id="Future">
-        <div class="subtitle"><h3>@ResourceScr.Future</h3></div>
-        <div id="FutureTask">
-            @{Html.RenderAction("FilterTasks", "Tasks", new RouteValueDictionary { { "recordFilter", RecordFilter.Future } });}
-        </div>
-        <div id="FutureEvent">
-            @{Html.RenderAction("FilterEvents", "Events", new RouteValueDictionary { { "recordFilter", RecordFilter.Future } });}
-        </div>
-    </div>
-    <div id="NoDueDate">
-        <div class="subtitle"><h3>@ResourceScr.NoDueDate</h3></div>
-        @{Html.RenderAction("FilterTasks", "Tasks", new RouteValueDictionary { { "recordFilter", RecordFilter.NoDueDate } });}
     </div>
 </div>
