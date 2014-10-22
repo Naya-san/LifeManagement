@@ -75,6 +75,18 @@ namespace LifeManagement.Controllers
             return PartialView(records);
         }
 
+        public ActionResult NothingToDoTask()
+        {
+            var userId = User.Identity.GetUserId();
+            var request = System.Web.HttpContext.Current.Request;
+            var today = DateTime.UtcNow.Date;
+            var dueDate = today.AddDays(7);
+            var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().Where(x => x.CompletedOn == null && 
+                ((x.IsUrgent && x.StartDate == null) || 
+                (x.EndDate != null && x.EndDate <= dueDate && x.EndDate > today))).OrderBy(x => x.IsUrgent).ToList();
+            ConvertTasksToUserLocalTime(request, records);
+            return View();
+        }
         public async Task<ActionResult> Complete(Guid taskId)
         {
             var userId = User.Identity.GetUserId();
