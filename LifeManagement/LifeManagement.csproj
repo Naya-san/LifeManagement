@@ -265,12 +265,8 @@
     <Content Include="Content\Images\chackCell.png" />
     <Content Include="Content\Images\check.png" />
     <Content Include="Content\Images\close.png" />
-    <Content Include="Content\Images\document.png" />
     <Content Include="Content\Images\Edit.png" />
     <Content Include="Content\Images\folder-horizontal.png" />
-    <Content Include="Content\Images\folder_blue_backup.png" />
-    <Content Include="Content\Images\format-indent-more.png" />
-    <Content Include="Content\Images\format-indent-more12.png" />
     <Content Include="Content\Images\go.png" />
     <Content Include="Content\Images\info.png" />
     <Content Include="Content\Images\logo.png" />
@@ -285,6 +281,7 @@
     <Content Include="Content\Images\monotone_arrow_right.png" />
     <Content Include="Content\Images\monotone_arrow_right_32x32.png" />
     <Content Include="Content\Images\Plus.png" />
+    <Content Include="Content\Images\Plus2.png" />
     <Content Include="Content\Images\Russia-Flag-icon.png" />
     <Content Include="Content\Images\suitcaseNoUrgentImportant.png" />
     <Content Include="Content\Images\suitcaseNoUrgentNoImportant.png" />
@@ -297,10 +294,9 @@
     <Content Include="Content\Images\taskUrgentNoImportant.png" />
     <Content Include="Content\Images\timemachine_backup.png" />
     <Content Include="Content\Images\toBackLog.png" />
-    <Content Include="Content\Images\toggle-small-expand.png" />
-    <Content Include="Content\Images\toggle-small.png" />
-    <Content Include="Content\Images\toggle_minus.png" />
-    <Content Include="Content\Images\toggle_plus.png" />
+    <Content Include="Content\Images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Content\Images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Content\Images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\Images\Ukraine-Flag-icon.png" />
     <Content Include="Content\Images\United-Kingdom-flag.png" />
     <Content Include="Content\Images\Urgent.png" />
@@ -382,6 +378,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\Dialog.js" />
     <Content Include="Scripts\easing.js" />
+    <Content Include="Content\Images\AddTask.psd" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
@@ -415,7 +412,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -430,33 +426,21 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Projects\Create.cshtml" />
     <Content Include="Views\Projects\Delete.cshtml" />
-    <Content Include="Views\Projects\Details.cshtml" />
     <Content Include="Views\Projects\Edit.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\Tags\Create.cshtml" />
     <Content Include="Views\Tags\Delete.cshtml" />
-    <Content Include="Views\Tags\Details.cshtml" />
     <Content Include="Views\Tags\Edit.cshtml" />
     <Content Include="Views\Tags\Index.cshtml" />
     <Content Include="Views\Feedbacks\Create.cshtml" />
-    <Content Include="Views\Feedbacks\Delete.cshtml" />
-    <Content Include="Views\Feedbacks\Details.cshtml" />
-    <Content Include="Views\Feedbacks\Edit.cshtml" />
-    <Content Include="Views\Feedbacks\Index.cshtml" />
     <Content Include="Views\Tasks\Create.cshtml" />
     <Content Include="Views\Tasks\Delete.cshtml" />
-    <Content Include="Views\Tasks\Details.cshtml" />
     <Content Include="Views\Tasks\Edit.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Views\Events\Create.cshtml" />
     <Content Include="Views\Events\Delete.cshtml" />
-    <Content Include="Views\Events\Details.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
-    <Content Include="Views\Alerts\Create.cshtml" />
-    <Content Include="Views\Alerts\Delete.cshtml" />
-    <Content Include="Views\Alerts\Details.cshtml" />
-    <Content Include="Views\Alerts\Edit.cshtml" />
     <Content Include="Views\Alerts\Index.cshtml" />
     <Content Include="Views\Cabinet\Index.cshtml" />
     <Content Include="Views\Cabinet\Sidebar.cshtml" />
