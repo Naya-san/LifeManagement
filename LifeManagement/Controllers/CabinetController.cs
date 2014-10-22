@@ -32,10 +32,16 @@ namespace LifeManagement.Controllers
             return View();
         }
 
-        [HttpPost]
         public ActionResult SearchResult()
         {
-            ViewBag.Text = Request["TextForSearch"];
+            if (Request["TextForSearch"] != null)
+            {
+                Session["Text"] = Request["TextForSearch"];
+            }
+            if (Session["Text"] == null || Session["Text"] == "")
+            {
+                return RedirectToAction("Index", "Cabinet");
+            }
             return View();
         }
 

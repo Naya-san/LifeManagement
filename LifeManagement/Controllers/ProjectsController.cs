@@ -62,7 +62,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Create");
             }
-            return RedirectToAction("Index", "Cabinet");
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
         }
 
         // POST: Projects/Create
@@ -80,7 +80,7 @@ namespace LifeManagement.Controllers
                 project.UserId = userId;
                 db.Projects.Add(project);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", "Cabinet");
+                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
             }
 
             ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id && x.UserId == userId), "Id", "Path", project.ParentProjectId);
@@ -120,7 +120,7 @@ namespace LifeManagement.Controllers
             {
                 db.Entry(project).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", "Cabinet");
+                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
             }
 
             ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id && x.UserId.Equals(project.UserId)), "Id", "Path", project.ParentProjectId);
@@ -157,7 +157,7 @@ namespace LifeManagement.Controllers
             db.Projects.RemoveRange(project.ChildProjects);
             db.Projects.Remove(project);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index", "Cabinet");
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
         }
 
         protected override void Dispose(bool disposing)

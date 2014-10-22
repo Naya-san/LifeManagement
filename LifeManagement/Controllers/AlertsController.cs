@@ -140,7 +140,7 @@ namespace LifeManagement.Controllers
             }
             db.Alerts.Remove(alert);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index", "Cabinet");
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
         }
 
         // POST: Alerts/Delete/5

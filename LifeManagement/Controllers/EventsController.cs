@@ -93,7 +93,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Create");
             }
-            return RedirectToAction("Index", "Cabinet");
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
         }
 
         private void AddReperts(Event @event, int alertPosition, HttpRequest request)
@@ -220,7 +220,7 @@ namespace LifeManagement.Controllers
               
                 db.Records.Add(@event);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", "Cabinet");
+                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
             }
 
             return View(@event);
@@ -261,7 +261,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Edit", @event);
             }
-            return RedirectToAction("Index", "Cabinet");
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
         }
 
         // POST: Events/Edit/5
@@ -409,7 +409,7 @@ namespace LifeManagement.Controllers
                
                 db.Entry(@event).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", "Cabinet");
+                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
             }
 
             return View(@event);
@@ -432,7 +432,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Delete", task);
             }
-            return RedirectToAction("Index", "Cabinet");
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
         }
 
         // POST: Events/Delete/5

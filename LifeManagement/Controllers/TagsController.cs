@@ -63,7 +63,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Create");
             }
-            return RedirectToAction("Index", "Cabinet");
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
         }
 
         // POST: Tags/Create
@@ -79,7 +79,7 @@ namespace LifeManagement.Controllers
                 tag.UserId = User.Identity.GetUserId();
                 db.Tags.Add(tag);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", "Cabinet");
+                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
             }
 
             return View(tag);
@@ -101,7 +101,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Edit", tag);
             }
-            return RedirectToAction("Index", "Cabinet");
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
         }
 
         // POST: Tags/Edit/5
@@ -140,7 +140,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Delete", tag);
             }
-            return RedirectToAction("Index", "Cabinet");
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
         }
 
         // POST: Tags/Delete/5

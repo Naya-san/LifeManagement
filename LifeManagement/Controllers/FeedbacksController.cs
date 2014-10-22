@@ -52,7 +52,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Create");
             }
-            return RedirectToAction("Index", "Cabinet");
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
         }
 
         // POST: Feedbacks/Create
@@ -69,7 +69,7 @@ namespace LifeManagement.Controllers
                 feedback.UserId = User.Identity.GetUserId();
                 db.Feedbacks.Add(feedback);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", "Cabinet");
+                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
             }
 
             return View(feedback);
