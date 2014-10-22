@@ -450,6 +450,7 @@
     <Content Include="Views\Cabinet\AllTasks.cshtml" />
     <Content Include="Views\Cabinet\AllEvents.cshtml" />
     <Content Include="Views\Cabinet\SearchResult.cshtml" />
+    <Content Include="Views\Tasks\NothingToDoTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
