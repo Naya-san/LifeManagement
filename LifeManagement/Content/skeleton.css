@@ -1935,8 +1935,7 @@ textarea.input-lg {
     margin-left: 0;
   }
 }
-
-.form-horizontal .control-label,
+/*.form-horizontal .control-label,
 .form-horizontal .radio,
 .form-horizontal .checkbox,
 .form-horizontal .radio-inline,
@@ -1945,7 +1944,7 @@ textarea.input-lg {
   margin-bottom: 0;
 }
 
-.form-horizontal .form-group {
+.form-horizontalLM .form-group {
   margin-right: -15px;
   margin-left: -15px;
 }
@@ -1966,9 +1965,10 @@ textarea.input-lg {
   content: " ";
 }
 
-.form-horizontal .form-group:after {
+.form-horizontalLM .form-group:after {
   clear: both;
-}
+}*/
+
 
 @media (min-width: 768px) {
   .form-horizontal .control-label {

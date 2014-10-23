@@ -153,6 +153,45 @@
   padding-left: 15px;
 }
 
+.form-horizontalLM .control-label,
+.form-horizontalLM .radio,
+.form-horizontalLM .checkbox,
+.form-horizontalLM .radio-inline,
+.form-horizontalLM .checkbox-inline {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.form-horizontalLM .form-group {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.form-horizontalLM .form-group:before,
+.form-horizontalLM .form-group:after {
+  display: table;
+  content: " ";
+}
+
+.form-horizontalLM .form-group:after {
+  clear: both;
+}
+
+.form-horizontalLM .form-group:before,
+.form-horizontalLM .form-group:after {
+  display: table;
+  content: " ";
+}
+
+.form-horizontalLM .form-group:after {
+  clear: both;
+}
+
+@media (min-width: 768px) {
+  .form-horizontalLM .control-label {
+    text-align: right;
+  }
+}
 
 
   /*  ----------------------------------- */
@@ -238,7 +277,6 @@ div#linkblock{
 
 /* New menu*/
 #menuLM {
-    
     position: absolute;
     right: 0px;
 }
@@ -248,7 +286,6 @@ div#linkblock{
     right: 10px;
 }
 #logo {
-
     position: absolute;
     left: 10px;
 }
@@ -666,8 +703,8 @@ input[type="checkbox"].taskcomp {
 
 .AlertsBox {
     min-height: 30px;
-    max-height: 70px; /* высота нашего блока */
-    border: 1px solid #C1C1C1; /* размер и цвет границы блока */
+    max-height: 70px; 
+    border: 1px solid #C1C1C1; 
     overflow-y: scroll; /* прокрутка по вертикали */
 }
 

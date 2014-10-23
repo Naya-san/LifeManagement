@@ -348,6 +348,14 @@ namespace LifeManagement.Controllers
 
             var userId = User.Identity.GetUserId();
             ViewBag.Time = task.EndDate.toTimeFormat();
+            var selected = new string[task.Tags.Count];
+            int i = 0;
+            foreach (var tag in task.Tags)
+            {
+                selected[i] = tag.Id.ToString();
+                i++;
+            }
+            ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name", selected);
             ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path", task.ProjectId);
             return View(task);
         }
