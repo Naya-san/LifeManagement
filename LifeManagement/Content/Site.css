@@ -83,7 +83,11 @@
   }
 }
 
-.LMсol-md-1,
+@media (min-width: 992px) {
+  .container {
+    /*max-width: 970px;*/
+  }
+  .LMсol-md-1,
   .LMсol-md-2,
   .LMсol-md-3,
   .LMсol-md-4,
@@ -132,6 +136,26 @@
   .LMсol-md-12 {
     width: 100%;
   }
+
+ .LMсol-md-1,
+.LMсol-md-2,
+.LMсol-md-3,
+.LMсol-md-4,
+.LMсol-md-5,
+.LMсol-md-6,
+.LMсol-md-7,
+.LMсol-md-8,
+.LMсol-md-9,
+.LMсol-md-10,
+.LMсol-md-11,
+.LMсol-md-12{
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+
 
   /*  ----------------------------------- */
 /* Set width on the form input elements since they're 100% wide by default 
