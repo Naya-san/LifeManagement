@@ -2,6 +2,7 @@
     Layout = null;
 }
 
+@using LifeManagement.Extensions
 @using LifeManagement.Resources
 @model IEnumerable<LifeManagement.Models.DB.Task>
 
@@ -23,7 +24,7 @@
                         }
                         @item.Name
                     </div>
-                    <span class="time">@item.StartDate - @item.EndDate</span>
+                    <span class="time">@item.ConvertTimeToNice()</span>
                 </div>
             </div>
         }

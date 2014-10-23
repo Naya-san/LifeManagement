@@ -2,6 +2,7 @@
     Layout = null;
 }
 
+@using LifeManagement.Extensions
 @using LifeManagement.Resources
 @model IEnumerable<LifeManagement.Models.DB.Task>
 
@@ -29,7 +30,7 @@
                              data_dialog_height = "auto"
                          })
                 </div>
-                <span class="time">@item.StartDate - @item.EndDate</span>
+                <span class="time">@item.ConvertTimeToNice()</span>
                 <div class="tags">
                     @foreach (var tag in item.Tags)
                     {

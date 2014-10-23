@@ -215,6 +215,7 @@
     <Compile Include="Extensions\AlertPositionExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\HttpRequestExtensions.cs" />
+    <Compile Include="Extensions\RecordExtensions.cs" />
     <Compile Include="Extensions\RepeatPositionExtensions.cs" />
     <Compile Include="Hubs\AlertsHub.cs" />
     <Compile Include="Migrations\Configuration.cs" />
