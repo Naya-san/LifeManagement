@@ -19,7 +19,7 @@ namespace LifeManagement.Extensions
             if (record.EndDate.HasValue && record.StartDate.HasValue &&
                 record.StartDate.Value.Date == record.EndDate.Value.Date)
             {
-                return String.Concat(ResourceScr.from, " ", record.StartDate.Value.ToString("t"), " ", ResourceScr.till, " ", record.EndDate.Value.ToString("t"), " ", record.EndDate.Value.ToString("yyyy MMMM dd") );
+                return String.Concat(ResourceScr.from, " ", record.StartDate.Value.ToString("t"), " ", ResourceScr.till, " ", record.EndDate.Value.ToString("t"), " ", record.EndDate.Value.ToString("dd MMMM yyyy"));
             }
             string res = "";
             if (record.StartDate.HasValue)

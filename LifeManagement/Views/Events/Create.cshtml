@@ -8,7 +8,7 @@
 <script type='text/javascript' src="@Url.Content("~/Scripts/availableFields.js")"></script>
 <script>
     $(function () {
-        $(".datepicker").datepicker({ dateFormat: 'dd.mm.yy' }).val();
+        $(".datepicker").datepicker({ dateFormat: 'mm.dd.yy' }).val();
     });
     $(function () {
         $(".timepicker").timepicker();
@@ -33,7 +33,7 @@
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9">
                 @Html.Html5Editor("StartTime", InputTypes.InputType.Text, htmlAttributes: new { @value = "00:00", @required = "true", @class = "timepicker" })
-                @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @value = ViewBag.Date.ToString("dd.MM.yyyy"), @class = "datepicker" })
+                @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @value = ViewBag.Date.ToString("MM/dd/yyyy"), @class = "datepicker" })
                 @Html.ValidationMessageFor(model => model.StartDate)
             </div>
         </div>
@@ -42,7 +42,7 @@
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9">
                 @Html.Html5Editor("EndTime", InputTypes.InputType.Text, htmlAttributes: new { @value = "23:59", @required = "true", @class = "timepicker" })
-                @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @value = ViewBag.Date.ToString("dd.MM.yyyy"), @class = "datepicker" })
+                @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @value = ViewBag.Date.ToString("MM/dd/yyyy"), @class = "datepicker" })
                 @Html.ValidationMessageFor(model => model.EndDate)
             </div>
         </div>
@@ -87,7 +87,7 @@
                             <td>
                                 <div id="ForHide" style="display: none">
                                     @LifeManagement.Resources.ResourceScr.till
-                                    @Html.Html5EditorFor(model => model.StopRepeatDate, InputTypes.InputType.Date, htmlAttributes: new { @required = "true", @value = ViewBag.DateR })
+                                    @Html.Html5EditorFor(model => model.StopRepeatDate, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @value = ViewBag.DateR.ToString("MM/dd/yyyy") })
                                 </div>
 
                             </td>
