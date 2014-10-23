@@ -463,8 +463,8 @@ namespace LifeManagement.Controllers
                         return
                             records.Where(
                                 x =>
-                                    (x.StartDate != null && x.StartDate.Value.Date <= dueDate) &&
-                                    (x.EndDate != null && x.EndDate.Value.Date >= dueDate)).ToList();
+                                    (x.StartDate != null && x.StartDate.Value <= dueDate) &&
+                                    (x.EndDate != null && x.EndDate.Value >= dueDate)).ToList();
                     }
                 case RecordFilter.Tomorrow:
                     {
