@@ -29,24 +29,24 @@
         @Html.HiddenFor(model => model.UserId)
         @Html.HiddenFor(model => model.GroupId)
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9 forma">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9 forma">
                 @Html.Html5EditorFor(model => model.Name, htmlAttributes: new { @required = "true", @class = "longer" })
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9 forma">
+            @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9 forma">
                 @Html.TextAreaFor(model => model.Note, htmlAttributes: new { @class = "longer" })
                 @Html.ValidationMessageFor(model => model.Note)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9 forma">
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9 forma">
                 @Html.Html5Editor("StartTime", InputTypes.InputType.Text, htmlAttributes: new { @value = Model.StartDate.toTimeFormat(), @required = "true", @class = "timepicker" })
                 @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Text, new { @required = "true", @value = Model.StartDate.HasValue ? Model.StartDate.Value.ToString("dd.MM.yyyy") : "", @class = "datepicker" })
                 @Html.ValidationMessageFor(model => model.StartDate)
@@ -54,8 +54,8 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9 forma">
+            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9 forma">
                 @Html.Html5Editor("EndTime", InputTypes.InputType.Text, htmlAttributes: new { @value = Model.EndDate.toTimeFormat(), @required = "true", @class = "timepicker" })
                 @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Text, new { @required = "true", @value = Model.EndDate.HasValue ? Model.EndDate.Value.ToString("dd.MM.yyyy") : "", @class = "datepicker" })
                 @Html.ValidationMessageFor(model => model.EndDate)
@@ -63,28 +63,28 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IsUrgent, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9 forma">
+            @Html.LabelFor(model => model.IsUrgent, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9 forma">
                 @Html.EditorFor(model => model.IsUrgent)
                 @Html.ValidationMessageFor(model => model.IsUrgent)
             </div>
         </div>
         
         <div class="form-group">
-            @Html.Label(LifeManagement.Resources.ResourceScr.Tags, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9 forma">
+            @Html.Label(LifeManagement.Resources.ResourceScr.Tags, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9 forma">
                 @Html.ListBox("Tags")
             </div>
         </div>
         <div class="form-group">
-            @Html.Label(@LifeManagement.Resources.ResourceScr.Alerts, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9 forma">
+            @Html.Label(@LifeManagement.Resources.ResourceScr.Alerts, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9 forma">
                 @Html.DropDownList("Alerts")
             </div>
         </div>
         <div class="form-group">
-            @Html.Label(@LifeManagement.Resources.ResourceScr.Repeat, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9 forma">
+            @Html.Label(@LifeManagement.Resources.ResourceScr.Repeat, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9 forma">
                 <table>
                     <tr>
                         <td class="forma">
@@ -114,8 +114,8 @@
         @if(Model.RepeatPosition != RepeatPosition.None){
             
             <div class="form-group">
-                @Html.Label(@ResourceScr.EditAll, htmlAttributes: new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
+                @Html.Label(@ResourceScr.EditAll, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+                <div class="LMсol-md-9">
                     @Html.CheckBox("ForAll")
                 </div>
             </div>

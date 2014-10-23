@@ -13,14 +13,14 @@
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.UserId)
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md" })
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label LMсol-md" })
             <div>
                 <div class="forma">@Html.EditorFor(model => model.Name)</div>
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.ParentProjectId, htmlAttributes: new { @class = "control-label col-md" })
+            @Html.LabelFor(model => model.ParentProjectId, htmlAttributes: new { @class = "control-label LMсol-md" })
             <div>
                 <div class="forma">
                     @Html.DropDownList("ParentProjectId", String.Empty)

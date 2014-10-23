@@ -1,4 +1,4 @@
-/* NUGET: BEGIN LICENSE TEXT
+﻿/* NUGET: BEGIN LICENSE TEXT
  *
  * Microsoft grants you the right to use these script files for the sole
  * purpose of either: (i) interacting through your browser with the Microsoft
@@ -268,9 +268,7 @@ table {
   h3 {
     page-break-after: avoid;
   }
-  .navbar {
-    display: none;
-  }
+
   .table td,
   .table th {
     background-color: #fff !important;
@@ -826,18 +824,18 @@ pre code {
 .col-sm-10,
 .col-sm-11,
 .col-sm-12,
-.col-md-1,
-.col-md-2,
-.col-md-3,
-.col-md-4,
-.col-md-5,
-.col-md-6,
-.col-md-7,
-.col-md-8,
-.col-md-9,
-.col-md-10,
-.col-md-11,
-.col-md-12,
+.LMсol-md-1,
+.LMсol-md-2,
+.LMсol-md-3,
+.LMсol-md-4,
+.LMсol-md-5,
+.LMсol-md-6,
+.LMсol-md-7,
+.LMсol-md-8,
+.LMсol-md-9,
+.LMсol-md-10,
+.LMсol-md-11,
+.LMсol-md-12,
 .col-lg-1,
 .col-lg-2,
 .col-lg-3,
@@ -1076,169 +1074,169 @@ pre code {
   .container {
     /*max-width: 970px;*/
   }
-  .col-md-1,
-  .col-md-2,
-  .col-md-3,
-  .col-md-4,
-  .col-md-5,
-  .col-md-6,
-  .col-md-7,
-  .col-md-8,
-  .col-md-9,
-  .col-md-10,
-  .col-md-11 {
+  /*.LMсol-md-1,
+  .LMсol-md-2,
+  .LMсol-md-3,
+  .LMсol-md-4,
+  .LMсol-md-5,
+  .LMсol-md-6,
+  .LMсol-md-7,
+  .LMсol-md-8,
+  .LMсol-md-9,
+  .LMсol-md-10,
+  .LMсol-md-11 {
     float: left;
   }
-  .col-md-1 {
+  .LMсol-md-1 {
     width: 8.333333333333332%;
   }
-  .col-md-2 {
+  .LMсol-md-2 {
     width: 16.666666666666664%;
   }
-  .col-md-3 {
+  .LMсol-md-3 {
     width: 25%;
   }
-  .col-md-4 {
+  .LMсol-md-4 {
     width: 33.33333333333333%;
   }
-  .col-md-5 {
+  .LMсol-md-5 {
     width: 41.66666666666667%;
   }
-  .col-md-6 {
+  .LMсol-md-6 {
     width: 50%;
   }
-  .col-md-7 {
+  .LMсol-md-7 {
     width: 58.333333333333336%;
   }
-  .col-md-8 {
+  .LMсol-md-8 {
     width: 66.66666666666666%;
   }
-  .col-md-9 {
+  .LMсol-md-9 {
     width: 75%;
   }
-  .col-md-10 {
+  .LMсol-md-10 {
     width: 83.33333333333334%;
   }
-  .col-md-11 {
+  .LMсol-md-11 {
     width: 91.66666666666666%;
   }
-  .col-md-12 {
+  .LMсol-md-12 {
     width: 100%;
   }
-  .col-md-push-0 {
+  .LMсol-md-push-0 {
     left: auto;
   }
-  .col-md-push-1 {
+  .LMсol-md-push-1 {
     left: 8.333333333333332%;
   }
-  .col-md-push-2 {
+  .LMсol-md-push-2 {
     left: 16.666666666666664%;
   }
-  .col-md-push-3 {
+  .LMсol-md-push-3 {
     left: 25%;
   }
-  .col-md-push-4 {
+  .LMсol-md-push-4 {
     left: 33.33333333333333%;
   }
-  .col-md-push-5 {
+  .LMсol-md-push-5 {
     left: 41.66666666666667%;
   }
-  .col-md-push-6 {
+  .LMсol-md-push-6 {
     left: 50%;
   }
-  .col-md-push-7 {
+  .LMсol-md-push-7 {
     left: 58.333333333333336%;
   }
-  .col-md-push-8 {
+  .LMсol-md-push-8 {
     left: 66.66666666666666%;
   }
-  .col-md-push-9 {
+  .LMсol-md-push-9 {
     left: 75%;
   }
-  .col-md-push-10 {
+  .LMсol-md-push-10 {
     left: 83.33333333333334%;
   }
-  .col-md-push-11 {
+  .LMсol-md-push-11 {
     left: 91.66666666666666%;
   }
-  .col-md-pull-0 {
+  .LMсol-md-pull-0 {
     right: auto;
   }
-  .col-md-pull-1 {
+  .LMсol-md-pull-1 {
     right: 8.333333333333332%;
   }
-  .col-md-pull-2 {
+  .LMсol-md-pull-2 {
     right: 16.666666666666664%;
   }
-  .col-md-pull-3 {
+  .LMсol-md-pull-3 {
     right: 25%;
   }
-  .col-md-pull-4 {
+  .LMсol-md-pull-4 {
     right: 33.33333333333333%;
   }
-  .col-md-pull-5 {
+  .LMсol-md-pull-5 {
     right: 41.66666666666667%;
   }
-  .col-md-pull-6 {
+  .LMсol-md-pull-6 {
     right: 50%;
   }
-  .col-md-pull-7 {
+  .LMсol-md-pull-7 {
     right: 58.333333333333336%;
   }
-  .col-md-pull-8 {
+  .LMсol-md-pull-8 {
     right: 66.66666666666666%;
   }
-  .col-md-pull-9 {
+  .LMсol-md-pull-9 {
     right: 75%;
   }
-  .col-md-pull-10 {
+  .LMсol-md-pull-10 {
     right: 83.33333333333334%;
   }
-  .col-md-pull-11 {
+  .LMсol-md-pull-11 {
     right: 91.66666666666666%;
   }
-  .col-md-offset-0 {
+  .LMсol-md-offset-0 {
     margin-left: 0;
   }
-  .col-md-offset-1 {
+  .LMсol-md-offset-1 {
     margin-left: 8.333333333333332%;
   }
-  .col-md-offset-2 {
+  .LMсol-md-offset-2 {
     margin-left: 16.666666666666664%;
   }
-  .col-md-offset-3 {
+  .LMсol-md-offset-3 {
     margin-left: 25%;
   }
-  .col-md-offset-4 {
+  .LMсol-md-offset-4 {
     margin-left: 33.33333333333333%;
   }
-  .col-md-offset-5 {
+  .LMсol-md-offset-5 {
     margin-left: 41.66666666666667%;
   }
-  .col-md-offset-6 {
+  .LMсol-md-offset-6 {
     margin-left: 50%;
   }
-  .col-md-offset-7 {
+  .LMсol-md-offset-7 {
     margin-left: 58.333333333333336%;
   }
-  .col-md-offset-8 {
+  .LMсol-md-offset-8 {
     margin-left: 66.66666666666666%;
   }
-  .col-md-offset-9 {
+  .LMсol-md-offset-9 {
     margin-left: 75%;
   }
-  .col-md-offset-10 {
+  .LMсol-md-offset-10 {
     margin-left: 83.33333333333334%;
   }
-  .col-md-offset-11 {
+  .LMсol-md-offset-11 {
     margin-left: 91.66666666666666%;
   }
-}
+}*/
 
-@media (min-width: 1200px) {
+/*@media (min-width: 1200px) {
   .container {
-    /*max-width: 1170px;*/
-  }
+    /*max-width: 1170px;
+  }*/
   .col-lg-1,
   .col-lg-2,
   .col-lg-3,

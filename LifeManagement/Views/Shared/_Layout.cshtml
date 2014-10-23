@@ -29,32 +29,34 @@
         </script>
 
     </head>
-    <body onload="onBodyLoad()">
-        <div class="navbar navbar-inverse">
-            <div class="navbar-header">
-                <div id="logo"><a href="/"><img src="/content/Images/LogoWithText.png" alt="LifeManagement" ></a></div>
-            </div>
-            <div class="searchContainer">
-                @using (@Html.BeginForm("SearchResult", "Cabinet", FormMethod.Post, new { @class = "search" })) {
-                    <input type="search" name="TextForSearch" id="TextForSearch" placeholder="@ResourceScr.Search" class="input" required="true"/>
-                    <input type="submit" name="" value="" class="submit" />
-                }
-            </div>
-            <div id="menu">
-                <ul id="navbar1">
-                    <li>
-                        <div id="menuBTN"><img src="/content/Images/MenuWhite.png" alt="Menu"></div>
-                        <ul>
-                            <li>
-                                <div class="flagContainer">
-                                    @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "uk-ua" }, new { @class = "ua" })
-                                    @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "en-us" }, new { @class = "eng" })
-                                    @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "ru-ru" }, new { @class = "ru" })
-                                </div>
-                            </li>
+<body onload="onBodyLoad()" class="LifeManagment">
+    <div class="navbarLM navbarLM-inverse">
+        <div class="navbarLM-header">
+            <div id="logo"><a href="/"><img src="/content/Images/LogoWithText.png" alt="LifeManagement"></a></div>
+        </div>
+        <div class="searchContainer">
+            @using (@Html.BeginForm("SearchResult", "Cabinet", FormMethod.Post, new { @class = "search" }))
+            {
+                <input type="search" name="TextForSearch" id="TextForSearch" placeholder="@ResourceScr.Search" class="input" required="true" />
+                <input type="submit" name="" value="" class="submit" />
+            }
+        </div>
+        <div id="menuLM">
+            <ul id="navbar1">
+                <li>
+                    <div id="menuBTN"><img src="/content/Images/MenuWhite.png" alt="Menu"></div>
+                    <ul>
+                        <li>
+                            <div class="flagContainer">
+                                @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "uk-ua" }, new { @class = "ua" })
+                                @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "en-us" }, new { @class = "eng" })
+                                @Html.ActionLink(" ", "ChangeLanguage", "Home", new { idLeng = "ru-ru" }, new { @class = "ru" })
+                            </div>
+                        </li>
 
-                            @Html.Partial("_LoginPartial")
-                            <li>@Html.ActionLink(ResourceScr.Feedback, "Create", "Feedbacks", null, new
+                        @Html.Partial("_LoginPartial")
+                        <li>
+                            @Html.ActionLink(ResourceScr.Feedback, "Create", "Feedbacks", null, new
                                 {
                                     @class = "openDialog",
                                     data_dialog_id = "41",
@@ -62,21 +64,21 @@
                                     data_dialog_width = "600",
                                     data_dialog_height = "auto"
                                 })
-                            </li>
-                            
+                        </li>
 
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+
+                    </ul>
+                </li>
+            </ul>
         </div>
-        <div class="body-content">
-            @RenderBody()
-            <hr />
-  
-        </div>
-        @RenderSection("scripts", required: false)
-    
-    </body>
+    </div>
+    <div class="body-contentLifeManagment">
+        @RenderBody()
+        <hr />
+
+    </div>
+@RenderSection("scripts", required: false)
+
+</body>
 </html>
 

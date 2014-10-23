@@ -1,4 +1,7 @@
-﻿body {
+﻿body.LifeManagment {
+    font-family: 'Comic Sans MS', Verdana, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.428571429;
     padding-top: 50px;
     padding-bottom: 20px;
     background-color: #f8f1d4;
@@ -6,12 +9,131 @@
 }
 
 /* Set padding to keep content from hitting the edges */
-.body-content {
+.body-contentLifeManagment {
     padding-left: 15px;
-    font-family:  Verdana, Helvetica, Arial, sans-serif;
     min-height: 90%;
 }
 
+/*  ----------------------------------- */
+  .navbarLM {
+    display: block;
+  }
+  .navbarLM {
+  position: relative;
+  z-index: 1000;
+  min-height: 80px;
+  margin-top: -50px;
+  /*margin-bottom: 20px;*/
+    border-top: 1px solid #fff;
+}
+
+.navbarLM:before,
+.navbarLM:after {
+  display: table;
+  content: " ";
+}
+
+.navbarLM:after {
+  clear: both;
+}
+
+.navbarLM:before,
+.navbarLM:after {
+  display: table;
+  content: " ";
+}
+
+.navbarLM:after {
+  clear: both;
+}
+
+@media (min-width: 600px) {
+  .navbarLM {
+    border-radius: 4px;
+  }
+}
+
+.navbarLM-header:before,
+.navbarLM-header:after {
+  display: table;
+  content: " ";
+}
+
+.navbarLM-header:after {
+  clear: both;
+}
+
+.navbarLM-header:before,
+.navbarLM-header:after {
+  display: table;
+  content: " ";
+}
+
+.navbarLM-inverse {
+  background-color: #17292e;
+}
+
+.navbarLM-header:after {
+  clear: both;
+}
+
+@media (min-width: 768px) {
+  .navbarLM-header {
+    float: left;
+  }
+}
+
+.LMсol-md-1,
+  .LMсol-md-2,
+  .LMсol-md-3,
+  .LMсol-md-4,
+  .LMсol-md-5,
+  .LMсol-md-6,
+  .LMсol-md-7,
+  .LMсol-md-8,
+  .LMсol-md-9,
+  .LMсol-md-10,
+  .LMсol-md-11 {
+    float: left;
+  }
+  .LMсol-md-1 {
+    width: 8.333333333333332%;
+  }
+  .LMсol-md-2 {
+    width: 16.666666666666664%;
+  }
+  .LMсol-md-3 {
+    width: 25%;
+  }
+  .LMсol-md-4 {
+    width: 33.33333333333333%;
+  }
+  .LMсol-md-5 {
+    width: 41.66666666666667%;
+  }
+  .LMсol-md-6 {
+    width: 50%;
+  }
+  .LMсol-md-7 {
+    width: 58.333333333333336%;
+  }
+  .LMсol-md-8 {
+    width: 66.66666666666666%;
+  }
+  .LMсol-md-9 {
+    width: 75%;
+  }
+  .LMсol-md-10 {
+    width: 83.33333333333334%;
+  }
+  .LMсol-md-11 {
+    width: 91.66666666666666%;
+  }
+  .LMсol-md-12 {
+    width: 100%;
+  }
+
+  /*  ----------------------------------- */
 /* Set width on the form input elements since they're 100% wide by default 
 input,
 select,
@@ -93,7 +215,7 @@ div#linkblock{
 }
 
 /* New menu*/
-#menu {
+#menuLM {
     
     position: absolute;
     right: 0px;
@@ -464,12 +586,12 @@ input[type="checkbox"].taskcomp {
     background-color: #ffffff;
 }
 
-.col-md {
+.LMсol-md {
     width: 220px;
     padding-right: 10px;
     float: left;
 }
-.col-md-min {
+.LMсol-md-min {
     width: 120px;
     padding-right: 10px;
     float: left;

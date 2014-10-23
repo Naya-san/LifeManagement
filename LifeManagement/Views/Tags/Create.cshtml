@@ -13,8 +13,8 @@
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
-            <div class="col-md-9">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9">
                 @Html.Html5EditorFor(model => model.Name, htmlAttributes: new { @required = "true" })
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
