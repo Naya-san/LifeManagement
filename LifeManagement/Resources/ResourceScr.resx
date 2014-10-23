@@ -286,7 +286,7 @@
     <value>Sorry, this task can't be added to your todo list. You haven't enough free time. Try to change your Day Limit or divide your task.</value>
   </data>
   <data name="back" xml:space="preserve">
-    <value>Back to cabinet</value>
+    <value>Back to timetable</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
@@ -503,5 +503,26 @@
   </data>
   <data name="Tag1" xml:space="preserve">
     <value>Tag</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="ChangePasswordError" xml:space="preserve">
+    <value>The new password and confirmation password do not match.</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirm new password</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="RegisterError" xml:space="preserve">
+    <value>The password and confirmation password do not match.</value>
+  </data>
+  <data name="YouLogged" xml:space="preserve">
+    <value>You're logged in as</value>
   </data>
 </root>

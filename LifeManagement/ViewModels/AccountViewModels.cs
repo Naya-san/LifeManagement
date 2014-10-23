@@ -39,18 +39,18 @@ namespace LifeManagement.ViewModels
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [Display(Name = "OldPassword", ResourceType = typeof(ResourceScr))]
         public string OldPassword { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "NewPassword", ResourceType = typeof(ResourceScr))]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "ConfirmNewPassword", ResourceType = typeof(ResourceScr))]
+        [Compare("NewPassword", ErrorMessageResourceName = "ChangePasswordError", ErrorMessageResourceType = typeof(ResourceScr))]
         public string ConfirmPassword { get; set; }
     }
 
@@ -83,7 +83,7 @@ namespace LifeManagement.ViewModels
 
         [DataType(DataType.Password)]
         [Display(Name = "ConfirmPassword", ResourceType = typeof(ResourceScr))]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessageResourceName = "RegisterError", ErrorMessageResourceType = typeof(ResourceScr))]
         public string ConfirmPassword { get; set; }
     }
 }

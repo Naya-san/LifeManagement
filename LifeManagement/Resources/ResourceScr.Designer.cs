@@ -9,6 +9,9 @@
 //------------------------------------------------------------------------------
 
 namespace LifeManagement.Resources {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -229,7 +232,7 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Back to cabinet.
+        ///   Looks up a localized string similar to Back to timetable.
         /// </summary>
         public static string back {
             get {
@@ -261,6 +264,33 @@ namespace LifeManagement.Resources {
         public static string cantAddToList {
             get {
                 return ResourceManager.GetString("cantAddToList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change password.
+        /// </summary>
+        public static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The new password and confirmation password do not match..
+        /// </summary>
+        public static string ChangePasswordError {
+            get {
+                return ResourceManager.GetString("ChangePasswordError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm new password.
+        /// </summary>
+        public static string ConfirmNewPassword {
+            get {
+                return ResourceManager.GetString("ConfirmNewPassword", resourceCulture);
             }
         }
         
@@ -697,6 +727,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New password.
+        /// </summary>
+        public static string NewPassword {
+            get {
+                return ResourceManager.GetString("NewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New project.
         /// </summary>
         public static string newProject {
@@ -787,6 +826,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current password.
+        /// </summary>
+        public static string OldPassword {
+            get {
+                return ResourceManager.GetString("OldPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Overdue.
         /// </summary>
         public static string Overdue {
@@ -855,6 +903,15 @@ namespace LifeManagement.Resources {
         public static string register {
             get {
                 return ResourceManager.GetString("register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password and confirmation password do not match..
+        /// </summary>
+        public static string RegisterError {
+            get {
+                return ResourceManager.GetString("RegisterError", resourceCulture);
             }
         }
         
@@ -1215,6 +1272,15 @@ namespace LifeManagement.Resources {
         public static string wb {
             get {
                 return ResourceManager.GetString("wb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;re logged in as.
+        /// </summary>
+        public static string YouLogged {
+            get {
+                return ResourceManager.GetString("YouLogged", resourceCulture);
             }
         }
     }

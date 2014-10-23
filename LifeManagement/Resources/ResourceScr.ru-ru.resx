@@ -280,7 +280,7 @@
     <value>К сожалению, эта задача не может быть добавлен в список задач. У вас не хватает свободного времени. Попробуйте изменить рамки дня или разбить задание на меньшие подзадачи</value>
   </data>
   <data name="back" xml:space="preserve">
-    <value>Вернуться в кабинет</value>
+    <value>Вернуться к расписанию</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Название</value>
@@ -497,5 +497,26 @@
   </data>
   <data name="Tag1" xml:space="preserve">
     <value>Тег</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Сменить пароль</value>
+  </data>
+  <data name="ChangePasswordError" xml:space="preserve">
+    <value>Новый пароль и подтверждение пароля не совпадают.</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Подтвердите новый пароль</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Новый пароль</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Текущий пароль</value>
+  </data>
+  <data name="RegisterError" xml:space="preserve">
+    <value>Пароль и подтверждение пароля не совпадают.</value>
+  </data>
+  <data name="YouLogged" xml:space="preserve">
+    <value>Вы вошли как</value>
   </data>
 </root>

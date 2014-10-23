@@ -280,7 +280,7 @@
     <value>На жаль, це завдання не може бути доданий до списку завдань. У вас не вистачає вільного часу. Спробуйте змінити межі деня або розділити задачу на дрібніші підзадачі.</value>
   </data>
   <data name="back" xml:space="preserve">
-    <value>Повернутись в кабінет</value>
+    <value>Повернутись до розкладу</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Назва</value>
@@ -497,5 +497,26 @@
   </data>
   <data name="Tag1" xml:space="preserve">
     <value>Мітка</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Змінити пароль</value>
+  </data>
+  <data name="ChangePasswordError" xml:space="preserve">
+    <value>Новий пароль і підтвердження пароля різні.</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Підтвердження нового пароля</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Новий пароль</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Ваш пароль зараз</value>
+  </data>
+  <data name="RegisterError" xml:space="preserve">
+    <value>Пароль і підтвердження пароля різні.</value>
+  </data>
+  <data name="YouLogged" xml:space="preserve">
+    <value>Ви увійшли як</value>
   </data>
 </root>
