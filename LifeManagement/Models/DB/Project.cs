@@ -61,6 +61,45 @@ namespace LifeManagement.Models.DB
             get { return ParentProjectId == null ? Name : String.Concat(ParentProject.Path, "\\", Name); }
         }
 
+        public override string ToString()
+        {
+            const int maxLength = 30;
+            if (Path.Length <= maxLength)
+            {
+                return Path;
+            }
+            var parts = Path.Split('\\');
+            int length = Path.Length;
+            string res = "";
+            for (int i = 0; i < parts.Length; i++)
+            {
+
+                if (parts[i].Length > 4)
+                {
+                    res += parts[i][0] + "...";
+                    length -= (parts[i].Length - 4);
+                }
+                else
+                {
+                    res += parts[i];
+                }
+                if (length <= maxLength)
+                {
+                    for (int j = i+1; j < parts.Length; j++)
+                    {
+                        res += "\\" + parts[j];
+                    }
+                    break;
+                }
+                res += "\\";
+            }
+            if (res.Length > maxLength)
+            {
+                res = "...\\" + Name;
+            }
+            return res;
+        }
+
 
         public Project()
         {

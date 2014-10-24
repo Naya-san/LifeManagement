@@ -27,8 +27,11 @@
                                       data_dialog_title = ResourceScr.Details,
                                       data_dialog_width = "700",
                                       data_dialog_height = "auto" 
-                                  }) 
-                            @Html.ActionLink(item.Name, "GetTasks", "Projects", new { id = item.Id }, null) 
+                            }) 
+
+                            @Html.ActionLink(item.ToString(), "GetTasks", "Projects", new { id = item.Id }, null)
+                           
+                           
                         </li>
                     }
                     <li>@Html.ActionLink(ResourceScr.addProject, "Create", "Projects", null, new { 
