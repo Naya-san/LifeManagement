@@ -17,6 +17,9 @@
 }
 
 /*  ----------------------------------- */
+.rowLM {
+    margin-left: -15px;
+}
   .navbarLM {
     display: block;
   }
@@ -189,6 +192,7 @@
 
 @media (min-width: 768px) {
   .form-horizontalLM .control-label {
+    padding-top: 2px;
     text-align: right;
   }
 }
@@ -424,6 +428,9 @@ input[type="search"] {
 ul.tree {
    margin-left: 0; /* Отступ слева в браузере IE и Opera */
    padding-left: 0;  
+}
+ul.tree a {
+   color: #5f9ea0; 
 }
 ul.tree>li {
     list-style-type: none; 
