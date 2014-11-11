@@ -1,0 +1,104 @@
+﻿@model List<LifeManagement.Models.DB.Record>
+
+@using LifeManagement.Extensions
+@using LifeManagement.Models.DB
+@using LifeManagement.Resources
+
+
+<div id="linkblock">
+    @{Html.RenderAction("Sidebar", "Cabinet");}
+</div>
+<div id="maincontent">
+    @{Html.RenderAction("Index", "Alerts");}
+    <div class="title">
+        <h2 id="maintitle">@ResourceScr.onDate @Session["FocusDate"]</h2>
+        @Html.ActionLink(" ", "Create", "Tasks", null, new
+        {
+            @class = "addTaskIcon openDialog",
+            data_dialog_id = "31",
+            data_dialog_title = ResourceScr.createTask,
+            data_dialog_width = "700",
+            data_dialog_height = "auto"
+        })
+        @Html.ActionLink(" ", "Create", "Events", null, new
+        {
+            @class = "addEventIcon  openDialog",
+            data_dialog_id = "41",
+            data_dialog_title = ResourceScr.newEvent,
+            data_dialog_width = "700",
+            data_dialog_height = "auto"
+        })
+    </div>
+    @if (!Model.Any())
+    {
+          <h4 style="text-align: center;">@ResourceScr.NothingPlaning </h4>
+    }
+    @foreach (var item in Model)
+    {
+        if (item is Task)
+        {
+            <div class="task">
+                <div>@Html.ActionLink(" ", "Complete", "Tasks", new { taskId = item.Id }, new { @class = "taskChackBox" })</div>
+                <div class="taskInfo">
+                    <div class="name">
+                        @if (item.IsUrgent)
+                        {
+                            <div class="Urgent"></div>
+                        }
+                        @item.Name
+                    </div>
+                    <div>
+                        @Html.ActionLink(" ", "Edit", "Tasks", new { id = item.Id },
+                         new
+                         {
+                             @class = "moreInfoIcon openDialog",
+                             data_dialog_id = "32",
+                             data_dialog_title = ResourceScr.Details,
+                             data_dialog_width = "700",
+                             data_dialog_height = "auto"
+                         })
+                    </div>
+                    <span class="time">@item.ConvertTimeToNice()</span>
+                    <div class="tags">
+                        @foreach (var tag in item.Tags)
+                        {
+                            <text>@tag.Name </text>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="event">
+                <div class="taskInfo">
+                    <div class="name">
+                        @if (item.IsUrgent)
+                        {
+                            <div class="Urgent"></div>
+                        }
+                        @item.Name
+                    </div>
+                    <div>
+                        @Html.ActionLink(" ", "Edit", "Events", new { id = item.Id },
+                                new
+                                {
+                                    @class = "moreInfoIcon openDialog",
+                                    data_dialog_id = "42",
+                                    data_dialog_title = ResourceScr.Details,
+                                    data_dialog_width = "700",
+                                    data_dialog_height = "auto"
+                                })
+                    </div>
+                    <span class="time">@item.ConvertTimeToNice()</span>
+                    <div class="tags">
+                        @foreach (var tag in item.Tags)
+                        {
+                            <text>@tag.Name </text>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

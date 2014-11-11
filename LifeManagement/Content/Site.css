@@ -759,3 +759,15 @@ a.Nothing:hover {
     font-weight: bold;
     color: #f19645;
 }
+
+.invisibleInput {
+    border: none;
+    background-color: #f8f1d4;
+    padding: 1px 0px;
+}
+input[type="text"].invisibleInput{
+    width: 100px;
+}
+input[type="submit"].invisibleInput:hover {
+    font-weight: bold;
+}

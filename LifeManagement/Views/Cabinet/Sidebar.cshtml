@@ -7,13 +7,25 @@
 @model IEnumerable<Project>
 
 <script type='text/javascript' src="@Url.Content("~/Scripts/tree.js")"></script>
-
+<script>
+    $(function () {
+        $(".datepicker").datepicker({ dateFormat: 'dd.mm.yy' }).val();
+    });
+</script>
 <div>
     <div>
         <ul class="tree">
             <li>@Html.ActionLink(@ResourceScr.Focus, "Index", "Cabinet")</li>
             <li>@Html.ActionLink(@ResourceScr.AllTask, "AllTasks", "Cabinet")</li>
-            <li>@Html.ActionLink(@ResourceScr.AllEvents, "AllEvents", "Cabinet")</li>            
+            <li>@Html.ActionLink(@ResourceScr.AllEvents, "AllEvents", "Cabinet")</li>  
+            <li>
+                @using (@Html.BeginForm("TimetableOnDate", "Cabinet", FormMethod.Post))
+                {
+                    <input type="submit" value="@ResourceScr.onDate" class="invisibleInput" />
+                    <input class="datepicker invisibleInput" value="@DateTime.Today.AddDays(1).ToString("dd.MM.yyyy")" type="text" name="FocusDate" />
+                }
+
+            </li>          
             
             <li>
                 <div id="chapter_img1" onclick="doMenu('1');" class="closeBlock">@ResourceScr.Projects</div>
@@ -22,11 +34,11 @@
                     {
                         <li class="subpunct">
                             @Html.ActionLink(" ", "Edit", "Projects", new { id = item.Id }, new { 
-                                      @class = "edit openDialog",
-                                      data_dialog_id = "22",
-                                      data_dialog_title = ResourceScr.Details,
-                                      data_dialog_width = "700",
-                                      data_dialog_height = "auto" 
+                                @class = "edit openDialog",
+                                data_dialog_id = "22",
+                                data_dialog_title = ResourceScr.Details,
+                                data_dialog_width = "700",
+                                data_dialog_height = "auto" 
                             }) 
 
                             @Html.ActionLink(item.ToString(), "GetTasks", "Projects", new { id = item.Id }, null)
@@ -35,11 +47,11 @@
                         </li>
                     }
                     <li>@Html.ActionLink(ResourceScr.addProject, "Create", "Projects", null, new { 
-                                       @class = "addBlock openDialog",
-                                      data_dialog_id = "21",
-                                      data_dialog_title = ResourceScr.newProject,
-                                      data_dialog_width = "700",
-                                      data_dialog_height = "auto"  })
+                            @class = "addBlock openDialog",
+                            data_dialog_id = "21",
+                            data_dialog_title = ResourceScr.newProject,
+                            data_dialog_width = "700",
+                            data_dialog_height = "auto"  })
                     </li>
                 </ul>
             </li>
@@ -49,6 +61,7 @@
                     @{Html.RenderAction("TagsList", "Cabinet");}
                 </ul>
             </li>
+
         </ul>
     </div>
 </div>

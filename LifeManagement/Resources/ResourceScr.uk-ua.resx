@@ -519,4 +519,10 @@
   <data name="YouLogged" xml:space="preserve">
     <value>Ви увійшли як</value>
   </data>
+  <data name="onDate" xml:space="preserve">
+    <value>Розклад на</value>
+  </data>
+  <data name="NothingPlaning" xml:space="preserve">
+    <value>У вас поки нічого не заплановано на цей день</value>
+  </data>
 </root>

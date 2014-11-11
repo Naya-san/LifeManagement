@@ -525,4 +525,10 @@
   <data name="YouLogged" xml:space="preserve">
     <value>You're logged in as</value>
   </data>
+  <data name="onDate" xml:space="preserve">
+    <value>Timetable on</value>
+  </data>
+  <data name="NothingPlaning" xml:space="preserve">
+    <value>You have no plans for this day</value>
+  </data>
 </root>

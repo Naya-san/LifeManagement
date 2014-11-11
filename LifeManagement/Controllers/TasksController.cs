@@ -429,8 +429,8 @@ namespace LifeManagement.Controllers
                         return
                             records.Where(
                                 x =>
-                                    (x.StartDate != null && x.StartDate.Value.Date <= dueDate) ||
-                                    (x.EndDate != null && x.EndDate.Value.Date == dueDate)).ToList();
+                                    (x.StartDate != null && x.StartDate.Value.Date <= dueDate && ((x.EndDate.HasValue && x.EndDate.Value >= dueDate) || !x.EndDate.HasValue)) ||
+                                    (x.EndDate != null && x.EndDate.Value.Date == dueDate && !x.StartDate.HasValue)).ToList();
                     }
                 case RecordFilter.Overdue:
                     return

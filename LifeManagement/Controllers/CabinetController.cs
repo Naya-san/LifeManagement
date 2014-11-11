@@ -1,7 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web.Mvc;
 using LifeManagement.Attributes;
+using LifeManagement.Extensions;
 using LifeManagement.Models;
+using LifeManagement.Models.DB;
 using Microsoft.AspNet.Identity;
 
 namespace LifeManagement.Controllers
@@ -28,6 +32,7 @@ namespace LifeManagement.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult SearchResult()
         {
             if (Request["TextForSearch"] != null)
@@ -39,6 +44,45 @@ namespace LifeManagement.Controllers
                 return RedirectToAction("Index", "Cabinet");
             }
             return View();
+        }
+
+        [Authorize]
+        public ActionResult TimetableOnDate()
+        {
+            if (Request["FocusDate"] != null)
+            {
+                Session["FocusDate"] = Request["FocusDate"];
+            }
+            if (Session["FocusDate"] == null || Session["FocusDate"] == "")
+            {
+                return RedirectToAction("Index", "Cabinet");
+            }
+            var FocusDate = DateTime.Parse(Session["FocusDate"].ToString());
+            var userId = User.Identity.GetUserId();
+            var records =
+                db.Records.Where(x => x.UserId == userId && 
+                    (((x.StartDate.HasValue && x.StartDate.Value <= FocusDate) && ((x.EndDate.HasValue && x.EndDate.Value >= FocusDate) || !x.EndDate.HasValue)) 
+                    || 
+                    (!x.StartDate.HasValue && x.EndDate.HasValue && x.EndDate.Value >= FocusDate))).ToList();
+            var recordsTmp = records.OfType<Task>().Where(x  => x.CompletedOn != null).ToList();
+            foreach (var rec in recordsTmp)
+            {
+                records.Remove(rec);
+            }
+            var request = System.Web.HttpContext.Current.Request;
+            foreach (var record in records)
+            {
+                if (record.StartDate.HasValue)
+                {
+                    record.StartDate = request.GetUserLocalTimeFromUtc(record.StartDate.Value);
+                }
+
+                if (record.EndDate.HasValue)
+                {
+                    record.EndDate = request.GetUserLocalTimeFromUtc(record.EndDate.Value);
+                }
+            }
+            return View(records);
         }
 
         [Authorize]

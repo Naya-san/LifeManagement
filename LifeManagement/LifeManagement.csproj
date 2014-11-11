@@ -459,6 +459,7 @@
     <Content Include="Views\Cabinet\AllEvents.cshtml" />
     <Content Include="Views\Cabinet\SearchResult.cshtml" />
     <Content Include="Views\Tasks\NothingToDoTask.cshtml" />
+    <Content Include="Views\Cabinet\TimetableOnDate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

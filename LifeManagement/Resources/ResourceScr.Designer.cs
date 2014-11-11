@@ -790,6 +790,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have no plans for this day.
+        /// </summary>
+        public static string NothingPlaning {
+            get {
+                return ResourceManager.GetString("NothingPlaning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nothing to do.
         /// </summary>
         public static string nothingToDo {
@@ -831,6 +840,15 @@ namespace LifeManagement.Resources {
         public static string OldPassword {
             get {
                 return ResourceManager.GetString("OldPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timetable on.
+        /// </summary>
+        public static string onDate {
+            get {
+                return ResourceManager.GetString("onDate", resourceCulture);
             }
         }
         
