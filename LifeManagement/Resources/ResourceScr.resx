@@ -531,4 +531,7 @@
   <data name="NothingPlaning" xml:space="preserve">
     <value>You have no plans for this day</value>
   </data>
+  <data name="CompletedOnWeek" xml:space="preserve">
+    <value>Tasks compleated during last week</value>
+  </data>
 </root>

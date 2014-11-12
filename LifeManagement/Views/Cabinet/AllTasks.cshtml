@@ -50,4 +50,8 @@
         <div class="subtitle"><h3>@ResourceScr.NoDueDate</h3></div>
         @{Html.RenderAction("FilterTasks", "Tasks", new RouteValueDictionary { { "recordFilter", RecordFilter.NoDueDate } });}
     </div>
+    <div id="Compleated">
+        <div class="subtitle"><h3>@ResourceScr.CompletedOnWeek</h3></div>
+        @{Html.RenderAction("GetTasksCompleatedWeek", "Tasks");}
+    </div>
 </div>

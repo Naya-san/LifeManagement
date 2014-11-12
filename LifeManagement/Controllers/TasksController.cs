@@ -37,6 +37,27 @@ namespace LifeManagement.Controllers
             return PartialView("Index", records);
         }
 
+        public ActionResult GetTasksCompleatedToday()
+        {
+            var userId = User.Identity.GetUserId();
+            var request = System.Web.HttpContext.Current.Request;
+             var today = DateTime.UtcNow.Date;
+             var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().Where(x => x.CompletedOn.HasValue && x.CompletedOn.Value.Year== today.Year && x.CompletedOn.Value.Month == today.Month && x.CompletedOn.Value.Day == today.Day).ToList();
+            ConvertTasksToUserLocalTime(request, records);
+            return PartialView("Index", records);
+        }
+        public ActionResult GetTasksCompleatedWeek()
+        {
+            var userId = User.Identity.GetUserId();
+            var request = System.Web.HttpContext.Current.Request;
+            var today = DateTime.UtcNow.Date;
+            var week = today.AddDays(-7);
+            var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().Where(x => x.CompletedOn.HasValue &&
+                x.CompletedOn.Value.Year <= today.Year && x.CompletedOn.Value.Month <= today.Month && x.CompletedOn.Value.Day <= today.Day &&
+                x.CompletedOn.Value.Year >= week.Year && x.CompletedOn.Value.Month >= week.Month && x.CompletedOn.Value.Day >= week.Day).ToList();
+            ConvertTasksToUserLocalTime(request, records);
+            return PartialView("Index", records);
+        }
         public ActionResult GetTasksByProject(Guid projectId)
         {
             var userId = User.Identity.GetUserId();

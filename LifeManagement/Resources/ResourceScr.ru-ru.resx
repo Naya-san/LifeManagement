@@ -525,4 +525,7 @@
   <data name="NothingPlaning" xml:space="preserve">
     <value>У вас пока нет плаов на этот день</value>
   </data>
+  <data name="CompletedOnWeek" xml:space="preserve">
+    <value>Задания, выполненые в течении недели</value>
+  </data>
 </root>

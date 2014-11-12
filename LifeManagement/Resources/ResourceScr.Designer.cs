@@ -286,6 +286,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tasks compleated during last week.
+        /// </summary>
+        public static string CompletedOnWeek {
+            get {
+                return ResourceManager.GetString("CompletedOnWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm new password.
         /// </summary>
         public static string ConfirmNewPassword {
