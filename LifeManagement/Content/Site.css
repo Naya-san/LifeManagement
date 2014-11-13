@@ -573,6 +573,14 @@ input[type="checkbox"].taskcomp {
     width: 30px;
     margin-top: 5px;
 }
+.taskChackBoxChacked {
+    background: url(/Content/Images/chackCellChaked.png) 0px no-repeat;
+    display: table-cell;
+    float: left;
+    height: 50px;
+    width: 30px;
+    margin-top: 5px;
+}
 .taskInfo {
     display: table-cell;
     padding-left: 10px;
@@ -728,6 +736,7 @@ input[type="checkbox"].taskcomp {
     color: #17292e;
 }
 .Сompleted>.taskInfo> .tags {
+    background: url(/Content/Images/TagComplete.png) 0px no-repeat;
     color: #17292e;
 }
 

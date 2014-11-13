@@ -43,7 +43,7 @@
     else
     {
         <div class="Сompleted">
-            <input type="checkbox" class="taskcomp" checked="true" disabled="false"/>
+            <div>@Html.ActionLink(" ", "UnComplete", "Tasks", new { taskId = item.Id }, new { @class = "taskChackBoxChacked" })</div>
             <div class="taskInfo">
                 <div class="name">
                     @if (item.IsUrgent)

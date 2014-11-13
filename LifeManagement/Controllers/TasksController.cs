@@ -101,9 +101,9 @@ namespace LifeManagement.Controllers
             var request = System.Web.HttpContext.Current.Request;
             var today = DateTime.UtcNow.Date.AddMinutes(1439);
             var dueDate = today.AddDays(7);
-            var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().Where(x => x.CompletedOn == null && 
-                ((x.IsUrgent && x.StartDate == null) ||
-                (x.EndDate != null && x.EndDate <= dueDate && x.EndDate > today && (x.StartDate == null || (x.StartDate != null && x.StartDate > today))))).OrderBy(x => x.IsUrgent).ToList();
+            var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().Where(x => !x.CompletedOn.HasValue &&
+                ((!x.StartDate.HasValue && !x.EndDate.HasValue) ||
+                (x.EndDate != null && x.EndDate <= dueDate && x.EndDate > today && (x.StartDate == null || (x.StartDate != null && x.StartDate > today))))).OrderBy(x => !x.IsUrgent).ToList();
             ConvertTasksToUserLocalTime(request, records);
             return PartialView(records);
         }
@@ -142,6 +142,19 @@ namespace LifeManagement.Controllers
                 await db.SaveChangesAsync();
             }
 
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+        }
+        public async Task<ActionResult> UnComplete(Guid taskId)
+        {
+            var userId = User.Identity.GetUserId();
+            var task = await db.Records.FirstOrDefaultAsync(x => x.Id == taskId && x.UserId == userId) as Task;
+
+            if (task != null)
+            {
+                task.CompletedOn = null;
+                db.Entry(task).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
             return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
         }
 

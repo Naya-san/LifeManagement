@@ -265,6 +265,7 @@
     <Content Include="Content\Images\arrow_next_right_16x16.png" />
     <Content Include="Content\Images\bell.png" />
     <Content Include="Content\Images\chackCell.png" />
+    <Content Include="Content\Images\chackCellChaked.png" />
     <Content Include="Content\Images\check.png" />
     <Content Include="Content\Images\close.png" />
     <Content Include="Content\Images\Edit.png" />
@@ -291,6 +292,7 @@
     <Content Include="Content\Images\suitcaseUrgentImportant.png" />
     <Content Include="Content\Images\suitcaseUrgentNoImportant.png" />
     <Content Include="Content\Images\Tag.png" />
+    <Content Include="Content\Images\TagComplete.png" />
     <Content Include="Content\Images\taskNoUrgentImportant.png" />
     <Content Include="Content\Images\taskNoUrgentNoImportant.png" />
     <Content Include="Content\Images\taskUrgentImportant.png" />
