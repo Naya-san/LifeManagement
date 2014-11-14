@@ -423,7 +423,8 @@ namespace LifeManagement.Controllers
             var task = await db.Records.FindAsync(id);
             db.Records.Remove(task);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index", "Cabinet");
+       //     return RedirectToAction("Index", "Cabinet");
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
         }
 
         protected override void Dispose(bool disposing)

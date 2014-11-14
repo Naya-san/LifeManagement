@@ -135,7 +135,7 @@ namespace LifeManagement.Controllers
             var tag = await db.Tags.FindAsync(id);
             db.Tags.Remove(tag);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index", "Cabinet");
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
         }
 
         protected override void Dispose(bool disposing)
