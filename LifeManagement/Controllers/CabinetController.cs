@@ -57,6 +57,7 @@ namespace LifeManagement.Controllers
             {
                 return RedirectToAction("Index", "Cabinet");
             }
+
             var FocusDate = DateTime.Parse(Session["FocusDate"].ToString());
             var userId = User.Identity.GetUserId();
             var records =

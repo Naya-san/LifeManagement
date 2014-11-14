@@ -18,7 +18,7 @@ namespace LifeManagement.Controllers
 {
     [Authorize]
     [Localize]
-    public class EventsController : Controller
+    public class EventsController : ControllerExtensions
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -75,7 +75,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Create");
             }
-            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            return RedirectToPrevious();
         }
 
         private void AddReperts(Event @event, int alertPosition, HttpRequest request)
@@ -202,7 +202,7 @@ namespace LifeManagement.Controllers
               
                 db.Records.Add(@event);
                 await db.SaveChangesAsync();
-                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+                return RedirectToPrevious();
             }
 
             return View(@event);
@@ -243,7 +243,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Edit", @event);
             }
-            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            return RedirectToPrevious();
         }
 
         // POST: Events/Edit/5
@@ -391,7 +391,7 @@ namespace LifeManagement.Controllers
                
                 db.Entry(@event).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+                return RedirectToPrevious();
             }
 
             return View(@event);
@@ -414,7 +414,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Delete", task);
             }
-            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            return RedirectToPrevious();
         }
 
         // POST: Events/Delete/5
@@ -425,7 +425,7 @@ namespace LifeManagement.Controllers
             var task = await db.Records.FindAsync(id);
             db.Records.Remove(task);
             await db.SaveChangesAsync();
-            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            return RedirectToPrevious();
         }
 
         protected override void Dispose(bool disposing)

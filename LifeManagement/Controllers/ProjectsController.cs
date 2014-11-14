@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
 using LifeManagement.Attributes;
+using LifeManagement.Extensions;
 using LifeManagement.Models;
 using LifeManagement.Models.DB;
 using Microsoft.AspNet.Identity;
@@ -13,7 +14,7 @@ namespace LifeManagement.Controllers
 {
     [Authorize]
     [Localize]
-    public class ProjectsController : Controller
+    public class ProjectsController : ControllerExtensions
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -34,7 +35,7 @@ namespace LifeManagement.Controllers
             Project project = await db.Projects.FindAsync(id);
             if (project == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "Cabinet");
             }
             return View(project);
         }
@@ -48,7 +49,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Create");
             }
-            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            return RedirectToPrevious();
         }
 
         // POST: Projects/Create
@@ -66,7 +67,7 @@ namespace LifeManagement.Controllers
                 project.UserId = userId;
                 db.Projects.Add(project);
                 await db.SaveChangesAsync();
-                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+                return RedirectToPrevious();
             }
 
             ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id && x.UserId == userId), "Id", "Path", project.ParentProjectId);
@@ -84,7 +85,7 @@ namespace LifeManagement.Controllers
             var project = await db.Projects.FindAsync(id);
             if (project == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "Cabinet");
             }
 
             ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id && x.UserId.Equals(project.UserId)), "Id", "Path", project.ParentProjectId);
@@ -106,7 +107,7 @@ namespace LifeManagement.Controllers
             {
                 db.Entry(project).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+                return RedirectToPrevious();
             }
 
             ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id && x.UserId.Equals(project.UserId)), "Id", "Path", project.ParentProjectId);
@@ -124,7 +125,7 @@ namespace LifeManagement.Controllers
             var project = await db.Projects.FindAsync(id);
             if (project == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "Cabinet");
             }
 
             if (Request.IsAjaxRequest())
@@ -143,7 +144,7 @@ namespace LifeManagement.Controllers
             db.Projects.RemoveRange(project.ChildProjects);
             db.Projects.Remove(project);
             await db.SaveChangesAsync();
-            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            return RedirectToPrevious();
         }
 
         protected override void Dispose(bool disposing)

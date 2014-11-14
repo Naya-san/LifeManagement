@@ -534,4 +534,7 @@
   <data name="CompletedOnWeek" xml:space="preserve">
     <value>Tasks compleated during last week</value>
   </data>
+  <data name="TimeL" xml:space="preserve">
+    <value>Тime limitation</value>
+  </data>
 </root>

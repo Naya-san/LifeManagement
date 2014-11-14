@@ -210,6 +210,7 @@
     <Compile Include="Enums\RepeatPosition.cs" />
     <Compile Include="Enums\RecordFilter.cs" />
     <Compile Include="Extensions\AlertPositionExtensions.cs" />
+    <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\HttpRequestExtensions.cs" />
     <Compile Include="Extensions\RecordExtensions.cs" />
@@ -462,6 +463,7 @@
     <Content Include="Views\Cabinet\SearchResult.cshtml" />
     <Content Include="Views\Tasks\NothingToDoTask.cshtml" />
     <Content Include="Views\Cabinet\TimetableOnDate.cshtml" />
+    <Content Include="Views\Tasks\Display.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -528,4 +528,7 @@
   <data name="CompletedOnWeek" xml:space="preserve">
     <value>Справи, виконані за тиждень</value>
   </data>
+  <data name="TimeL" xml:space="preserve">
+    <value>Обмеження у часі</value>
+  </data>
 </root>

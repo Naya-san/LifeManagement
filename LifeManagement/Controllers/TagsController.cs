@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
 using LifeManagement.Attributes;
+using LifeManagement.Extensions;
 using LifeManagement.Models;
 using LifeManagement.Models.DB;
 using Microsoft.AspNet.Identity;
@@ -13,7 +14,7 @@ namespace LifeManagement.Controllers
 {
     [Authorize]
     [Localize]
-    public class TagsController : Controller
+    public class TagsController : ControllerExtensions
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -34,7 +35,7 @@ namespace LifeManagement.Controllers
             Tag tag = await db.Tags.FindAsync(id);
             if (tag == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "Cabinet");
             }
             
             return View(tag);
@@ -47,7 +48,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Create");
             }
-            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            return RedirectToPrevious();
         }
 
         // POST: Tags/Create
@@ -63,7 +64,7 @@ namespace LifeManagement.Controllers
                 tag.UserId = User.Identity.GetUserId();
                 db.Tags.Add(tag);
                 await db.SaveChangesAsync();
-                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+                return RedirectToPrevious();
             }
 
             return View(tag);
@@ -79,13 +80,13 @@ namespace LifeManagement.Controllers
             var tag = await db.Tags.FindAsync(id);
             if (tag == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index", "Cabinet");
             }
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Edit", tag);
             }
-            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            return RedirectToPrevious();
         }
 
         // POST: Tags/Edit/5
@@ -124,7 +125,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Delete", tag);
             }
-            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            return RedirectToPrevious();
         }
 
         // POST: Tags/Delete/5
@@ -135,7 +136,7 @@ namespace LifeManagement.Controllers
             var tag = await db.Tags.FindAsync(id);
             db.Tags.Remove(tag);
             await db.SaveChangesAsync();
-            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            return RedirectToPrevious();
         }
 
         protected override void Dispose(bool disposing)

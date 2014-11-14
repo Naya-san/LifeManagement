@@ -23,7 +23,7 @@ namespace LifeManagement.Controllers
 {
     [System.Web.Mvc.Authorize]
     [Localize]
-    public class TasksController : Controller
+    public class TasksController : ControllerExtensions
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
@@ -113,7 +113,7 @@ namespace LifeManagement.Controllers
         {
             if (TasksId == null)
             {
-                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+                return RedirectToPrevious();
             }
             var today = DateTime.UtcNow.Date;
             foreach (var guid in TasksId)
@@ -127,7 +127,7 @@ namespace LifeManagement.Controllers
                 }
 
             }
-            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            return RedirectToPrevious();
         }
 
         public async Task<ActionResult> Complete(Guid taskId)
@@ -142,7 +142,7 @@ namespace LifeManagement.Controllers
                 await db.SaveChangesAsync();
             }
 
-            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            return RedirectToPrevious();
         }
         public async Task<ActionResult> UnComplete(Guid taskId)
         {
@@ -155,7 +155,7 @@ namespace LifeManagement.Controllers
                 db.Entry(task).State = EntityState.Modified;
                 await db.SaveChangesAsync();
             }
-            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            return RedirectToPrevious();
         }
 
         // GET: Tasks/Create
@@ -179,7 +179,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Create");
             }
-            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            return RedirectToPrevious();
         }
 
         public void SendAlertToClient(Guid alertId, DateTime userLocalTime)
@@ -240,7 +240,7 @@ namespace LifeManagement.Controllers
 
                 if (alert == null)
                 {
-                    return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+                    return RedirectToPrevious();
                 }
 
                 var timespan = alert.Date - DateTime.UtcNow;
@@ -249,14 +249,40 @@ namespace LifeManagement.Controllers
                     BackgroundJob.Schedule(() => SendAlertToClient(alert.Id, request.GetUserLocalTimeFromUtc(alert.Date)), timespan);
                 }
 
-                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+                return RedirectToPrevious();
             }
             ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path", task.ProjectId);
             ViewBag.Alerts = AlertPosition.None.ToSelectList();
             ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name", listTag);
             return View(task);
         }
+        
+        public async Task<ActionResult> Display(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
+            var task = await db.Records.Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == id) as Task;
+            var userId = User.Identity.GetUserId();
+            if (task == null || task.UserId != userId)
+            {
+                return HttpNotFound();
+            }
+
+            var alert = await db.Alerts.FirstOrDefaultAsync(x => x.UserId == userId && x.RecordId == task.Id);
+            ViewBag.Alerts = alert == null ? AlertPosition.None.ToSelectList() : alert.Position.ToSelectList();
+            HttpRequest request = System.Web.HttpContext.Current.Request;
+            task.EndDate = request.GetUserLocalTimeFromUtc(task.EndDate);
+            task.StartDate = request.GetUserLocalTimeFromUtc(task.StartDate);
+            ViewBag.Time = task.EndDate.toTimeFormat();
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("Display", task);
+            }
+            return RedirectToPrevious();
+        }
         // GET: Tasks/Edit/5
         public async Task<ActionResult> Edit(Guid? id)
         {
@@ -291,7 +317,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Edit", task);
             }
-            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            return RedirectToPrevious();
         }
 
         // POST: Tasks/Edit/5
@@ -412,7 +438,7 @@ namespace LifeManagement.Controllers
             {
                 return PartialView("Delete", task);
             }
-            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            return RedirectToPrevious();
         }
 
         // POST: Tasks/Delete/5
@@ -423,8 +449,7 @@ namespace LifeManagement.Controllers
             var task = await db.Records.FindAsync(id);
             db.Records.Remove(task);
             await db.SaveChangesAsync();
-       //     return RedirectToAction("Index", "Cabinet");
-            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            return RedirectToPrevious();
         }
 
         protected override void Dispose(bool disposing)

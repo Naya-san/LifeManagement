@@ -1222,6 +1222,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Тime limitation.
+        /// </summary>
+        public static string TimeL {
+            get {
+                return ResourceManager.GetString("TimeL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to to.
         /// </summary>
         public static string to {
