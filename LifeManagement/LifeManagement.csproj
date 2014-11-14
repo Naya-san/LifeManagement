@@ -265,6 +265,7 @@
     <Content Include="Content\Images\arrow_next_right.png" />
     <Content Include="Content\Images\arrow_next_right_16x16.png" />
     <Content Include="Content\Images\bell.png" />
+    <Content Include="Content\Images\CalendarIcon.png" />
     <Content Include="Content\Images\chackCell.png" />
     <Content Include="Content\Images\chackCellChaked.png" />
     <Content Include="Content\Images\check.png" />

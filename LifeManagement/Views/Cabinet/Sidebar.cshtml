@@ -22,7 +22,7 @@
                 @using (@Html.BeginForm("TimetableOnDate", "Cabinet", FormMethod.Post))
                 {
                     <input type="submit" value="@ResourceScr.onDate" class="invisibleInput" />
-                    <input class="datepicker invisibleInput" value="@DateTime.Today.AddDays(1).ToString("dd.MM.yyyy")" type="text" name="FocusDate" />
+                    <input class="datepicker invisibleInput CalendarIcon" value="@DateTime.Today.AddDays(1).ToString("dd.MM.yyyy")" type="text" name="FocusDate" />
                 }
 
             </li>          
