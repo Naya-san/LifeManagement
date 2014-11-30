@@ -108,7 +108,7 @@
     width: 16.666666666666664%;
   }
   .LMсol-md-3 {
-    width: 25%;
+    width: 35%;
   }
   .LMсol-md-4 {
     width: 33.33333333333333%;
@@ -126,7 +126,7 @@
     width: 66.66666666666666%;
   }
   .LMсol-md-9 {
-    width: 75%;
+    width: 65%;
   }
   .LMсol-md-10 {
     width: 83.33333333333334%;
@@ -456,14 +456,21 @@ ul.subtree > li > a:hover {
     font-weight: bolder;
     color: #5f9ea0;
 }
-ul.subtree > li.subpunct>.edit:hover {
+/*ul.subtree > li.subpunct>.edit:hover {
     background: url(/Content/Images/Edit.png) 0px no-repeat;
     padding-left: 15px;
-}
+}*/
 .edit {
+    /*background: url(/Content/Images/Edit.png) 0px no-repeat;*/
     width: 10px;
     height: 21px;
     float: left;
+    padding-left: 15px;
+    position: absolute;
+    left: 340px;
+}
+ul.subtree > li.subpunct:hover>.edit {
+    background: url(/Content/Images/Edit.png) 0px no-repeat;
 }
 
 .addBlock {
@@ -700,7 +707,12 @@ input[type="checkbox"].taskcomp {
 .longer {
     width: 265px;
 }
-
+.long {
+    width: 160px;
+}
+.short {
+    width: 100px;
+}
 .closeIcon{
     background: url(/Content/Images/close.png) 0px no-repeat;
     height: 40px;

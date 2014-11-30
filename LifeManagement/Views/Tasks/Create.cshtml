@@ -34,7 +34,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label LMсol-md-3" })
                 <div class="LMсol-md-9">
-                    @Html.TextAreaFor(model => model.Note)
+                    @Html.TextAreaFor(model => model.Note, htmlAttributes: new { @class = "longer" })
                     <br>
                     @Html.ValidationMessageFor(model => model.Note)
                 </div>
@@ -42,7 +42,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label LMсol-md-3" })
                 <div class="LMсol-md-9">
-                    @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Text, htmlAttributes: new { @class = "datepicker", @Value = ViewBag.StartDate })
+                    @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Text, htmlAttributes: new { @class = "datepicker longer", @Value = ViewBag.StartDate })
                     <br>
                     @Html.ValidationMessageFor(model => model.StartDate)
                 </div>
@@ -51,8 +51,8 @@
                 @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label LMсol-md-3" })
                 <div class="LMсol-md-9">
                    
-                    @Html.Html5Editor("EndTime", InputTypes.InputType.Text, htmlAttributes: new { @value = ViewBag.Time, @class = "timepicker", @placeholder = "00:00" })
-                    @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Text, htmlAttributes: new { @class = "datepicker", @Value = ViewBag.EndDate })
+                    @Html.Html5Editor("EndTime", InputTypes.InputType.Text, htmlAttributes: new { @value = ViewBag.Time, @class = "timepicker short", @placeholder = "00:00" })
+                    @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Text, htmlAttributes: new { @class = "datepicker long", @Value = ViewBag.EndDate })
                     <br>
                     @Html.ValidationMessageFor(model => model.EndDate)
                 </div>
@@ -68,13 +68,13 @@
             <div class="form-group">
                 @Html.Label(LifeManagement.Resources.ResourceScr.Tags, htmlAttributes: new { @class = "control-label LMсol-md-3" })
                 <div class="LMсol-md-9">
-                    @Html.ListBox("Tags")
+                    @Html.ListBox("Tags", null, htmlAttributes:new{@class = "longer"})
                 </div>
             </div>
             <div class="form-group">
                 @Html.Label(LifeManagement.Resources.ResourceScr.Alert, htmlAttributes: new { @class = "control-label LMсol-md-3" })
                 <div class="LMсol-md-9">
-                    @Html.DropDownList("Alerts")
+                    @Html.DropDownList("Alerts", null, htmlAttributes: new { @class = "longer" })
                 </div>
             </div>
         </div>

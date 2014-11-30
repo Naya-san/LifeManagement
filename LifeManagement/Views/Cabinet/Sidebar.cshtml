@@ -34,8 +34,9 @@
                     @foreach (var item in Model)
                     {
                         <li class="subpunct">
-                            @Html.DialogFormLink(" ", "edit", Url.Action("Edit", "Projects", new { id = item.Id }), ResourceScr.Details, "linkblock", Url.Action("Sidebar", "Cabinet"), 700)
+                           
                             @Html.ActionLink(item.ToString(), "GetTasks", "Projects", new { id = item.Id }, null)
+                            @Html.DialogFormLink(" ", "edit", Url.Action("Edit", "Projects", new { id = item.Id }), ResourceScr.Details, "linkblock", Url.Action("Sidebar", "Cabinet"), 700)
                         </li>
                     }
                     <li>

@@ -41,8 +41,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9 forma">
-                @Html.Html5Editor("StartTime", InputTypes.InputType.Text, htmlAttributes: new { @value = Model.StartDate.ToTimeFormat(), @required = "true", @class = "timepicker" })
-                @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Text, new { @required = "true", @value = Model.StartDate.HasValue ? Model.StartDate.Value.ToString("dd.MM.yyyy") : "", @class = "datepicker" })
+                @Html.Html5Editor("StartTime", InputTypes.InputType.Text, htmlAttributes: new { @value = Model.StartDate.ToTimeFormat(), @required = "true", @class = "timepicker short" })
+                @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Text, new { @required = "true", @value = Model.StartDate.HasValue ? Model.StartDate.Value.ToString("dd.MM.yyyy") : "", @class = "datepicker long" })
                 <br />
                 @Html.ValidationMessageFor(model => model.StartDate)
             </div>
@@ -51,8 +51,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9 forma">
-                @Html.Html5Editor("EndTime", InputTypes.InputType.Text, htmlAttributes: new { @value = Model.EndDate.ToTimeFormat(), @required = "true", @class = "timepicker" })
-                @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Text, new { @required = "true", @value = Model.EndDate.HasValue ? Model.EndDate.Value.ToString("dd.MM.yyyy") : "", @class = "datepicker" })
+                @Html.Html5Editor("EndTime", InputTypes.InputType.Text, htmlAttributes: new { @value = Model.EndDate.ToTimeFormat(), @required = "true", @class = "timepicker short" })
+                @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Text, new { @required = "true", @value = Model.EndDate.HasValue ? Model.EndDate.Value.ToString("dd.MM.yyyy") : "", @class = "datepicker long" })
                 <br />
                 @Html.ValidationMessageFor(model => model.EndDate)
             </div>
@@ -69,13 +69,13 @@
         <div class="form-group">
             @Html.Label(LifeManagement.Resources.ResourceScr.Tags, htmlAttributes: new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9 forma">
-                @Html.ListBox("Tags")
+                @Html.ListBox("Tags", null, htmlAttributes: new { @class = "longer" })
             </div>
         </div>
         <div class="form-group">
             @Html.Label(@LifeManagement.Resources.ResourceScr.Alerts, htmlAttributes: new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9 forma">
-                @Html.DropDownList("Alerts")
+                @Html.DropDownList("Alerts", null, htmlAttributes: new { @class = "longer" })
             </div>
         </div>
         <div class="form-group">
@@ -97,7 +97,7 @@
                             }
                             <div id="ForHide" style="display: @ViewBag.style" class="forma">
                                 @LifeManagement.Resources.ResourceScr.till
-                                @Html.Html5EditorFor(model => model.StopRepeatDate, InputTypes.InputType.Text, new { @required = "true", @value = Model.StopRepeatDate.HasValue ? Model.StopRepeatDate.Value.Date.ToString("dd.MM.yyyy") : Model.EndDate.Value.AddYears(1).ToString("dd.MM.yyyy"), @class = "datepicker" })
+                                @Html.Html5EditorFor(model => model.StopRepeatDate, InputTypes.InputType.Text, new { @required = "true", @value = Model.StopRepeatDate.HasValue ? Model.StopRepeatDate.Value.Date.ToString("dd.MM.yyyy") : Model.EndDate.Value.AddYears(1).ToString("dd.MM.yyyy"), @class = "datepicker short" })
                             </div> 
 
                         </td>
