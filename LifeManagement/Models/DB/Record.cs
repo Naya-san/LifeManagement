@@ -26,7 +26,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using LifeManagement.Enums;
 using LifeManagement.Resources;
+using System.Web.Mvc;
 
 namespace LifeManagement.Models.DB
 {
@@ -38,13 +40,8 @@ namespace LifeManagement.Models.DB
 
         [Required(ErrorMessageResourceName = "ErrorRequired", ErrorMessageResourceType = typeof(ResourceScr))]
         [StringLength(25, ErrorMessageResourceName = "ErrorStrLen", ErrorMessageResourceType = typeof(ResourceScr))]
-        [RegularExpression(@"[A-Za-zА-Яа-яА-Яа-яі0-9,:._()\-\s\""]+",
-        ErrorMessageResourceName = "ErrorRegulExpr", ErrorMessageResourceType = typeof(ResourceScr))]
         [Display(Name = "Name", ResourceType = typeof(ResourceScr))]
         public string Name { get; set; }
-
-        [RegularExpression(@"[A-Za-zА-Яа-яА-Яа-яі0-9,:._()\-\s\""]+",
-        ErrorMessageResourceName = "ErrorRegulExpr", ErrorMessageResourceType = typeof(ResourceScr))]
         [StringLength(700, ErrorMessageResourceName = "ErrorStrLen", ErrorMessageResourceType = typeof(ResourceScr))]
         [Display(Name = "TaskDescription", ResourceType = typeof(ResourceScr))]
         public string Note { get; set; }
@@ -61,6 +58,8 @@ namespace LifeManagement.Models.DB
         public virtual ApplicationUser User { get; set; }
         public virtual ICollection<Tag> Tags { get; private set; }
         public virtual ICollection<Alert> Alerts { get; private set; }
+
+        public abstract bool IsTimeValid(ModelStateDictionary modelState, AlertPosition alert);
 
         protected Record()
         {

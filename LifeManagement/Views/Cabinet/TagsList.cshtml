@@ -1,30 +1,17 @@
 ﻿@{
     Layout = null;
 }
+@using LifeManagement.Extensions
 @using LifeManagement.Resources
 @model IEnumerable<LifeManagement.Models.DB.Tag>
 
 
 @foreach (var item in Model) {
     <li class="subpunct">
-        
-        @Html.ActionLink(" ", "Edit", "Tags", new { id = item.Id }, new
-           {
-               @class = "edit openDialog",
-               data_dialog_id = "12",
-               data_dialog_title = ResourceScr.Details,
-               data_dialog_width = "600",
-               data_dialog_height = "auto"
-           })
+        @Html.DialogFormLink(" ", "edit", Url.Action("Edit", "Tags", new { id = item.Id }), ResourceScr.Details, "chapter2", Url.Action("TagsList", "Cabinet"), 500)
         @Html.ActionLink(item.Name, "GetRecords", "Tags", new { id = item.Id }, null) 
     </li>
 }
-<li>@Html.ActionLink(ResourceScr.addTag, "Create", "Tags", null, new
-    {
-        @class = "addBlock openDialog",
-        data_dialog_id = "11",
-        data_dialog_title = ResourceScr.newTag,
-        data_dialog_width = "500",
-        data_dialog_height = "auto"
-    })
+<li>
+    @Html.DialogFormLink(ResourceScr.addTag, "addBlock", Url.Action("Create", "Tags"), ResourceScr.newTag, "chapter2", Url.Action("TagsList", "Cabinet"), 700)
 </li>

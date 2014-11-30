@@ -37,7 +37,6 @@ namespace LifeManagement.Models.DB
 
         [Required(ErrorMessageResourceName = "ErrorRequired", ErrorMessageResourceType = typeof(ResourceScr))]
         [StringLength(25, ErrorMessageResourceName = "ErrorStrLen", ErrorMessageResourceType = typeof(ResourceScr))]
-        [RegularExpression(@"[A-Za-zА-Яа-яА-Яа-яі0-9,:._\-()\s\""]+", ErrorMessageResourceName = "ErrorRegulExpr", ErrorMessageResourceType = typeof(ResourceScr))]
         [Display(Name = "Name", ResourceType = typeof(ResourceScr))]
         public string Name { get; set; }
 

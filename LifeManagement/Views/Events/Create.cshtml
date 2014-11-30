@@ -6,14 +6,6 @@
 }
 
 <script type='text/javascript' src="@Url.Content("~/Scripts/availableFields.js")"></script>
-<script>
-    $(function () {
-        $(".datepicker").datepicker({ dateFormat: 'dd.mm.yy' }).val();
-    });
-    $(function () {
-        $(".timepicker").timepicker();
-    });
-</script>
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -25,6 +17,7 @@
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9">
                 @Html.Html5EditorFor(model => model.Name, htmlAttributes: new {@required = "true", @class = "longer"})
+                <br>
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
@@ -32,8 +25,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9">
-                @Html.Html5Editor("StartTime", InputTypes.InputType.Text, htmlAttributes: new { @value = "00:00", @required = "true", @class = "timepicker" })
-                @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @value = ViewBag.Date.ToString("dd.MM.yyyy"), @class = "datepicker" })
+                @Html.Html5Editor("StartTime", InputTypes.InputType.Text, htmlAttributes: new { @value = ViewBag.TimeStart, @required = "true", @class = "timepicker" })
+                @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @value = ViewBag.DateStart.ToString("dd.MM.yyyy"), @class = "datepicker" })
+                <br>
                 @Html.ValidationMessageFor(model => model.StartDate)
             </div>
         </div>
@@ -41,17 +35,19 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9">
-                @Html.Html5Editor("EndTime", InputTypes.InputType.Text, htmlAttributes: new { @value = "23:59", @required = "true", @class = "timepicker" })
-                @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @value = ViewBag.Date.ToString("dd.MM.yyyy"), @class = "datepicker" })
+                @Html.Html5Editor("EndTime", InputTypes.InputType.Text, htmlAttributes: new { @value = ViewBag.TimeEnd, @required = "true", @class = "timepicker" })
+                @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @value = ViewBag.DateEnd.ToString("dd.MM.yyyy"), @class = "datepicker" })
+                <br>
                 @Html.ValidationMessageFor(model => model.EndDate)
             </div>
         </div>
-        <a href="javascript:void(0)" onclick="showMore()" class="closeBlock" id="moreLabel">@LifeManagement.Resources.ResourceScr.More</a>
-        <div id="editionalInfo" style="display: none">
+        <a href="javascript:void(0)" onclick="showMore()" class=@ViewBag.BlockState id="moreLabel">@LifeManagement.Resources.ResourceScr.More</a>
+        <div id="editionalInfo" style="display: @(ViewBag.BlockState.Equals("closeBlock")? "none" : "block")">
             <div class="form-group">
                 @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label LMсol-md-3" })
                 <div class="LMсol-md-9">
                     @Html.TextAreaFor(model => model.Note, htmlAttributes: new { @class = "longer" })
+                    <br>
                     @Html.ValidationMessageFor(model => model.Note)
                 </div>
             </div>
@@ -82,12 +78,12 @@
                     <table>
                         <tr>
                             <td>
-                                @SelectExtensions.DropDownList(Html, "RepeatPosition", ViewBag.RepeatPosition, htmlAttributes: new { @onchange = "showDate()" })
+                                @SelectExtensions.DropDownList(Html, "RepeatPosition", null, htmlAttributes: new { @onchange = "showDate()" })
                             </td>
                             <td>
-                                <div id="ForHide" style="display: none">
+                                <div id="ForHide" style="display: @ViewBag.RepeatState ">
                                     @LifeManagement.Resources.ResourceScr.till
-                                    @Html.Html5EditorFor(model => model.StopRepeatDate, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @value = ViewBag.DateR.ToString("dd.MM.yyyy") })
+                                    @Html.Html5EditorFor(model => model.StopRepeatDate, InputTypes.InputType.Text, htmlAttributes: new {  @class = "datepicker", @value = ViewBag.DateR.ToString("dd.MM.yyyy") })
                                 </div>
 
                             </td>

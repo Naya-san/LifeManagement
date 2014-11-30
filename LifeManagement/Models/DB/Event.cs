@@ -24,7 +24,9 @@
 #endregion
 
 using System;
+using System.Web.Mvc;
 using LifeManagement.Enums;
+using LifeManagement.Resources;
 
 namespace LifeManagement.Models.DB
 {
@@ -34,5 +36,38 @@ namespace LifeManagement.Models.DB
         public RepeatPosition RepeatPosition { get; set; }
 
         public DateTime? StopRepeatDate { get; set; }
+        public override bool IsTimeValid(ModelStateDictionary modelState, AlertPosition alert)
+        {
+            if (!StartDate.HasValue)
+            {
+                modelState.AddModelError("StartDate", ResourceScr.ErrorRequired);
+                return false;
+            }
+            if (!EndDate.HasValue)
+            {
+                modelState.AddModelError("EndDate", ResourceScr.ErrorRequired);
+                return false;
+            }
+
+            if (EndDate.Value > StartDate.Value)
+            {
+                if (RepeatPosition != RepeatPosition.None)
+                {
+                    if (!StopRepeatDate.HasValue)
+                    {
+                        modelState.AddModelError("StopRepeatDate", ResourceScr.ErrorRequired);
+                        return false;
+                    }
+                    if (StopRepeatDate.Value <= EndDate.Value)
+                    {
+                        modelState.AddModelError("StopRepeatDate", ResourceScr.ErrorDateStopOrder);
+                        return false;
+                    }
+                }
+                return true;
+            }
+            modelState.AddModelError("EndDate", ResourceScr.ErrorDateOrder);
+            return false;
+        }
     }
 }

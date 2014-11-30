@@ -13,22 +13,7 @@
     @{Html.RenderAction("Index", "Alerts");}
     <div class="title">
         <h2 id="maintitle">@ResourceScr.Tag1  @Model.Name</h2>
-        @Html.ActionLink(" ", "Create", "Tasks", null, new
-   {
-       @class = "addTaskIcon openDialog",
-       data_dialog_id = "31",
-       data_dialog_title = ResourceScr.createTask,
-       data_dialog_width = "700",
-       data_dialog_height = "auto"
-   })
-        @Html.ActionLink(" ", "Create", "Events", null, new
-   {
-       @class = "addEventIcon  openDialog",
-       data_dialog_id = "41",
-       data_dialog_title = ResourceScr.newEvent,
-       data_dialog_width = "700",
-       data_dialog_height = "auto"
-   })
+        @Html.Partial("_QuickCreateIcon")
     </div>
 
     <div id="ByTag">

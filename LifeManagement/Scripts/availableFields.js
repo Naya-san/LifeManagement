@@ -16,7 +16,7 @@ function showDate() {
 function showMore() {
     var obj = document.getElementById('editionalInfo');
     var label = document.getElementById('moreLabel');
-    if (obj.style.display == 'none') {
+    if ( label.className == 'closeBlock') {
         obj.style.display = 'block';
         label.className = 'openBlock';
     }

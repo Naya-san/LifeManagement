@@ -10,24 +10,10 @@
 <div id="maincontent">
     @{Html.RenderAction("Index", "Alerts");}
     <div class="title">
-        <h2 id="maintitle">@ResourceScr.SearchResult</h2>
-        @Html.ActionLink(" ", "Create", "Tasks", null, new
-   {
-       @class = "addTaskIcon openDialog",
-       data_dialog_id = "31",
-       data_dialog_title = ResourceScr.createTask,
-       data_dialog_width = "700",
-       data_dialog_height = "auto"
-   })
-        @Html.ActionLink(" ", "Create", "Events", null, new
-   {
-       @class = "addEventIcon  openDialog",
-       data_dialog_id = "41",
-       data_dialog_title = ResourceScr.newEvent,
-       data_dialog_width = "700",
-       data_dialog_height = "auto"
-   })
+        <h2 id="maintitle">@Session["Text"]</h2>
+        @Html.Partial("_QuickCreateIcon")
     </div>
+  </div>
 
     <div id="SearchResult">
         <div>
@@ -37,4 +23,3 @@
             @{ Html.RenderAction("GetEventsByText", "Events", new { text = Session["Text"] });}
         </div>
     </div>
-</div>

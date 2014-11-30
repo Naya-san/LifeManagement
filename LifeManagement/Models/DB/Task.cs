@@ -25,6 +25,8 @@
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using LifeManagement.Enums;
 using LifeManagement.Resources;
 
 namespace LifeManagement.Models.DB
@@ -37,5 +39,27 @@ namespace LifeManagement.Models.DB
         public DateTime? CompletedOn { get; set; }
 
         public virtual Project Project { get; set; }
+        public override bool IsTimeValid(ModelStateDictionary modelState, AlertPosition alert)
+        {
+            if (!StartDate.HasValue && !EndDate.HasValue)
+            {
+                if (alert == AlertPosition.None)
+                {
+                    return true;
+                }
+                modelState.AddModelError("StartDate", ResourceScr.ErrorAlert);
+                return false;
+            }
+            if (StartDate.HasValue && EndDate.HasValue)
+            {
+                if (EndDate.Value > StartDate.Value)
+                {
+                    return true;
+                }
+                modelState.AddModelError("EndDate", ResourceScr.ErrorDateOrder);
+                return false;
+            }
+            return true;
+        }
     }
 }

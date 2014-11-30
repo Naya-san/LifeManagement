@@ -27,7 +27,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using LifeManagement.Resources;
+using Microsoft.Ajax.Utilities;
 
 namespace LifeManagement.Models.DB
 {
@@ -43,7 +45,6 @@ namespace LifeManagement.Models.DB
 
         [Required(ErrorMessageResourceName = "ErrorRequired", ErrorMessageResourceType = typeof(ResourceScr))]
         [StringLength(25, ErrorMessageResourceName = "ErrorStrLen", ErrorMessageResourceType = typeof(ResourceScr))]
-        [RegularExpression(@"[A-Za-zА-Яа-яА-Яа-яі0-9,:._\-()\s\""]+", ErrorMessageResourceName = "ErrorRegulExpr", ErrorMessageResourceType = typeof(ResourceScr))]
         [Display(Name = "Name", ResourceType = typeof(ResourceScr))]
         public string Name { get; set; }
 
@@ -59,6 +60,48 @@ namespace LifeManagement.Models.DB
         public String Path
         {
             get { return ParentProjectId == null ? Name : String.Concat(ParentProject.Path, "\\", Name); }
+        }
+
+        private bool CanHasLikeSonUp(Guid projectId)
+        {
+            if (Id == projectId)
+            {
+                return false;
+            }
+            if (ParentProjectId == null)
+            {
+                return true;
+            }
+            return ParentProject.CanHasLikeSonUp(projectId);
+        }
+        private bool CanHasLikeSonDown(Guid projectId)
+        {
+            if (Id == projectId)
+            {
+                return false;
+            }
+            if (ChildProjects == null || !ChildProjects.Any())
+            {
+                return true;
+            }
+            foreach (var childProject in ChildProjects)
+            {
+                if (!childProject.CanHasLikeSonDown(projectId))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool CanHasLikeSon(Guid projectId)
+        {
+
+            if (CanHasLikeSonUp(projectId))
+            {
+                return true;
+            }
+            return false;
         }
 
         public override string ToString()

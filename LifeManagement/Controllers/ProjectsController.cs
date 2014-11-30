@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -67,11 +68,12 @@ namespace LifeManagement.Controllers
                 project.UserId = userId;
                 db.Projects.Add(project);
                 await db.SaveChangesAsync();
-                return RedirectToPrevious();
+               // return RedirectToPrevious();
+                return Json(new { success = true });   
             }
 
             ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id && x.UserId == userId), "Id", "Path", project.ParentProjectId);
-            return View(project);
+            return PartialView("Create",project);
         }
 
         // GET: Projects/Edit/5
@@ -87,8 +89,9 @@ namespace LifeManagement.Controllers
             {
                 return RedirectToAction("Index", "Cabinet");
             }
-
-            ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id && x.UserId.Equals(project.UserId)), "Id", "Path", project.ParentProjectId);
+            var parentListTmp = db.Projects.Where(x => x.UserId.Equals(project.UserId)).ToList();
+            var parentList = parentListTmp.Where(project1 => project1.CanHasLikeSon(project.Id));
+            ViewBag.ParentProjectId = new SelectList(parentList, "Id", "Path", project.ParentProjectId);
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Edit", project);
@@ -107,11 +110,12 @@ namespace LifeManagement.Controllers
             {
                 db.Entry(project).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToPrevious();
+                return Json(new { success = true });   
             }
-
-            ViewBag.ParentProjectId = new SelectList(db.Projects.Where(x => x.Id != project.Id && x.UserId.Equals(project.UserId)), "Id", "Path", project.ParentProjectId);
-            return View(project);
+            var parentListTmp = db.Projects.Where(x => x.UserId.Equals(project.UserId)).ToList();
+            var parentList = parentListTmp.Where(project1 => project1.CanHasLikeSon(project.Id));
+            ViewBag.ParentProjectId = new SelectList(parentList, "Id", "Path", project.ParentProjectId);
+            return PartialView("Edit", project);
         }
 
         // GET: Projects/Delete/5
@@ -144,7 +148,7 @@ namespace LifeManagement.Controllers
             db.Projects.RemoveRange(project.ChildProjects);
             db.Projects.Remove(project);
             await db.SaveChangesAsync();
-            return RedirectToPrevious();
+            return Json(new { success = true });   
         }
 
         protected override void Dispose(bool disposing)

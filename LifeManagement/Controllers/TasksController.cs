@@ -115,7 +115,7 @@ namespace LifeManagement.Controllers
             {
                 return RedirectToPrevious();
             }
-            var today = DateTime.UtcNow.Date;
+            var today = DateTime.UtcNow;
             foreach (var guid in TasksId)
             {
                 var task = db.Records.Find(guid);
@@ -127,7 +127,7 @@ namespace LifeManagement.Controllers
                 }
 
             }
-            return RedirectToPrevious();
+            return Json(new { success = true });   
         }
 
         public async Task<ActionResult> Complete(Guid taskId)
@@ -175,6 +175,10 @@ namespace LifeManagement.Controllers
             ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path");
             ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name");
             ViewBag.Alerts = AlertPosition.None.ToSelectList();
+            ViewBag.StartDate = "";
+            ViewBag.EndDate = "";
+            ViewBag.Time = "";
+            ViewBag.BlockState = "closeBlock";
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Create");
@@ -224,7 +228,7 @@ namespace LifeManagement.Controllers
                 alertPosition = Convert.ToInt32(Request["Alerts"]);
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && task.IsTimeValid(ModelState, AlertPosition.None.Parse(alertPosition) ))
             {
                 task.Id = Guid.NewGuid();
                 task.UserId = userId;
@@ -240,7 +244,7 @@ namespace LifeManagement.Controllers
 
                 if (alert == null)
                 {
-                    return RedirectToPrevious();
+                    return Json(new { success = true });
                 }
 
                 var timespan = alert.Date - DateTime.UtcNow;
@@ -249,12 +253,16 @@ namespace LifeManagement.Controllers
                     BackgroundJob.Schedule(() => SendAlertToClient(alert.Id, request.GetUserLocalTimeFromUtc(alert.Date)), timespan);
                 }
 
-                return RedirectToPrevious();
+                return Json(new { success = true });
             }
             ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path", task.ProjectId);
-            ViewBag.Alerts = AlertPosition.None.ToSelectList();
+            ViewBag.Alerts = AlertPosition.None.Parse(alertPosition).ToSelectList();
             ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name", listTag);
-            return View(task);
+            ViewBag.StartDate = task.StartDate.HasValue ? request.GetUserLocalTimeFromUtc(task.StartDate).Value.ToString("dd.MM.yyyy") : "";
+            ViewBag.EndDate = task.EndDate.HasValue ? request.GetUserLocalTimeFromUtc(task.EndDate).Value.ToString("dd.MM.yyyy") : "";
+            ViewBag.Time = Request["EndTime"]!=""? Request["EndTime"]: "00:00";
+            ViewBag.BlockState = "openBlock";
+            return PartialView("Create", task);
         }
         
         public async Task<ActionResult> Display(Guid? id)
@@ -276,7 +284,7 @@ namespace LifeManagement.Controllers
             HttpRequest request = System.Web.HttpContext.Current.Request;
             task.EndDate = request.GetUserLocalTimeFromUtc(task.EndDate);
             task.StartDate = request.GetUserLocalTimeFromUtc(task.StartDate);
-            ViewBag.Time = task.EndDate.toTimeFormat();
+            ViewBag.Time = task.EndDate.ToTimeFormat();
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Display", task);
@@ -312,7 +320,7 @@ namespace LifeManagement.Controllers
             HttpRequest request = System.Web.HttpContext.Current.Request;
             task.EndDate = request.GetUserLocalTimeFromUtc(task.EndDate);
             task.StartDate = request.GetUserLocalTimeFromUtc(task.StartDate);
-            ViewBag.Time = task.EndDate.toTimeFormat();
+            ViewBag.Time = task.EndDate.ToTimeFormat();
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Edit", task);
@@ -399,15 +407,15 @@ namespace LifeManagement.Controllers
                 }
             }
            
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && task.IsTimeValid(ModelState, AlertPosition.None.Parse(alertPosition)))
             {
                 db.Entry(task).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+                return Json(new { success = true });
             }
 
             var userId = User.Identity.GetUserId();
-            ViewBag.Time = task.EndDate.toTimeFormat();
+            ViewBag.Time = task.EndDate.ToTimeFormat();
             var selected = new string[task.Tags.Count];
             int i = 0;
             foreach (var tag in task.Tags)
@@ -415,9 +423,13 @@ namespace LifeManagement.Controllers
                 selected[i] = tag.Id.ToString();
                 i++;
             }
+            ViewBag.Alerts = AlertPosition.None.Parse(alertPosition).ToSelectList();
             ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name", selected);
             ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path", task.ProjectId);
-            return View(task);
+            task.EndDate = request.GetUserLocalTimeFromUtc(task.EndDate);
+            task.StartDate = request.GetUserLocalTimeFromUtc(task.StartDate);
+            ViewBag.Time = task.EndDate.ToTimeFormat();
+            return PartialView("Edit", task);
         }
 
         // GET: Tasks/Delete/5
@@ -449,7 +461,7 @@ namespace LifeManagement.Controllers
             var task = await db.Records.FindAsync(id);
             db.Records.Remove(task);
             await db.SaveChangesAsync();
-            return RedirectToPrevious();
+            return Json(new { success = true });
         }
 
         protected override void Dispose(bool disposing)

@@ -212,6 +212,7 @@
     <Compile Include="Extensions\AlertPositionExtensions.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Extensions\HttpRequestExtensions.cs" />
     <Compile Include="Extensions\RecordExtensions.cs" />
     <Compile Include="Extensions\RepeatPositionExtensions.cs" />
@@ -382,6 +383,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\Dialog.js" />
+    <Content Include="Scripts\DialogForm.js" />
     <Content Include="Scripts\easing.js" />
     <Content Include="Content\Images\AddTask.psd" />
     <Content Include="Content\bootstrap-theme.css.map" />
@@ -398,6 +400,7 @@
     <Content Include="Scripts\jquery.signalR-2.1.2.js" />
     <Content Include="Scripts\jquery.signalR-2.1.2.min.js" />
     <Content Include="Scripts\jquery.ui.timepicker.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -465,6 +468,7 @@
     <Content Include="Views\Tasks\NothingToDoTask.cshtml" />
     <Content Include="Views\Cabinet\TimetableOnDate.cshtml" />
     <Content Include="Views\Tasks\Display.cshtml" />
+    <Content Include="Views\Shared\_QuickCreateIcon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

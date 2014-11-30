@@ -13,13 +13,9 @@
                 @item.Name
             </div>
             <div>
-                @Html.ActionLink(" ", "Edit", "Events", new { id = item.Id },
-                            new { @class = "moreInfoIcon openDialog",
-                                data_dialog_id = "42",
-                                data_dialog_title = ResourceScr.Details,
-                                data_dialog_width = "700",
-                                data_dialog_height = "auto"  })
-        </div>
+                @Html.DialogFormLink(" ", "moreInfoIcon", Url.Action("Edit", "Events", new { id = item.Id }), ResourceScr.Details, "body-LifeManagment", "", 700)
+                
+            </div>
         <span class="time">@item.ConvertTimeToNice()</span>
         <div class="tags">
             @foreach (var tag in item.Tags)

@@ -1,4 +1,5 @@
-﻿@using LifeManagement.Resources
+﻿@using LifeManagement.Extensions
+@using LifeManagement.Resources
 @model LifeManagement.Models.DB.Project
 
 @{
@@ -33,15 +34,16 @@
 
         <div class="buttonbar">
 
-                <input type="submit" value="@ResourceScr.save" class="btn btn-default halfsize" />
-                @Html.ActionLink(ResourceScr.Delete, "Delete", new { id = Model.Id }, new
+            <input type="submit" value="@ResourceScr.save" class="btn btn-default halfsize" />
+            @Html.DialogFormLink(ResourceScr.Delete, "btn btn-default halfsize", Url.Action("Delete", "Projects", new { id = Model.Id }), ResourceScr.Delete, "", "", 500)
+                @*@Html.ActionLink(ResourceScr.Delete, "Delete", new { id = Model.Id }, new
                 {
                     @class = "btn btn-default halfsize openDialog",
                     data_dialog_id = "23",
                     data_dialog_title = ResourceScr.Delete,
                     data_dialog_width = "500",
                     data_dialog_height = "auto"
-                })
+                })*@
 
         </div>
     </div>

@@ -69,8 +69,14 @@ namespace LifeManagement.Controllers
             ViewBag.RepeatPosition = RepeatPosition.None.ToSelectList();
 
             HttpRequest request = System.Web.HttpContext.Current.Request;
-            ViewBag.Date = request.GetUserLocalTimeFromUtc(DateTime.UtcNow).Date;
-            ViewBag.DateR = request.GetUserLocalTimeFromUtc(DateTime.UtcNow.AddYears(1)).Date;
+            var now = request.GetUserLocalTimeFromUtc(DateTime.UtcNow);
+            ViewBag.DateStart = now.Date;
+            ViewBag.TimeStart = now.ToTimeFormat();
+            ViewBag.DateEnd = now.AddHours(1).Date;
+            ViewBag.TimeEnd = now.AddHours(1).ToTimeFormat();
+            ViewBag.DateR = request.GetUserLocalTimeFromUtc(DateTime.UtcNow.AddMonths(2)).Date;
+            ViewBag.BlockState = "closeBlock";
+            ViewBag.RepeatState = "none";
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Create");
@@ -167,8 +173,15 @@ namespace LifeManagement.Controllers
             timeSpan = new TimeSpan(0, Convert.ToInt32(time[0]), Convert.ToInt32(time[1]), 0);
             @event.StartDate = new DateTime(@event.StartDate.Value.Ticks).Add(timeSpan);
             string startString = @event.StartDate.Value.ToString("g");
-            @event.EndDate = request.GetUtcFromUserLocalTime(@event.EndDate);
+            var now = request.GetUserLocalTimeFromUtc(DateTime.UtcNow);
+            ViewBag.DateStart = @event.StartDate.HasValue ? @event.StartDate.Value.Date : now.Date;
+            ViewBag.TimeStart = @event.StartDate.HasValue ? @event.StartDate.Value.ToTimeFormat() : now.ToTimeFormat();
+            ViewBag.DateEnd = @event.EndDate.HasValue ? @event.EndDate.Value.Date : now.AddHours(1).Date;
+            ViewBag.TimeEnd = @event.EndDate.HasValue ? @event.EndDate.Value.ToTimeFormat() : now.AddHours(1).ToTimeFormat();
+
             @event.StartDate = request.GetUtcFromUserLocalTime(@event.StartDate);
+            @event.EndDate = request.GetUtcFromUserLocalTime(@event.EndDate);
+            @event.StopRepeatDate = request.GetUtcFromUserLocalTime(@event.StopRepeatDate);
 
             string[] listTag = new[] { "" };
             
@@ -188,7 +201,7 @@ namespace LifeManagement.Controllers
 
             var repeatPosition = (RepeatPosition)Enum.Parse(typeof(RepeatPosition), Request["RepeatPosition"], true);
             @event.RepeatPosition = repeatPosition;
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && @event.IsTimeValid(ModelState, AlertPosition.None.Parse(alertPosition)))
             {
                 @event.Id = Guid.NewGuid();
                 @event.UserId = userId;
@@ -202,10 +215,18 @@ namespace LifeManagement.Controllers
               
                 db.Records.Add(@event);
                 await db.SaveChangesAsync();
-                return RedirectToPrevious();
+                return Json(new { success = true });
             }
+            
+            ViewBag.DateR = (@event.StopRepeatDate.HasValue) ? request.GetUserLocalTimeFromUtc(@event.StopRepeatDate).Value.Date : request.GetUserLocalTimeFromUtc(now.AddMonths(2));
+      
+            ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name", listTag);
 
-            return View(@event);
+            ViewBag.Alerts = AlertPosition.None.Parse(alertPosition).ToSelectList();
+            ViewBag.RepeatPosition = @event.RepeatPosition.ToSelectList();
+            ViewBag.BlockState = "openBlock";
+            ViewBag.RepeatState = @event.RepeatPosition == RepeatPosition.None ? "none" : "block";
+            return PartialView("Create", @event);
         }
 
         // GET: Events/Edit/5
@@ -239,6 +260,7 @@ namespace LifeManagement.Controllers
             @event.EndDate = request.GetUserLocalTimeFromUtc(@event.EndDate);
             @event.StartDate = request.GetUserLocalTimeFromUtc(@event.StartDate);
 
+           
             if (Request.IsAjaxRequest())
             {
                 return PartialView("Edit", @event);
@@ -270,32 +292,32 @@ namespace LifeManagement.Controllers
             db.Entry(@event).Collection(x => x.Alerts).Load();
 
             bool flagNeedRewrite = true;
-            if (ModelState.IsValid)
+            if (Request["Tags"] != "" && Request["Tags"] != null)
             {
-                if (Request["Tags"] != "" && Request["Tags"] != null)
+                List<Tag> newTags = new List<Tag>();
+                var tags = Request["Tags"].Split(',');
+                foreach (string s in tags)
                 {
-                    List<Tag> newTags = new List<Tag>();
-                    var tags = Request["Tags"].Split(',');
-                    foreach (string s in tags)
+                    newTags.Add(await db.Tags.FindAsync(new Guid(s)));
+                }
+                List<Tag> newTagsTmp = @event.Tags.ToList();
+                foreach (var tag in newTagsTmp)
+                {
+                    if (!newTags.Contains(tag))
                     {
-                        newTags.Add(await db.Tags.FindAsync(new Guid(s)));
-                    }
-                    List<Tag> newTagsTmp = @event.Tags.ToList();
-                    foreach (var tag in newTagsTmp)
-                    {
-                        if (!newTags.Contains(tag))
-                        {
-                            @event.Tags.Remove(tag);
-                        }
-                    }
-                    foreach (var tag in newTags)
-                    {
-                        if (!@event.Tags.Contains(tag))
-                        {
-                            @event.Tags.Add(tag);
-                        }
+                        @event.Tags.Remove(tag);
                     }
                 }
+                foreach (var tag in newTags)
+                {
+                    if (!@event.Tags.Contains(tag))
+                    {
+                        @event.Tags.Add(tag);
+                    }
+                }
+            }
+            if (ModelState.IsValid && @event.IsTimeValid(ModelState, AlertPosition.None))
+            {
                 int alertPosition = Int32.MinValue;
                 if (Request["Alerts"] != null)
                 {
@@ -391,10 +413,22 @@ namespace LifeManagement.Controllers
                
                 db.Entry(@event).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToPrevious();
+                return Json(new { success = true });
             }
+            var selected = new string[@event.Tags.Count];
+            int i = 0;
+            foreach (var tag in @event.Tags)
+            {
+                selected[i] = tag.Id.ToString();
+                i++;
+            }
+            ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == @event.UserId), "Id", "Name", selected);
+            ViewBag.Alerts = Request["Alerts"] == null ? AlertPosition.None.ToSelectList() : AlertPosition.None.Parse(Convert.ToInt32(Request["Alerts"])).ToSelectList();
+            ViewBag.RepeatPosition = @event.RepeatPosition.ToSelectList();
 
-            return View(@event);
+            @event.EndDate = request.GetUserLocalTimeFromUtc(@event.EndDate);
+            @event.StartDate = request.GetUserLocalTimeFromUtc(@event.StartDate);
+            return PartialView("Edit",@event);
         }
 
         // GET: Events/Delete/5
@@ -425,7 +459,7 @@ namespace LifeManagement.Controllers
             var task = await db.Records.FindAsync(id);
             db.Records.Remove(task);
             await db.SaveChangesAsync();
-            return RedirectToPrevious();
+            return Json(new { success = true });
         }
 
         protected override void Dispose(bool disposing)

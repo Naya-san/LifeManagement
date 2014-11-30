@@ -64,7 +64,7 @@ namespace LifeManagement.Controllers
                 tag.UserId = User.Identity.GetUserId();
                 db.Tags.Add(tag);
                 await db.SaveChangesAsync();
-                return RedirectToPrevious();
+                return Json(new { success = true });  
             }
 
             return View(tag);
@@ -101,7 +101,7 @@ namespace LifeManagement.Controllers
                 tag.UserId = User.Identity.GetUserId();
                 db.Entry(tag).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", "Cabinet");
+                return Json(new { success = true });
             }
 
             return PartialView("Edit", tag);
@@ -136,7 +136,7 @@ namespace LifeManagement.Controllers
             var tag = await db.Tags.FindAsync(id);
             db.Tags.Remove(tag);
             await db.SaveChangesAsync();
-            return RedirectToPrevious();
+            return Json(new { success = true });   
         }
 
         protected override void Dispose(bool disposing)

@@ -166,7 +166,7 @@
     <value>Description</value>
   </data>
   <data name="TaskDueDate" xml:space="preserve">
-    <value>Desired due date</value>
+    <value>Due date</value>
   </data>
   <data name="TaskEstimation" xml:space="preserve">
     <value>Estimation</value>
@@ -536,5 +536,14 @@
   </data>
   <data name="TimeL" xml:space="preserve">
     <value>Тime limitation</value>
+  </data>
+  <data name="ErrorDateOrder" xml:space="preserve">
+    <value>Start date should be before End date</value>
+  </data>
+  <data name="ErrorDateStopOrder" xml:space="preserve">
+    <value>Date of repeating stop should be after End date</value>
+  </data>
+  <data name="ErrorAlert" xml:space="preserve">
+    <value>Alert needs informations about  Star or End Date</value>
   </data>
 </root>

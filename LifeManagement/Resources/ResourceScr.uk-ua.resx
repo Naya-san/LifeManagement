@@ -166,7 +166,7 @@
     <value>Опис</value>
   </data>
   <data name="TaskDueDate" xml:space="preserve">
-    <value>Бажана дата завершення</value>
+    <value>Виконати до</value>
   </data>
   <data name="TaskEstimation" xml:space="preserve">
     <value>Часова оцінка</value>
@@ -530,5 +530,14 @@
   </data>
   <data name="TimeL" xml:space="preserve">
     <value>Обмеження у часі</value>
+  </data>
+  <data name="ErrorDateOrder" xml:space="preserve">
+    <value>Дата початку має предувати даті завершення</value>
+  </data>
+  <data name="ErrorDateStopOrder" xml:space="preserve">
+    <value>Дата завершення повторень має бути пізніше дати завершення події</value>
+  </data>
+  <data name="ErrorAlert" xml:space="preserve">
+    <value>Для нагадувань спершу вкажіть дату початку чи завершення завдань</value>
   </data>
 </root>

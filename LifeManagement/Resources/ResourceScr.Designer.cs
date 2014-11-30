@@ -457,6 +457,33 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alert needs informations about  Star or End Date.
+        /// </summary>
+        public static string ErrorAlert {
+            get {
+                return ResourceManager.GetString("ErrorAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start date should be before End date.
+        /// </summary>
+        public static string ErrorDateOrder {
+            get {
+                return ResourceManager.GetString("ErrorDateOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date of repeating stop should be after End date.
+        /// </summary>
+        public static string ErrorDateStopOrder {
+            get {
+                return ResourceManager.GetString("ErrorDateStopOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This field can only contain letters, numbers, underscores and punctuation.
         /// </summary>
         public static string ErrorRegulExpr {
@@ -1141,7 +1168,7 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Desired due date.
+        ///   Looks up a localized string similar to Due date.
         /// </summary>
         public static string TaskDueDate {
             get {

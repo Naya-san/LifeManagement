@@ -47,11 +47,22 @@ namespace LifeManagement
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
+            //bundles.Add(new ScriptBundle("~/bundles/Dialog").Include(
+            //                           "~/Scripts/jquery-1.8.2.min.js",
+            //                           "~/Scripts/jquery-ui-1.8.24.js",
+            //                           "~/Scripts/jquery.ui.datepicker.js",
+            //                           "~/Scripts/jquery.ui.timepicker.js",
+            //                           "~/Scripts/Dialog.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/Dialog").Include(
                                        "~/Scripts/jquery-1.8.2.min.js",
                                        "~/Scripts/jquery-ui-1.8.24.js",
+                                       "~/Scripts/jquery.unobtrusive-ajax.js",
+                                       "~/Scripts/jquery.validate.min.js",
+                                       "~/Scripts/jquery.validate.unobtrusive.min.js",
                                        "~/Scripts/jquery.ui.datepicker.js",
                                        "~/Scripts/jquery.ui.timepicker.js",
+                                       "~/Scripts/DialogForm.js",
                                        "~/Scripts/Dialog.js"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(

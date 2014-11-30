@@ -2,6 +2,7 @@
     ViewBag.Title = ResourceScr.Focus;
 }
 @using LifeManagement.Enums
+@using LifeManagement.Extensions
 @using LifeManagement.Resources
 
 
@@ -12,19 +13,7 @@
     @{Html.RenderAction("Index", "Alerts");}
     <div class="title">
         <h2 id="maintitle">@ResourceScr.Focus</h2>
-        @Html.ActionLink(" ", "Create", "Tasks", null, new { 
-            @class = "addTaskIcon openDialog",
-            data_dialog_id = "31",
-            data_dialog_title = ResourceScr.createTask,
-            data_dialog_width = "700",
-            data_dialog_height = "auto" 
-        })
-        @Html.ActionLink(" ", "Create", "Events", null, new { @class = "addEventIcon  openDialog",
-            data_dialog_id = "41",
-            data_dialog_title = ResourceScr.newEvent,
-            data_dialog_width = "700",
-            data_dialog_height = "auto"  
-        })
+        @Html.Partial("_QuickCreateIcon")
     </div>
     
     <div id="Overdue">
@@ -40,14 +29,7 @@
             @{Html.RenderAction("FilterTasks", "Tasks", new RouteValueDictionary { { "recordFilter", RecordFilter.Today } });}
             @{Html.RenderAction("GetTasksCompleatedToday", "Tasks");}
         </div>
-        @Html.ActionLink(ResourceScr.nothingToDo, "NothingToDoTask", "Tasks", null, new
-           {
-               @class = "Nothing openDialog",
-               data_dialog_id = "51",
-               data_dialog_title = ResourceScr.nothingToDo,
-               data_dialog_width = "500",
-               data_dialog_height = "auto"
-           })
+            @Html.DialogFormLink(ResourceScr.nothingToDo, "Nothing", Url.Action("NothingToDoTask", "Tasks"), ResourceScr.nothingToDo, "", "", 500)
     </div>
     <div id="Tomorrow">
         <div class="subtitle"><h3>@ResourceScr.Tomorrow</h3></div>

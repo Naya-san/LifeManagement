@@ -166,7 +166,7 @@
     <value>Описание</value>
   </data>
   <data name="TaskDueDate" xml:space="preserve">
-    <value>Желательно выполнить до</value>
+    <value>Выполнить до</value>
   </data>
   <data name="TaskEstimation" xml:space="preserve">
     <value>Временная оценка</value>
@@ -530,5 +530,14 @@
   </data>
   <data name="TimeL" xml:space="preserve">
     <value>Ограничение  во времени</value>
+  </data>
+  <data name="ErrorDateOrder" xml:space="preserve">
+    <value>Дата начала должна быть не позднее даты окончания</value>
+  </data>
+  <data name="ErrorDateStopOrder" xml:space="preserve">
+    <value>Дата окончания повторений должна быть позже даты окончания события</value>
+  </data>
+  <data name="ErrorAlert" xml:space="preserve">
+    <value>Для создания напоминания сперва укажите дату начала или завершения</value>
   </data>
 </root>

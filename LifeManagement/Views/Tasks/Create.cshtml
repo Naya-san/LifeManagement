@@ -4,15 +4,10 @@
 @{
     ViewBag.Title = "Create";
 }
+
 <script type='text/javascript' src="@Url.Content("~/Scripts/availableFields.js")"></script>
-<script>
-    $(function () {
-        $(".datepicker").datepicker({ dateFormat: 'dd.mm.yy' }).val();
-    });
-    $(function () {
-        $(".timepicker").timepicker();
-    });
-</script>
+
+
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -23,6 +18,7 @@
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9">
                @Html.Html5EditorFor(model => model.Name, htmlAttributes: new { @required = "true", @class = "longer"})
+                <br>
                 @Html.ValidationMessageFor(model => model.Name)
             </div>
         </div>
@@ -33,27 +29,31 @@
                 @Html.ValidationMessageFor(model => model.ProjectId)
             </div>
         </div>
-        <a href="javascript:void(0)" onclick="showMore()" class="closeBlock" id="moreLabel">@LifeManagement.Resources.ResourceScr.More</a>
-        <div id="editionalInfo" style="display: none">
+        <a href="javascript:void(0)" onclick="showMore()" class=@ViewBag.BlockState id="moreLabel">@LifeManagement.Resources.ResourceScr.More</a>
+        <div id="editionalInfo" style="display: @(ViewBag.BlockState.Equals("closeBlock")? "none" : "block")">
             <div class="form-group">
                 @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label LMсol-md-3" })
                 <div class="LMсol-md-9">
                     @Html.TextAreaFor(model => model.Note)
+                    <br>
                     @Html.ValidationMessageFor(model => model.Note)
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label LMсol-md-3" })
                 <div class="LMсol-md-9">
-                    @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Text, htmlAttributes: new { @onchange = "dis()", @class = "longer datepicker" })
+                    @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Text, htmlAttributes: new { @class = "datepicker", @Value = ViewBag.StartDate })
+                    <br>
                     @Html.ValidationMessageFor(model => model.StartDate)
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label LMсol-md-3" })
                 <div class="LMсol-md-9">
-                    @Html.Html5Editor("EndTime", InputTypes.InputType.Text, htmlAttributes: new { @value = "23:59", @min = "00:00", @class = "timepicker" })
-                    @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Text, htmlAttributes: new { @onchange = "dis()", @class="datepicker" })
+                   
+                    @Html.Html5Editor("EndTime", InputTypes.InputType.Text, htmlAttributes: new { @value = ViewBag.Time, @class = "timepicker", @placeholder = "00:00" })
+                    @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Text, htmlAttributes: new { @class = "datepicker", @Value = ViewBag.EndDate })
+                    <br>
                     @Html.ValidationMessageFor(model => model.EndDate)
                 </div>
             </div>
@@ -74,7 +74,7 @@
             <div class="form-group">
                 @Html.Label(LifeManagement.Resources.ResourceScr.Alert, htmlAttributes: new { @class = "control-label LMсol-md-3" })
                 <div class="LMсol-md-9">
-                    @Html.DropDownList("Alerts", (IEnumerable<SelectListItem>)ViewBag.Alerts, new { @disabled = "true" })
+                    @Html.DropDownList("Alerts")
                 </div>
             </div>
         </div>

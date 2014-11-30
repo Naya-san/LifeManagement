@@ -60,13 +60,6 @@
     </div>
           
         <div class="buttonbar">
-            @Html.ActionLink(ResourceScr.Delete, "Delete", new { id = Model.Id }, new
-            {
-                @class = "btn btn-default fullsize openDialog",
-                data_dialog_id = "13",
-                data_dialog_title = ResourceScr.Delete,
-                data_dialog_width = "500",
-                data_dialog_height = "auto"
-            })
+            @Html.DialogFormLink(ResourceScr.Delete, "btn btn-default fullsize", Url.Action("Delete", "Tasks", new { id = Model.Id }), ResourceScr.Delete, "", "", 700)
         </div>
     </div>

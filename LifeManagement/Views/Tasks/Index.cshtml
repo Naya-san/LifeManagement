@@ -20,15 +20,8 @@
                     }
                     @item.Name
                 </div>
-                <div>@Html.ActionLink(" ", "Edit", "Tasks", new {id = item.Id},
-                         new
-                         {
-                             @class = "moreInfoIcon openDialog",
-                             data_dialog_id = "32",
-                             data_dialog_title = ResourceScr.Details,
-                             data_dialog_width = "700",
-                             data_dialog_height = "auto"
-                         })
+                <div>
+                    @Html.DialogFormLink(" ", "moreInfoIcon", Url.Action("Edit", "Tasks", new { id = item.Id }), ResourceScr.Details, "body-LifeManagment", "", 700)
                 </div>
                 <span class="time">@item.ConvertTimeToNice()</span>
                 <div class="tags">
@@ -53,16 +46,17 @@
                     @item.Name
                 </div>
                 <div>
-                    @Html.ActionLink(" ", "Display", "Tasks", new { id = item.Id },
-                         new
-                         {
-                             @class = "moreInfoIcon openDialog",
-                             data_dialog_id = "32",
-                             data_dialog_title = ResourceScr.Details,
-                             data_dialog_width = "700",
-                             data_dialog_height = "auto"
-                         })
-            </div>
+                    @Html.DialogFormLink(" ", "moreInfoIcon", Url.Action("Display", "Tasks", new { id = item.Id }), ResourceScr.Details, "body-LifeManagment", "", 700)
+                    @*@Html.ActionLink(" ", "Display", "Tasks", new { id = item.Id },
+                        new
+                        {
+                            @class = "moreInfoIcon openDialog",
+                            data_dialog_id = "32",
+                            data_dialog_title = ResourceScr.Details,
+                            data_dialog_width = "700",
+                            data_dialog_height = "auto"
+                        })*@
+                </div>
             <span class="time">@item.CompletedOn</span>
             <div class="tags">
                 @foreach (var tag in item.Tags)

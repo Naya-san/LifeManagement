@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Web.UI;
 using LifeManagement.Enums;
 
 namespace LifeManagement.Extensions
@@ -54,6 +55,20 @@ namespace LifeManagement.Extensions
             };
             return new SelectList(positions, "ID", "Text", (int)alert);
 
+        }
+
+        public static AlertPosition Parse(this AlertPosition alert, int code)
+        {
+            AlertPosition tmp;
+            try
+            {
+                tmp = (AlertPosition)code;
+            }
+            catch (Exception)
+            {
+                tmp = AlertPosition.None;
+            }
+            return tmp;
         }
     }
 
