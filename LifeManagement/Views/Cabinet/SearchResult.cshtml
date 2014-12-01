@@ -13,8 +13,6 @@
         <h2 id="maintitle">@Session["Text"]</h2>
         @Html.Partial("_QuickCreateIcon")
     </div>
-  </div>
-
     <div id="SearchResult">
         <div>
             @{ Html.RenderAction("GetTasksByText", "Tasks", new { text = Session["Text"] });}
@@ -23,3 +21,6 @@
             @{ Html.RenderAction("GetEventsByText", "Events", new { text = Session["Text"] });}
         </div>
     </div>
+  </div>
+
+    
