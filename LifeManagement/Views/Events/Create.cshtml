@@ -83,10 +83,12 @@
                             <td>
                                 <div id="ForHide" style="display: @ViewBag.RepeatState ">
                                     @LifeManagement.Resources.ResourceScr.till
-                                    @Html.Html5EditorFor(model => model.StopRepeatDate, InputTypes.InputType.Text, htmlAttributes: new {  @class = "datepicker short", @value = ViewBag.DateR.ToString("dd.MM.yyyy") })
+                                    @Html.Html5EditorFor(model => model.StopRepeatDate, InputTypes.InputType.Text, htmlAttributes: new {  @class = "datepicker short", @value = ViewBag.DateR.ToString("dd.MM.yyyy") })   
                                 </div>
-
                             </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">@Html.ValidationMessageFor(model => model.StopRepeatDate)</td> 
                         </tr>
                     </table>
                 </div>

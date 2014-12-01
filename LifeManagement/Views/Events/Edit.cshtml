@@ -96,8 +96,10 @@
                                 ViewBag.style = "block";
                             }
                             <div id="ForHide" style="display: @ViewBag.style" class="forma">
-                                @LifeManagement.Resources.ResourceScr.till
+                                @ResourceScr.till
                                 @Html.Html5EditorFor(model => model.StopRepeatDate, InputTypes.InputType.Text, new { @required = "true", @value = Model.StopRepeatDate.HasValue ? Model.StopRepeatDate.Value.Date.ToString("dd.MM.yyyy") : Model.EndDate.Value.AddYears(1).ToString("dd.MM.yyyy"), @class = "datepicker short" })
+                                <br />
+                                @Html.ValidationMessageFor(model => model.StopRepeatDate)
                             </div> 
 
                         </td>
