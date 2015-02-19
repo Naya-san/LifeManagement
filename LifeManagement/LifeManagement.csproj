@@ -209,7 +209,9 @@
     <Compile Include="Enums\AlertPosition.cs" />
     <Compile Include="Enums\RepeatPosition.cs" />
     <Compile Include="Enums\RecordFilter.cs" />
+    <Compile Include="Enums\Сomplexity.cs" />
     <Compile Include="Extensions\AlertPositionExtensions.cs" />
+    <Compile Include="Extensions\ComplexityExtensions.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />

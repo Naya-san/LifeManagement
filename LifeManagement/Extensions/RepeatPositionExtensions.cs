@@ -29,7 +29,7 @@ namespace LifeManagement.Extensions
         {
             var positions = new List<Pair>
             {
-                new Pair(){ ID =(int) AlertPosition.None , Text = AlertPosition.None.ToLocalizedString()},
+                new Pair(){ ID =(int) RepeatPosition.None , Text = RepeatPosition.None.ToLocalizedString()},
                 new Pair(){ ID =(int) RepeatPosition.Ed, Text = RepeatPosition.Ed.ToLocalizedString()},
                 new Pair(){ ID =(int) RepeatPosition.Ew , Text = RepeatPosition.Ew.ToLocalizedString()},
                 new Pair(){ ID =(int) RepeatPosition.E2w , Text = RepeatPosition.E2w.ToLocalizedString()},
