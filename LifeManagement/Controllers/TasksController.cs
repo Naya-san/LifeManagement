@@ -85,6 +85,42 @@ namespace LifeManagement.Controllers
             return PartialView("Index", records);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> UpdateCompleteLevel(string id, byte level)
+        {
+            Guid taskId;
+            Guid.TryParse(id, out taskId);
+            if (taskId == null)
+            {
+                return Json(false);
+            }
+
+            var task = await db.Records.Include(x => x.Tags).FirstOrDefaultAsync(x => x.Id == taskId) as Task;
+            if (task == null)
+            {
+                return Json(false);
+            }
+            if(task.CompleteLevel == level){
+                return Json(true);
+            }
+            if (level < 100 && task.CompleteLevel == 100)
+            {
+                task.CompletedOn = null;
+            }
+            task.CompleteLevel = level;
+            if (task.CompleteLevel == 100)
+            {
+                task.CompletedOn = DateTime.UtcNow;
+            }
+            if (ModelState.IsValid)
+            {
+                db.Entry(task).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return Json(true);
+            }
+
+            return Json(false);
+        }
         // GET: Tasks
         public ActionResult Index()
         {
@@ -213,6 +249,8 @@ namespace LifeManagement.Controllers
             string startString = task.StartDate.HasValue? task.StartDate.Value.ToString("g") : task.EndDate.HasValue? task.EndDate.Value.ToString("g") : "";
             task.EndDate = request.GetUtcFromUserLocalTime(task.EndDate);
             task.StartDate = request.GetUtcFromUserLocalTime(task.StartDate);
+            task.Complexity = Complexity.Low;
+            task.CompleteLevel = 0;
             string[] listTag = new[] {""};
             if (Request["Tags"] != "" && Request["Tags"] != null)
             {

@@ -10,6 +10,8 @@
         @Styles.Render("~/Content/themes/base/css")
         @Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("~/bundles/Dialog")
+        <!--[if IE]><script type="text/javascript" src="~/Scripts/excanvas.js"></script><![endif]-->
+        @Scripts.Render("~/bundles/CircleSlider")
         <script src="~/Scripts/jquery.signalR-2.1.2.min.js"></script>
         <script src="~/signalr/hubs"></script>
         <script type='text/javascript' src="@Url.Content("~/Scripts/tree.js")"></script>

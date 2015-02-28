@@ -577,6 +577,13 @@ input[type="checkbox"].taskcomp {
     width: 30px;
     color: #f19645;
 }
+.taskComleateLevel {
+    display: table-cell;
+    float: left;
+    height: 50px;
+    width: 50px;
+    margin-top: 5px;
+}
 .taskChackBox {
     background: url(/Content/Images/chackCell.png) 0px no-repeat;
     display: table-cell;

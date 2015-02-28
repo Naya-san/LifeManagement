@@ -7,11 +7,18 @@
 @model IEnumerable<LifeManagement.Models.DB.Task>
 
 
+
 @foreach (var item in Model) {
     if (!item.CompletedOn.HasValue)
     {
         <div class="task">
-            <div>@Html.ActionLink(" ", "Complete", "Tasks", new {taskId = item.Id}, new {@class = "taskChackBox"})</div>
+       @*     <div>@Html.ActionLink(" ", "Complete", "Tasks", new {taskId = item.Id}, new {@class = "taskChackBox"})</div>
+            <div class="taskComleateLevel">
+                <input @*class="knob" data-width="45" data-angleoffset=-179 data-anglearc=358 data-fgcolor=" #4e888a" value="0" onsubmit="My()">
+            </div>*@
+            <div class="taskComleateLevel" data-id = @item.Id>
+                <input class="knob" data-width="45" data-angleoffset=-179 data-anglearc=358 data-fgcolor=" #4e888a" value='@item.CompleteLevel'>
+            </div>
             <div class="taskInfo">
                 <div class="name">
                     @if (item.IsUrgent)
@@ -36,6 +43,7 @@
     else
     {
         <div class="Сompleted">
+            
             <div>@Html.ActionLink(" ", "UnComplete", "Tasks", new { taskId = item.Id }, new { @class = "taskChackBoxChacked" })</div>
             <div class="taskInfo">
                 <div class="name">
@@ -47,15 +55,6 @@
                 </div>
                 <div>
                     @Html.DialogFormLink(" ", "moreInfoIcon", Url.Action("Display", "Tasks", new { id = item.Id }), ResourceScr.Details, "body-LifeManagment", "", 700)
-                    @*@Html.ActionLink(" ", "Display", "Tasks", new { id = item.Id },
-                        new
-                        {
-                            @class = "moreInfoIcon openDialog",
-                            data_dialog_id = "32",
-                            data_dialog_title = ResourceScr.Details,
-                            data_dialog_width = "700",
-                            data_dialog_height = "auto"
-                        })*@
                 </div>
             <span class="time">@item.CompletedOn</span>
             <div class="tags">
