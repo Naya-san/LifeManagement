@@ -45,7 +45,7 @@ namespace LifeManagement.Controllers
         {
             var userId = User.Identity.GetUserId();
             var request = System.Web.HttpContext.Current.Request;
-            var records = db.Records.Where(x => x.UserId == userId).OfType<Event>().ToList().Where(x => x.Name.Contains(text));
+            var records = db.Records.Where(x => x.UserId == userId).OfType<Event>().ToList().Where(x=>x.Name.ToLower().Contains(text.ToLower()));
             ConvertEventsToUserLocalTime(request, records);
             return PartialView("Index", records);
         }

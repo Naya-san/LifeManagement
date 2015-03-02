@@ -64,6 +64,10 @@ namespace LifeManagement
                                        "~/Scripts/jquery.ui.timepicker.js",
                                        "~/Scripts/DialogForm.js",
                                        "~/Scripts/Dialog.js"));
+          
+            bundles.Add(new ScriptBundle("~/bundles/CircleSlider").Include(
+                                       "~/Scripts/jquery.knob.min.js",
+                                       "~/Scripts/CircleSlider.js"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

@@ -540,4 +540,7 @@
   <data name="ErrorAlert" xml:space="preserve">
     <value>Для нагадувань спершу вкажіть дату початку чи завершення завдань</value>
   </data>
+  <data name="CompletedOn" xml:space="preserve">
+    <value>Віконано у</value>
+  </data>
 </root>

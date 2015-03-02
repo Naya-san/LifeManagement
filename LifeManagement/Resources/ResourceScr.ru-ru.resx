@@ -540,4 +540,7 @@
   <data name="ErrorAlert" xml:space="preserve">
     <value>Для создания напоминания сперва укажите дату начала или завершения</value>
   </data>
+  <data name="CompletedOn" xml:space="preserve">
+    <value>Выполнено в</value>
+  </data>
 </root>

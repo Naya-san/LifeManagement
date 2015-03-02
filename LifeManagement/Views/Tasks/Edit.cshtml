@@ -16,7 +16,8 @@
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.UserId)
-
+        @Html.HiddenFor(model => model.CompletedOn)
+        @Html.HiddenFor(model => model.CompleteLevel)
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9 forma">
@@ -66,6 +67,12 @@
             <div class="LMсol-md-9 forma">
                 @Html.EditorFor(model => model.IsUrgent)
                 @Html.ValidationMessageFor(model => model.IsUrgent)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Complexity, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9">
+                @Html.DropDownList("Complexity")
             </div>
         </div>
         <div class="form-group">

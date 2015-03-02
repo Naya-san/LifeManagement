@@ -64,6 +64,7 @@ namespace LifeManagement
             app.UseHangfire(config =>
             {
                 config.UseSqlServerStorage("ApplicationDbContext");
+             //   config.UseSqlServerStorage("LMContext");
                 config.UseServer();
             });
 

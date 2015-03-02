@@ -9,15 +9,11 @@
 
 
 @foreach (var item in Model) {
-    if (!item.CompletedOn.HasValue)
+    if (item.CompleteLevel < 100)
     {
         <div class="task">
-       @*     <div>@Html.ActionLink(" ", "Complete", "Tasks", new {taskId = item.Id}, new {@class = "taskChackBox"})</div>
-            <div class="taskComleateLevel">
-                <input @*class="knob" data-width="45" data-angleoffset=-179 data-anglearc=358 data-fgcolor=" #4e888a" value="0" onsubmit="My()">
-            </div>*@
             <div class="taskComleateLevel" data-id = @item.Id>
-                <input class="knob" data-width="45" data-angleoffset=-179 data-anglearc=358 data-fgcolor=" #4e888a" value='@item.CompleteLevel'>
+                <input class="knob" data-width="45" data-angleoffset=-179 data-displayprevious=true data-anglearc =358 data-fgcolor="#0e0e0e" value='@item.CompleteLevel'>
             </div>
             <div class="taskInfo">
                 <div class="name">
@@ -34,7 +30,7 @@
                 <div class="tags">
                     @foreach (var tag in item.Tags)
                     {
-                        <text>@tag.Name </text>
+                         @Html.ActionLink(tag.Name, "GetRecords", "Tags", new { id = tag.Id }, null) 
                     }
                 </div>
             </div>
@@ -43,8 +39,9 @@
     else
     {
         <div class="Сompleted">
-            
-            <div>@Html.ActionLink(" ", "UnComplete", "Tasks", new { taskId = item.Id }, new { @class = "taskChackBoxChacked" })</div>
+            <div class="taskComleateLevel" data-id=@item.Id>
+                <input class="knob" data-width="45" data-angleoffset=-179 data-anglearc=358 data-displayprevious=true data-fgcolor ="#0e0e0e" value='@item.CompleteLevel'>
+            </div>
             <div class="taskInfo">
                 <div class="name">
                     @if (item.IsUrgent)
@@ -56,11 +53,11 @@
                 <div>
                     @Html.DialogFormLink(" ", "moreInfoIcon", Url.Action("Display", "Tasks", new { id = item.Id }), ResourceScr.Details, "body-LifeManagment", "", 700)
                 </div>
-            <span class="time">@item.CompletedOn</span>
+            <span class="time">@item.ConvertTimeToNice(true)</span>
             <div class="tags">
                 @foreach (var tag in item.Tags)
                 {
-                    <text>@tag.Name </text>
+                    @Html.ActionLink(tag.Name, "GetRecords", "Tags", new { id = tag.Id }, null) 
                 }
             </div>
         </div>

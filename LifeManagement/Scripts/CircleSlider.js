@@ -1,21 +1,38 @@
 ﻿$(function ($) {
     var refrashTask = function (e) {
-        console.log("!!!" + e.data('id'));
-        var newValue = e.find("input.knob").get(0).value;
+        //   console.log("!!!" + e.data('id'));
+        var carentKnob = e.find("input.knob").get(0);
+        var newValue = carentKnob.value;
         var ID =  e.data('id'); // store the ID of the student (change to suit your property name)
-        var url = 'Tasks/UpdateCompleteLevel';
+        var url = taskUpdateCompleteURL; //'Tasks/UpdateCompleteLevel';
         $.post(url, { id: ID, level: newValue }, function (data) { 
-            if (data) { alert("Ok"); } else { alert("Fail"); };
+            var taskDiv = e.parents('div:first');
+            switch (data.success) {
+                case 2: taskDiv.removeClass('task').addClass('Сompleted');
+                   // carentKnob.data('fgcolor') = '#4e888a';
+                    taskDiv.find('span.time').text(data.time);
+                    break;
+                case 3: taskDiv.removeClass('Сompleted').addClass('task');
+                // carentKnob.data('fgcolor') = '#0e0e0e';
+                    taskDiv.find('span.time').text(data.time);
+                    break;
+            }
         });
     };
     $("div.taskComleateLevel")
         .bind("mouseup", function () {
-        //    $(this).data('min') !== undefined ? this.$.data('min') : 0,
-            console.log($(this).data('id'));
             refrashTask($(this));
         })
         .bind("touchend.k", function () {
-            console.log($(this).find("input.knob").get(0).value);
+            refrashTask($(this));
+        })
+        .bind('mousewheel', function () {
+            var elem = $(this);
+            clearTimeout($.data(this, 'timer'));
+
+            $.data(this, 'timer', setTimeout(function () {
+                refrashTask(elem);
+            }, 500));         
         });
     $(".knob").knob({
         change: function (value) {

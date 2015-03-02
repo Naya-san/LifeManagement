@@ -28,6 +28,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using LifeManagement.Enums;
 using LifeManagement.Resources;
+using LifeManagement.Extensions;
 
 namespace LifeManagement.Models.DB
 {
@@ -37,6 +38,11 @@ namespace LifeManagement.Models.DB
         public Guid ProjectId { get; set; }
 
         public DateTime? CompletedOn { get; set; }
+
+        [Display(Name = "TaskComplexity", ResourceType = typeof(ResourceScr))]
+        public Complexity Complexity { get; set; }
+
+        public int CompleteLevel { get; set; }
 
         public virtual Project Project { get; set; }
         public override bool IsTimeValid(ModelStateDictionary modelState, AlertPosition alert)
@@ -60,6 +66,15 @@ namespace LifeManagement.Models.DB
                 return false;
             }
             return true;
+        }
+
+        public string ConvertTimeToNice(bool withComplete)
+        {
+            if (withComplete && CompletedOn.HasValue)
+            {
+                return ResourceScr.CompletedOn + " " + CompletedOn.ToString();
+            }
+            return this.ConvertTimeToNice();
         }
     }
 }

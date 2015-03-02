@@ -546,4 +546,7 @@
   <data name="ErrorAlert" xml:space="preserve">
     <value>Alert needs informations about  Star or End Date</value>
   </data>
+  <data name="CompletedOn" xml:space="preserve">
+    <value>Completed on</value>
+  </data>
 </root>
