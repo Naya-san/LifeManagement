@@ -304,6 +304,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Percentage of completion.
+        /// </summary>
+        public static string CompleteLevel {
+            get {
+                return ResourceManager.GetString("CompleteLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm new password.
         /// </summary>
         public static string ConfirmNewPassword {

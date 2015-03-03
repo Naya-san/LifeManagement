@@ -541,6 +541,9 @@
     <value>Для нагадувань спершу вкажіть дату початку чи завершення завдань</value>
   </data>
   <data name="CompletedOn" xml:space="preserve">
-    <value>Віконано у</value>
+    <value>Виконано у</value>
+  </data>
+  <data name="CompleteLevel" xml:space="preserve">
+    <value>Відсоток виконаності</value>
   </data>
 </root>

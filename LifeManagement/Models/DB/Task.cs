@@ -37,11 +37,13 @@ namespace LifeManagement.Models.DB
         [Display(Name = "TaskProject", ResourceType = typeof(ResourceScr))]
         public Guid ProjectId { get; set; }
 
+         [Display(Name = "CompletedOn", ResourceType = typeof(ResourceScr))]
         public DateTime? CompletedOn { get; set; }
 
         [Display(Name = "TaskComplexity", ResourceType = typeof(ResourceScr))]
         public Complexity Complexity { get; set; }
 
+         [Display(Name = "CompleteLevel", ResourceType = typeof(ResourceScr))]
         public int CompleteLevel { get; set; }
 
         public virtual Project Project { get; set; }

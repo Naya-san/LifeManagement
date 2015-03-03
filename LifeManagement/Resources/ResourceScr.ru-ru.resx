@@ -543,4 +543,7 @@
   <data name="CompletedOn" xml:space="preserve">
     <value>Выполнено в</value>
   </data>
+  <data name="CompleteLevel" xml:space="preserve">
+    <value>Процент выполнености</value>
+  </data>
 </root>

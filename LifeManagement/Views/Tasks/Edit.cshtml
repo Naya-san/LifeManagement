@@ -17,7 +17,7 @@
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.UserId)
         @Html.HiddenFor(model => model.CompletedOn)
-        @Html.HiddenFor(model => model.CompleteLevel)
+        @*@Html.HiddenFor(model => model.CompleteLevel)*@
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9 forma">
@@ -61,7 +61,12 @@
                 @Html.ValidationMessageFor(model => model.EndDate)
             </div>
         </div>
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.CompleteLevel, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9 forma">
+                @Html.Html5EditorFor(model => model.CompleteLevel, InputTypes.InputType.Number, htmlAttributes: new { @min = 0, @max = 100 })
+            </div>
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.IsUrgent, htmlAttributes: new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9 forma">

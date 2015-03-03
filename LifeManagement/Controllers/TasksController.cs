@@ -150,21 +150,6 @@ namespace LifeManagement.Controllers
         }
 
 
-        public async Task<ActionResult> Complete(Guid taskId)
-        {
-            var userId = User.Identity.GetUserId();
-            var task = await db.Records.FirstOrDefaultAsync(x => x.Id == taskId && x.UserId == userId) as Task;
-
-            if (task != null)
-            {
-                task.CompletedOn = DateTime.UtcNow;
-                db.Entry(task).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-            }
-
-            return RedirectToPrevious();
-        }
-
         // GET: Tasks/Create
         public ActionResult Create()
         {
@@ -221,7 +206,6 @@ namespace LifeManagement.Controllers
             string startString = task.StartDate.HasValue? task.StartDate.Value.ToString("g") : task.EndDate.HasValue? task.EndDate.Value.ToString("g") : "";
             task.EndDate = request.GetUtcFromUserLocalTime(task.EndDate);
             task.StartDate = request.GetUtcFromUserLocalTime(task.StartDate);
-           // task.Complexity = Complexity.Low;
             task.CompleteLevel = 0;
             string[] listTag = new[] {""};
             if (Request["Tags"] != "" && Request["Tags"] != null)
@@ -293,14 +277,16 @@ namespace LifeManagement.Controllers
             var alert = await db.Alerts.FirstOrDefaultAsync(x => x.UserId == userId && x.RecordId == task.Id);
             ViewBag.Alerts = alert == null ? AlertPosition.None.ToSelectList() : alert.Position.ToSelectList();
             HttpRequest request = System.Web.HttpContext.Current.Request;
-            task.EndDate = request.GetUserLocalTimeFromUtc(task.EndDate);
-            task.StartDate = request.GetUserLocalTimeFromUtc(task.StartDate);
-            ViewBag.Time = task.EndDate.ToTimeFormat();
-            if (Request.IsAjaxRequest())
+            ConvertTaskToUserLocalTime(request, task);
+            
+            if (task.CompleteLevel >= 100)
             {
                 return PartialView("Display", task);
             }
-            return RedirectToPrevious();
+            ViewBag.Time = task.EndDate.ToTimeFormat();
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path", task.ProjectId);
+            ViewBag.Complexity = task.Complexity.ToSelectList();
+            return PartialView("Edit", task);
         }
         // GET: Tasks/Edit/5
         public async Task<ActionResult> Edit(Guid? id)
@@ -315,7 +301,13 @@ namespace LifeManagement.Controllers
             {
                 return HttpNotFound();
             }
-
+            HttpRequest request = System.Web.HttpContext.Current.Request;
+            ConvertTaskToUserLocalTime(request, task);
+            ViewBag.Time = task.EndDate.ToTimeFormat();
+            if (task.CompleteLevel >= 100)
+            {
+                return PartialView("Display", task);
+            }
             var userId = User.Identity.GetUserId();
             ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path", task.ProjectId);
             var selected = new string[task.Tags.Count];
@@ -328,10 +320,6 @@ namespace LifeManagement.Controllers
             ViewBag.Tags = new MultiSelectList(db.Tags.Where(x => x.UserId == userId), "Id", "Name", selected);
             var alert = await db.Alerts.FirstOrDefaultAsync(x => x.UserId == userId && x.RecordId == task.Id);
             ViewBag.Alerts = alert == null ? AlertPosition.None.ToSelectList() : alert.Position.ToSelectList();
-            HttpRequest request = System.Web.HttpContext.Current.Request;
-            task.EndDate = request.GetUserLocalTimeFromUtc(task.EndDate);
-            task.StartDate = request.GetUserLocalTimeFromUtc(task.StartDate);
-            ViewBag.Time = task.EndDate.ToTimeFormat();
             ViewBag.Complexity = task.Complexity.ToSelectList();
             if (Request.IsAjaxRequest())
             {
@@ -489,8 +477,8 @@ namespace LifeManagement.Controllers
 
         protected void ConvertTaskToUserLocalTime(HttpRequest request, Task record)
         {
-            record.StartDate = request.GetUserLocalTimeFromUtc(record.StartDate.Value);
-            record.EndDate = request.GetUserLocalTimeFromUtc(record.EndDate.Value);
+            record.StartDate = request.GetUserLocalTimeFromUtc(record.StartDate);
+            record.EndDate = request.GetUserLocalTimeFromUtc(record.EndDate);
             record.CompletedOn = request.GetUserLocalTimeFromUtc(record.CompletedOn);            
         }
         protected void ConvertTasksToUserLocalTime(HttpRequest request, IEnumerable<Task> records)
@@ -498,16 +486,6 @@ namespace LifeManagement.Controllers
             foreach (var record in records)
             {
                 ConvertTaskToUserLocalTime(request, record);
-                //if (record.StartDate.HasValue)
-                //{
-                //    record.StartDate = request.GetUserLocalTimeFromUtc(record.StartDate.Value);
-                //}
-
-                //if (record.EndDate.HasValue)
-                //{
-                //    record.EndDate = request.GetUserLocalTimeFromUtc(record.EndDate.Value);
-                //}
-                //record.CompletedOn = request.GetUserLocalTimeFromUtc(record.CompletedOn);
             }
         }
 

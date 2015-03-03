@@ -8,12 +8,13 @@
 
 
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     if (item.CompleteLevel < 100)
     {
-        <div class="task">
-            <div class="taskComleateLevel" data-id = @item.Id>
-                <input class="knob" data-width="45" data-angleoffset=-179 data-displayprevious=true data-anglearc =358 data-fgcolor="#0e0e0e" value='@item.CompleteLevel'>
+        <div class="task @item.Complexity">
+            <div class="taskComleateLevel" data-id=@item.Id>
+                <input class="knob" data-width="45" data-angleoffset=-179 data-displayprevious=true data-anglearc=358 data-fgcolor="#0e0e0e" value='@item.CompleteLevel'>
             </div>
             <div class="taskInfo">
                 <div class="name">
@@ -30,7 +31,7 @@
                 <div class="tags">
                     @foreach (var tag in item.Tags)
                     {
-                         @Html.ActionLink(tag.Name, "GetRecords", "Tags", new { id = tag.Id }, null) 
+                        @Html.ActionLink(tag.Name, "GetRecords", "Tags", new { id = tag.Id }, null)
                     }
                 </div>
             </div>
@@ -38,9 +39,9 @@
     }
     else
     {
-        <div class="Сompleted">
+        <div class="Сompleted @item.Complexity">
             <div class="taskComleateLevel" data-id=@item.Id>
-                <input class="knob" data-width="45" data-angleoffset=-179 data-anglearc=358 data-displayprevious=true data-fgcolor ="#0e0e0e" value='@item.CompleteLevel'>
+                <input class="knob" data-width="45" data-angleoffset=-179 data-anglearc=358 data-displayprevious=true data-fgcolor="#0e0e0e" value='@item.CompleteLevel'>
             </div>
             <div class="taskInfo">
                 <div class="name">
@@ -53,15 +54,15 @@
                 <div>
                     @Html.DialogFormLink(" ", "moreInfoIcon", Url.Action("Display", "Tasks", new { id = item.Id }), ResourceScr.Details, "body-LifeManagment", "", 700)
                 </div>
-            <span class="time">@item.ConvertTimeToNice(true)</span>
-            <div class="tags">
-                @foreach (var tag in item.Tags)
-                {
-                    @Html.ActionLink(tag.Name, "GetRecords", "Tags", new { id = tag.Id }, null) 
-                }
+                <span class="time">@item.ConvertTimeToNice(true)</span>
+                <div class="tags">
+                    @foreach (var tag in item.Tags)
+                    {
+                        @Html.ActionLink(tag.Name, "GetRecords", "Tags", new { id = tag.Id }, null)
+                    }
+                </div>
             </div>
         </div>
-    </div>
     }
 
 }

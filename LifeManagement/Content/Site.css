@@ -552,7 +552,15 @@ ul.subtree > li.subpunct:hover>.edit {
     -webkit-border-bottom-right-radius: 10px; 
     -webkit-border-bottom-left-radius: 10px;
 }
-
+.Low{
+    min-height: 65px
+}
+.Medium{
+    min-height: 75px
+}
+.Hight{
+    min-height: 85px
+}
 .event{
     margin-left: 5px;
     margin-right: 5px;
@@ -605,8 +613,15 @@ input[type="checkbox"].taskcomp {
     padding-left: 10px;
     float: left;
 }
-
-
+.Low>.taskInfo, .Low > .taskComleateLevel{
+    padding-top: 2.5px;
+}
+.Medium > .taskInfo, .Medium > .taskComleateLevel{
+    padding-top: 7.5px;
+}
+.Hight > .taskInfo, .Hight > .taskComleateLevel{
+    padding-top: 12.5px;
+}
 
 .time {
     font-size: 10px;
@@ -631,6 +646,14 @@ input[type="checkbox"].taskcomp {
     position: relative;
     vertical-align: bottom;
     margin-top: 22px;
+}
+.tags > a {
+    color: #fefefe;
+}
+.tags > a:hover {
+    text-decoration : none;
+    font-weight: bold;
+    font-size:11px;
 }
 .moreInfoIcon{
     background: url(/Content/Images/info.png) 0px no-repeat;
@@ -763,7 +786,9 @@ input[type="checkbox"].taskcomp {
     background: url(/Content/Images/TagComplete.png) 0px no-repeat;
     color: #17292e;
 }
-
+.Сompleted>.taskInfo> .tags > a {
+        color: #17292e;
+}
 a#moreLabel{
     font: 15px "Comic Sans MS", Tahoma, Arial, sans-serif;
     color: #5f9ea0;

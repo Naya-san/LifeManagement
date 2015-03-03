@@ -549,4 +549,7 @@
   <data name="CompletedOn" xml:space="preserve">
     <value>Completed on</value>
   </data>
+  <data name="CompleteLevel" xml:space="preserve">
+    <value>Percentage of completion</value>
+  </data>
 </root>
