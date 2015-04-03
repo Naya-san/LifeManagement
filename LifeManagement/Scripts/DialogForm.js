@@ -27,7 +27,7 @@
                 title: dialogTitle,
                 create: function() {
                     $(".datepicker").datepicker({ dateFormat: 'dd.mm.yy', }, $.datepicker.setDefaults($.datepicker.regional[LocalizeCode]));
-                    $(".timepicker").timepicker();
+                    $(".timepicker").timepicker($.timepicker.setDefaults($.timepicker.regional[LocalizeCode]));
                 },
                     modal: true,
                     draggable: true,
@@ -76,8 +76,8 @@ function wireUpForm(dialog, updateTargetId, updateUrl) {
                     // Reload the dialog to show model errors                    
                     $(dialog).html(result);
                     //console.log($(".datepicker").length);
-                    $(".datepicker").datepicker({ dateFormat: 'dd.mm.yy' }, $.datepicker.regional['uk']);
-                    $(".timepicker").timepicker();
+                    $(".datepicker").datepicker({ dateFormat: 'dd.mm.yy' }, $.datepicker.regional[LocalizeCode]);
+                    $(".timepicker").timepicker($.timepicker.setDefaults($.timepicker.regional[LocalizeCode]));
 
                     // Enable client side validation
                     //$.validator.unobtrusive.parse(dialog);

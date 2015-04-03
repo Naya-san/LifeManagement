@@ -1,4 +1,4 @@
-﻿(function ($) {
+﻿jQuery(function ($) {
     $.timepicker.regional['ru-ru'] = {
         timeOnlyTitle: 'Выберите время',
         timeText: 'Время',
@@ -9,9 +9,9 @@
         timezoneText: 'Часовой пояс',
         currentText: 'Сейчас',
         closeText: 'Закрыть',
-        timeFormat: 'hh:mm',
+        timeFormat: 'HH:mm',
         amNames: ['AM', 'A'],
         pmNames: ['PM', 'P'],
+        timeSuffix: ''
     };
-    $.timepicker.setDefaults($.timepicker.regional['ru-ru']);
-})(jQuery);
+});

@@ -1,4 +1,4 @@
-﻿(function ($) {
+﻿jQuery(function ($) {
     $.timepicker.regional['uk-ua'] = {
         timeOnlyTitle: 'Oберіть час',
         timeText: 'Час',
@@ -9,9 +9,9 @@
         timezoneText: 'Часовий пояс',
         currentText: 'Зараз',
         closeText: 'Закрити',
-        timeFormat: 'hh:mm tt',
+        timeFormat: 'hh:mm',
         amNames: ['AM', 'A'],
         pmNames: ['PM', 'P'],
-        ampm: false
+        timeSuffix: ''
     };
-})(jQuery);
+});
