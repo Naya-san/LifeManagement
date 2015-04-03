@@ -61,7 +61,11 @@ namespace LifeManagement
                                        "~/Scripts/jquery.validate.min.js",
                                        "~/Scripts/jquery.validate.unobtrusive.min.js",
                                        "~/Scripts/jquery.ui.datepicker.js",
+                                       "~/Scripts/jquery.ui.datepicker-uk.js",
+                                       "~/Scripts/jquery.ui.datepicker-ru.js",
                                        "~/Scripts/jquery.ui.timepicker.js",
+                                       "~/Scripts/jquery-ui-timepicker-ru.js",
+                                       "~/Scripts/jquery-ui-timepicker-uk.js",
                                        "~/Scripts/DialogForm.js",
                                        "~/Scripts/Dialog.js"));
           

@@ -31,9 +31,9 @@
 
             var __date = new Date();
             setCookie('timeZoneOffset', __date.getTimezoneOffset(), 1);
+            LocalizeCode ='@(Session["culture"] ?? "uk-ua")';
         </script>
-
-    </head>
+</head>
 <body onload="onBodyLoad()" class="LifeManagment" id="body-LifeManagment">
     <div class="navbarLM navbarLM-inverse">
         <div class="navbarLM-header">
