@@ -23,7 +23,9 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LifeManagement.Models.DB
@@ -35,6 +37,7 @@ namespace LifeManagement.Models.DB
         public virtual ICollection<Project> Projects { get; private set; }
         public virtual ICollection<Record> Records { get; private set; }
         public virtual ICollection<Tag> Tags { get; private set; }
+        public virtual ICollection<ListForDay> ListForDays { get; private set; }
 
         public ApplicationUser()
         {
@@ -42,6 +45,7 @@ namespace LifeManagement.Models.DB
           Projects = new List<Project>();
           Records = new List<Record>();
           Tags = new List<Tag>(); 
+          ListForDays = new List<ListForDay>();
         }
     }
 }

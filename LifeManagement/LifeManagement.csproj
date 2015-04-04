@@ -206,6 +206,7 @@
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Controllers\UserSettingController.cs" />
     <Compile Include="Enums\AlertPosition.cs" />
     <Compile Include="Enums\RepeatPosition.cs" />
     <Compile Include="Enums\RecordFilter.cs" />
@@ -219,12 +220,21 @@
     <Compile Include="Extensions\RecordExtensions.cs" />
     <Compile Include="Extensions\RepeatPositionExtensions.cs" />
     <Compile Include="Hubs\AlertsHub.cs" />
-    <Compile Include="Migrations\201502271748011_AddTaskLevel.cs" />
-    <Compile Include="Migrations\201502271748011_AddTaskLevel.Designer.cs">
-      <DependentUpon>201502271748011_AddTaskLevel.cs</DependentUpon>
+    <Compile Include="Migrations\201504041336035_NewEntetis.cs" />
+    <Compile Include="Migrations\201504041336035_NewEntetis.Designer.cs">
+      <DependentUpon>201504041336035_NewEntetis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504041457527_NewTableSettings.cs" />
+    <Compile Include="Migrations\201504041457527_NewTableSettings.Designer.cs">
+      <DependentUpon>201504041457527_NewTableSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504041508135_TableSettingsUpdate.cs" />
+    <Compile Include="Migrations\201504041508135_TableSettingsUpdate.Designer.cs">
+      <DependentUpon>201504041508135_TableSettingsUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\LMContext.cs" />
+    <Compile Include="Models\DB\ListForDay.cs" />
+    <Compile Include="Models\DB\UserSetting.cs" />
     <Compile Include="Models\UserTimeConverter.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Models\DB\ApplicationUser.cs" />
@@ -377,8 +387,14 @@
     <Content Include="Scripts\availableFields.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EmbeddedResource Include="Migrations\201502271748011_AddTaskLevel.resx">
-      <DependentUpon>201502271748011_AddTaskLevel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504041336035_NewEntetis.resx">
+      <DependentUpon>201504041336035_NewEntetis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504041457527_NewTableSettings.resx">
+      <DependentUpon>201504041457527_NewTableSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504041508135_TableSettingsUpdate.resx">
+      <DependentUpon>201504041508135_TableSettingsUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ResourceScr.ru-ru.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -486,6 +502,7 @@
     <Content Include="Views\Cabinet\TimetableOnDate.cshtml" />
     <Content Include="Views\Tasks\Display.cshtml" />
     <Content Include="Views\Shared\_QuickCreateIcon.cshtml" />
+    <Content Include="Views\UserSetting\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -36,6 +36,9 @@ namespace LifeManagement.Models.DB
         public RepeatPosition RepeatPosition { get; set; }
 
         public DateTime? StopRepeatDate { get; set; }
+
+        public bool OnBackground { set; get; }
+
         public override bool IsTimeValid(ModelStateDictionary modelState, AlertPosition alert)
         {
             if (!StartDate.HasValue)

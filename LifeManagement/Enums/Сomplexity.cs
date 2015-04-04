@@ -6,7 +6,5 @@
         Low,
         Medium,
         Hight
-        
-
     }
 }

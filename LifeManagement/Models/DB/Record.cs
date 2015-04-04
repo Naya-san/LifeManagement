@@ -59,6 +59,8 @@ namespace LifeManagement.Models.DB
         public virtual ICollection<Tag> Tags { get; private set; }
         public virtual ICollection<Alert> Alerts { get; private set; }
 
+        public virtual ICollection<ListForDay> ListForDays { get; set; }
+
         public abstract bool IsTimeValid(ModelStateDictionary modelState, AlertPosition alert);
 
         protected Record()
@@ -66,6 +68,7 @@ namespace LifeManagement.Models.DB
             Id = Guid.NewGuid();
             Alerts = new List<Alert>();
             Tags = new List<Tag>();
+            ListForDays = new List<ListForDay>();
         }
     }
 }

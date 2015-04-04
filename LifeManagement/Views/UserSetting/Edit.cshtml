@@ -1,0 +1,56 @@
+﻿@using System.Web.Mvc.Html5
+@using LifeManagement.Resources
+@model LifeManagement.Models.DB.UserSetting
+
+<h4>@ResourceScr.ComplexitySettings</h4>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontalLM">
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.UserId)
+
+
+        <div class="form-group">
+            @Html.Label(ResourceScr.Low, new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9 forma">
+                @Html.EditorFor(model => model.ComplexityLowFrom) - 
+                @Html.EditorFor(model => model.ComplexityLowTo)
+                @Html.ValidationMessageFor(model => model.ComplexityLowFrom)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label(ResourceScr.Medium, new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9 forma">
+                @*@Html.Html5EditorFor(setting => setting.ComplexityLowTo, InputTypes.InputType.Time, htmlAttributes: new { @required = "true", @class = " short" })*@
+                @Html.EditorFor(model => model.ComplexityLowTo) - 
+                @Html.EditorFor(model => model.ComplexityMediumTo)
+                @Html.ValidationMessageFor(model => model.ComplexityMediumTo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label(ResourceScr.High, new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9 forma">
+                @Html.EditorFor(model => model.ComplexityMediumTo) - 
+                @Html.EditorFor(model => model.ComplexityHightTo)
+                @Html.ValidationMessageFor(model => model.ComplexityHightTo)
+            </div>
+        </div>
+
+        <div class="buttonbar">
+
+            <input type="submit" value="@ResourceScr.save" class="btn btn-default fullsize" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

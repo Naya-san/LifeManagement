@@ -1,4 +1,5 @@
-﻿@using LifeManagement.Resources
+﻿@using LifeManagement.Extensions
+@using LifeManagement.Resources
 @using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
@@ -6,19 +7,24 @@
     {
     @Html.AntiForgeryToken()
         <li>
-            @Html.ActionLink(@LifeManagement.Resources.ResourceScr.greeting+", " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink(ResourceScr.greeting+", " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">@LifeManagement.Resources.ResourceScr.logoff</a></li>
-         <li>
-                            @Html.ActionLink(ResourceScr.Feedback, "Create", "Feedbacks", null, new
-                                {
-                                    @class = "openDialog",
-                                    data_dialog_id = "41",
-                                    data_dialog_title = ResourceScr.Feedback,
-                                    data_dialog_width = "600",
-                                    data_dialog_height = "auto"
-                                })
-                        </li>
+        <li>
+            @Html.ActionLink(ResourceScr.Feedback, "Create", "Feedbacks", null, new
+            {
+                @class = "openDialog",
+                data_dialog_id = "41",
+                data_dialog_title = ResourceScr.Feedback,
+                data_dialog_width = "600",
+                data_dialog_height = "auto"
+            })
+        </li>
+        <li>
+            @Html.DialogFormLink(ResourceScr.Settings, "", Url.Action("Edit", "UserSetting"), ResourceScr.Settings, "", "", 700)
+
+        </li>
+    
     }
 }       
 else

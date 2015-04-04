@@ -28,6 +28,7 @@ using LifeManagement.Models.DB;
 using Microsoft.AspNet.Identity.EntityFramework;
 using LifeManagement.Migrations;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.EnterpriseServices;
 
 namespace LifeManagement.Models
 {
@@ -38,6 +39,9 @@ namespace LifeManagement.Models
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<Record> Records { get; set; }
+        public virtual DbSet<UserSetting> UserSettings { get; set; }
+
+        public virtual DbSet<ListForDay> ListsForDays { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection")
@@ -46,14 +50,16 @@ namespace LifeManagement.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+      //      Database.SetInitializer(new CreateDatabaseIfNotExists<ApplicationDbContext>());
+
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
             base.OnModelCreating(modelBuilder);
 
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
             //base.OnModelCreating(modelBuilder);
-
+            //modelBuilder.Entity<IdentityUserLogin>().HasKey(x => x.UserId);
+            //modelBuilder.Entity<IdentityUserRole>().HasKey(x => x.UserId);
             //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
-
             //base.OnModelCreating(modelBuilder);
             //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
@@ -66,5 +72,7 @@ namespace LifeManagement.Models
             //modelBuilder.Entity<ApplicationUser>().HasMany(c => c.Records).WithRequired().HasForeignKey(c => c.UserId);
             //modelBuilder.Entity<ApplicationUser>().HasMany(c => c.Tags).WithRequired().HasForeignKey(c => c.UserId);
         }
+
+      
     }
 }

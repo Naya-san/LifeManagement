@@ -7,13 +7,13 @@ namespace LifeManagement.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.0.0-20911")]
-    public sealed partial class AddTaskLevel : IMigrationMetadata
+    public sealed partial class NewTableSettings : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddTaskLevel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(NewTableSettings));
         
         string IMigrationMetadata.Id
         {
-            get { return "201502271748011_AddTaskLevel"; }
+            get { return "201504041457527_NewTableSettings"; }
         }
         
         string IMigrationMetadata.Source

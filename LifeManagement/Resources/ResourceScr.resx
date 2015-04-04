@@ -552,4 +552,10 @@
   <data name="CompleteLevel" xml:space="preserve">
     <value>Percentage of completion</value>
   </data>
+  <data name="ComplexitySettings" xml:space="preserve">
+    <value>Evaluation of the time range of the assignment with complexity level</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>

@@ -546,4 +546,10 @@
   <data name="CompleteLevel" xml:space="preserve">
     <value>Процент выполнености</value>
   </data>
+  <data name="ComplexitySettings" xml:space="preserve">
+    <value>Временной диапазон выполнения задания за уровнем сложности</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
 </root>
