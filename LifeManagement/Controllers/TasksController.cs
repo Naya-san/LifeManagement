@@ -144,7 +144,7 @@ namespace LifeManagement.Controllers
             var dueDate = today.AddDays(7);
             var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().Where(x => !x.CompletedOn.HasValue &&
                 ((!x.StartDate.HasValue && !x.EndDate.HasValue) ||
-                (x.EndDate != null && x.EndDate <= dueDate && x.EndDate > today && (x.StartDate == null || (x.StartDate != null && x.StartDate > today))))).OrderBy(x => !x.IsUrgent).ToList();
+                (x.EndDate != null && x.EndDate <= dueDate && x.EndDate > today && (x.StartDate == null || (x.StartDate != null && x.StartDate > today))))).OrderBy(x => !x.IsImportant).ToList();
             ConvertTasksToUserLocalTime(request, records);
             return PartialView(records);
         }
@@ -188,12 +188,29 @@ namespace LifeManagement.Controllers
             hubContext.Clients.User(alert.User.UserName).addAlert(new AlertViewModel { Id = alert.Id, Name = alert.Name, Date = userLocalTime.ToString() });
         }
 
+        private bool CheckComplexity(Task task, ModelStateDictionary modelState)
+        {
+            bool res = true;
+            if (task.StartDate.HasValue && task.EndDate.HasValue && task.Complexity!= Complexity.None)
+            {
+                var settings = db.UserSettings.FirstOrDefaultAsync(x => x.UserId == task.UserId).Result ?? new UserSetting() ;
+                res = task.EndDate.Value.Subtract(task.StartDate.Value).Ticks >
+                       settings.GetMinComplexityRange(task.Complexity).Ticks;
+                if (!res)
+                {
+                    modelState.AddModelError("Complexity", ResourceScr.ErrorComplexity);
+                }
+
+            }
+            return res;
+        }
+
         // POST: Tasks/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Name,Note,StartDate,EndDate,IsUrgent,ProjectId,Complexity")] Task task)
+        public async Task<ActionResult> Create([Bind(Include = "Name,Note,StartDate,EndDate,IsImportant,ProjectId,Complexity")] Task task)
         {
             var userId = User.Identity.GetUserId();
             HttpRequest request = System.Web.HttpContext.Current.Request;
@@ -221,11 +238,10 @@ namespace LifeManagement.Controllers
             {
                 alertPosition = Convert.ToInt32(Request["Alerts"]);
             }
-
-            if (ModelState.IsValid && task.IsTimeValid(ModelState, AlertPosition.None.Parse(alertPosition) ))
+            task.UserId = userId;
+            if (ModelState.IsValid && task.IsTimeValid(ModelState, AlertPosition.None.Parse(alertPosition)) && CheckComplexity(task,ModelState))
             {
                 task.Id = Guid.NewGuid();
-                task.UserId = userId;
                 Alert alert = null;
 
                 if (alertPosition >= 0)
@@ -333,7 +349,7 @@ namespace LifeManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,UserId,Name,Note,StartDate,EndDate,IsUrgent,ProjectId,Complexity,CompleteLevel,CompletedOn")] Task task)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,UserId,Name,Note,StartDate,EndDate,IsImportant,ProjectId,Complexity,CompleteLevel,CompletedOn")] Task task)
         {
             if (task.EndDate != null && Request["EndTime"] != "")
             {
@@ -406,8 +422,8 @@ namespace LifeManagement.Controllers
                     }
                 }
             }
-           
-            if (ModelState.IsValid && task.IsTimeValid(ModelState, AlertPosition.None.Parse(alertPosition)))
+
+            if (ModelState.IsValid && task.IsTimeValid(ModelState, AlertPosition.None.Parse(alertPosition)) && CheckComplexity(task, ModelState))
             {
                 db.Entry(task).State = EntityState.Modified;
                 await db.SaveChangesAsync();

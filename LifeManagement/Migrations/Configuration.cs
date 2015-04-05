@@ -9,8 +9,8 @@ namespace LifeManagement.Migrations
     {
         public Configuration()
         {
-         // AutomaticMigrationsEnabled = false;
-          AutomaticMigrationsEnabled = true;
+          AutomaticMigrationsEnabled = false;
+         //   AutomaticMigrationsEnabled = true;
             ContextKey = "LifeManagement.Models.ApplicationDbContext";
         }
 

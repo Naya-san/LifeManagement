@@ -107,9 +107,10 @@ namespace LifeManagement.Controllers
                         Name = @event.Name,
                         Note = @event.Note,
                         UserId = @event.UserId,
-                        IsUrgent = @event.IsUrgent,
+                        IsImportant = @event.IsImportant,
                         RepeatPosition = @event.RepeatPosition,
-                        StopRepeatDate = @event.StopRepeatDate
+                        StopRepeatDate = @event.StopRepeatDate,
+                        OnBackground = @event.OnBackground
                     };
                     foreach (var tag in @event.Tags)
                     {
@@ -161,7 +162,7 @@ namespace LifeManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Name,Note,StartDate,EndDate,IsUrgent,StopRepeatDate")] Event @event)
+        public async Task<ActionResult> Create([Bind(Include = "Name,Note,StartDate,EndDate,IsImportant,StopRepeatDate,OnBackground")] Event @event)
         {
             var userId = User.Identity.GetUserId();
             HttpRequest request = System.Web.HttpContext.Current.Request;
@@ -273,7 +274,7 @@ namespace LifeManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,UserId,GroupId,Name,Note,StartDate,EndDate,IsUrgent,RepeatPosition,StopRepeatDate")] Event @event)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,UserId,GroupId,Name,Note,StartDate,EndDate,IsImportant,RepeatPosition,StopRepeatDate,OnBackground")] Event @event)
         {
             HttpRequest request = System.Web.HttpContext.Current.Request;
             var time = Request["EndTime"].Split(':');

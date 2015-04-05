@@ -192,8 +192,8 @@
   <data name="NoUrgentNoImportant" xml:space="preserve">
     <value>No urgent, no important</value>
   </data>
-  <data name="UrgentImportant" xml:space="preserve">
-    <value>Urgent, important</value>
+  <data name="Important" xml:space="preserve">
+    <value>Important</value>
   </data>
   <data name="UrgentNoImportant" xml:space="preserve">
     <value>Urgent, no important</value>
@@ -557,5 +557,17 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="ErrorComplexity" xml:space="preserve">
+    <value>Time range is to small for this complexity</value>
+  </data>
+  <data name="FinishAt" xml:space="preserve">
+    <value>Finish at</value>
+  </data>
+  <data name="OnBackground" xml:space="preserve">
+    <value>On background</value>
+  </data>
+  <data name="StartAt" xml:space="preserve">
+    <value>Start at</value>
   </data>
 </root>

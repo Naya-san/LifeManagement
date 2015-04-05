@@ -19,8 +19,8 @@
         <div class="form-group">
             @Html.Label(ResourceScr.Low, new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9 forma">
-                @Html.EditorFor(model => model.ComplexityLowFrom) - 
-                @Html.EditorFor(model => model.ComplexityLowTo)
+                @Html.Html5EditorFor(model => model.ComplexityLowFrom, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = "short" }) - 
+                @Html.Html5EditorFor(model => model.ComplexityLowTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short" })
                 @Html.ValidationMessageFor(model => model.ComplexityLowFrom)
             </div>
         </div>
@@ -29,8 +29,8 @@
             @Html.Label(ResourceScr.Medium, new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9 forma">
                 @*@Html.Html5EditorFor(setting => setting.ComplexityLowTo, InputTypes.InputType.Time, htmlAttributes: new { @required = "true", @class = " short" })*@
-                @Html.EditorFor(model => model.ComplexityLowTo) - 
-                @Html.EditorFor(model => model.ComplexityMediumTo)
+                @Html.Html5EditorFor(model => model.ComplexityLowTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short" }) - 
+                @Html.Html5EditorFor(model => model.ComplexityMediumTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short" })
                 @Html.ValidationMessageFor(model => model.ComplexityMediumTo)
             </div>
         </div>
@@ -38,8 +38,8 @@
         <div class="form-group">
             @Html.Label(ResourceScr.High, new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9 forma">
-                @Html.EditorFor(model => model.ComplexityMediumTo) - 
-                @Html.EditorFor(model => model.ComplexityHightTo)
+                @Html.Html5EditorFor(model => model.ComplexityMediumTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short" }) - 
+                @Html.Html5EditorFor(model => model.ComplexityHightTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short" })
                 @Html.ValidationMessageFor(model => model.ComplexityHightTo)
             </div>
         </div>

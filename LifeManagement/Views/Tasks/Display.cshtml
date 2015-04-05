@@ -43,9 +43,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IsUrgent, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+            @Html.LabelFor(model => model.IsImportant, htmlAttributes: new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9 forma">
-                @Html.Html5EditorFor(model => model.IsUrgent, null, htmlAttributes: new {@disabled="false", @type ="checkbox" })
+                @Html.Html5EditorFor(model => model.IsImportant, null, htmlAttributes: new {@disabled="false", @type ="checkbox" })
             </div>
        </div>
      

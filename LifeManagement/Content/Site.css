@@ -552,7 +552,7 @@ ul.subtree > li.subpunct:hover>.edit {
     -webkit-border-bottom-right-radius: 10px; 
     -webkit-border-bottom-left-radius: 10px;
 }
-.Low{
+.None, .Low{
     min-height: 65px
 }
 .Medium{
@@ -574,10 +574,15 @@ ul.subtree > li.subpunct:hover>.edit {
     border: 1px solid #17292e;
     color: #fff;
     -webkit-border-top-left-radius: 10px; 
-    -webkit-border-top-right-radius: 10px; 
+    /*-webkit-border-top-right-radius: 10px;*/ 
     -webkit-border-bottom-right-radius: 10px; 
-    -webkit-border-bottom-left-radius: 10px;
+    /*-webkit-border-bottom-left-radius: 10px;*/
 }
+.event.onBackground {
+    -ms-opacity: 0.8;
+    opacity: 0.8;
+}
+
 input[type="checkbox"].taskcomp {
     display: table-cell;
     float: left;
@@ -613,6 +618,7 @@ input[type="checkbox"].taskcomp {
     padding-left: 10px;
     float: left;
 }
+.None>.taskInfo, .None > .taskComleateLevel
 .Low>.taskInfo, .Low > .taskComleateLevel{
     padding-top: 2.5px;
 }
@@ -662,6 +668,7 @@ input[type="checkbox"].taskcomp {
     position: absolute;
     right: 20px;
 }
+
 
 .UrgentImportant{
     background : #fe2d36;
@@ -778,13 +785,20 @@ input[type="checkbox"].taskcomp {
     font-size: 12px;
     padding-left: 10px;
     padding-right: 10px;
-    min-height: 60px;
     background-color: #e8e8e8;
     color: #17292e;
 }
 .Сompleted>.taskInfo> .tags {
     background: url(/Content/Images/TagComplete.png) 0px no-repeat;
     color: #17292e;
+}
+
+.Сompleted .moreInfoIcon {
+    background: url(/Content/Images/infoComp.png) 0px no-repeat;
+    height: 22px;
+    width: 22px;
+    position: absolute;
+    right: 20px;
 }
 .Сompleted>.taskInfo> .tags > a {
         color: #17292e;

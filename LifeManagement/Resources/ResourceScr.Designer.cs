@@ -493,6 +493,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Time range is to small for this complexity.
+        /// </summary>
+        public static string ErrorComplexity {
+            get {
+                return ResourceManager.GetString("ErrorComplexity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start date should be before End date.
         /// </summary>
         public static string ErrorDateOrder {
@@ -592,6 +601,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finish at.
+        /// </summary>
+        public static string FinishAt {
+            get {
+                return ResourceManager.GetString("FinishAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Focus.
         /// </summary>
         public static string Focus {
@@ -669,6 +687,15 @@ namespace LifeManagement.Resources {
         public static string IfNoAccount {
             get {
                 return ResourceManager.GetString("IfNoAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Important.
+        /// </summary>
+        public static string Important {
+            get {
+                return ResourceManager.GetString("Important", resourceCulture);
             }
         }
         
@@ -907,6 +934,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to On background.
+        /// </summary>
+        public static string OnBackground {
+            get {
+                return ResourceManager.GetString("OnBackground", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Timetable on.
         /// </summary>
         public static string onDate {
@@ -1110,6 +1146,15 @@ namespace LifeManagement.Resources {
         public static string slogan {
             get {
                 return ResourceManager.GetString("slogan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start at.
+        /// </summary>
+        public static string StartAt {
+            get {
+                return ResourceManager.GetString("StartAt", resourceCulture);
             }
         }
         
@@ -1326,15 +1371,6 @@ namespace LifeManagement.Resources {
         public static string Tomorrow {
             get {
                 return ResourceManager.GetString("Tomorrow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Urgent, important.
-        /// </summary>
-        public static string UrgentImportant {
-            get {
-                return ResourceManager.GetString("UrgentImportant", resourceCulture);
             }
         }
         

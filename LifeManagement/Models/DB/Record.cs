@@ -52,8 +52,8 @@ namespace LifeManagement.Models.DB
         [Display(Name = "TaskDueDate", ResourceType = typeof(ResourceScr))]
         public DateTime? EndDate { get; set; }
 
-        [Display(Name = "IsUrgent", ResourceType = typeof(ResourceScr))]
-        public bool IsUrgent { get; set; }
+        [Display(Name = "Important", ResourceType = typeof(ResourceScr))]
+        public bool IsImportant { get; set; }
 
         public virtual ApplicationUser User { get; set; }
         public virtual ICollection<Tag> Tags { get; private set; }

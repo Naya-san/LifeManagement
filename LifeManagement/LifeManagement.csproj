@@ -232,6 +232,10 @@
     <Compile Include="Migrations\201504041508135_TableSettingsUpdate.Designer.cs">
       <DependentUpon>201504041508135_TableSettingsUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504051712110_Rename.cs" />
+    <Compile Include="Migrations\201504051712110_Rename.Designer.cs">
+      <DependentUpon>201504051712110_Rename.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DB\ListForDay.cs" />
     <Compile Include="Models\DB\UserSetting.cs" />
@@ -292,6 +296,7 @@
     <Content Include="Content\Images\folder-horizontal.png" />
     <Content Include="Content\Images\go.png" />
     <Content Include="Content\Images\info.png" />
+    <Content Include="Content\Images\infoComp.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\LogoWithText.png" />
     <Content Include="Content\Images\menu.png" />
@@ -395,6 +400,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504041508135_TableSettingsUpdate.resx">
       <DependentUpon>201504041508135_TableSettingsUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504051712110_Rename.resx">
+      <DependentUpon>201504051712110_Rename.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ResourceScr.ru-ru.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

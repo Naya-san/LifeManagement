@@ -9,7 +9,7 @@
         timezoneText: 'Часовий пояс',
         currentText: 'Зараз',
         closeText: 'Закрити',
-        timeFormat: 'hh:mm',
+        timeFormat: 'HH:mm',
         amNames: ['AM', 'A'],
         pmNames: ['PM', 'P'],
         timeSuffix: ''

@@ -3,10 +3,10 @@
 @model IEnumerable<LifeManagement.Models.DB.Event>
 
 @foreach (var item in Model) {
-    <div class="event">
+    <div class="event @(item.OnBackground? "onBackground":"")">
         <div class="taskInfo">
             <div class="name">
-                @if (item.IsUrgent)
+                @if (item.IsImportant)
                     {
                     <div class="Urgent"></div>
                     }

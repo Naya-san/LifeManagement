@@ -24,6 +24,7 @@
 #endregion
 
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using LifeManagement.Enums;
 using LifeManagement.Resources;
@@ -37,6 +38,7 @@ namespace LifeManagement.Models.DB
 
         public DateTime? StopRepeatDate { get; set; }
 
+        [Display(Name = "OnBackground", ResourceType = typeof(ResourceScr))]
         public bool OnBackground { set; get; }
 
         public override bool IsTimeValid(ModelStateDictionary modelState, AlertPosition alert)

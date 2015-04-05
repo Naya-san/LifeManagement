@@ -192,8 +192,8 @@
   <data name="NoUrgentNoImportant" xml:space="preserve">
     <value>Не срочно, не важно</value>
   </data>
-  <data name="UrgentImportant" xml:space="preserve">
-    <value>Срочно, важно</value>
+  <data name="Important" xml:space="preserve">
+    <value>Важно</value>
   </data>
   <data name="UrgentNoImportant" xml:space="preserve">
     <value>Срочно, не важно</value>
@@ -551,5 +551,17 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Настройки</value>
+  </data>
+  <data name="ErrorComplexity" xml:space="preserve">
+    <value>Задания указаной сложности требуют больше времени для исполнения</value>
+  </data>
+  <data name="FinishAt" xml:space="preserve">
+    <value>Окончание</value>
+  </data>
+  <data name="OnBackground" xml:space="preserve">
+    <value>Фоновое</value>
+  </data>
+  <data name="StartAt" xml:space="preserve">
+    <value>Начало</value>
   </data>
 </root>

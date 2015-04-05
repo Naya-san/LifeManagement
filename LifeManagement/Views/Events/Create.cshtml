@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+            @Html.Label(LifeManagement.Resources.ResourceScr.StartAt, htmlAttributes: new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9">
                 @Html.Html5Editor("StartTime", InputTypes.InputType.Text, htmlAttributes: new { @value = ViewBag.TimeStart, @required = "true", @class = "timepicker short" })
                 @Html.Html5EditorFor(model => model.StartDate, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @value = ViewBag.DateStart.ToString("dd.MM.yyyy"), @class = "datepicker long" })
@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+            @Html.Label(LifeManagement.Resources.ResourceScr.FinishAt, htmlAttributes: new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9">
                 @Html.Html5Editor("EndTime", InputTypes.InputType.Text, htmlAttributes: new { @value = ViewBag.TimeEnd, @required = "true", @class = "timepicker short" })
                 @Html.Html5EditorFor(model => model.EndDate, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @value = ViewBag.DateEnd.ToString("dd.MM.yyyy"), @class = "datepicker long" })
@@ -53,13 +53,20 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.IsUrgent, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+                @Html.LabelFor(model => model.IsImportant, htmlAttributes: new { @class = "control-label LMсol-md-3" })
                 <div class="LMсol-md-9">
-                    @Html.EditorFor(model => model.IsUrgent)
-                    @Html.ValidationMessageFor(model => model.IsUrgent)
+                    @Html.EditorFor(model => model.IsImportant)
+                    @Html.ValidationMessageFor(model => model.IsImportant)
                 </div>
             </div>
 
+            <div class="form-group">
+                @Html.LabelFor(model => model.OnBackground, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+                <div class="LMсol-md-9">
+                    @Html.EditorFor(model => model.OnBackground)
+                    @Html.ValidationMessageFor(model => model.OnBackground)
+                </div>
+            </div>
             <div class="form-group">
                 @Html.Label(LifeManagement.Resources.ResourceScr.Tags, htmlAttributes: new { @class = "control-label LMсol-md-3" })
                 <div class="LMсol-md-9">

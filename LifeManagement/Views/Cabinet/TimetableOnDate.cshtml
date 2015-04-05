@@ -23,10 +23,12 @@
         if (item is Task)
         {
             <div class="task">
-                <div>@Html.ActionLink(" ", "Complete", "Tasks", new { taskId = item.Id }, new { @class = "taskChackBox" })</div>
+                <div class="taskComleateLevel" data-id=@item.Id>
+                    <input class="knob" data-width="45" data-angleoffset=-179 data-displayprevious=true data-anglearc=358 data-fgcolor="#0e0e0e" value='@((item as Task).CompleteLevel)'>
+                </div>
                 <div class="taskInfo">
                     <div class="name">
-                        @if (item.IsUrgent)
+                        @if (item.IsImportant)
                         {
                             <div class="Urgent"></div>
                         }
@@ -50,7 +52,7 @@
             <div class="event">
                 <div class="taskInfo">
                     <div class="name">
-                        @if (item.IsUrgent)
+                        @if (item.IsImportant)
                         {
                             <div class="Urgent"></div>
                         }

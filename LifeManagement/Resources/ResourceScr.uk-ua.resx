@@ -192,8 +192,8 @@
   <data name="NoUrgentNoImportant" xml:space="preserve">
     <value>Не терміново, не важливо</value>
   </data>
-  <data name="UrgentImportant" xml:space="preserve">
-    <value>Терміново, важливо</value>
+  <data name="Important" xml:space="preserve">
+    <value>Важливо</value>
   </data>
   <data name="UrgentNoImportant" xml:space="preserve">
     <value>Терміново, не важливо</value>
@@ -551,5 +551,17 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Налаштування</value>
+  </data>
+  <data name="ErrorComplexity" xml:space="preserve">
+    <value>Завдання такої складності потребує більше часу</value>
+  </data>
+  <data name="FinishAt" xml:space="preserve">
+    <value>Завершення</value>
+  </data>
+  <data name="OnBackground" xml:space="preserve">
+    <value>Фоновий режим</value>
+  </data>
+  <data name="StartAt" xml:space="preserve">
+    <value>Початок</value>
   </data>
 </root>

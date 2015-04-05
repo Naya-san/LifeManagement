@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using LifeManagement.Enums;
 
 namespace LifeManagement.Models.DB
 {
@@ -24,5 +25,60 @@ namespace LifeManagement.Models.DB
                 ComplexityMediumTo = new TimeSpan(3, 30, 0);
                 ComplexityHightTo = new TimeSpan(10, 30, 0);
             }
+
+        public TimeSpan[] GetRange(Complexity complexity)
+        {
+            var result = new TimeSpan[2];
+            switch (complexity)
+            {
+                case Complexity.Low:
+                    result[0] = ComplexityLowFrom;
+                    result[1] = ComplexityLowTo;
+                    break;
+                case Complexity.Medium:
+                    result[0] = ComplexityLowTo.Add(new TimeSpan(0, 1, 0));
+                    result[1] = ComplexityMediumTo;
+                    break;
+                case Complexity.Hight:
+                    result[0] = ComplexityMediumTo.Add(new TimeSpan(0,1,0));
+                    result[1] = ComplexityHightTo;
+                    break;
+                default:
+                    result[0] = new TimeSpan(0, 0, 0);
+                    result[1] = new TimeSpan(0,1,0);
+                    break;
+            }
+            return result;
+        }
+
+        public TimeSpan GetMaxComplexityRange(Complexity complexity)
+        {
+            switch (complexity)
+            {
+                case Complexity.Low:
+                    return ComplexityLowTo;
+                case Complexity.Medium:
+                    return ComplexityMediumTo;
+                case Complexity.Hight:
+                    return ComplexityHightTo;
+                default:
+                    return new TimeSpan(0, 1, 0);
+            }
+        }
+        public TimeSpan GetMinComplexityRange(Complexity complexity)
+        {
+            switch (complexity)
+            {
+                case Complexity.Low:
+                    return ComplexityLowFrom;
+                case Complexity.Medium:
+                    return ComplexityLowTo;
+                case Complexity.Hight:
+                    return ComplexityMediumTo;
+                default:
+                    return new TimeSpan(0, 1, 0);
+            }
+        }
+
     }
 }
