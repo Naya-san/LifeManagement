@@ -220,10 +220,6 @@
     <Compile Include="Extensions\RecordExtensions.cs" />
     <Compile Include="Extensions\RepeatPositionExtensions.cs" />
     <Compile Include="Hubs\AlertsHub.cs" />
-    <Compile Include="Migrations\201504041336035_NewEntetis.cs" />
-    <Compile Include="Migrations\201504041336035_NewEntetis.Designer.cs">
-      <DependentUpon>201504041336035_NewEntetis.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201504041457527_NewTableSettings.cs" />
     <Compile Include="Migrations\201504041457527_NewTableSettings.Designer.cs">
       <DependentUpon>201504041457527_NewTableSettings.cs</DependentUpon>
@@ -394,9 +390,6 @@
     <Content Include="Scripts\availableFields.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EmbeddedResource Include="Migrations\201504041336035_NewEntetis.resx">
-      <DependentUpon>201504041336035_NewEntetis.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504041457527_NewTableSettings.resx">
       <DependentUpon>201504041457527_NewTableSettings.cs</DependentUpon>
     </EmbeddedResource>

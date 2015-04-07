@@ -158,7 +158,39 @@ namespace LifeManagement.Controllers
             return PartialView(settings);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> GenerateList([Bind(Include = "Date,TimeToFill")]TaskListSettingsViewModel listSetting)
+        {
+            listSetting.Date = System.Web.HttpContext.Current.Request.GetUtcFromUserLocalTime(listSetting.Date);
 
+            return Json(new { success = true });
+        }
+
+        public void SendAlertToClient(Guid alertId, DateTime userLocalTime)
+        {
+            var alert = db.Alerts.FirstOrDefault(x => x.Id == alertId);
+            if (alert == null) return;
+
+            var hubContext = GlobalHost.ConnectionManager.GetHubContext<AlertsHub>();
+            hubContext.Clients.User(alert.User.UserName).addAlert(new AlertViewModel { Id = alert.Id, Name = alert.Name, Date = userLocalTime.ToString() });
+        }
+
+        private bool CheckComplexity(Task task, ModelStateDictionary modelState)
+        {
+            bool res = true;
+            if (task.StartDate.HasValue && task.EndDate.HasValue && task.Complexity != Complexity.None)
+            {
+                var settings = db.UserSettings.FirstOrDefaultAsync(x => x.UserId == task.UserId).Result ?? new UserSetting();
+                res = task.EndDate.Value.Subtract(task.StartDate.Value).Ticks >
+                       settings.GetMinComplexityRange(task.Complexity).Ticks;
+                if (!res)
+                {
+                    modelState.AddModelError("Complexity", ResourceScr.ErrorComplexity);
+                }
+
+            }
+            return res;
+        }
         // GET: Tasks/Create
         public ActionResult Create()
         {
@@ -187,33 +219,6 @@ namespace LifeManagement.Controllers
             }
             return RedirectToPrevious();
         }
-
-        public void SendAlertToClient(Guid alertId, DateTime userLocalTime)
-        {
-            var alert = db.Alerts.FirstOrDefault(x => x.Id == alertId);
-            if (alert == null) return;
-
-            var hubContext = GlobalHost.ConnectionManager.GetHubContext<AlertsHub>();
-            hubContext.Clients.User(alert.User.UserName).addAlert(new AlertViewModel { Id = alert.Id, Name = alert.Name, Date = userLocalTime.ToString() });
-        }
-
-        private bool CheckComplexity(Task task, ModelStateDictionary modelState)
-        {
-            bool res = true;
-            if (task.StartDate.HasValue && task.EndDate.HasValue && task.Complexity!= Complexity.None)
-            {
-                var settings = db.UserSettings.FirstOrDefaultAsync(x => x.UserId == task.UserId).Result ?? new UserSetting() ;
-                res = task.EndDate.Value.Subtract(task.StartDate.Value).Ticks >
-                       settings.GetMinComplexityRange(task.Complexity).Ticks;
-                if (!res)
-                {
-                    modelState.AddModelError("Complexity", ResourceScr.ErrorComplexity);
-                }
-
-            }
-            return res;
-        }
-
         // POST: Tasks/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
