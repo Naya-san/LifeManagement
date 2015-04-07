@@ -23,12 +23,16 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System;
 using System.Data.Entity;
 using LifeManagement.Models.DB;
 using Microsoft.AspNet.Identity.EntityFramework;
 using LifeManagement.Migrations;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.EnterpriseServices;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace LifeManagement.Models
 {
@@ -50,13 +54,12 @@ namespace LifeManagement.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-      //      Database.SetInitializer(new CreateDatabaseIfNotExists<ApplicationDbContext>());
+    
 
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
             base.OnModelCreating(modelBuilder);
 
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
-            //base.OnModelCreating(modelBuilder);
+            //Database.SetInitializer(new CreateDatabaseIfNotExists<ApplicationDbContext>());
             //modelBuilder.Entity<IdentityUserLogin>().HasKey(x => x.UserId);
             //modelBuilder.Entity<IdentityUserRole>().HasKey(x => x.UserId);
             //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
@@ -73,6 +76,12 @@ namespace LifeManagement.Models
             //modelBuilder.Entity<ApplicationUser>().HasMany(c => c.Tags).WithRequired().HasForeignKey(c => c.UserId);
         }
 
+
+        public async Task<ListForDay> FirstOrDefaultListTaskAsync(DateTime date)
+        {
+            var list = ListsForDays.FirstOrDefault(x => x.Date == date)?? new ListForDay(date);
+            return list;
+        }
       
     }
 }

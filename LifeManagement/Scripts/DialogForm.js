@@ -31,7 +31,7 @@
                     $(".sliderSpend").slider({min: 5,
                         max: 1440,
                         slide: function( event, ui ) {
-                            $("#TimeToFill").val(Math.floor(ui.value / 60) + ":" + ui.value % 60);
+                            $("#TimeToFill").val(Math.floor(ui.value / 60) + ":" + ((ui.value % 60 > 9) ? ui.value % 60 : "0"+ui.value % 60));
                         }
                     });
                     //$("#TimeToFill").val($(".sliderSpend").slider("value"));

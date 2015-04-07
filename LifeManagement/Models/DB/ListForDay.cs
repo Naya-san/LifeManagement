@@ -22,6 +22,11 @@ namespace LifeManagement.Models.DB
             Id = Guid.NewGuid();
             Records = new List<Record>();
         }
-
+        public ListForDay(DateTime date)
+        {
+            Id = Guid.NewGuid();
+            Records = new List<Record>();
+            Date = date;
+        }
     }
 }

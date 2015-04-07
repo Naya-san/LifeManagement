@@ -149,6 +149,28 @@ namespace LifeManagement.Controllers
             return PartialView(records);
         }
 
+        [HttpPost]
+        public ActionResult MakeTask(Guid[] TasksId)
+        {
+            if (TasksId == null)
+            {
+                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+            }
+            var today = DateTime.UtcNow.Date;
+            foreach (var guid in TasksId)
+            {
+                var task = db.Records.Find(guid);
+                if (task != null)
+                {
+                    task.StartDate = today;
+                    db.Entry(task).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+            }
+            return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+        }
+
         public ActionResult GenerateList()
         {
             var settings = new TaskListSettingsViewModel();
@@ -161,7 +183,13 @@ namespace LifeManagement.Controllers
         [HttpPost]
         public async Task<ActionResult> GenerateList([Bind(Include = "Date,TimeToFill")]TaskListSettingsViewModel listSetting)
         {
-            listSetting.Date = System.Web.HttpContext.Current.Request.GetUtcFromUserLocalTime(listSetting.Date);
+            if (listSetting.Date < DateTime.UtcNow.Date)
+            {
+                ViewBag.Date = listSetting.Date.ToString("dd.MM.yyyy");
+                ViewBag.Time = listSetting.TimeToFill.Hours + ":" + listSetting.TimeToFill.Minutes;
+                ModelState.AddModelError("Date", ResourceScr.itsPast);
+                return PartialView("GenerateList", listSetting);
+            }
 
             return Json(new { success = true });
         }
