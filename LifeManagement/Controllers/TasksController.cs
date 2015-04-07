@@ -149,6 +149,15 @@ namespace LifeManagement.Controllers
             return PartialView(records);
         }
 
+        public ActionResult GenerateList()
+        {
+            var settings = new TaskListSettingsViewModel();
+            ViewBag.Date = DateTime.Now.Date.ToString("dd.MM.yyyy");
+            ViewBag.Time = "00:05";
+
+            return PartialView(settings);
+        }
+
 
         // GET: Tasks/Create
         public ActionResult Create()

@@ -28,7 +28,6 @@
         <div class="form-group">
             @Html.Label(ResourceScr.Medium, new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9 forma">
-                @*@Html.Html5EditorFor(setting => setting.ComplexityLowTo, InputTypes.InputType.Time, htmlAttributes: new { @required = "true", @class = " short" })*@
                 @Html.Html5EditorFor(model => model.ComplexityLowTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short" }) - 
                 @Html.Html5EditorFor(model => model.ComplexityMediumTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short" })
                 @Html.ValidationMessageFor(model => model.ComplexityMediumTo)

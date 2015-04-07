@@ -274,6 +274,7 @@
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AlertViewModel.cs" />
+    <Compile Include="ViewModels\TaskListSettingsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -297,6 +298,7 @@
     <Content Include="Content\Images\go.png" />
     <Content Include="Content\Images\info.png" />
     <Content Include="Content\Images\infoComp.png" />
+    <Content Include="Content\Images\list.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\LogoWithText.png" />
     <Content Include="Content\Images\menu.png" />
@@ -511,6 +513,7 @@
     <Content Include="Views\Tasks\Display.cshtml" />
     <Content Include="Views\Shared\_QuickCreateIcon.cshtml" />
     <Content Include="Views\UserSetting\Edit.cshtml" />
+    <Content Include="Views\Tasks\GenerateList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

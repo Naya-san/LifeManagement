@@ -502,14 +502,19 @@ ul.subtree > li.subpunct:hover>.edit {
 .addTaskIcon {
     background: url(/Content/Images/AddTask.png) 0px no-repeat;
     position: absolute;
-    right: 55px;
+    right: 80px;
 }
 .addEventIcon {
     background: url(/Content/Images/AddEvent.png) 0px no-repeat;
     position: absolute;
-    right: 20px;
+    right: 50px;
 }
-.addEventIcon, .addTaskIcon {
+.generateListIcon {
+    background: url(/Content/Images/list.png) 0px no-repeat;
+    position: absolute;
+    right: 15px;
+}
+.generateListIcon, .addEventIcon, .addTaskIcon {
     height: 28px;
     width: 28px;
     float: left;

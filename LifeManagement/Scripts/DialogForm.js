@@ -28,11 +28,18 @@
                 create: function() {
                     $(".datepicker").datepicker({ dateFormat: 'dd.mm.yy', }, $.datepicker.setDefaults($.datepicker.regional[LocalizeCode]));
                     $(".timepicker").timepicker($.timepicker.setDefaults($.timepicker.regional[LocalizeCode]));
+                    $(".sliderSpend").slider({min: 5,
+                        max: 1440,
+                        slide: function( event, ui ) {
+                            $("#TimeToFill").val(Math.floor(ui.value / 60) + ":" + ui.value % 60);
+                        }
+                    });
+                    //$("#TimeToFill").val($(".sliderSpend").slider("value"));
                 },
                     modal: true,
                     draggable: true,
                     resizable: false,
-                    position: ['center', 'center'],
+                    position: ['center', 'center']
                 });
 
             // Enable client side validation
@@ -78,7 +85,13 @@ function wireUpForm(dialog, updateTargetId, updateUrl) {
                     //console.log($(".datepicker").length);
                     $(".datepicker").datepicker({ dateFormat: 'dd.mm.yy' }, $.datepicker.regional[LocalizeCode]);
                     $(".timepicker").timepicker($.timepicker.setDefaults($.timepicker.regional[LocalizeCode]));
-
+                    $(".sliderSpend").slider({
+                        min: 5,
+                        max: 1440,
+                        slide: function (event, ui) {
+                            $("#TimeToFill").val(Math.floor(ui.value / 60) + ":" + ui.value % 60);
+                        }
+                    });
                     // Enable client side validation
                     //$.validator.unobtrusive.parse(dialog);
 
