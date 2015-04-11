@@ -235,7 +235,6 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DB\ListForDay.cs" />
     <Compile Include="Models\DB\UserSetting.cs" />
-    <Compile Include="Models\UserTimeConverter.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Models\DB\ApplicationUser.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />

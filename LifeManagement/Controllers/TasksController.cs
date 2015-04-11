@@ -190,6 +190,7 @@ namespace LifeManagement.Controllers
                 ModelState.AddModelError("Date", ResourceScr.itsPast);
                 return PartialView("GenerateList", listSetting);
             }
+            var listForDay = db.FirstOrDefaultListTaskAsync(listSetting.Date);
 
             return Json(new { success = true });
         }
