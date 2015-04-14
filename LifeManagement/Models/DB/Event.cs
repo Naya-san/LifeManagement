@@ -74,5 +74,20 @@ namespace LifeManagement.Models.DB
             modelState.AddModelError("EndDate", ResourceScr.ErrorDateOrder);
             return false;
         }
+
+        public override TimeSpan CalculateTimeLeft(UserSetting setting)
+        {
+            var dateNow = DateTime.UtcNow;
+            if (dateNow > EndDate || !EndDate.HasValue || !StartDate.HasValue)
+            {
+                return new TimeSpan(0);
+            }
+            var timeSpan = EndDate.Value.Subtract(dateNow > StartDate ? dateNow : StartDate.Value);
+            if (OnBackground)
+            {
+                timeSpan = new TimeSpan(timeSpan.Ticks*setting.ParallelismPercentage/100);
+            }
+            return timeSpan;
+        }
     }
 }

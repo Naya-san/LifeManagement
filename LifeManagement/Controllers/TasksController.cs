@@ -190,8 +190,18 @@ namespace LifeManagement.Controllers
                 ModelState.AddModelError("Date", ResourceScr.itsPast);
                 return PartialView("GenerateList", listSetting);
             }
-            var listForDay = db.FirstOrDefaultListTaskAsync(listSetting.Date);
-
+            var userId = User.Identity.GetUserId();
+            var records =
+                db.Records.Where(x => x.UserId == userId &&
+                    (((x.StartDate.HasValue && x.StartDate.Value <= listSetting.Date) && ((x.EndDate.HasValue && x.EndDate.Value >= listSetting.Date) || !x.EndDate.HasValue))
+                    ||
+                    (!x.StartDate.HasValue && x.EndDate.HasValue && x.EndDate.Value >= listSetting.Date))).ToList();
+            var settings = db.UserSettings.FirstOrDefault(x => x.UserId == userId) ?? new UserSetting(userId);
+            var ticksInUse = settings.WorkingTime.Subtract(new TimeSpan(records.Sum(record => record.CalculateTimeLeft(settings).Ticks)));
+            if (listSetting.TimeToFill.Subtract(ticksInUse) > settings.GetMinComplexityRange(Complexity.None))
+            {
+                PartialView("NothingToDoTask", records.OfType<Task>().ToList());
+            }
             return Json(new { success = true });
         }
 

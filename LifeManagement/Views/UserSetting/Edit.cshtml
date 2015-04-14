@@ -1,4 +1,5 @@
 ﻿@using System.Web.Mvc.Html5
+@using LifeManagement.Extensions
 @using LifeManagement.Resources
 @model LifeManagement.Models.DB.UserSetting
 
@@ -19,8 +20,9 @@
         <div class="form-group">
             @Html.Label(ResourceScr.Low, new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9 forma">
-                @Html.Html5EditorFor(model => model.ComplexityLowFrom, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = "short" }) - 
-                @Html.Html5EditorFor(model => model.ComplexityLowTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short" })
+                @Html.Html5EditorFor(model => model.ComplexityLowFrom, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = "short", @readonly = "readonly" }) - 
+                @Html.Html5EditorFor(model => model.ComplexityLowTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short", @readonly = "readonly" })
+                <div class="longer" id="slider-rangeLow" data-start-value-to="@Model.ComplexityLowFrom.TotalMinutes" data-start-value-from="@Model.ComplexityLowTo.TotalMinutes"></div>
                 @Html.ValidationMessageFor(model => model.ComplexityLowFrom)
             </div>
         </div>
@@ -28,24 +30,51 @@
         <div class="form-group">
             @Html.Label(ResourceScr.Medium, new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9 forma">
-                @Html.Html5EditorFor(model => model.ComplexityLowTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short" }) - 
-                @Html.Html5EditorFor(model => model.ComplexityMediumTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short" })
+                @Html.Html5EditorFor(model => model.ComplexityLowTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short", @readonly = "readonly" }) - 
+                @Html.Html5EditorFor(model => model.ComplexityMediumTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short", @readonly = "readonly" })
+                <div class="sliderSpend longer"></div>
                 @Html.ValidationMessageFor(model => model.ComplexityMediumTo)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.Label(ResourceScr.High, new { @class = "control-label LMсol-md-3" })
+            @Html.Label(ResourceScr.High, new {@class = "control-label LMсol-md-3"})
             <div class="LMсol-md-9 forma">
-                @Html.Html5EditorFor(model => model.ComplexityMediumTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short" }) - 
-                @Html.Html5EditorFor(model => model.ComplexityHightTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short" })
+                @Html.Html5EditorFor(model => model.ComplexityMediumTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short", @readonly = "readonly" }) -
+                @Html.Html5EditorFor(model => model.ComplexityHightTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short", @readonly = "readonly" })
+                <div class="sliderSpend longer"></div>
                 @Html.ValidationMessageFor(model => model.ComplexityHightTo)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.WorkingTime, new {@class = "control-label LMсol-md-3"})
+            <div class="LMсol-md-9 forma">
+                @Html.Html5EditorFor(model => model.WorkingTime, InputTypes.InputType.Text, htmlAttributes: new
+                {
+                    @required = "true", @class = " short", @readonly = "readonly",
+                    @value = @Model.WorkingTime.Hours + ":" + @Model.WorkingTime.Minutes
+                })
+                <br/>
+                <div class="longer" id="sliderWorking" data-start-value="@Model.WorkingTime.TotalMinutes"></div>
+                <br />
+                @Html.ValidationMessageFor(model => model.WorkingTime)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ParallelismPercentage, new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9 forma">
+                @Html.Html5EditorFor(model => model.ParallelismPercentage, InputTypes.InputType.Text, htmlAttributes: new {@required = "true", @class = "Percentage short", @readonly = "readonly" })%
+                <br />
+                <div class="sliderPercentage longer" data-start-value="@Model.ParallelismPercentage"></div>
+                <br />
+                @Html.ValidationMessageFor(model => model.ParallelismPercentage)
             </div>
         </div>
 
         <div class="buttonbar">
 
-            <input type="submit" value="@ResourceScr.save" class="btn btn-default fullsize" />
+            <input type="submit" value="@ResourceScr.save" class="btn btn-default halfsize" />
+            @Html.DialogFormLink(ResourceScr.Delete, "btn btn-default halfsize", Url.Action("ToDefault", "UserSetting", new { id = Model.Id }), ResourceScr.Delete, "", "", 700)
         </div>
     </div>
 }

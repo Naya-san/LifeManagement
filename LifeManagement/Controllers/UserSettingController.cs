@@ -41,7 +41,7 @@ namespace LifeManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include="Id,UserId,ComplexityLowFrom,ComplexityLowTo,ComplexityMediumTo,ComplexityHightTo")] UserSetting usersetting)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,UserId,ComplexityLowFrom,ComplexityLowTo,ComplexityMediumTo,ComplexityHightTo,ParallelismPercentage,WorkingTime")] UserSetting usersetting)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +62,26 @@ namespace LifeManagement.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public async Task<ActionResult> ToDefault(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var settings = await db.UserSettings.FirstOrDefaultAsync(x => x.Id == id);
+            if (settings == null)
+            {
+                return HttpNotFound();
+            }
+            settings.SetDefault();
+            if (ModelState.IsValid)
+            {
+                db.Entry(settings).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+            }
+            return PartialView("Edit", settings);
         }
     }
 }

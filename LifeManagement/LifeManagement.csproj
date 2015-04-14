@@ -232,6 +232,10 @@
     <Compile Include="Migrations\201504051712110_Rename.Designer.cs">
       <DependentUpon>201504051712110_Rename.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504130926153_NawSettings.cs" />
+    <Compile Include="Migrations\201504130926153_NawSettings.Designer.cs">
+      <DependentUpon>201504130926153_NawSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DB\ListForDay.cs" />
     <Compile Include="Models\DB\UserSetting.cs" />
@@ -398,6 +402,9 @@
     <EmbeddedResource Include="Migrations\201504051712110_Rename.resx">
       <DependentUpon>201504051712110_Rename.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504130926153_NawSettings.resx">
+      <DependentUpon>201504130926153_NawSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\ResourceScr.ru-ru.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ResourceScr.ru-ru.Designer.cs</LastGenOutput>
@@ -429,6 +436,7 @@
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\jquery-ui-timepicker-ru.js" />
     <Content Include="Scripts\jquery-ui-timepicker-uk.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.knob.min.js" />
     <Content Include="Scripts\jquery.signalR-2.1.2.js" />
     <Content Include="Scripts\jquery.signalR-2.1.2.min.js" />

@@ -70,6 +70,15 @@ namespace LifeManagement.Models.DB
             return true;
         }
 
+        public override TimeSpan CalculateTimeLeft(UserSetting setting)
+        {
+            if (CompleteLevel < 100)
+            {
+                return new TimeSpan(setting.GetMaxComplexityRange(Complexity).Ticks*CompleteLevel/100);
+            }
+            return new TimeSpan(0);
+        }
+
         public string ConvertTimeToNice(bool withComplete)
         {
             if (withComplete && CompletedOn.HasValue)

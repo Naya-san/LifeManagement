@@ -63,6 +63,8 @@ namespace LifeManagement.Models.DB
 
         public abstract bool IsTimeValid(ModelStateDictionary modelState, AlertPosition alert);
 
+        public abstract TimeSpan CalculateTimeLeft(UserSetting setting);
+
         protected Record()
         {
             Id = Guid.NewGuid();

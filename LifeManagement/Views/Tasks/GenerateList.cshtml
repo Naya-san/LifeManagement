@@ -10,7 +10,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9">              
-                @Html.Html5EditorFor(model => model.Date, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = "datepicker longer", @value = ViewBag.Date })
+                @Html.Html5EditorFor(model => model.Date, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = "datepicker longer", @value = ViewBag.Date, @readonly = "readonly" })
                 <br>
                 @Html.ValidationMessageFor(model => model.Date)
             </div>

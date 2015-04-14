@@ -14,17 +14,30 @@ namespace LifeManagement.Models.DB
             public TimeSpan ComplexityLowTo { get; set; }
             public TimeSpan ComplexityMediumTo { get; set; }
             public TimeSpan ComplexityHightTo { get; set; }
-
+            public int ParallelismPercentage { get; set; }
+            public TimeSpan WorkingTime { get; set; }
             public virtual ApplicationUser User { get; set; }
 
             public UserSetting()
             {
                 Id = Guid.NewGuid();
-                ComplexityLowFrom = new TimeSpan(0, 5, 0);
-                ComplexityLowTo = new TimeSpan(1, 20, 0);
-                ComplexityMediumTo = new TimeSpan(3, 30, 0);
-                ComplexityHightTo = new TimeSpan(10, 30, 0);
+                SetDefault();
             }
+
+            public UserSetting(string userId) : this()
+            {
+                this.UserId = userId;
+            }
+
+        public void SetDefault()
+        {
+            ComplexityLowFrom = new TimeSpan(0, 15, 0);
+            ComplexityLowTo = new TimeSpan(1, 20, 0);
+            ComplexityMediumTo = new TimeSpan(3, 30, 0);
+            ComplexityHightTo = new TimeSpan(10, 30, 0);
+            ParallelismPercentage = 30;
+            WorkingTime = new TimeSpan(16, 0, 0);
+        }
 
         public TimeSpan[] GetRange(Complexity complexity)
         {
@@ -45,11 +58,12 @@ namespace LifeManagement.Models.DB
                     break;
                 default:
                     result[0] = new TimeSpan(0, 0, 0);
-                    result[1] = new TimeSpan(0,1,0);
+                    result[1] = new TimeSpan(0,15,0);
                     break;
             }
             return result;
         }
+
 
         public TimeSpan GetMaxComplexityRange(Complexity complexity)
         {
@@ -62,7 +76,7 @@ namespace LifeManagement.Models.DB
                 case Complexity.Hight:
                     return ComplexityHightTo;
                 default:
-                    return new TimeSpan(0, 1, 0);
+                    return new TimeSpan(0, 15, 0);
             }
         }
         public TimeSpan GetMinComplexityRange(Complexity complexity)
@@ -76,7 +90,7 @@ namespace LifeManagement.Models.DB
                 case Complexity.Hight:
                     return ComplexityMediumTo;
                 default:
-                    return new TimeSpan(0, 1, 0);
+                    return new TimeSpan(0, 15, 0);
             }
         }
 
