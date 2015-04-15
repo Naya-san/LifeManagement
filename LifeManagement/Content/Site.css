@@ -849,3 +849,9 @@ input[type="text"].invisibleInput{
 input[type="submit"].invisibleInput:hover {
     font-weight: bold;
 }
+
+/*Slider*/
+.sliderLong {
+    width: 288px;
+}
+.sliderLong .ui-slider-range { background: #4e888a; }

@@ -34,6 +34,7 @@ $(function () {
                     $(".datepicker").datepicker({ dateFormat: "dd.mm.yy", }, $.datepicker.setDefaults($.datepicker.regional[LocalizeCode]));
                     $(".timepicker").timepicker($.timepicker.setDefaults($.timepicker.regional[LocalizeCode]));
                     $(".sliderSpend").slider(console.log($(".sliderSpend").attr("data-start-value")), {
+                        range: "min",
                         min: 5,
                         max: 1440,
                         value: $(".sliderSpend").attr("data-start-value"),
@@ -42,6 +43,7 @@ $(function () {
                         }
                     });
                     $("#sliderWorking").slider(console.log($("#sliderWorking").attr("data-start-value")), {
+                        range: "min",
                         min: 5,
                         max: 1440,
                         value: $("#sliderWorking").attr("data-start-value"),
@@ -50,6 +52,7 @@ $(function () {
                         }
                     });
                     $(".sliderPercentage").slider(console.log($(".sliderSpend").attr("data-start-value")), {
+                        range: "min",
                         min: 1,
                         max: 100,
                         value: $(".sliderPercentage").attr("data-start-value"),
@@ -64,9 +67,28 @@ $(function () {
                         max: 1440,
                         values: [$("#slider-rangeLow").attr("data-start-value-from"), $("#slider-rangeLow").attr("data-start-value-to")],
                         slide: function (event, ui) {
-                       //     var value = Math.floor(ui.values[0] / 60) + ":" + ((ui.values[0] % 60 > 9) ? ui.values[0] % 60 : "0" + ui.values[0] % 60);
                             $("#ComplexityLowFrom").val(toTime(ui.values[0]));
                             $("#ComplexityLowTo").val(toTime(ui.values[1]));
+                        }
+                    });
+                    $("#slider-rangeMedium").slider({
+                        range: true,
+                        min: 4,
+                        max: 1440,
+                        values: [$("#slider-rangeMedium").attr("data-start-value-from"), $("#slider-rangeMedium").attr("data-start-value-to")],
+                        slide: function (event, ui) {
+                            $("#ComplexityLowTo").val(toTime(ui.values[0]));
+                            $("#ComplexityMediumTo").val(toTime(ui.values[1]));
+                        }
+                    });
+                    $("#slider-rangeHight").slider({
+                        range: true,
+                        min: 4,
+                        max: 1440,
+                        values: [$("#slider-rangeHight").attr("data-start-value-from"), $("#slider-rangeHight").attr("data-start-value-to")],
+                        slide: function (event, ui) {
+                            $("#ComplexityMediumTo").val(toTime(ui.values[0]));
+                            $("#ComplexityHightTo").val(toTime(ui.values[1]));
                         }
                     });
                 },

@@ -22,7 +22,7 @@
             <div class="LMсol-md-9 forma">
                 @Html.Html5EditorFor(model => model.ComplexityLowFrom, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = "short", @readonly = "readonly" }) - 
                 @Html.Html5EditorFor(model => model.ComplexityLowTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short", @readonly = "readonly" })
-                <div class="longer" id="slider-rangeLow" data-start-value-to="@Model.ComplexityLowFrom.TotalMinutes" data-start-value-from="@Model.ComplexityLowTo.TotalMinutes"></div>
+                <div class="sliderLong" id="slider-rangeLow" data-start-value-from="@Model.ComplexityLowFrom.TotalMinutes" data-start-value-to="@Model.ComplexityLowTo.TotalMinutes"></div>
                 @Html.ValidationMessageFor(model => model.ComplexityLowFrom)
             </div>
         </div>
@@ -32,7 +32,7 @@
             <div class="LMсol-md-9 forma">
                 @Html.Html5EditorFor(model => model.ComplexityLowTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short", @readonly = "readonly" }) - 
                 @Html.Html5EditorFor(model => model.ComplexityMediumTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short", @readonly = "readonly" })
-                <div class="sliderSpend longer"></div>
+                <div class="sliderLong" id="slider-rangeMedium" data-start-value-from="@(Model.ComplexityLowTo.TotalMinutes+1)" data-start-value-to="@Model.ComplexityMediumTo.TotalMinutes"></div>
                 @Html.ValidationMessageFor(model => model.ComplexityMediumTo)
             </div>
         </div>
@@ -42,7 +42,7 @@
             <div class="LMсol-md-9 forma">
                 @Html.Html5EditorFor(model => model.ComplexityMediumTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short", @readonly = "readonly" }) -
                 @Html.Html5EditorFor(model => model.ComplexityHightTo, InputTypes.InputType.Text, htmlAttributes: new { @required = "true", @class = " short", @readonly = "readonly" })
-                <div class="sliderSpend longer"></div>
+                <div class="sliderLong" id="slider-rangeHight" data-start-value-from="@(Model.ComplexityMediumTo.TotalMinutes+1)" data-start-value-to="@Model.ComplexityHightTo.TotalMinutes"></div>
                 @Html.ValidationMessageFor(model => model.ComplexityHightTo)
             </div>
         </div>
@@ -55,7 +55,7 @@
                     @value = @Model.WorkingTime.Hours + ":" + @Model.WorkingTime.Minutes
                 })
                 <br/>
-                <div class="longer" id="sliderWorking" data-start-value="@Model.WorkingTime.TotalMinutes"></div>
+                <div class="sliderLong" id="sliderWorking" data-start-value="@Model.WorkingTime.TotalMinutes"></div>
                 <br />
                 @Html.ValidationMessageFor(model => model.WorkingTime)
             </div>
@@ -65,7 +65,7 @@
             <div class="LMсol-md-9 forma">
                 @Html.Html5EditorFor(model => model.ParallelismPercentage, InputTypes.InputType.Text, htmlAttributes: new {@required = "true", @class = "Percentage short", @readonly = "readonly" })%
                 <br />
-                <div class="sliderPercentage longer" data-start-value="@Model.ParallelismPercentage"></div>
+                <div class="sliderPercentage sliderLong" data-start-value="@Model.ParallelismPercentage"></div>
                 <br />
                 @Html.ValidationMessageFor(model => model.ParallelismPercentage)
             </div>
