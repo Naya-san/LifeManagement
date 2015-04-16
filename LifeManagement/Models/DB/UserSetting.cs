@@ -16,6 +16,7 @@ namespace LifeManagement.Models.DB
             public TimeSpan ComplexityHightTo { get; set; }
             public int ParallelismPercentage { get; set; }
             public TimeSpan WorkingTime { get; set; }
+        //    public TimeZone TimeZone { get; set; }
             public virtual ApplicationUser User { get; set; }
 
             public UserSetting()
@@ -37,6 +38,7 @@ namespace LifeManagement.Models.DB
             ComplexityHightTo = new TimeSpan(10, 30, 0);
             ParallelismPercentage = 30;
             WorkingTime = new TimeSpan(16, 0, 0);
+           // TimeZone = TimeZone.
         }
 
         public TimeSpan[] GetRange(Complexity complexity)

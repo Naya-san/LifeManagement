@@ -705,6 +705,13 @@ input[type="checkbox"].taskcomp {
     background-color: #f8f1d4;
 }
 
+.formaReadOnly > select,
+.formaReadOnly input{
+    width: 50px;
+    border: 1px solid #f8f1d4;
+    background-color: #f8f1d4;
+}
+
 .forma > select:active, .forma > select:hover {
     background-color: #ffffff;
 }
