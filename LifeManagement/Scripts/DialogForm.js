@@ -67,11 +67,18 @@ $(function () {
                         max: 1440,
                         values: [$("#slider-rangeLow").attr("data-start-value-from"), $("#slider-rangeLow").attr("data-start-value-to")],
                         slide: function (event, ui) {
+                            $("#slider-rangeLow").attr("data-start-value-from", ui.values[0]);
                             $("#ComplexityLowFrom").val(toTime(ui.values[0]));
                             $("#ComplexityLowTo").val(toTime(ui.values[1]));
-                            var difference = $("#slider-rangeMedium").values[1] - $("#slider-rangeMedium").values[0];
-                            console.log(difference);
-
+                            if($("#slider-rangeLow").attr("data-start-value-to") != ui.values[1]){
+                                $("#slider-rangeLow").attr("data-start-value-to", ui.values[1]);                            
+                                var difference = $("#slider-rangeMedium").attr("data-start-value-to") - $("#slider-rangeMedium").attr("data-start-value-from");
+                                $("#slider-rangeMedium").slider("values", [$("#slider-rangeLow").attr("data-start-value-to"), (parseInt($("#slider-rangeLow").attr("data-start-value-to")) + difference)]);
+                                $("#slider-rangeMedium").attr("data-start-value-from", $("#slider-rangeLow").attr("data-start-value-to"));
+                                $("#slider-rangeMedium").attr("data-start-value-to", parseInt($("#slider-rangeLow").attr("data-start-value-to")) + difference);
+                                var differenceH = $("#slider-rangeHight").attr("data-start-value-to") - $("#slider-rangeHight").attr("data-start-value-from");                              
+                                $("#slider-rangeHight").slider("values", [$("#slider-rangeMedium").attr("data-start-value-to"), (parseInt($("#slider-rangeMedium").attr("data-start-value-to")) + differenceH)]);
+                            }  
                         }
                     });
                     $("#slider-rangeMedium").slider({
@@ -80,8 +87,14 @@ $(function () {
                         max: 1440,
                         values: [$("#slider-rangeMedium").attr("data-start-value-from"), $("#slider-rangeMedium").attr("data-start-value-to")],
                         slide: function (event, ui) {
+                            $("#slider-rangeMedium").attr("data-start-value-from", ui.values[0]);
+                            $("#slider-rangeMedium").attr("data-start-value-to", ui.values[1]);
                             $("#ComplexityLowTo").val(toTime(ui.values[0]));
                             $("#ComplexityMediumTo").val(toTime(ui.values[1]));
+                            var differenceL = $("#slider-rangeLow").attr("data-start-value-to") - $("#slider-rangeLow").attr("data-start-value-from");
+                            var differenceH = $("#slider-rangeHight").attr("data-start-value-to") - $("#slider-rangeHight").attr("data-start-value-from");
+                            $("#slider-rangeLow").slider("values", [$("#slider-rangeMedium").attr("data-start-value-from") - differenceL, $("#slider-rangeMedium").attr("data-start-value-from")]);
+                            $("#slider-rangeHight").slider("values", [$("#slider-rangeMedium").attr("data-start-value-to"), (parseInt($("#slider-rangeMedium").attr("data-start-value-to")) + differenceH)]);
                         }
                     });
                     $("#slider-rangeHight").slider({
@@ -90,8 +103,13 @@ $(function () {
                         max: 1440,
                         values: [$("#slider-rangeHight").attr("data-start-value-from"), $("#slider-rangeHight").attr("data-start-value-to")],
                         slide: function (event, ui) {
+                            $("#slider-rangeHight").attr("data-start-value-from", ui.values[0]);
+                            $("#slider-rangeHight").attr("data-start-value-to", ui.values[1]);
                             $("#ComplexityMediumTo").val(toTime(ui.values[0]));
                             $("#ComplexityHightTo").val(toTime(ui.values[1]));
+                            var differenceH = $("#slider-rangeHight").attr("data-start-value-to") - $("#slider-rangeHight").attr("data-start-value-from");
+                            var difference = $("#slider-rangeMedium").attr("data-start-value-to") - $("#slider-rangeMedium").attr("data-start-value-from");
+                            $("#slider-rangeMedium").slider("values", [$("#slider-rangeHight").attr("data-start-value-from") - difference, ($("#slider-rangeHight").attr("data-start-value-from"))]);
                         }
                     });
                 },
