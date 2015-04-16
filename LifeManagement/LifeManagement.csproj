@@ -220,6 +220,7 @@
     <Compile Include="Extensions\RecordExtensions.cs" />
     <Compile Include="Extensions\RepeatPositionExtensions.cs" />
     <Compile Include="Hubs\AlertsHub.cs" />
+    <Compile Include="Logic\ListManager.cs" />
     <Compile Include="Migrations\201504041457527_NewTableSettings.cs" />
     <Compile Include="Migrations\201504041457527_NewTableSettings.Designer.cs">
       <DependentUpon>201504041457527_NewTableSettings.cs</DependentUpon>
