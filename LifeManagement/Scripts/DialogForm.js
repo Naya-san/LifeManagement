@@ -69,6 +69,9 @@ $(function () {
                         slide: function (event, ui) {
                             $("#ComplexityLowFrom").val(toTime(ui.values[0]));
                             $("#ComplexityLowTo").val(toTime(ui.values[1]));
+                            var difference = $("#slider-rangeMedium").values[1] - $("#slider-rangeMedium").values[0];
+                            console.log(difference);
+
                         }
                     });
                     $("#slider-rangeMedium").slider({
