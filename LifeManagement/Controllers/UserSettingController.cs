@@ -64,13 +64,8 @@ namespace LifeManagement.Controllers
             base.Dispose(disposing);
         }
 
-        public async Task<ActionResult> ToDefault(Guid? id)
+        public async Task<ActionResult> ToDefault([Bind(Include = "Id,UserId,ComplexityLowFrom,ComplexityLowTo,ComplexityMediumTo,ComplexityHightTo,ParallelismPercentage,WorkingTime")] UserSetting settings)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var settings = await db.UserSettings.FirstOrDefaultAsync(x => x.Id == id);
             if (settings == null)
             {
                 return HttpNotFound();
@@ -81,7 +76,7 @@ namespace LifeManagement.Controllers
                 db.Entry(settings).State = EntityState.Modified;
                 await db.SaveChangesAsync();
             }
-            return PartialView("Edit", settings);
+            return Json(new { success = true });
         }
     }
 }

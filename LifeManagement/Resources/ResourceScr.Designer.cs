@@ -376,6 +376,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date for planning.
+        /// </summary>
+        public static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to days.
         /// </summary>
         public static string days {
@@ -642,6 +651,15 @@ namespace LifeManagement.Resources {
         public static string Future {
             get {
                 return ResourceManager.GetString("Future", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate task list.
+        /// </summary>
+        public static string GenerateList {
+            get {
+                return ResourceManager.GetString("GenerateList", resourceCulture);
             }
         }
         
@@ -957,6 +975,15 @@ namespace LifeManagement.Resources {
         public static string Overdue {
             get {
                 return ResourceManager.GetString("Overdue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Percentage of time you need for background events.
+        /// </summary>
+        public static string ParallelismPercentage {
+            get {
+                return ResourceManager.GetString("ParallelismPercentage", resourceCulture);
             }
         }
         
@@ -1339,6 +1366,24 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to How much free time should be filled.
+        /// </summary>
+        public static string TimeToFill {
+            get {
+                return ResourceManager.GetString("TimeToFill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your time zone.
+        /// </summary>
+        public static string TimeZone {
+            get {
+                return ResourceManager.GetString("TimeZone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to to.
         /// </summary>
         public static string to {
@@ -1362,6 +1407,15 @@ namespace LifeManagement.Resources {
         public static string Today {
             get {
                 return ResourceManager.GetString("Today", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To default.
+        /// </summary>
+        public static string ToDefault {
+            get {
+                return ResourceManager.GetString("ToDefault", resourceCulture);
             }
         }
         
@@ -1407,6 +1461,15 @@ namespace LifeManagement.Resources {
         public static string wb {
             get {
                 return ResourceManager.GetString("wb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time for tasks and events.
+        /// </summary>
+        public static string WorkingTime {
+            get {
+                return ResourceManager.GetString("WorkingTime", resourceCulture);
             }
         }
         

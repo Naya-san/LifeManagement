@@ -331,7 +331,7 @@
     <value>У вас немає термінових завдань. Ви можете прочитати цікаву книгу, зайнятися спортом або просто відпочити.</value>
   </data>
   <data name="itsPast" xml:space="preserve">
-    <value>Потяг пішов, не можна додати справу для минулог часу</value>
+    <value>Неможливо використовувати минулий час</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Детальніше</value>
@@ -563,5 +563,26 @@
   </data>
   <data name="StartAt" xml:space="preserve">
     <value>Початок</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>На коли скласти розклад</value>
+  </data>
+  <data name="GenerateList" xml:space="preserve">
+    <value>Згенерувати список завдань</value>
+  </data>
+  <data name="ParallelismPercentage" xml:space="preserve">
+    <value>Скільки уваги потребують справи у фоновому режимі</value>
+  </data>
+  <data name="TimeToFill" xml:space="preserve">
+    <value>На скільки часу необхідно скласти розклад</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Ваш часовой пояс</value>
+  </data>
+  <data name="ToDefault" xml:space="preserve">
+    <value>Повернути до базових наштувань</value>
+  </data>
+  <data name="WorkingTime" xml:space="preserve">
+    <value>Скільки часу на день Ви готові присвятити справам</value>
   </data>
 </root>

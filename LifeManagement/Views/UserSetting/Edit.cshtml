@@ -72,11 +72,21 @@
         </div>
 
         <div class="buttonbar">
-
-            <input type="submit" value="@ResourceScr.save" class="btn btn-default halfsize" />
-            @Html.DialogFormLink(ResourceScr.Delete, "btn btn-default halfsize", Url.Action("ToDefault", "UserSetting", new { id = Model.Id }), ResourceScr.Delete, "", "", 700)
+            <input type="submit" value="@ResourceScr.save" class="btn btn-default fullsize"/>
         </div>
     </div>
+}
+@using (Html.BeginForm("ToDefault", "UserSetting", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.UserId)
+    @Html.HiddenFor(model => model.WorkingTime)
+    @Html.HiddenFor(model => model.ParallelismPercentage)
+    @Html.HiddenFor(model => model.ComplexityLowTo)
+    @Html.HiddenFor(model => model.ComplexityMediumTo)
+    @Html.HiddenFor(model => model.ComplexityHightTo)
+    @Html.HiddenFor(model => model.ComplexityLowFrom)
+    <input type="submit" value="@ResourceScr.to" class="btn btn-default fullsize" />
 }
 
 @section Scripts {

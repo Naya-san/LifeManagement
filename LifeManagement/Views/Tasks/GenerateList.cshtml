@@ -17,9 +17,9 @@
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.TimeToFill, htmlAttributes: new { @class = "control-label LMсol-md-3" })
-            <div class="LMсol-md-9">
-                @Html.Html5EditorFor(model => model.TimeToFill, htmlAttributes: new { @class = "longer", @value = ViewBag.Time})
-                <div class="sliderSpend longer"></div>
+            <div class="LMсol-md-9 formaReadOnly">
+                @Html.Html5EditorFor(model => model.TimeToFill, htmlAttributes: new { @class = "longer", @value = ViewBag.Time })
+                <div class="sliderSpend sliderLong"></div>
                 <br>
                 @Html.ValidationMessageFor(model => model.TimeToFill)
             </div>

@@ -313,6 +313,7 @@
     <Content Include="Content\Images\Nothing.png" />
     <Content Include="Content\Images\Plus.png" />
     <Content Include="Content\Images\Plus2.png" />
+    <Content Include="Content\Images\reminder.png" />
     <Content Include="Content\Images\Russia-Flag-icon.png" />
     <Content Include="Content\Images\suitcaseNoUrgentImportant.png" />
     <Content Include="Content\Images\suitcaseNoUrgentNoImportant.png" />
@@ -325,7 +326,9 @@
     <Content Include="Content\Images\taskUrgentImportant.png" />
     <Content Include="Content\Images\taskUrgentNoImportant.png" />
     <Content Include="Content\Images\timemachine_backup.png" />
+    <Content Include="Content\Images\time_loading.png" />
     <Content Include="Content\Images\toBackLog.png" />
+    <Content Include="Content\Images\todo-list.png" />
     <Content Include="Content\Images\ui-bg_flat_10_000000_40x100.png" />
     <Content Include="Content\Images\ui-bg_glass_100_f6f6f6_1x400.png" />
     <Content Include="Content\Images\ui-icons_ffffff_256x240.png" />

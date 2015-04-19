@@ -331,7 +331,7 @@
     <value>У вас нет срочных заданий. Почитайте интересную книгу, займитесь спортом или просто отдохните.</value>
   </data>
   <data name="itsPast" xml:space="preserve">
-    <value>Поезд ушел, это время уже в прошлом</value>
+    <value>Невозможно использовать прошедшее время</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Подробнее</value>
@@ -563,5 +563,26 @@
   </data>
   <data name="StartAt" xml:space="preserve">
     <value>Начало</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date for planning</value>
+  </data>
+  <data name="ParallelismPercentage" xml:space="preserve">
+    <value>Сколько процентов внимания требуют фоновые события</value>
+  </data>
+  <data name="TimeToFill" xml:space="preserve">
+    <value>Сколько времени необходимо распланировать</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Ваш часовой пояс</value>
+  </data>
+  <data name="ToDefault" xml:space="preserve">
+    <value>По умолчанию</value>
+  </data>
+  <data name="WorkingTime" xml:space="preserve">
+    <value>Сколько времени можно посвятить делам ежедневно</value>
+  </data>
+  <data name="GenerateList" xml:space="preserve">
+    <value>Сгенерировать список заданий</value>
   </data>
 </root>

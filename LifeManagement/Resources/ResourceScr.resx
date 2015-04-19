@@ -570,4 +570,25 @@
   <data name="StartAt" xml:space="preserve">
     <value>Start at</value>
   </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date for planning</value>
+  </data>
+  <data name="ParallelismPercentage" xml:space="preserve">
+    <value>Percentage of time you need for background events</value>
+  </data>
+  <data name="TimeToFill" xml:space="preserve">
+    <value>How much free time should be filled</value>
+  </data>
+  <data name="TimeZone" xml:space="preserve">
+    <value>Your time zone</value>
+  </data>
+  <data name="ToDefault" xml:space="preserve">
+    <value>To default</value>
+  </data>
+  <data name="WorkingTime" xml:space="preserve">
+    <value>Time for tasks and events</value>
+  </data>
+  <data name="GenerateList" xml:space="preserve">
+    <value>Generate task list</value>
+  </data>
 </root>

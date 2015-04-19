@@ -9,22 +9,24 @@
         <li>
             @Html.ActionLink(ResourceScr.greeting+", " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">@LifeManagement.Resources.ResourceScr.logoff</a></li>
         <li>
-            @Html.ActionLink(ResourceScr.Feedback, "Create", "Feedbacks", null, new
+            @*@Html.ActionLink(ResourceScr.Feedback, "Create", "Feedbacks", null, new
             {
                 @class = "openDialog",
                 data_dialog_id = "41",
                 data_dialog_title = ResourceScr.Feedback,
                 data_dialog_width = "600",
                 data_dialog_height = "auto"
-            })
+            })*@
+            @Html.DialogFormLink(ResourceScr.Feedback, "", Url.Action("Create", "Feedbacks"), ResourceScr.Feedback, "", "", 600)
         </li>
+    
+        
         <li>
             @Html.DialogFormLink(ResourceScr.Settings, "", Url.Action("Edit", "UserSetting"), ResourceScr.Settings, "", "", 600)
 
         </li>
-    
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">@LifeManagement.Resources.ResourceScr.logoff</a></li>  
     }
 }       
 else

@@ -41,10 +41,10 @@ namespace LifeManagement.Controllers
                 feedback.UserId = User.Identity.GetUserId();
                 db.Feedbacks.Add(feedback);
                 await db.SaveChangesAsync();
-                return Redirect(ControllerContext.HttpContext.Request.UrlReferrer.ToString());
+                return Json(new { success = true });
             }
 
-            return View(feedback);
+            return PartialView("Create", feedback);
         }
 
         protected override void Dispose(bool disposing)

@@ -507,7 +507,7 @@ ul.subtree > li.subpunct:hover>.edit {
 .addEventIcon {
     background: url(/Content/Images/AddEvent.png) 0px no-repeat;
     position: absolute;
-    right: 50px;
+    right: 45px;
 }
 .generateListIcon {
     background: url(/Content/Images/list.png) 0px no-repeat;
@@ -862,3 +862,27 @@ input[type="submit"].invisibleInput:hover {
     width: 288px;
 }
 .sliderLong .ui-slider-range { background: #4e888a; }
+
+/*Main page*/
+.Contol{
+    background: url(/Content/Images/time_loading.png) 0px no-repeat;
+    height: 500px;
+    width: 500px;
+    horiz-align: center;
+}
+.remainder{
+    background: url(/Content/Images/reminder.png) 0px no-repeat;
+    height: 500px;
+    width: 500px;
+    horiz-align: center;
+}
+.todo-list{
+    background: url(/Content/Images/todo-list.png) 0px no-repeat;
+    height: 500px;
+    width: 500px;
+    horiz-align: center;
+}
+.main {
+    width: 100%;
+    height: auto;
+}

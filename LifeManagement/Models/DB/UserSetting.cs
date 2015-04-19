@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using LifeManagement.Enums;
+using LifeManagement.Resources;
 
 namespace LifeManagement.Models.DB
 {
@@ -14,9 +16,15 @@ namespace LifeManagement.Models.DB
             public TimeSpan ComplexityLowTo { get; set; }
             public TimeSpan ComplexityMediumTo { get; set; }
             public TimeSpan ComplexityHightTo { get; set; }
+            
+            [Display(Name = "TimeToFill", ResourceType = typeof(ResourceScr))]
             public int ParallelismPercentage { get; set; }
+
+            [Display(Name = "WorkingTime", ResourceType = typeof(ResourceScr))]    
             public TimeSpan WorkingTime { get; set; }
-        //    public TimeZone TimeZone { get; set; }
+
+            //[Display(Name = "TimeZone", ResourceType = typeof(ResourceScr))]
+            //public TimeZone TimeZone { get; set; }
             public virtual ApplicationUser User { get; set; }
 
             public UserSetting()
