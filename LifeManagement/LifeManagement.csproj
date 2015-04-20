@@ -238,6 +238,7 @@
       <DependentUpon>201504130926153_NawSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\DB\Archive.cs" />
     <Compile Include="Models\DB\ListForDay.cs" />
     <Compile Include="Models\DB\UserSetting.cs" />
     <Compile Include="Controllers\AccountController.cs" />

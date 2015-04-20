@@ -23,8 +23,8 @@ namespace LifeManagement.Models.DB
             [Display(Name = "WorkingTime", ResourceType = typeof(ResourceScr))]    
             public TimeSpan WorkingTime { get; set; }
 
-            //[Display(Name = "TimeZone", ResourceType = typeof(ResourceScr))]
-            //public TimeZone TimeZone { get; set; }
+            [Display(Name = "TimeZone", ResourceType = typeof(ResourceScr))]
+            public TimeSpan TimeZoneShift { get; set; }
             public virtual ApplicationUser User { get; set; }
 
             public UserSetting()
@@ -46,7 +46,7 @@ namespace LifeManagement.Models.DB
             ComplexityHightTo = new TimeSpan(10, 30, 0);
             ParallelismPercentage = 30;
             WorkingTime = new TimeSpan(16, 0, 0);
-           // TimeZone = TimeZone.
+            TimeZoneShift = new TimeSpan(0,2,0);
         }
 
         public TimeSpan[] GetRange(Complexity complexity)
