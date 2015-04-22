@@ -17,6 +17,17 @@ namespace LifeManagement.Models.DB
 
         public virtual Task Task{get;set;}
 
-        
+        public virtual ListForDay TodoList { get; set; }
+        protected Archive()
+        {
+            Id = Guid.NewGuid();
+        }
+
+        public Archive(Task task) : this()
+        {
+            TaskId = task.Id;
+            LevelOnStart = task.CompleteLevel;
+            Task = task;
+        }
     }
 }

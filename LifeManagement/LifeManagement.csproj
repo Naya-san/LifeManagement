@@ -237,6 +237,14 @@
     <Compile Include="Migrations\201504130926153_NawSettings.Designer.cs">
       <DependentUpon>201504130926153_NawSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504220551217_DBUpdate.cs" />
+    <Compile Include="Migrations\201504220551217_DBUpdate.Designer.cs">
+      <DependentUpon>201504220551217_DBUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504220605335_DBUpdate2.cs" />
+    <Compile Include="Migrations\201504220605335_DBUpdate2.Designer.cs">
+      <DependentUpon>201504220605335_DBUpdate2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DB\Archive.cs" />
     <Compile Include="Models\DB\ListForDay.cs" />
@@ -409,6 +417,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504130926153_NawSettings.resx">
       <DependentUpon>201504130926153_NawSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504220551217_DBUpdate.resx">
+      <DependentUpon>201504220551217_DBUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504220605335_DBUpdate2.resx">
+      <DependentUpon>201504220605335_DBUpdate2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ResourceScr.ru-ru.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

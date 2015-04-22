@@ -17,12 +17,13 @@ namespace LifeManagement.Models.DB
         public virtual ICollection<Record> Records { get; set; }
         public virtual ApplicationUser User { get; set; }
 
-        public virtual Dictionary<Task, int> Archive { get; set; }
+        public virtual ICollection<Archive> Archive { get; set; }
+
         protected ListForDay()
         {
             Id = Guid.NewGuid();
             Records = new List<Record>();
-            Archive = new Dictionary<Task, int>();
+            Archive = new List<Archive>();
         }
 
         public ListForDay(DateTime date) : this()
