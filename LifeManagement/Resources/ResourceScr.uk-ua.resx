@@ -583,6 +583,6 @@
     <value>Повернути до базових наштувань</value>
   </data>
   <data name="WorkingTime" xml:space="preserve">
-    <value>Скільки часу на день Ви готові присвятити справам</value>
+    <value>Скільки часу на день можна присвятити справам</value>
   </data>
 </root>

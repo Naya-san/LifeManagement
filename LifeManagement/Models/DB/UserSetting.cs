@@ -16,8 +16,8 @@ namespace LifeManagement.Models.DB
             public TimeSpan ComplexityLowTo { get; set; }
             public TimeSpan ComplexityMediumTo { get; set; }
             public TimeSpan ComplexityHightTo { get; set; }
-            
-            [Display(Name = "TimeToFill", ResourceType = typeof(ResourceScr))]
+
+            [Display(Name = "ParallelismPercentage", ResourceType = typeof(ResourceScr))]
             public int ParallelismPercentage { get; set; }
 
             [Display(Name = "WorkingTime", ResourceType = typeof(ResourceScr))]    
@@ -35,7 +35,7 @@ namespace LifeManagement.Models.DB
 
             public UserSetting(string userId) : this()
             {
-                this.UserId = userId;
+                UserId = userId;
             }
 
         public void SetDefault()

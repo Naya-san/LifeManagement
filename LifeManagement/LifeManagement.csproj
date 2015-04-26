@@ -221,6 +221,7 @@
     <Compile Include="Extensions\RepeatPositionExtensions.cs" />
     <Compile Include="Hubs\AlertsHub.cs" />
     <Compile Include="Logic\ListManager.cs" />
+    <Compile Include="Logic\TodoListTimeTicker.cs" />
     <Compile Include="Migrations\201504041457527_NewTableSettings.cs" />
     <Compile Include="Migrations\201504041457527_NewTableSettings.Designer.cs">
       <DependentUpon>201504041457527_NewTableSettings.cs</DependentUpon>
@@ -244,6 +245,14 @@
     <Compile Include="Migrations\201504220605335_DBUpdate2.cs" />
     <Compile Include="Migrations\201504220605335_DBUpdate2.Designer.cs">
       <DependentUpon>201504220605335_DBUpdate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504261043584_ChangeToEvent.cs" />
+    <Compile Include="Migrations\201504261043584_ChangeToEvent.Designer.cs">
+      <DependentUpon>201504261043584_ChangeToEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504261320511_AddArchives.cs" />
+    <Compile Include="Migrations\201504261320511_AddArchives.Designer.cs">
+      <DependentUpon>201504261320511_AddArchives.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DB\Archive.cs" />
@@ -423,6 +432,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504220605335_DBUpdate2.resx">
       <DependentUpon>201504220605335_DBUpdate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504261043584_ChangeToEvent.resx">
+      <DependentUpon>201504261043584_ChangeToEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504261320511_AddArchives.resx">
+      <DependentUpon>201504261320511_AddArchives.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ResourceScr.ru-ru.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

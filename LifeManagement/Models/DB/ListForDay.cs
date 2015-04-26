@@ -14,7 +14,7 @@ namespace LifeManagement.Models.DB
 
         public double CompleteLevel { get; set; }
 
-        public virtual ICollection<Record> Records { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
         public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<Archive> Archive { get; set; }
@@ -22,8 +22,8 @@ namespace LifeManagement.Models.DB
         protected ListForDay()
         {
             Id = Guid.NewGuid();
-            Records = new List<Record>();
             Archive = new List<Archive>();
+            Events = new List<Event>();
         }
 
         public ListForDay(DateTime date) : this()

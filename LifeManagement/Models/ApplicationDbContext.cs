@@ -44,8 +44,9 @@ namespace LifeManagement.Models
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<Record> Records { get; set; }
         public virtual DbSet<UserSetting> UserSettings { get; set; }
-
         public virtual DbSet<ListForDay> ListsForDays { get; set; }
+
+        public virtual DbSet<Archive> Archives { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection")
@@ -66,13 +67,13 @@ namespace LifeManagement.Models
             //base.OnModelCreating(modelBuilder);
             //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
-            //modelBuilder.Entity<Record>().HasMany(t => t.Tags).WithMany(t => t.Records);
+            //modelBuilder.Entity<Record>().HasMany(t => t.Tags).WithMany(t => t.Events);
             //modelBuilder.Entity<Record>().HasMany(c => c.Alerts).WithRequired().HasForeignKey(c => c.RecordId);
             //modelBuilder.Entity<Project>().HasMany(c => c.ChildProjects).WithOptional().HasForeignKey(c => c.ParentProjectId);
             //modelBuilder.Entity<Project>().HasMany(c => c.Tasks).WithRequired().HasForeignKey(c => c.ProjectId);
             //modelBuilder.Entity<ApplicationUser>().HasMany(c => c.Alerts).WithRequired().HasForeignKey(c => c.UserId);
             //modelBuilder.Entity<ApplicationUser>().HasMany(c => c.Projects).WithRequired().HasForeignKey(c => c.UserId);
-            //modelBuilder.Entity<ApplicationUser>().HasMany(c => c.Records).WithRequired().HasForeignKey(c => c.UserId);
+            //modelBuilder.Entity<ApplicationUser>().HasMany(c => c.Events).WithRequired().HasForeignKey(c => c.UserId);
             //modelBuilder.Entity<ApplicationUser>().HasMany(c => c.Tags).WithRequired().HasForeignKey(c => c.UserId);
         }
 

@@ -70,7 +70,13 @@
                 @Html.ValidationMessageFor(model => model.ParallelismPercentage)
             </div>
         </div>
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.TimeZoneShift, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9">
+                @Html.DropDownList("TimeZoneShift")
+                @Html.ValidationMessageFor(model => model.TimeZoneShift)
+            </div>
+        </div>
         <div class="buttonbar">
             <input type="submit" value="@ResourceScr.save" class="btn btn-default fullsize"/>
         </div>
@@ -86,7 +92,7 @@
     @Html.HiddenFor(model => model.ComplexityMediumTo)
     @Html.HiddenFor(model => model.ComplexityHightTo)
     @Html.HiddenFor(model => model.ComplexityLowFrom)
-    <input type="submit" value="@ResourceScr.to" class="btn btn-default fullsize" />
+    <input type="submit" value="@ResourceScr.ToDefault" class="btn btn-default fullsize" />
 }
 
 @section Scripts {
