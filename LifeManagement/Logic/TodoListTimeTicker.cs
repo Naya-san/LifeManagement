@@ -99,10 +99,11 @@ namespace LifeManagement.Logic
                 }
                 listForDay.Events = db.Records.OfType<Event>().Where(x => x.StartDate.Value.Date == now.Date || x.EndDate.Value.Date == now.Date || (x.StartDate.Value.Date <= now.Date && x.EndDate.Value.Date >= now.Date)).ToList();
                 listForDay.CompleteLevel = await CalculateCompleateLevel(now, listForDay);
+
             }
         }
 
-        private async Task<int> CalculateCompleateLevel(DateTime now, ListForDay listForDay)
+        private async Task<double> CalculateCompleateLevel(DateTime now, ListForDay listForDay)
         {
             var settings = await db.UserSettings.FirstOrDefaultAsync(x => x.UserId == listForDay.UserId);
             var nowS = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
@@ -116,12 +117,8 @@ namespace LifeManagement.Logic
                 }
             }
             var freeTimeForTasks = settings.WorkingTime - TimeSpan.FromMinutes(minutesForEvents);
-            double minutesForTasks  = 0;
-            foreach (var archive in listForDay.Archive)
-            {
-                minutesForTasks += settings.GetMinComplexityRange(archive.Task.Complexity).TotalMinutes*
-                                  (archive.LevelOnEnd - archive.LevelOnStart)/100.0;
-            }
+            double minutesForTasks  = listForDay.Archive.Sum(archive => settings.GetMinComplexityRange(archive.Task.Complexity).TotalMinutes*(archive.LevelOnEnd - archive.LevelOnStart)/100.0);
+            return  (minutesForTasks*100)/ freeTimeForTasks.TotalMinutes;
 
         }
     }
