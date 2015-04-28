@@ -89,15 +89,15 @@ namespace LifeManagement.Models.DB
             }
             return timeSpan;
         }
-        public override TimeSpan CalculateTimeLeftInDay(UserSetting setting)
+        public override TimeSpan CalculateTimeLeftInDay(UserSetting setting, DateTime date)
         {
             double minutesInDay = 60 * 24;
-            var dateNow = DateTime.UtcNow;
-            if (dateNow > EndDate || !EndDate.HasValue || !StartDate.HasValue)
+            var date = DateTime.UtcNow;
+            if (date > EndDate || !EndDate.HasValue || !StartDate.HasValue)
             {
                 return new TimeSpan(0);
             }
-            var timeSpan = EndDate.Value.Subtract(dateNow > StartDate ? dateNow : StartDate.Value);
+            var timeSpan = EndDate.Value.Subtract(date > StartDate ? date : StartDate.Value);
             if (timeSpan.TotalMinutes > minutesInDay)
             {
                 timeSpan = TimeSpan.FromMinutes(minutesInDay);

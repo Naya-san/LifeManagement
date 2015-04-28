@@ -31,20 +31,23 @@ namespace LifeManagement.Models.DB
             Date = date;
         }
 
-        public TimeSpan EventTime()
+        public TimeSpan EventTime(UserSetting settings)
         {
             double minutes = 0;
             foreach (var @event in Events)
             {
-               // minutes += @event.
+                minutes += @event.CalculateTimeLeftInDay(Date, settings);
             }
+            return TimeSpan.FromMinutes(minutes);
         }
-        public TimeSpan TaskTime()
+        public TimeSpan TaskTime(UserSetting settings)
         {
+            double minutes = 0;
             foreach (var archive in Archive)
             {
-
+                minutes += (archive.LevelOnEnd - archive.LevelOnStart) * settings.GetMinComplexityRange(archive.Task.Complexity).TotalMinutes / 100.0;
             }
+            return TimeSpan.FromMinutes(minutes);
         }
     }
 }

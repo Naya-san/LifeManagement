@@ -30,11 +30,11 @@ namespace LifeManagement.Logic
             var showcase = db.ListsForDays.Where(x => x.UserId == listSetting.UserId && x.CompleteLevel >= SuccessLevel).ToList();
             if (showcase.Any())
             {
-
+                 return generateListWithShowcase(db, listSetting, showcase);
             }
             else
             {
-                
+                return generateListWithIntuition(db, listSetting); 
             }
 
             return null;
@@ -44,8 +44,20 @@ namespace LifeManagement.Logic
             TaskListSettingsViewModel listSetting, List<ListForDay> showcase)
         {
             var tasks= new List<Task>();
-      //      showcase.Where(x=> x.Date.DayOfWeek == listSetting.Date.DayOfWeek && listSetting.TimeToFill == x.)
+            var userSettings = db.UserSettings.FirstOrDefault(x => x.UserId == listSetting.UserId) ?? new UserSetting();
+            var showcaseClose = showcase.Where(x => x.Date.DayOfWeek == listSetting.Date.DayOfWeek || listSetting.TimeToFill <= x.TaskTime(userSettings));
+
             return tasks;
         }
+        private static List<Task> generateListWithIntuition(ApplicationDbContext db,
+           TaskListSettingsViewModel listSetting)
+        {
+            var tasks = new List<Task>();
+            var userSettings = db.UserSettings.FirstOrDefault(x => x.UserId == listSetting.UserId) ?? new UserSetting();
+           
+
+            return tasks;
+        }
+     
     }
 }
