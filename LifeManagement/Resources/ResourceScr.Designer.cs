@@ -529,6 +529,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This day has already been planed.
+        /// </summary>
+        public static string ErrorNoTime {
+            get {
+                return ResourceManager.GetString("ErrorNoTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This field can only contain letters, numbers, underscores and punctuation.
         /// </summary>
         public static string ErrorRegulExpr {

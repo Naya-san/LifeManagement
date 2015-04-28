@@ -12,6 +12,7 @@ using LifeManagement.Enums;
 using LifeManagement.Hubs;
 using LifeManagement.Models;
 using LifeManagement.Extensions;
+using LifeManagement.Logic;
 using LifeManagement.Models.DB;
 using LifeManagement.ViewModels;
 using LifeManagement.Resources;
@@ -190,18 +191,8 @@ namespace LifeManagement.Controllers
                 ModelState.AddModelError("Date", ResourceScr.itsPast);
                 return PartialView("GenerateList", listSetting);
             }
-            var userId = User.Identity.GetUserId();
-            var records =
-                db.Records.Where(x => x.UserId == userId &&
-                    (((x.StartDate.HasValue && x.StartDate.Value <= listSetting.Date) && ((x.EndDate.HasValue && x.EndDate.Value >= listSetting.Date) || !x.EndDate.HasValue))
-                    ||
-                    (!x.StartDate.HasValue && x.EndDate.HasValue && x.EndDate.Value >= listSetting.Date))).ToList();
-            var settings = db.UserSettings.FirstOrDefault(x => x.UserId == userId) ?? new UserSetting(userId);
-            var ticksInUse = settings.WorkingTime.Subtract(new TimeSpan(records.Sum(record => record.CalculateTimeLeft(settings).Ticks)));
-            if (listSetting.TimeToFill.Subtract(ticksInUse) > settings.GetMinComplexityRange(Complexity.None))
-            {
-                PartialView("NothingToDoTask", records.OfType<Task>().ToList());
-            }
+            listSetting.UserId = User.Identity.GetUserId();
+            ListManager.Generate(db, listSetting);
             return Json(new { success = true });
         }
 

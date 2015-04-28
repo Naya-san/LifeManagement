@@ -14,5 +14,7 @@ namespace LifeManagement.ViewModels
 
         [Display(Name = "TimeToFill", ResourceType = typeof(ResourceScr))]
         public TimeSpan TimeToFill { set; get; }
+
+        public string UserId { set; get; }
     }
 }

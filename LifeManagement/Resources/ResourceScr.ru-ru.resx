@@ -585,4 +585,7 @@
   <data name="GenerateList" xml:space="preserve">
     <value>Сгенерировать список заданий</value>
   </data>
+  <data name="ErrorNoTime" xml:space="preserve">
+    <value>Этот день уже целиком распланирован</value>
+  </data>
 </root>

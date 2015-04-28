@@ -585,4 +585,7 @@
   <data name="WorkingTime" xml:space="preserve">
     <value>Скільки часу на день можна присвятити справам</value>
   </data>
+  <data name="ErrorNoTime" xml:space="preserve">
+    <value>Цей день вже повныстю розплановано</value>
+  </data>
 </root>
