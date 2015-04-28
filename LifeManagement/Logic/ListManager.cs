@@ -26,7 +26,7 @@ namespace LifeManagement.Logic
             {
                 throw new Exception(ResourceScr.ErrorNoTime);
             }
-            freeTime = (freeTime.Ticks < listSetting.TimeToFill.Ticks) ? freeTime : listSetting.TimeToFill;
+            listSetting.TimeToFill = (freeTime.Ticks < listSetting.TimeToFill.Ticks) ? freeTime : listSetting.TimeToFill;
             var showcase = db.ListsForDays.Where(x => x.UserId == listSetting.UserId && x.CompleteLevel >= SuccessLevel).ToList();
             if (showcase.Any())
             {
@@ -36,7 +36,6 @@ namespace LifeManagement.Logic
             {
                 return generateListWithIntuition(db, listSetting); 
             }
-
             return null;
         }
 
@@ -46,16 +45,38 @@ namespace LifeManagement.Logic
             var tasks= new List<Task>();
             var userSettings = db.UserSettings.FirstOrDefault(x => x.UserId == listSetting.UserId) ?? new UserSetting();
             var showcaseClose = showcase.Where(x => x.Date.DayOfWeek == listSetting.Date.DayOfWeek || listSetting.TimeToFill <= x.TaskTime(userSettings));
-
+            
             return tasks;
         }
-        private static List<Task> generateListWithIntuition(ApplicationDbContext db,
-           TaskListSettingsViewModel listSetting)
+        private static List<Task> generateListWithIntuition(ApplicationDbContext db, TaskListSettingsViewModel listSetting)
         {
             var tasks = new List<Task>();
             var userSettings = db.UserSettings.FirstOrDefault(x => x.UserId == listSetting.UserId) ?? new UserSetting();
-           
-
+            var minutesTakeTask = 0.0;
+            var records = db.Records
+                .Where(x => x.UserId == userId)
+                .OfType<Task>()
+                .Where(
+                        x => !x.CompletedOn.HasValue &&
+                        (
+                            (!x.StartDate.HasValue && !x.EndDate.HasValue) ||
+                            (x.EndDate != null && x.EndDate <= listSetting.Date.Add(x.CalculateTimeLeft(userSettings))Add(x.CalculateTimeLeft(userSettings))
+                            && 
+                            x.EndDate > listSetting.Date 
+                            &&
+                            (x.StartDate == null || (x.StartDate != null && x.StartDate > listSetting.Date)))
+                        )
+                 )
+                .OrderBy(x => !x.IsImportant).ToList();
+            foreach(var task in records)
+            {
+                tasks.Add(task);
+                minutesTakeTask+=task.CalculateTimeLeft().TotalMinutes;
+                if(minutesTakeTask < listSetting.TimeToFill.TotalMinutes)
+                {
+                    break;
+                }
+            }
             return tasks;
         }
      
