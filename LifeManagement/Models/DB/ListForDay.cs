@@ -30,5 +30,21 @@ namespace LifeManagement.Models.DB
         {
             Date = date;
         }
+
+        public TimeSpan EventTime()
+        {
+            double minutes = 0;
+            foreach (var @event in Events)
+            {
+               // minutes += @event.
+            }
+        }
+        public TimeSpan TaskTime()
+        {
+            foreach (var archive in Archive)
+            {
+
+            }
+        }
     }
 }
