@@ -28,7 +28,7 @@ namespace LifeManagement.Logic
                 throw new Exception(ResourceScr.ErrorNoTime);
             }
             listSetting.TimeToFill = (freeTime.Ticks < listSetting.TimeToFill.Ticks) ? freeTime : listSetting.TimeToFill;
-            var showcase = db.ListsForDays.Where(x => x.UserId == listSetting.UserId && x.CompleteLevel >= SuccessLevel).ToList();
+            var showcase = db.ListsForDays.Where(x => x.UserId == listSetting.UserId && x.CompleteLevel >= SuccessLevel).OrderByDescending(x => x.CompleteLevel).ToList();
             if (showcase.Any())
             {
                  return await GenerateListWithShowcase(db, listSetting, showcase);
@@ -47,6 +47,10 @@ namespace LifeManagement.Logic
                 if (showcaseQualification.Count > 2)
                 {
                     showcase = showcaseQualification;
+                }
+                else
+                {
+                    showcase = showcase.Take(5).ToList();
                 }
             }
             var minutesLow = new List<double>();
@@ -76,17 +80,41 @@ namespace LifeManagement.Logic
                             minutesHight[i] += archive.GetDurationEstimation(userSettings);
                             break;
                     }
-                }
-                double[] minutesAverage = new[]
+                }     
+            }
+            double[] minutesAverage = new[]
                 {
                     minutesNone.Sum()/minutesNone.Count,
                     minutesLow.Sum()/minutesLow.Count,
                     minutesMidium.Sum()/minutesMidium.Count,
                     minutesHight.Sum()/minutesHight.Count,
-                };
+                }
+                var records = db.Records
+                .Where(x => x.UserId == listSetting.UserId)
+                .OfType<Task>()
+                .Where(
+                        x => !x.CompletedOn.HasValue &&
+                        (
+                            (!x.StartDate.HasValue && !x.EndDate.HasValue) 
+                            ||
+                            (
+                                x.EndDate.HasValue && x.EndDate >= listSetting.Date
+                                &&
+                                (x.StartDate == null || (x.StartDate != null && x.StartDate > listSetting.Date))
+                            )
+                            ||
+                            (
+                                x.EndDate.HasValue && x.EndDate >= listSetting.Date
+                                &&
+                                (x.StartDate == null || (x.StartDate != null && x.StartDate > listSetting.Date))
+                            )
 
-
-            }
+                        )
+                 )
+                .OrderByDescending(x => x.IsImportant)
+                .ThenByDescending(x => x.CompleteLevel)
+                .ThenBy(x => x.EndDate)
+                .ToList();
             return tasks;
         }
         private static async System.Threading.Tasks.Task<List<Task>> GenerateListWithIntuition(ApplicationDbContext db, TaskListSettingsViewModel listSetting)
