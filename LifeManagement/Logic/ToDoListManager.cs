@@ -11,7 +11,7 @@ using LifeManagement.ViewModels;
 
 namespace LifeManagement.Logic
 {
-    public static class ListManager
+    public static class ToDoListManager
     {
         public static readonly double SuccessLevel = 65.5;
         public static async System.Threading.Tasks.Task<List<Task>> Generate(ApplicationDbContext db, TaskListSettingsViewModel listSetting)
@@ -74,14 +74,14 @@ namespace LifeManagement.Logic
             .ThenBy(x => x.EndDate)
             .GroupBy(x => x.Complexity)
             .ToList();
-            var tasksLow = new List<Task>();
-            var tasksMedium = new List<Task>();
-            var tasksHight = new List<Task>();
-            var tasksNone = new List<Task>();
+            var tasksLow = new List<List<Task>>();
+            double minutesInBlock;
             foreach(var group in applicantTaskGroups){
+                minutesInBlock = 0;
                 foreach(var task in group)
                 {
-                   
+
+                  // while( )
                 }
             }
             return tasks;
@@ -124,7 +124,7 @@ namespace LifeManagement.Logic
                             minutesLow.Sum()/minutesLow.Count,
                             minutesMidium.Sum()/minutesMidium.Count,
                             minutesHight.Sum()/minutesHight.Count,
-                        }
+                        };
         }
         private static async System.Threading.Tasks.Task<List<Task>> GenerateListWithIntuition(ApplicationDbContext db, TaskListSettingsViewModel listSetting)
         {

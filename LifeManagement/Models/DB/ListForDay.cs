@@ -36,7 +36,7 @@ namespace LifeManagement.Models.DB
             double minutes = 0;
             foreach (var @event in Events)
             {
-                minutes += @event.CalculateTimeLeftInDay(Date, settings);
+                minutes += @event.CalculateTimeLeftInDay(settings, Date).TotalMinutes;
             }
             return TimeSpan.FromMinutes(minutes);
         }

@@ -220,7 +220,7 @@
     <Compile Include="Extensions\RecordExtensions.cs" />
     <Compile Include="Extensions\RepeatPositionExtensions.cs" />
     <Compile Include="Hubs\AlertsHub.cs" />
-    <Compile Include="Logic\ListManager.cs" />
+    <Compile Include="Logic\ToDoListManager.cs" />
     <Compile Include="Logic\TodoListTimeTicker.cs" />
     <Compile Include="Migrations\201504041457527_NewTableSettings.cs" />
     <Compile Include="Migrations\201504041457527_NewTableSettings.Designer.cs">
@@ -293,6 +293,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AlertViewModel.cs" />
     <Compile Include="ViewModels\TaskListSettingsViewModel.cs" />
+    <Compile Include="ViewModels\ToDoList.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

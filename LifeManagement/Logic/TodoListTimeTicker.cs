@@ -110,7 +110,7 @@ namespace LifeManagement.Logic
             double minutesForEvents  = 0;
             foreach (var @event in listForDay.Events)
             {
-                minutesForEvents +=((@event.EndDate.Value > now) ? now : @event.EndDate.Value)).TotalMinutes - (((@event.StartDate.Value < nowS) ? nowS : @event.StartDate.Value);
+                minutesForEvents +=(((@event.EndDate.Value > now) ? now : @event.EndDate.Value) - (((@event.StartDate.Value < nowS) ? nowS : @event.StartDate.Value))).TotalMinutes;
                 if (@event.OnBackground)
                 {
                     minutesForEvents *= settings.ParallelismPercentage / 100.0;

@@ -192,7 +192,7 @@ namespace LifeManagement.Controllers
                 return PartialView("GenerateList", listSetting);
             }
             listSetting.UserId = User.Identity.GetUserId();
-            ListManager.Generate(db, listSetting);
+            ToDoListManager.Generate(db, listSetting);
             return Json(new { success = true });
         }
 

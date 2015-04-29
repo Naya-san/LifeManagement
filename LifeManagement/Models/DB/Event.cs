@@ -89,10 +89,9 @@ namespace LifeManagement.Models.DB
             }
             return timeSpan;
         }
-        public override TimeSpan CalculateTimeLeftInDay(UserSetting setting, DateTime date)
+        public TimeSpan CalculateTimeLeftInDay(UserSetting setting, DateTime date)
         {
             double minutesInDay = 60 * 24;
-            var date = DateTime.UtcNow;
             if (date > EndDate || !EndDate.HasValue || !StartDate.HasValue)
             {
                 return new TimeSpan(0);
