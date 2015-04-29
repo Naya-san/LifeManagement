@@ -53,69 +53,78 @@ namespace LifeManagement.Logic
                     showcase = showcase.Take(5).ToList();
                 }
             }
-            var minutesLow = new List<double>();
-            var minutesNone = new List<double>();
-            var minutesMidium = new List<double>();
-            var minutesHight = new List<double>();
-            for (int i = 0; i < showcase.Count; i++)
-            {
-                minutesLow.Add(0);
-                minutesMidium.Add(0);
-                minutesHight.Add(0);
-                minutesNone.Add(0);
-                foreach (var archive in showcase[i].Archive)
-                {
-                    switch (archive.Task.Complexity)
-                    {
-                        case Complexity.None:
-                            minutesNone[i] += archive.GetDurationEstimation(userSettings);
-                            break;
-                        case Complexity.Low:
-                            minutesLow[i] += archive.GetDurationEstimation(userSettings);
-                            break;
-                        case Complexity.Medium:
-                            minutesMidium[i] += archive.GetDurationEstimation(userSettings);
-                            break;
-                        case Complexity.Hight:
-                            minutesHight[i] += archive.GetDurationEstimation(userSettings);
-                            break;
-                    }
-                }     
-            }
-            double[] minutesAverage = new[]
-                {
-                    minutesNone.Sum()/minutesNone.Count,
-                    minutesLow.Sum()/minutesLow.Count,
-                    minutesMidium.Sum()/minutesMidium.Count,
-                    minutesHight.Sum()/minutesHight.Count,
-                }
-                var records = db.Records
-                .Where(x => x.UserId == listSetting.UserId)
-                .OfType<Task>()
-                .Where(
-                        x => !x.CompletedOn.HasValue &&
+            var minutesAverage = CalculateIdealRatio(showcase, userSettings);
+            var applicantTaskGroups = db.Records
+            .Where(x => x.UserId == listSetting.UserId)
+            .OfType<Task>()
+            .Where(
+                    x => !x.CompletedOn.HasValue &&
+                    (
+                        (!x.StartDate.HasValue && !x.EndDate.HasValue) 
+                        ||
                         (
-                            (!x.StartDate.HasValue && !x.EndDate.HasValue) 
-                            ||
-                            (
-                                x.EndDate.HasValue && x.EndDate >= listSetting.Date
-                                &&
-                                (x.StartDate == null || (x.StartDate != null && x.StartDate > listSetting.Date))
-                            )
-                            ||
-                            (
-                                x.EndDate.HasValue && x.EndDate >= listSetting.Date
-                                &&
-                                (x.StartDate == null || (x.StartDate != null && x.StartDate > listSetting.Date))
-                            )
-
+                            x.EndDate.HasValue && x.EndDate >= listSetting.Date
+                            &&
+                            (!x.StartDate.HasValue || (x.StartDate.HasValue && x.StartDate > listSetting.Date && x.IsImportant))
                         )
-                 )
-                .OrderByDescending(x => x.IsImportant)
-                .ThenByDescending(x => x.CompleteLevel)
-                .ThenBy(x => x.EndDate)
-                .ToList();
+                    )
+                )
+            .OrderByDescending(x => x.IsImportant)
+            .ThenByDescending(x => x.CompleteLevel)
+            .ThenBy(x => x.EndDate)
+            .GroupBy(x => x.Complexity)
+            .ToList();
+            var tasksLow = new List<Task>();
+            var tasksMedium = new List<Task>();
+            var tasksHight = new List<Task>();
+            var tasksNone = new List<Task>();
+            foreach(var group in applicantTaskGroups){
+                foreach(var task in group)
+                {
+                   
+                }
+            }
             return tasks;
+        }
+
+        private static  double[] CalculateIdealRatio(List<ListForDay> showcase, UserSetting userSettings)
+        {
+                    var minutesLow = new List<double>();
+                    var minutesNone = new List<double>();
+                    var minutesMidium = new List<double>();
+                    var minutesHight = new List<double>();
+                    for (int i = 0; i < showcase.Count; i++)
+                    {
+                        minutesLow.Add(0);
+                        minutesMidium.Add(0);
+                        minutesHight.Add(0);
+                        minutesNone.Add(0);
+                        foreach (var archive in showcase[i].Archive)
+                        {
+                            switch (archive.Task.Complexity)
+                            {
+                                case Complexity.None:
+                                    minutesNone[i] += archive.GetDurationEstimation(userSettings);
+                                    break;
+                                case Complexity.Low:
+                                    minutesLow[i] += archive.GetDurationEstimation(userSettings);
+                                    break;
+                                case Complexity.Medium:
+                                    minutesMidium[i] += archive.GetDurationEstimation(userSettings);
+                                    break;
+                                case Complexity.Hight:
+                                    minutesHight[i] += archive.GetDurationEstimation(userSettings);
+                                    break;
+                            }
+                        }     
+                    }
+                    return new[]
+                        {
+                            minutesNone.Sum()/minutesNone.Count,
+                            minutesLow.Sum()/minutesLow.Count,
+                            minutesMidium.Sum()/minutesMidium.Count,
+                            minutesHight.Sum()/minutesHight.Count,
+                        }
         }
         private static async System.Threading.Tasks.Task<List<Task>> GenerateListWithIntuition(ApplicationDbContext db, TaskListSettingsViewModel listSetting)
         {
@@ -128,12 +137,17 @@ namespace LifeManagement.Logic
                 .Where(
                         x => !x.CompletedOn.HasValue &&
                         (
-                            (!x.StartDate.HasValue && !x.EndDate.HasValue) ||
-                            (x.EndDate != null && x.EndDate <= listSetting.Date.Add(x.CalculateTimeLeft(userSettings)).Add(x.CalculateTimeLeft(userSettings))
-                            && 
-                            x.EndDate > listSetting.Date 
-                            &&
-                            (x.StartDate == null || (x.StartDate != null && x.StartDate > listSetting.Date)))
+                            (!x.StartDate.HasValue && !x.EndDate.HasValue) 
+                            ||
+                            (
+                                x.EndDate != null 
+                                && 
+                                x.EndDate <= listSetting.Date.Add(x.CalculateTimeLeft(userSettings)).Add(x.CalculateTimeLeft(userSettings))
+                                && 
+                                x.EndDate > listSetting.Date 
+                                &&
+                                (x.StartDate == null || (x.StartDate != null && x.StartDate > listSetting.Date && x.IsImportant))
+                            )
                         )
                  )
                 .OrderByDescending(x => x.IsImportant)
