@@ -42,12 +42,7 @@ namespace LifeManagement.Models.DB
         }
         public TimeSpan TaskTime(UserSetting settings)
         {
-            double minutes = 0;
-            foreach (var archive in Archive)
-            {
-                minutes += (archive.LevelOnEnd - archive.LevelOnStart) * settings.GetMinComplexityRange(archive.Task.Complexity).TotalMinutes / 100.0;
-            }
-            return TimeSpan.FromMinutes(minutes);
+            return TimeSpan.FromMinutes(Archive.Sum(archive => archive.GetDurationEstimation(settings)));
         }
     }
 }

@@ -29,5 +29,10 @@ namespace LifeManagement.Models.DB
             LevelOnStart = task.CompleteLevel;
             Task = task;
         }
+
+        public double GetDurationEstimation(UserSetting userSetting)
+        {
+            return (LevelOnEnd - LevelOnStart) * userSetting.GetMinComplexityRange(Task.Complexity).TotalMinutes / 100.0;
+        }
     }
 }
