@@ -933,8 +933,8 @@ input.radio:hover:not(:checked) ~ label {
 input.radio:checked ~ label:before {
 	content:'\2714';
 	text-indent: .9em;
-	color: #9CE2AE;
-	background-color: #4DCB6D;
+	color: #f19645;
+	background-color: #4e888a;
 }
 
 input.radio:checked ~ label {
@@ -943,5 +943,18 @@ input.radio:checked ~ label {
 
 /* radio focus */
 input.radio:focus ~ label:before {
-	box-shadow: 0 0 0 3px #999;
+	box-shadow: 0 0 0 2px #17292e;
+}
+/*Div With scroll*/
+.withScroll {
+    overflow-y: scroll;
+    max-height: 500px;
+}
+
+.bottomfix {
+    position: absolute;
+    top: 2px;
+    width: 92%;
+    border-bottom: #f8f1d4 solid 20px;
+    border-top: #f8f1d4 solid 20px;
 }

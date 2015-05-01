@@ -20,7 +20,7 @@ namespace LifeManagement.Extensions
                 case Complexity.Low:
                     return Resources.ResourceScr.Low;
                 default:
-                    return Resources.ResourceScr.None;
+                    return Resources.ResourceScr.NoneComp;
             }
         }
 

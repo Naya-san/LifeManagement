@@ -97,6 +97,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add todo list totimetable.
+        /// </summary>
+        public static string AddToTimetable {
+            get {
+                return ResourceManager.GetString("AddToTimetable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Have you forgot the details of your task? Write a remark for it!.
         /// </summary>
         public static string advRemark {
@@ -808,6 +817,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to See more versions.
+        /// </summary>
+        public static string MoreVersions {
+            get {
+                return ResourceManager.GetString("MoreVersions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Name {
@@ -903,6 +921,15 @@ namespace LifeManagement.Resources {
         public static string None {
             get {
                 return ResourceManager.GetString("None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown.
+        /// </summary>
+        public static string NoneComp {
+            get {
+                return ResourceManager.GetString("NoneComp", resourceCulture);
             }
         }
         
@@ -1452,6 +1479,15 @@ namespace LifeManagement.Resources {
         public static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version #.
+        /// </summary>
+        public static string VersionToDoList {
+            get {
+                return ResourceManager.GetString("VersionToDoList", resourceCulture);
             }
         }
         

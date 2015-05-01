@@ -594,4 +594,16 @@
   <data name="ErrorNoTime" xml:space="preserve">
     <value>This day has already been planed</value>
   </data>
+  <data name="AddToTimetable" xml:space="preserve">
+    <value>Add todo list totimetable</value>
+  </data>
+  <data name="MoreVersions" xml:space="preserve">
+    <value>See more versions</value>
+  </data>
+  <data name="NoneComp" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="VersionToDoList" xml:space="preserve">
+    <value>Version #</value>
+  </data>
 </root>

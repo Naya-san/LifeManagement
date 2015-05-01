@@ -588,4 +588,16 @@
   <data name="ErrorNoTime" xml:space="preserve">
     <value>Цей день вже повныстю розплановано</value>
   </data>
+  <data name="AddToTimetable" xml:space="preserve">
+    <value>Додати список до розкладу</value>
+  </data>
+  <data name="MoreVersions" xml:space="preserve">
+    <value>Переглянути ще варіанти</value>
+  </data>
+  <data name="NoneComp" xml:space="preserve">
+    <value>Невідома</value>
+  </data>
+  <data name="VersionToDoList" xml:space="preserve">
+    <value>Варіант №</value>
+  </data>
 </root>

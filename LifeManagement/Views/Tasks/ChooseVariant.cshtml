@@ -3,34 +3,35 @@
 @model IList<LifeManagement.ViewModels.ToDoList>
 <script type='text/javascript' src="@Url.Content("~/Scripts/availableFields.js")"></script>
 
-
 @if (Model.Any())
+{
+    using (@Html.BeginForm("ChooseVariant", "Tasks", new {listSetting = ViewBag.listSetting, toDoLists = Model}, FormMethod.Post, new {@class = "withScroll"}))
     {
         <div>
-            <input type="radio" name="radio" id="radio1" class="radio" checked/>
-            <label for="radio1">#1</label>
+            <input type="radio" name="radio" id="radio1" class="radio" value="0" checked/>
+            <label for="radio1">@ResourceScr.VersionToDoList 1</label>
         </div>
-          @Html.Partial("ToDoList", Model[0].TasksTodo)
+        @Html.Partial("ToDoList", Model[0])
         if (Model.Count > 1)
         {
-
-              <a href="javascript:void(0)" onclick="showMore()" class="closeBlock" id="moreLabel">@ResourceScr.More</a>
-              <div id="editionalInfo" style="display: none">
-                  @for (int i = 0; i < Model.Count; i++)
-                  {
-                      <div>
-                          <input type="radio" name="radio" id="@{ "radio" + i}" class="radio" checked />
-                          <label for=@{ "radio" + i}># @{i+1}</label>
-                      </div>
-                      @Html.Partial("ToDoList", Model[i].TasksTodo)
-                  }
+            <a href="javascript:void(0)" onclick=" showMore() " class="closeBlock" id="moreLabel">@ResourceScr.MoreVersions</a>
+            <div id="editionalInfo" style="display: none">
+                @for (int i = 1; i < Model.Count; i++)
+                {
+                    <div>
+                        <input type="radio" name="radio" id="radio" value="@i" class="radio"/>
+                        <label for="radio">@ResourceScr.VersionToDoList @(i + 1) </label>
+                    </div>
+                    @Html.Partial("ToDoList", Model[i])
+                }
             </div>
         }
-        <div class="buttonbar">
-            <input type="submit" value="@ResourceScr.doToday" class="btn btn-default fullsize" />
+        <div class="buttonbar bottomfix">
+            <input type="submit" value="@ResourceScr.AddToTimetable" class="btn btn-default fullsize"/>
         </div>
     }
-    else
-    {
-        <h3>@ResourceScr.noAvailableTasks</h3>
-    }
+}
+else
+{
+    <h3>@ResourceScr.noAvailableTasks</h3>
+}

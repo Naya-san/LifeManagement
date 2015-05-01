@@ -59,7 +59,7 @@ namespace LifeManagement.Logic
             var indexRow = 0;
             for(var i = 0; i < blocks.Count; i++)
             {
-                if (blocks[i].Count > 2 && blocks[i].Count < 6)
+                if (blocks[i].Count >= 2 && blocks[i].Count < 6)
                 {
                     indexRow = i;
                 }
@@ -164,7 +164,7 @@ namespace LifeManagement.Logic
             .ThenBy(x => x.EndDate)
             .GroupBy(x => x.Complexity)
             .ToList();
-            var blocks = (from @group in applicantTaskGroups select GenerateBlocksFromGroups(@group, listSetting.TimeToFill.Minutes * idealRatio[(int)@group.Key] / 100, userSettings)).ToList();
+            var blocks = (from @group in applicantTaskGroups select GenerateBlocksFromGroups(@group, listSetting.TimeToFill.TotalMinutes * idealRatio[(int)@group.Key] / 100, userSettings)).ToList();
             return BuildToDoListsFromBlock(blocks, userSettings);
         }
         private static async System.Threading.Tasks.Task<List<ToDoList>> GenerateListWithIntuition(TaskListSettingsViewModel listSetting)
@@ -194,7 +194,7 @@ namespace LifeManagement.Logic
                 .ThenBy(x => x.EndDate)
                 .GroupBy(x => x.Complexity)
                 .ToList();
-            var blocks = (from @group in applicantTaskGroups select GenerateBlocksFromGroups(@group, listSetting.TimeToFill.Minutes/4.0, userSettings)).ToList();
+            var blocks = (from @group in applicantTaskGroups select GenerateBlocksFromGroups(@group, listSetting.TimeToFill.TotalMinutes/4.0, userSettings)).ToList();
             return BuildToDoListsFromBlock(blocks, userSettings);
         }
      

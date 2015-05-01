@@ -193,7 +193,27 @@ namespace LifeManagement.Controllers
             }
             listSetting.UserId = User.Identity.GetUserId();
             var variants = await ToDoListManager.Generate(listSetting);
+            ViewBag.listSetting = listSetting;
             return PartialView("ChooseVariant", variants);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ChooseVariant(TaskListSettingsViewModel listSetting, IList<ToDoList> toDoLists)
+        {
+            try
+            {
+                var index = int.Parse(Request["radio"]);
+                foreach (var task in toDoLists[index].TasksTodo)
+                {
+                    task.StartDate = listSetting.Date;
+                }
+                await db.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return Json(new { success = true });
         }
 
         public void SendAlertToClient(Guid alertId, DateTime userLocalTime)
