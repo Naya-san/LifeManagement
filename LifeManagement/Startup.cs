@@ -1,4 +1,6 @@
-﻿using Microsoft.Owin;
+﻿using LifeManagement.Logic;
+using LifeManagement.ViewModels;
+using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartup(typeof(LifeManagement.Startup))]
@@ -11,6 +13,7 @@ namespace LifeManagement
         {
             ConfigureAuth(app);
             app.MapSignalR();
+            TodoListTimeTicker ticker = new TodoListTimeTicker();
             // Дополнительные сведения о настройке приложения см. по адресу: http://go.microsoft.com/fwlink/?LinkID=316888
         }
     }

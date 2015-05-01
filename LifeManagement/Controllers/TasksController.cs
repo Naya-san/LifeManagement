@@ -192,8 +192,8 @@ namespace LifeManagement.Controllers
                 return PartialView("GenerateList", listSetting);
             }
             listSetting.UserId = User.Identity.GetUserId();
-            ToDoListManager.Generate(db, listSetting);
-            return Json(new { success = true });
+            var variants = await ToDoListManager.Generate(listSetting);
+            return PartialView("ChooseVariant", variants);
         }
 
         public void SendAlertToClient(Guid alertId, DateTime userLocalTime)

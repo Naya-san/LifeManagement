@@ -1,0 +1,36 @@
+﻿@using LifeManagement.Extensions
+@using LifeManagement.Resources
+@model IList<LifeManagement.ViewModels.ToDoList>
+<script type='text/javascript' src="@Url.Content("~/Scripts/availableFields.js")"></script>
+
+
+@if (Model.Any())
+    {
+        <div>
+            <input type="radio" name="radio" id="radio1" class="radio" checked/>
+            <label for="radio1">#1</label>
+        </div>
+          @Html.Partial("ToDoList", Model[0].TasksTodo)
+        if (Model.Count > 1)
+        {
+
+              <a href="javascript:void(0)" onclick="showMore()" class="closeBlock" id="moreLabel">@ResourceScr.More</a>
+              <div id="editionalInfo" style="display: none">
+                  @for (int i = 0; i < Model.Count; i++)
+                  {
+                      <div>
+                          <input type="radio" name="radio" id="@{ "radio" + i}" class="radio" checked />
+                          <label for=@{ "radio" + i}># @{i+1}</label>
+                      </div>
+                      @Html.Partial("ToDoList", Model[i].TasksTodo)
+                  }
+            </div>
+        }
+        <div class="buttonbar">
+            <input type="submit" value="@ResourceScr.doToday" class="btn btn-default fullsize" />
+        </div>
+    }
+    else
+    {
+        <h3>@ResourceScr.noAvailableTasks</h3>
+    }

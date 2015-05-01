@@ -45,7 +45,6 @@ namespace LifeManagement.Models
         public virtual DbSet<Record> Records { get; set; }
         public virtual DbSet<UserSetting> UserSettings { get; set; }
         public virtual DbSet<ListForDay> ListsForDays { get; set; }
-
         public virtual DbSet<Archive> Archives { get; set; }
 
         public ApplicationDbContext()
@@ -55,8 +54,6 @@ namespace LifeManagement.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-    
-
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
             base.OnModelCreating(modelBuilder);
 
@@ -76,13 +73,5 @@ namespace LifeManagement.Models
             //modelBuilder.Entity<ApplicationUser>().HasMany(c => c.Events).WithRequired().HasForeignKey(c => c.UserId);
             //modelBuilder.Entity<ApplicationUser>().HasMany(c => c.Tags).WithRequired().HasForeignKey(c => c.UserId);
         }
-
-
-        public async Task<ListForDay> FirstOrDefaultListTaskAsync(DateTime date)
-        {
-            var list = ListsForDays.FirstOrDefault(x => x.Date == date)?? new ListForDay(date);
-            return list;
-        }
-      
     }
 }

@@ -14,46 +14,60 @@ namespace LifeManagement.Logic
 {
     public class TodoListTimeTicker
     {
-        private static int frequency = 30;
+        private static int frequency = 10;
         private readonly TimeSpan _updateInterval = TimeSpan.FromMinutes(frequency);
-        private Timer _timer;
         private volatile ApplicationDbContext db = new ApplicationDbContext();
 
-        private volatile bool _updating;
-        private readonly object _updateLock = new object();
         public TodoListTimeTicker()
         {
-            _timer = new Timer(UpdateTodoList, null, _updateInterval, _updateInterval);
+            var t = System.Threading.Tasks.Task.Factory.StartNew(() => UpdateTodoList());
         }
 
-        private void UpdateTodoList(object state)
+        private async System.Threading.Tasks.Task UpdateTodoList()
         {
-            lock (_updateLock)
+            while (true)
             {
-                if (!_updating)
-                {
-                    _updating = true;
-                    DateTime now = DateTime.UtcNow;
-                    CreateNewListForDay(now);
-                    CloseListForDay(now);
-                    db.SaveChanges();
-                    _updating = false;
-                }
+                DateTime now = DateTime.UtcNow;
+                CreateNewListForDay(now);
+                await CloseListForDay(now);
+                await db.SaveChangesAsync();
+                Thread.Sleep(_updateInterval);
             }
         }
 
-        private void CreateNewListForDay(DateTime now)
+
+        private bool IsStartEtalon(DateTime now, UserSetting userSetting)
         {
             var startEtalon = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
-            var userSettings = db.UserSettings.Where(x => (now.Add(x.TimeZoneShift) - startEtalon).Ticks > 0 || (now.Add(x.TimeZoneShift) - startEtalon).Ticks < _updateInterval.Ticks).ToList();
+            return ((now.Add(userSetting.TimeZoneShift) - startEtalon).Ticks > 0 && (now.Add(userSetting.TimeZoneShift) - startEtalon).Ticks < _updateInterval.Ticks);
+        }
+
+        private  void CreateNewListForDay(DateTime now)
+        {
+            var userSettingsAll = db.UserSettings.ToList();
+            var userSettings = new List<UserSetting>();
+            foreach (var settings in userSettingsAll)
+            {
+                if (IsStartEtalon(now, settings))
+                {
+                    userSettings.Add(settings);
+                }
+            }
+
             foreach (var settings in userSettings)
             {
                 var listForDay = new ListForDay(now.Date) {UserId = settings.UserId};
                 var tasks =
-                    db.Records.OfType<Task>().Where(x => x.UserId == settings.UserId && x.CompleteLevel < 100 &&
-                        (((x.StartDate.HasValue && x.StartDate.Value.Date <= now) && ((x.EndDate.HasValue && x.EndDate.Value.Date >= now.Date) || !x.EndDate.HasValue))
-                        ||
-                        (!x.StartDate.HasValue && x.EndDate.HasValue && x.EndDate.Value.Date >= now.Date))).ToList();
+                    db.Records.OfType<Task>().Where(
+                        x => x.UserId == settings.UserId && x.CompleteLevel < 100 &&
+                        (
+                            (
+                                (x.StartDate.HasValue && x.StartDate.Value.Year <= now.Year && x.StartDate.Value.Month <= now.Month && x.StartDate.Value.Day <= now.Day) 
+                                ||
+                                (x.EndDate.HasValue && x.EndDate.Value.Year <= now.Year && x.EndDate.Value.Month <= now.Month && x.EndDate.Value.Day <= now.Day)
+                            )
+                        )
+                        ).ToList();
                 foreach (var task in tasks)
                 {
                     listForDay.Archive.Add(new Archive(task));
@@ -62,10 +76,22 @@ namespace LifeManagement.Logic
             }
         }
 
-        private async void CloseListForDay(DateTime now)
+        private bool IsCloseEtalon(DateTime now, UserSetting userSetting)
         {
             var closeEtalon = new DateTime(now.Year, now.Month, now.Day, 23, 59, 0);
-            var userSettings = db.UserSettings.Where(x => closeEtalon - now.Add(x.TimeZoneShift) < _updateInterval || (closeEtalon - now.Add(x.TimeZoneShift)).Ticks > 0).ToList();
+            return (closeEtalon - now.Add(userSetting.TimeZoneShift) < _updateInterval && (closeEtalon - now.Add(userSetting.TimeZoneShift)).Ticks > 0);
+        }
+        private async System.Threading.Tasks.Task CloseListForDay(DateTime now)
+        {
+            var userSettingsAll = db.UserSettings.ToList();
+            var userSettings = new List<UserSetting>();
+            foreach (var settings in userSettingsAll)
+            {
+                if (IsCloseEtalon(now, settings))
+                {
+                    userSettings.Add(settings);
+                }
+            }
             foreach (var settings in userSettings)
             {
                 var listForDay = await db.ListsForDays.Include(x => x.Archive).Include(x => x.Events).FirstOrDefaultAsync(x => x.UserId == settings.UserId && x.Date == now.Date);
@@ -74,10 +100,22 @@ namespace LifeManagement.Logic
                     continue;
                 }
                 var tasks =
-                    db.Records.OfType<Task>().Where(x => x.UserId == settings.UserId && x.CompleteLevel < 100 &&
-                        (((x.StartDate.HasValue && x.StartDate.Value.Date <= now) && ((x.EndDate.HasValue && x.EndDate.Value.Date >= now.Date) || !x.EndDate.HasValue))
-                        ||
-                        (!x.StartDate.HasValue && x.EndDate.HasValue && x.EndDate.Value.Date >= now.Date))).ToList();
+                     db.Records.OfType<Task>().Where(
+                        x => x.UserId == settings.UserId && 
+                        (
+                            (x.CompletedOn.HasValue && x.CompletedOn.Value.Day == now.Day &&  x.CompletedOn.Value.Month == now.Month &&  x.CompletedOn.Value.Year == now.Year)
+                            ||
+                            (
+                                x.CompleteLevel < 100
+                                &&
+                                (
+                                    (x.StartDate.HasValue && x.StartDate.Value.Year <= now.Year && x.StartDate.Value.Month <= now.Month && x.StartDate.Value.Day <= now.Day)
+                                    ||
+                                    (x.EndDate.HasValue && x.EndDate.Value.Year <= now.Year && x.EndDate.Value.Month <= now.Month && x.EndDate.Value.Day <= now.Day)
+                                )
+                            )
+                        )
+                      ).ToList();
                 foreach (var task in tasks)
                 {
                     var archive = listForDay.Archive.FirstOrDefault(x => x.TaskId == task.Id);
@@ -97,9 +135,14 @@ namespace LifeManagement.Logic
                         listForDay.Archive.Remove(archive);
                     }
                 }
-                listForDay.Events = db.Records.OfType<Event>().Where(x => x.StartDate.Value.Date == now.Date || x.EndDate.Value.Date == now.Date || (x.StartDate.Value.Date <= now.Date && x.EndDate.Value.Date >= now.Date)).ToList();
+                listForDay.Events = db.Records.OfType<Event>().Where(
+                    x =>
+                        (x.StartDate.Value.Year <= now.Year && x.StartDate.Value.Month <= now.Month && x.StartDate.Value.Year <= now.Month)
+                        &&
+                        (x.EndDate.Value.Year >= now.Year && x.EndDate.Value.Month >= now.Month && x.EndDate.Value.Day >= now.Day)
+                        )
+                        .ToList();
                 listForDay.CompleteLevel = await CalculateCompleateLevel(now, listForDay);
-
             }
         }
 

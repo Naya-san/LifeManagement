@@ -1,0 +1,21 @@
+﻿@using LifeManagement.Extensions
+<table class="table">
+    @foreach (var task in Model.TasksTodo)
+    {
+        <tr>
+            <td>
+                @task.Name
+            </td>
+            <td>
+                @if (task.IsImportant)
+                {
+                    <div class="Urgent"></div>
+                }
+            </td>
+            <td>
+                @task.Complexity.ToLocalizedString()
+            </td>
+        </tr>
+    }
+</table>
+<br/>
