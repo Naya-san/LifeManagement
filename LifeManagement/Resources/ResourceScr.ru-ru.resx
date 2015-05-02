@@ -600,4 +600,19 @@
   <data name="VersionToDoList" xml:space="preserve">
     <value>Вариант №</value>
   </data>
+  <data name="QuantityTasks" xml:space="preserve">
+    <value>Количество выполненых заданий</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Анализ продуктивности</value>
+  </data>
+  <data name="StatisticsSuccess" xml:space="preserve">
+    <value>Общий процент успешности за день</value>
+  </data>
+  <data name="StatisticsTasksPerDay" xml:space="preserve">
+    <value>Выполненых заданий за день</value>
+  </data>
+  <data name="SuccessLevel" xml:space="preserve">
+    <value>Уровень успешности</value>
+  </data>
 </root>

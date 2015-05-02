@@ -51,11 +51,8 @@ namespace LifeManagement.Controllers
         {
             var userId = User.Identity.GetUserId();
             var request = System.Web.HttpContext.Current.Request;
-            var today = DateTime.UtcNow.Date;
-            var week = today.AddDays(-7);
-            var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().Where(x => x.CompletedOn.HasValue &&
-                x.CompletedOn.Value.Year <= today.Year && x.CompletedOn.Value.Month <= today.Month && x.CompletedOn.Value.Day <= today.Day &&
-                x.CompletedOn.Value.Year >= week.Year && x.CompletedOn.Value.Month >= week.Month && x.CompletedOn.Value.Day >= week.Day).ToList();
+            var week = DateTime.UtcNow.Date.AddDays(-7);
+            var records = db.Records.Where(x => x.UserId == userId).OfType<Task>().Where(x => x.CompletedOn.HasValue && x.CompletedOn.Value > week).ToList();
             ConvertTasksToUserLocalTime(request, records);
             return PartialView("Index", records);
         }
@@ -192,20 +189,37 @@ namespace LifeManagement.Controllers
                 return PartialView("GenerateList", listSetting);
             }
             listSetting.UserId = User.Identity.GetUserId();
-            var variants = await ToDoListManager.Generate(listSetting);
-            ViewBag.listSetting = listSetting;
-            return PartialView("ChooseVariant", variants);
+            var version = new VersionsViewModel();
+            try
+            {
+                version.ToDoLists = await ToDoListManager.Generate(listSetting);
+            }
+            catch (Exception exception)
+            {
+                ViewBag.Date = listSetting.Date.ToString("dd.MM.yyyy");
+                ViewBag.Time = listSetting.TimeToFill.Hours + ":" + listSetting.TimeToFill.Minutes;
+                ModelState.AddModelError("Date", exception.Message);
+                return PartialView("GenerateList", listSetting);
+            }
+            ViewData["idList"] = Guid.NewGuid();
+            Session[ViewData["idList"].ToString()] = version;
+            ViewData["Date"] = listSetting.Date;
+            return PartialView("ChooseVariant", version);
         }
 
         [HttpPost]
-        public async Task<ActionResult> ChooseVariant(TaskListSettingsViewModel listSetting, IList<ToDoList> toDoLists)
+        public async Task<ActionResult> ChooseVariant(DateTime date, Guid id)
         {
             try
             {
+                VersionsViewModel version = (VersionsViewModel) Session[id.ToString()];
                 var index = int.Parse(Request["radio"]);
-                foreach (var task in toDoLists[index].TasksTodo)
+
+                foreach (var task in version.ToDoLists[index].TasksTodo)
                 {
-                    task.StartDate = listSetting.Date;
+                    task.StartDate = date;
+                    var taskTmp = await db.Records.FindAsync(task.Id);
+                    taskTmp.StartDate = date;
                 }
                 await db.SaveChangesAsync();
             }
@@ -571,6 +585,7 @@ namespace LifeManagement.Controllers
 
         protected List<Task> FilterRecords(List<Task> records, RecordFilter recordFilter)
         {
+            var request = System.Web.HttpContext.Current.Request;
             var today = DateTime.UtcNow.Date;
             switch (recordFilter)
             {
@@ -594,7 +609,7 @@ namespace LifeManagement.Controllers
                         return
                             records.Where(
                                 x =>
-                                    (x.StartDate != null && x.StartDate.Value.Date == dueDate && (x.EndDate == null || (x.EndDate != null && x.EndDate > today))) ||
+                                    (x.StartDate != null && request.GetUserLocalTimeFromUtc(x.StartDate.Value).Date == dueDate && (x.EndDate == null || (x.EndDate != null && x.EndDate > today))) ||
                                     (x.EndDate != null && x.EndDate.Value.Date == dueDate)).ToList();
                     }
                 case RecordFilter.Future:

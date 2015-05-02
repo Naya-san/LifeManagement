@@ -606,4 +606,19 @@
   <data name="VersionToDoList" xml:space="preserve">
     <value>Version #</value>
   </data>
+  <data name="QuantityTasks" xml:space="preserve">
+    <value>Quantity of tasks</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Продуктивність</value>
+  </data>
+  <data name="StatisticsSuccess" xml:space="preserve">
+    <value>Рівень успішності на день</value>
+  </data>
+  <data name="StatisticsTasksPerDay" xml:space="preserve">
+    <value>Викнаних завдань на день</value>
+  </data>
+  <data name="SuccessLevel" xml:space="preserve">
+    <value>Success level</value>
+  </data>
 </root>

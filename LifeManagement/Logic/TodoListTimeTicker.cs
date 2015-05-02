@@ -14,7 +14,7 @@ namespace LifeManagement.Logic
 {
     public class TodoListTimeTicker
     {
-        private static int frequency = 10;
+        private static int frequency = 30;
         private readonly TimeSpan _updateInterval = TimeSpan.FromMinutes(frequency);
         private volatile ApplicationDbContext db = new ApplicationDbContext();
 

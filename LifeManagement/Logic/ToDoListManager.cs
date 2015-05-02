@@ -17,20 +17,24 @@ namespace LifeManagement.Logic
         public static ApplicationDbContext db = new ApplicationDbContext();
         public static async System.Threading.Tasks.Task<List<ToDoList>> Generate(TaskListSettingsViewModel listSetting)
         {
-           
-           // var settings = db.UserSettings.FirstOrDefault(x => x.UserId == listSetting.UserId) ?? new UserSetting(listSetting.UserId);
-            //var recordsOnDate =
-            //    db.Records.Where(x => x.UserId == listSetting.UserId &&
-            //        (((x.StartDate.HasValue && x.StartDate.Value.Date <= listSetting.Date) && ((x.EndDate.HasValue && x.EndDate.Value.Date >= listSetting.Date) || !x.EndDate.HasValue))
-            //        ||
-            //        (!x.StartDate.HasValue && x.EndDate.HasValue && x.EndDate.Value.Date >= listSetting.Date))).ToList();
-            
-            //var freeTime = settings.WorkingTime.Subtract(new TimeSpan(recordsOnDate.Sum(record => record.CalculateTimeLeft(settings).Ticks)));
-            //if (freeTime.Ticks <= 0)
-            //{
-            //    throw new Exception(ResourceScr.ErrorNoTime);
-            //}
-            //listSetting.TimeToFill = (freeTime.Ticks < listSetting.TimeToFill.Ticks) ? freeTime : listSetting.TimeToFill;
+            var settings = db.UserSettings.FirstOrDefault(x => x.UserId == listSetting.UserId) ?? new UserSetting(listSetting.UserId);
+            var recordsOnDate =
+                db.Records.Where(x => x.UserId == listSetting.UserId &&
+                    (
+                     (x.StartDate.HasValue && x.StartDate.Value.Day <= listSetting.Date.Day && x.StartDate.Value.Month <= listSetting.Date.Month && x.StartDate.Value.Year <= listSetting.Date.Year) 
+                        ||
+                     (!x.StartDate.HasValue && x.EndDate.HasValue && x.EndDate.Value.Day == listSetting.Date.Day && x.EndDate.Value.Month == listSetting.Date.Month && x.EndDate.Value.Year == listSetting.Date.Year)
+                    )
+                ).ToList();
+
+            var freeTime = settings.WorkingTime.Subtract(new TimeSpan(recordsOnDate.Sum(record => record.CalculateTimeLeft(settings).Ticks)));
+            var todayCheck = DateTime.UtcNow;
+
+            if (freeTime.Ticks <= 0 || (todayCheck.Date == listSetting.Date && listSetting.Date.AddDays(1).Subtract(todayCheck) < settings.GetMinComplexityRange(Complexity.Low)))
+            {
+                throw new Exception(ResourceScr.ErrorNoTime);
+            }
+            listSetting.TimeToFill = (freeTime.Ticks < listSetting.TimeToFill.Ticks) ? freeTime : listSetting.TimeToFill;
             var showcase = db.ListsForDays.Where(x => x.UserId == listSetting.UserId && x.CompleteLevel >= SuccessLevel).OrderByDescending(x => x.CompleteLevel).ToList();
             if (showcase.Any())
             {
@@ -74,6 +78,10 @@ namespace LifeManagement.Logic
             blocksList.Add(new ToDoList(userSettings));
             foreach (var task in group)
             {
+                if (task.CalculateTimeLeft(userSettings).TotalMinutes > minutesAverage*1.2)
+                {
+                    continue;
+                }
                 if (blocksList[index].TimeEstimate.TotalMinutes >= minutesAverage)
                 {
                     blocksList.Add(new ToDoList(userSettings));
@@ -164,7 +172,23 @@ namespace LifeManagement.Logic
             .ThenBy(x => x.EndDate)
             .GroupBy(x => x.Complexity)
             .ToList();
-            var blocks = (from @group in applicantTaskGroups select GenerateBlocksFromGroups(@group, listSetting.TimeToFill.TotalMinutes * idealRatio[(int)@group.Key] / 100, userSettings)).ToList();
+            var blocks = new List<List<ToDoList>>();
+            var additional = 0.0;
+            int i = 0;
+            foreach (var @group in applicantTaskGroups)
+            {
+                blocks.Add(GenerateBlocksFromGroups(@group, idealRatio[(int)@group.Key]+additional, userSettings));
+                if (blocks[i][0].TimeEstimate.Ticks == 0)
+                {
+                    additional += idealRatio[(int)@group.Key];
+                }
+                else
+                {
+                    additional = 0.0;
+                }
+                i++;
+            }
+        //    var blocks = (from @group in applicantTaskGroups select GenerateBlocksFromGroups(@group, listSetting.TimeToFill.TotalMinutes * idealRatio[(int)@group.Key] / 100, userSettings)).ToList();
             return BuildToDoListsFromBlock(blocks, userSettings);
         }
         private static async System.Threading.Tasks.Task<List<ToDoList>> GenerateListWithIntuition(TaskListSettingsViewModel listSetting)
@@ -194,7 +218,25 @@ namespace LifeManagement.Logic
                 .ThenBy(x => x.EndDate)
                 .GroupBy(x => x.Complexity)
                 .ToList();
-            var blocks = (from @group in applicantTaskGroups select GenerateBlocksFromGroups(@group, listSetting.TimeToFill.TotalMinutes/4.0, userSettings)).ToList();
+          //  var blocks = (from @group in applicantTaskGroups select GenerateBlocksFromGroups(@group, listSetting.TimeToFill.TotalMinutes/4.0, userSettings)).ToList();
+            var blocks = new List<List<ToDoList>>();
+            var minutEtalon = listSetting.TimeToFill.TotalMinutes/4.0;
+            var totalMinuts = minutEtalon;
+            int i = 0;
+            foreach (var @group in applicantTaskGroups)
+            {
+                blocks.Add(GenerateBlocksFromGroups(@group, totalMinuts, userSettings));
+                if (blocks[i][0].TimeEstimate.Ticks == 0)
+                {
+                    totalMinuts += minutEtalon;
+                }
+                else
+                {
+                    totalMinuts = minutEtalon;
+                }
+                i++;
+            }
+
             return BuildToDoListsFromBlock(blocks, userSettings);
         }
      

@@ -20,6 +20,7 @@ namespace LifeManagement.Extensions
             builder.Attributes.Add("data-update-target-id", updateTargetId);
             builder.Attributes.Add("data-update-url", updateUrl);
             builder.Attributes.Add("data-dialog-width", width.ToString(CultureInfo.InvariantCulture));
+            builder.Attributes.Add("title", "Magic");
             // Add a css class named dialogLink that will be
             // used to identify the anchor tag and to wire up
             // the jQuery functions

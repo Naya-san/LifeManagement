@@ -586,7 +586,7 @@
     <value>Скільки часу на день можна присвятити справам</value>
   </data>
   <data name="ErrorNoTime" xml:space="preserve">
-    <value>Цей день вже повныстю розплановано</value>
+    <value>Цей день вже повністю розпланований</value>
   </data>
   <data name="AddToTimetable" xml:space="preserve">
     <value>Додати список до розкладу</value>
@@ -599,5 +599,20 @@
   </data>
   <data name="VersionToDoList" xml:space="preserve">
     <value>Варіант №</value>
+  </data>
+  <data name="QuantityTasks" xml:space="preserve">
+    <value>Кількість виконаних завдань</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Статистика продуктивності</value>
+  </data>
+  <data name="StatisticsSuccess" xml:space="preserve">
+    <value>Загальний рівень успішності</value>
+  </data>
+  <data name="StatisticsTasksPerDay" xml:space="preserve">
+    <value>Виконаних завдань на день</value>
+  </data>
+  <data name="SuccessLevel" xml:space="preserve">
+    <value>Рівень успішності</value>
   </data>
 </root>

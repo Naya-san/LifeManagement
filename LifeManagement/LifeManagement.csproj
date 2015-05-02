@@ -101,6 +101,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -294,6 +295,7 @@
     <Compile Include="ViewModels\AlertViewModel.cs" />
     <Compile Include="ViewModels\TaskListSettingsViewModel.cs" />
     <Compile Include="ViewModels\ToDoList.cs" />
+    <Compile Include="ViewModels\VersionsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -549,8 +551,9 @@
     <Content Include="Views\Shared\_QuickCreateIcon.cshtml" />
     <Content Include="Views\UserSetting\Edit.cshtml" />
     <Content Include="Views\Tasks\GenerateList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ToDoList.cshtml" />
     <Content Include="Views\Tasks\ChooseVariant.cshtml" />
-    <Content Include="Views\Tasks\ToDoList.cshtml" />
+    <Content Include="Views\Cabinet\ShowStatisticResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -29,7 +29,6 @@
             @{Html.RenderAction("FilterTasks", "Tasks", new RouteValueDictionary { { "recordFilter", RecordFilter.Today } });}
             @{Html.RenderAction("GetTasksCompleatedToday", "Tasks");}
         </div>
-            @Html.DialogFormLink(ResourceScr.nothingToDo, "Nothing", Url.Action("NothingToDoTask", "Tasks"), ResourceScr.nothingToDo, "", "", 500)
     </div>
     <div id="Tomorrow">
         <div class="subtitle"><h3>@ResourceScr.Tomorrow</h3></div>

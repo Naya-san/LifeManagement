@@ -19,36 +19,36 @@
           <h4 style="text-align: center;">@ResourceScr.NothingPlaning </h4>
     }
     @foreach (var item in Model)
+{
+    if (item is Task)
     {
-        if (item is Task)
-        {
-            <div class="task">
-                <div class="taskComleateLevel" data-id=@item.Id>
-                    <input class="knob" data-width="45" data-angleoffset=-179 data-displayprevious=true data-anglearc=358 data-fgcolor="#0e0e0e" value='@((item as Task).CompleteLevel)'>
+        <div class="task @((item as Task).Complexity)">
+            <div class="taskComleateLevel" data-id=@item.Id>
+                <input class="knob" data-width="45" data-angleoffset=-179 data-displayprevious=true data-anglearc=358 data-fgcolor="#0e0e0e" value='@((item as Task).CompleteLevel)'>
+            </div>
+            <div class="taskInfo">
+                <div class="name">
+                    @if (item.IsImportant)
+                    {
+                        <div class="Urgent"></div>
+                    }
+                    @item.Name
                 </div>
-                <div class="taskInfo">
-                    <div class="name">
-                        @if (item.IsImportant)
-                        {
-                            <div class="Urgent"></div>
-                        }
-                        @item.Name
-                    </div>
-                    <div>
-                       @Html.DialogFormLink(" ", "moreInfoIcon", Url.Action("Edit", "Tasks", new { id = item.Id }), ResourceScr.Details, "body-LifeManagment", HttpContext.Current.Request.Url.AbsoluteUri, 700)
-                    </div>
-                    <span class="time">@item.ConvertTimeToNice()</span>
-                    <div class="tags">
-                        @foreach (var tag in item.Tags)
-                        {
-                            <text>@tag.Name </text>
-                        }
-                    </div>
+                <div>
+                    @Html.DialogFormLink(" ", "moreInfoIcon", Url.Action("Edit", "Tasks", new { id = item.Id }), ResourceScr.Details, "body-LifeManagment", HttpContext.Current.Request.Url.AbsoluteUri, 700)
+                </div>
+                <span class="time">@item.ConvertTimeToNice()</span>
+                <div class="tags">
+                    @foreach (var tag in item.Tags)
+                    {
+                        <text>@tag.Name </text>
+                    }
                 </div>
             </div>
-        }
-        else
-        {
+        </div>
+    }
+    else
+    {
             <div class="event">
                 <div class="taskInfo">
                     <div class="name">

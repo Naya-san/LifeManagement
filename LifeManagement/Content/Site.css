@@ -549,7 +549,7 @@ ul.subtree > li.subpunct:hover>.edit {
     padding-left: 10px;
     padding-right: 10px;
     min-height: 60px;
-    background-color: #f19645;
+    background-color: #4e888a;
     border: 1px solid #17292e;
     color: #fff;
     -webkit-border-top-left-radius: 10px; 
@@ -558,10 +558,17 @@ ul.subtree > li.subpunct:hover>.edit {
     -webkit-border-bottom-left-radius: 10px;
 }
 .None, .Low{
-    min-height: 65px
+    min-height: 60px;
+}
+.None {
+    opacity: 0.70;
+}
+.Low{
+    opacity: 0.8;
 }
 .Medium{
-    min-height: 75px
+    min-height: 75px;
+    opacity: 0.9;
 }
 .Hight{
     min-height: 85px
@@ -956,5 +963,9 @@ input.radio:focus ~ label:before {
     top: 2px;
     width: 92%;
     border-bottom: #f8f1d4 solid 20px;
-    border-top: #f8f1d4 solid 20px;
+    border-top: #f8f1d4 solid 5px;
 }
+/*Tabs*/
+/*.body-contentLifeManagment .ui-widget-content {
+    background-color: #f8f1d4 !important;
+}*/

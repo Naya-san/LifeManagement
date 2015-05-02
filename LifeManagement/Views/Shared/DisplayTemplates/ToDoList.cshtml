@@ -1,0 +1,23 @@
+﻿@using LifeManagement.Extensions
+@model LifeManagement.ViewModels.ToDoList
+<table class="table">
+    @for (int i = 0; i < Model.TasksTodo.Count; i++)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(m=>m.TasksTodo[i].Name)
+     
+            </td>
+            <td>
+                @if (Model.TasksTodo[i].IsImportant)
+                {
+                    <div class="Urgent"></div>
+                }
+            </td>
+            <td>
+               @Model.TasksTodo[i].Complexity.ToLocalizedString()
+            </td>
+        </tr>
+    }
+</table>
+<br/>

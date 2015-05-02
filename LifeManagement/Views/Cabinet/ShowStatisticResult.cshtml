@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = ResourceScr.cabinet;
+}
+@using LifeManagement.Resources
+<script>
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>
+
+<div id="linkblock">
+    @{Html.RenderAction("Sidebar", "Cabinet");}
+</div>
+<div id="maincontent">
+    @{Html.RenderAction("Index", "Alerts");}
+    <div class="title">
+        <h2 id="maintitle">@ResourceScr.Statistics</h2>
+        @Html.Partial("_QuickCreateIcon")
+    </div>
+    <div>
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-1">@ResourceScr.StatisticsTasksPerDay</a></li>
+                <li><a href="#tabs-2">@ResourceScr.StatisticsSuccess</a></li>
+            </ul>
+            <div id="tabs-1">
+                <div>
+                    <img src="@Url.Action("StatisticsTasksPerDay")" />
+                </div>
+            </div>
+            <div id="tabs-2">
+                <div>
+                    <img src="@Url.Action("StatisticsSuccess")" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -74,7 +74,7 @@ namespace LifeManagement.Models.DB
         {
             if (CompleteLevel < 100)
             {
-                return new TimeSpan(setting.GetMaxComplexityRange(Complexity).Ticks*(100 - CompleteLevel)/100);
+                return new TimeSpan(setting.GetAverageComplexityRange(Complexity).Ticks*(100 - CompleteLevel)/100);
             }
             return new TimeSpan(0);
         }

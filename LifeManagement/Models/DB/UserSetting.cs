@@ -89,6 +89,13 @@ namespace LifeManagement.Models.DB
                     return new TimeSpan(0, 15, 0);
             }
         }
+
+        public TimeSpan GetAverageComplexityRange(Complexity complexity)
+        {
+            var result = GetRange(complexity);
+            return result[0].Add(TimeSpan.FromMinutes(result[1].Subtract(result[0]).TotalMinutes/2));
+
+        }
         public TimeSpan GetMinComplexityRange(Complexity complexity)
         {
             switch (complexity)

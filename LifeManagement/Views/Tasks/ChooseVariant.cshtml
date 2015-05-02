@@ -1,32 +1,35 @@
 ﻿@using LifeManagement.Extensions
 @using LifeManagement.Resources
-@model IList<LifeManagement.ViewModels.ToDoList>
+@model  LifeManagement.ViewModels.VersionsViewModel
 <script type='text/javascript' src="@Url.Content("~/Scripts/availableFields.js")"></script>
 
-@if (Model.Any())
+@if (Model.ToDoLists.Any())
 {
-    using (@Html.BeginForm("ChooseVariant", "Tasks", new {listSetting = ViewBag.listSetting, toDoLists = Model}, FormMethod.Post, new {@class = "withScroll"}))
+    using (@Html.BeginForm("ChooseVariant", "Tasks", new { id = ViewData["idList"], date = ViewData["Date"] }, FormMethod.Post, new { @class = "withScroll" }))
     {
         <div>
             <input type="radio" name="radio" id="radio1" class="radio" value="0" checked/>
             <label for="radio1">@ResourceScr.VersionToDoList 1</label>
         </div>
-        @Html.Partial("ToDoList", Model[0])
-        if (Model.Count > 1)
+        @Html.DisplayFor(m => m.ToDoLists[0])
+        //@Html.Partial("ToDoList", Model.ToDoLists[0])
+        if (Model.ToDoLists.Count > 1)
         {
             <a href="javascript:void(0)" onclick=" showMore() " class="closeBlock" id="moreLabel">@ResourceScr.MoreVersions</a>
             <div id="editionalInfo" style="display: none">
-                @for (int i = 1; i < Model.Count; i++)
+                @for (int i = 1; i < Model.ToDoLists.Count; i++)
                 {
                     <div>
                         <input type="radio" name="radio" id="radio" value="@i" class="radio"/>
                         <label for="radio">@ResourceScr.VersionToDoList @(i + 1) </label>
                     </div>
-                    @Html.Partial("ToDoList", Model[i])
+
+                    @Html.DisplayFor(m => m.ToDoLists[i])
+                //    @Html.Partial("ToDoList", Model.ToDoLists[i])
                 }
             </div>
         }
-        <div class="buttonbar bottomfix">
+        <div class="bottomfix">
             <input type="submit" value="@ResourceScr.AddToTimetable" class="btn btn-default fullsize"/>
         </div>
     }

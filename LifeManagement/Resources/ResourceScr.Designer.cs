@@ -1069,6 +1069,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Quantity of tasks.
+        /// </summary>
+        public static string QuantityTasks {
+            get {
+                return ResourceManager.GetString("QuantityTasks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Readiness.
         /// </summary>
         public static string Readiness {
@@ -1222,6 +1231,33 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Продуктивність.
+        /// </summary>
+        public static string Statistics {
+            get {
+                return ResourceManager.GetString("Statistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Рівень успішності на день.
+        /// </summary>
+        public static string StatisticsSuccess {
+            get {
+                return ResourceManager.GetString("StatisticsSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Викнаних завдань на день.
+        /// </summary>
+        public static string StatisticsTasksPerDay {
+            get {
+                return ResourceManager.GetString("StatisticsTasksPerDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Subject.
         /// </summary>
         public static string Subject {
@@ -1245,6 +1281,15 @@ namespace LifeManagement.Resources {
         public static string subprojects {
             get {
                 return ResourceManager.GetString("subprojects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success level.
+        /// </summary>
+        public static string SuccessLevel {
+            get {
+                return ResourceManager.GetString("SuccessLevel", resourceCulture);
             }
         }
         
