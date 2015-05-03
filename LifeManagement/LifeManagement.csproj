@@ -221,6 +221,7 @@
     <Compile Include="Extensions\RecordExtensions.cs" />
     <Compile Include="Extensions\RepeatPositionExtensions.cs" />
     <Compile Include="Hubs\AlertsHub.cs" />
+    <Compile Include="Logic\ForTestTicker.cs" />
     <Compile Include="Logic\ToDoListManager.cs" />
     <Compile Include="Logic\TodoListTimeTicker.cs" />
     <Compile Include="Migrations\201504041457527_NewTableSettings.cs" />
