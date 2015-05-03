@@ -3,7 +3,9 @@
 @using LifeManagement.Extensions
 @using LifeManagement.Models.DB
 @using LifeManagement.Resources
-
+@{
+    ViewBag.Title = ResourceScr.onDate+" "+Session["FocusDate"];
+}
 
 <div id="linkblock">
     @{Html.RenderAction("Sidebar", "Cabinet");}
@@ -23,8 +25,8 @@
     if (item is Task)
     {
         <div class="task @((item as Task).Complexity)">
-            <div class="taskComleateLevel" data-id=@item.Id>
-                <input class="knob" data-width="45" data-angleoffset=-179 data-displayprevious=true data-anglearc=358 data-fgcolor="#0e0e0e" value='@((item as Task).CompleteLevel)'>
+            <div class="taskComleateLevel" data-id=@item.Id title="@ResourceScr.CompleteLevel">
+                <input class="knob" data-width="45" data-height="45" data-angleoffset=-179 data-displayprevious=true data-anglearc=358 data-fgcolor="#0e0e0e" value='@((item as Task).CompleteLevel)'>
             </div>
             <div class="taskInfo">
                 <div class="name">

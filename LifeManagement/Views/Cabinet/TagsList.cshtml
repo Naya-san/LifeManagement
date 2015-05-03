@@ -9,7 +9,7 @@
 @foreach (var item in Model) {
     <li class="subpunct">
         @Html.ActionLink(item.Name, "GetRecords", "Tags", new { id = item.Id }, null) 
-        @Html.DialogFormLink(" ", "edit", Url.Action("Edit", "Tags", new { id = item.Id }), ResourceScr.Details, "chapter2", Url.Action("TagsList", "Cabinet"), 500)
+        @Html.DialogFormLink(" ", "edit", Url.Action("Edit", "Tags", new { id = item.Id }), ResourceScr.Details, "chapter2", Url.Action("TagsList", "Cabinet"), 500, ResourceScr.HelpEdit)
     </li>
 }
 <li>

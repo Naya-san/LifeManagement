@@ -181,10 +181,10 @@ namespace LifeManagement.Controllers
         [HttpPost]
         public async Task<ActionResult> GenerateList([Bind(Include = "Date,TimeToFill")]TaskListSettingsViewModel listSetting)
         {
+            ViewBag.Date = listSetting.Date.ToString("dd.MM.yyyy");
+            ViewBag.Time = listSetting.TimeToFill.Hours + ":" + listSetting.TimeToFill.Minutes;
             if (listSetting.Date < DateTime.UtcNow.Date)
             {
-                ViewBag.Date = listSetting.Date.ToString("dd.MM.yyyy");
-                ViewBag.Time = listSetting.TimeToFill.Hours + ":" + listSetting.TimeToFill.Minutes;
                 ModelState.AddModelError("Date", ResourceScr.itsPast);
                 return PartialView("GenerateList", listSetting);
             }
@@ -196,8 +196,6 @@ namespace LifeManagement.Controllers
             }
             catch (Exception exception)
             {
-                ViewBag.Date = listSetting.Date.ToString("dd.MM.yyyy");
-                ViewBag.Time = listSetting.TimeToFill.Hours + ":" + listSetting.TimeToFill.Minutes;
                 ModelState.AddModelError("Date", exception.Message);
                 return PartialView("GenerateList", listSetting);
             }

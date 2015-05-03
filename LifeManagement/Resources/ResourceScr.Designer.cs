@@ -295,6 +295,15 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clse alert.
+        /// </summary>
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Completed on.
         /// </summary>
         public static string CompletedOn {
@@ -354,6 +363,15 @@ namespace LifeManagement.Resources {
         public static string contains {
             get {
                 return ResourceManager.GetString("contains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create.
+        /// </summary>
+        public static string Create {
+            get {
+                return ResourceManager.GetString("Create", resourceCulture);
             }
         }
         
@@ -687,6 +705,60 @@ namespace LifeManagement.Resources {
         public static string greeting {
             get {
                 return ResourceManager.GetString("greeting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create new event.
+        /// </summary>
+        public static string HelpAddEvent {
+            get {
+                return ResourceManager.GetString("HelpAddEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create new task.
+        /// </summary>
+        public static string HelpAddTask {
+            get {
+                return ResourceManager.GetString("HelpAddTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string HelpEdit {
+            get {
+                return ResourceManager.GetString("HelpEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate to-do list.
+        /// </summary>
+        public static string HelpGenerate {
+            get {
+                return ResourceManager.GetString("HelpGenerate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to See more information.
+        /// </summary>
+        public static string HelpMoreInfo {
+            get {
+                return ResourceManager.GetString("HelpMoreInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to See more information and edit.
+        /// </summary>
+        public static string HelpMoreInfoAndEdit {
+            get {
+                return ResourceManager.GetString("HelpMoreInfoAndEdit", resourceCulture);
             }
         }
         

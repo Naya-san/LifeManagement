@@ -10,7 +10,7 @@
 <script type='text/javascript' src="@Url.Content("~/Scripts/tree.js")"></script>
 <script>
     $(function () {
-        $(".datepicker").datepicker({ dateFormat: 'dd.mm.yy' }).val();
+        $(".datepicker").datepicker({ dateFormat: 'dd.mm.yy' }, $.datepicker.setDefaults($.datepicker.regional[LocalizeCode])).val();
     });
 </script>
 <div>
@@ -36,7 +36,7 @@
                         <li class="subpunct">
                            
                             @Html.ActionLink(item.ToString(), "GetTasks", "Projects", new { id = item.Id }, null)
-                            @Html.DialogFormLink(" ", "edit", Url.Action("Edit", "Projects", new { id = item.Id }), ResourceScr.Details, "linkblock", Url.Action("Sidebar", "Cabinet"), 700)
+                            @Html.DialogFormLink(" ", "edit", Url.Action("Edit", "Projects", new { id = item.Id }), ResourceScr.Details, "linkblock", Url.Action("Sidebar", "Cabinet"), 700, ResourceScr.HelpEdit)
                         </li>
                     }
                     <li>

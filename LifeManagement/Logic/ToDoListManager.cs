@@ -15,13 +15,19 @@ namespace LifeManagement.Logic
     {
         public static readonly double SuccessLevel = 65.5;
         public static ApplicationDbContext db = new ApplicationDbContext();
+        private static TimeSpan TimeTillTomorrow(TaskListSettingsViewModel listSetting)
+        {
+            var todayCheck = DateTime.UtcNow;
+            return listSetting.Date.AddDays(1).Subtract(todayCheck);
+        }
+
         public static async System.Threading.Tasks.Task<List<ToDoList>> Generate(TaskListSettingsViewModel listSetting)
         {
             var settings = db.UserSettings.FirstOrDefault(x => x.UserId == listSetting.UserId) ?? new UserSetting(listSetting.UserId);
             var recordsOnDate =
                 db.Records.Where(x => x.UserId == listSetting.UserId &&
                     (
-                     (x.StartDate.HasValue && x.StartDate.Value.Day <= listSetting.Date.Day && x.StartDate.Value.Month <= listSetting.Date.Month && x.StartDate.Value.Year <= listSetting.Date.Year) 
+                     (x.StartDate.HasValue && x.StartDate.Value.Day <= listSetting.Date.Day && x.StartDate.Value.Month <= listSetting.Date.Month && x.StartDate.Value.Year <= listSetting.Date.Year)
                         ||
                      (!x.StartDate.HasValue && x.EndDate.HasValue && x.EndDate.Value.Day == listSetting.Date.Day && x.EndDate.Value.Month == listSetting.Date.Month && x.EndDate.Value.Year == listSetting.Date.Year)
                     )
@@ -30,17 +36,18 @@ namespace LifeManagement.Logic
             var freeTime = settings.WorkingTime.Subtract(new TimeSpan(recordsOnDate.Sum(record => record.CalculateTimeLeft(settings).Ticks)));
             var todayCheck = DateTime.UtcNow;
 
-            if (freeTime.Ticks <= 0 || (todayCheck.Date == listSetting.Date && listSetting.Date.AddDays(1).Subtract(todayCheck) < settings.GetMinComplexityRange(Complexity.Low)))
+            if (freeTime.Ticks <= 0 || (todayCheck.Date == listSetting.Date && TimeTillTomorrow(listSetting) < settings.GetMinComplexityRange(Complexity.Low)))
             {
                 throw new Exception(ResourceScr.ErrorNoTime);
             }
             listSetting.TimeToFill = (freeTime.Ticks < listSetting.TimeToFill.Ticks) ? freeTime : listSetting.TimeToFill;
+            listSetting.TimeToFill = (todayCheck.Date == listSetting.Date && TimeTillTomorrow(listSetting) < listSetting.TimeToFill) ? TimeTillTomorrow(listSetting) : listSetting.TimeToFill;
             var showcase = db.ListsForDays.Where(x => x.UserId == listSetting.UserId && x.CompleteLevel >= SuccessLevel).OrderByDescending(x => x.CompleteLevel).ToList();
             if (showcase.Any())
             {
-                 return await GenerateListWithShowcase(listSetting, showcase);
+                return await GenerateListWithShowcase(listSetting, showcase);
             }
-            return await GenerateListWithIntuition(listSetting); 
+            return await GenerateListWithIntuition(listSetting);
         }
 
         private static List<ToDoList> BuildToDoListsFromBlock(List<List<ToDoList>> blocks, UserSetting userSettings)
@@ -218,24 +225,24 @@ namespace LifeManagement.Logic
                 .ThenBy(x => x.EndDate)
                 .GroupBy(x => x.Complexity)
                 .ToList();
-          //  var blocks = (from @group in applicantTaskGroups select GenerateBlocksFromGroups(@group, listSetting.TimeToFill.TotalMinutes/4.0, userSettings)).ToList();
-            var blocks = new List<List<ToDoList>>();
-            var minutEtalon = listSetting.TimeToFill.TotalMinutes/4.0;
-            var totalMinuts = minutEtalon;
-            int i = 0;
-            foreach (var @group in applicantTaskGroups)
-            {
-                blocks.Add(GenerateBlocksFromGroups(@group, totalMinuts, userSettings));
-                if (blocks[i][0].TimeEstimate.Ticks == 0)
-                {
-                    totalMinuts += minutEtalon;
-                }
-                else
-                {
-                    totalMinuts = minutEtalon;
-                }
-                i++;
-            }
+            var blocks = (from @group in applicantTaskGroups select GenerateBlocksFromGroups(@group, listSetting.TimeToFill.TotalMinutes / applicantTaskGroups.Count, userSettings)).ToList();
+            //var blocks = new List<List<ToDoList>>();
+            //var minutEtalon = listSetting.TimeToFill.TotalMinutes/applicantTaskGroups.Count;
+            //var totalMinuts = minutEtalon;
+            //int i = 0;
+            //foreach (var @group in applicantTaskGroups)
+            //{
+            //    blocks.Add(GenerateBlocksFromGroups(@group, totalMinuts, userSettings));
+            //    if (blocks[i][0].TimeEstimate.Ticks == 0)
+            //    {
+            //        totalMinuts += minutEtalon;
+            //    }
+            //    else
+            //    {
+            //        totalMinuts = minutEtalon;
+            //    }
+            //    i++;
+            //}
 
             return BuildToDoListsFromBlock(blocks, userSettings);
         }

@@ -13,7 +13,7 @@
     if (item.CompleteLevel < 100)
     {
         <div class="task @item.Complexity">
-            <div class="taskComleateLevel" data-id=@item.Id>
+            <div class="taskComleateLevel" data-id=@item.Id title="@ResourceScr.CompleteLevel">
                 <input class="knob" data-width="45" data-height="45" data-angleoffset=-179 data-displayprevious=true data-anglearc=358 data-fgcolor="#0e0e0e" value='@item.CompleteLevel'>
             </div>
             <div class="taskInfo">
@@ -25,7 +25,7 @@
                     @item.Name
                 </div>
                 <div>
-                    @Html.DialogFormLink(" ", "moreInfoIcon", Url.Action("Edit", "Tasks", new { id = item.Id }), ResourceScr.Details, "body-LifeManagment", "", 700)
+                    @Html.DialogFormLink(" ", "moreInfoIcon", Url.Action("Edit", "Tasks", new { id = item.Id }), ResourceScr.Details, "body-LifeManagment", "", 700, ResourceScr.HelpMoreInfoAndEdit)
                 </div>
                 <span class="time">@item.ConvertTimeToNice()</span>
                 <div class="tags">
@@ -40,8 +40,8 @@
     else
     {
         <div class="Сompleted @item.Complexity">
-            <div class="taskComleateLevel" data-id=@item.Id>
-                <input class="knob" data-width="45" data-angleoffset=-179 data-anglearc=358 data-displayprevious=true data-fgcolor="#0e0e0e" value='@item.CompleteLevel'>
+            <div class="taskComleateLevel" data-id=@item.Id title="@ResourceScr.CompleteLevel">
+                <input class="knob" data-width="45" data-height="45" data-angleoffset=-179 data-anglearc=358 data-displayprevious=true data-fgcolor="#0e0e0e" value='@item.CompleteLevel'>
             </div>
             <div class="taskInfo">
                 <div class="name">
@@ -52,7 +52,7 @@
                     @item.Name
                 </div>
                 <div>
-                    @Html.DialogFormLink(" ", "moreInfoIcon", Url.Action("Display", "Tasks", new { id = item.Id }), ResourceScr.Details, "body-LifeManagment", "", 700)
+                    @Html.DialogFormLink(" ", "moreInfoIcon", Url.Action("Display", "Tasks", new { id = item.Id }), ResourceScr.Details, "body-LifeManagment", "", 700, ResourceScr.HelpMoreInfo)
                 </div>
                 <span class="time">@item.ConvertTimeToNice(true)</span>
                 <div class="tags">

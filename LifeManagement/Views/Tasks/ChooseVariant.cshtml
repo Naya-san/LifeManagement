@@ -3,7 +3,7 @@
 @model  LifeManagement.ViewModels.VersionsViewModel
 <script type='text/javascript' src="@Url.Content("~/Scripts/availableFields.js")"></script>
 
-@if (Model.ToDoLists.Any())
+@if (!Model.IsEmpty())
 {
     using (@Html.BeginForm("ChooseVariant", "Tasks", new { id = ViewData["idList"], date = ViewData["Date"] }, FormMethod.Post, new { @class = "withScroll" }))
     {
@@ -12,7 +12,6 @@
             <label for="radio1">@ResourceScr.VersionToDoList 1</label>
         </div>
         @Html.DisplayFor(m => m.ToDoLists[0])
-        //@Html.Partial("ToDoList", Model.ToDoLists[0])
         if (Model.ToDoLists.Count > 1)
         {
             <a href="javascript:void(0)" onclick=" showMore() " class="closeBlock" id="moreLabel">@ResourceScr.MoreVersions</a>
@@ -25,7 +24,6 @@
                     </div>
 
                     @Html.DisplayFor(m => m.ToDoLists[i])
-                //    @Html.Partial("ToDoList", Model.ToDoLists[i])
                 }
             </div>
         }

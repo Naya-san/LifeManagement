@@ -331,7 +331,7 @@
     <value>У вас немає термінових завдань. Ви можете прочитати цікаву книгу, зайнятися спортом або просто відпочити.</value>
   </data>
   <data name="itsPast" xml:space="preserve">
-    <value>Неможливо використовувати минулий час</value>
+    <value>Будь ласка,  не вказуйте час, що вже в минулому</value>
   </data>
   <data name="About" xml:space="preserve">
     <value>Детальніше</value>
@@ -614,5 +614,29 @@
   </data>
   <data name="SuccessLevel" xml:space="preserve">
     <value>Рівень успішності</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Приховати нагадування</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Створити</value>
+  </data>
+  <data name="HelpAddEvent" xml:space="preserve">
+    <value>Створити нову подію</value>
+  </data>
+  <data name="HelpAddTask" xml:space="preserve">
+    <value>Створити нове завдання</value>
+  </data>
+  <data name="HelpEdit" xml:space="preserve">
+    <value>Внести зміни</value>
+  </data>
+  <data name="HelpGenerate" xml:space="preserve">
+    <value>Автоматично сгенерувати список завдань на певну дату</value>
+  </data>
+  <data name="HelpMoreInfo" xml:space="preserve">
+    <value>Переглянути детальну інформацію</value>
+  </data>
+  <data name="HelpMoreInfoAndEdit" xml:space="preserve">
+    <value>Переглянути і змінити детальну інформацію</value>
   </data>
 </root>

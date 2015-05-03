@@ -494,12 +494,12 @@ namespace LifeManagement.Controllers
             {
                 case RecordFilter.Today:
                     {
-                        var dueDate = DateTime.UtcNow;
+                        var dueDate = DateTime.UtcNow.Date;
                         return
                             records.Where(
                                 x =>
-                                    (x.StartDate != null && x.StartDate.Value <= dueDate) &&
-                                    (x.EndDate != null && x.EndDate.Value >= dueDate)).ToList();
+                                    (x.StartDate != null && x.StartDate.Value.Date <= dueDate) &&
+                                    (x.EndDate != null && x.EndDate.Value.Date >= dueDate)).ToList();
                     }
                 case RecordFilter.Tomorrow:
                     {

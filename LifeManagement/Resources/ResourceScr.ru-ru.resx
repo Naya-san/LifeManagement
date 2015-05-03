@@ -615,4 +615,28 @@
   <data name="SuccessLevel" xml:space="preserve">
     <value>Уровень успешности</value>
   </data>
+  <data name="Close" xml:space="preserve">
+    <value>Скрыть напоминание</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Создать</value>
+  </data>
+  <data name="HelpAddEvent" xml:space="preserve">
+    <value>Создать новое событие</value>
+  </data>
+  <data name="HelpAddTask" xml:space="preserve">
+    <value>Создать новое задание</value>
+  </data>
+  <data name="HelpEdit" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
+  <data name="HelpGenerate" xml:space="preserve">
+    <value>Автоматически сформировать список заданий на определенный день</value>
+  </data>
+  <data name="HelpMoreInfo" xml:space="preserve">
+    <value>Просмотреть подробную информацию</value>
+  </data>
+  <data name="HelpMoreInfoAndEdit" xml:space="preserve">
+    <value>Просмотреть и изменить подробную информацию</value>
+  </data>
 </root>
