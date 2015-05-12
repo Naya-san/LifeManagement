@@ -256,6 +256,10 @@
     <Compile Include="Migrations\201504261320511_AddArchives.Designer.cs">
       <DependentUpon>201504261320511_AddArchives.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505121145338_AIntTicks.cs" />
+    <Compile Include="Migrations\201505121145338_AIntTicks.Designer.cs">
+      <DependentUpon>201505121145338_AIntTicks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DB\Archive.cs" />
     <Compile Include="Models\DB\ListForDay.cs" />
@@ -442,6 +446,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504261320511_AddArchives.resx">
       <DependentUpon>201504261320511_AddArchives.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505121145338_AIntTicks.resx">
+      <DependentUpon>201505121145338_AIntTicks.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ResourceScr.ru-ru.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

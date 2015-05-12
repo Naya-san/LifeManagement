@@ -14,7 +14,7 @@ namespace LifeManagement.Logic
 {
     public class TodoListTimeTicker
     {
-        private static int frequency = 30;
+        private static int frequency = 60;
         private readonly TimeSpan _updateInterval = TimeSpan.FromMinutes(frequency);
         private volatile ApplicationDbContext db = new ApplicationDbContext();
 
@@ -30,7 +30,7 @@ namespace LifeManagement.Logic
                 DateTime now = DateTime.UtcNow;
                 CreateNewListForDay(now);
                 await CloseListForDay(now);
-                await db.SaveChangesAsync();
+               
                 Thread.Sleep(_updateInterval);
             }
         }
@@ -39,7 +39,9 @@ namespace LifeManagement.Logic
         private bool IsStartEtalon(DateTime now, UserSetting userSetting)
         {
             var startEtalon = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
-            return ((now.Add(userSetting.TimeZoneShift) - startEtalon).Ticks > 0 && (now.Add(userSetting.TimeZoneShift) - startEtalon).Ticks < _updateInterval.Ticks);
+            var diff = now.Add(userSetting.TimeZoneShift) - startEtalon;
+           // return (diff.Ticks > 0);
+            return (diff.Ticks > 0 && diff < _updateInterval);
         }
 
         private  void CreateNewListForDay(DateTime now)
@@ -74,15 +76,19 @@ namespace LifeManagement.Logic
                 }
                 db.ListsForDays.Add(listForDay);
             }
+            db.SaveChanges();
         }
 
         private bool IsCloseEtalon(DateTime now, UserSetting userSetting)
         {
             var closeEtalon = new DateTime(now.Year, now.Month, now.Day, 23, 59, 0);
-            return (closeEtalon - now.Add(userSetting.TimeZoneShift) < _updateInterval && (closeEtalon - now.Add(userSetting.TimeZoneShift)).Ticks > 0);
+            var diff = closeEtalon - now.Add(userSetting.TimeZoneShift);
+            //return (diff < _updateInterval && diff.Ticks > 0);
+            return (diff < _updateInterval);
         }
         private async System.Threading.Tasks.Task CloseListForDay(DateTime now)
         {
+            
             var userSettingsAll = db.UserSettings.ToList();
             var userSettings = new List<UserSetting>();
             foreach (var settings in userSettingsAll)
@@ -144,6 +150,7 @@ namespace LifeManagement.Logic
                         .ToList();
                 listForDay.CompleteLevel = await CalculateCompleateLevel(now, listForDay);
             }
+            await db.SaveChangesAsync();
         }
 
         private async Task<double> CalculateCompleateLevel(DateTime now, ListForDay listForDay)

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using LifeManagement.Enums;
 using LifeManagement.Resources;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LifeManagement.Models.DB
 {
@@ -23,8 +24,14 @@ namespace LifeManagement.Models.DB
             [Display(Name = "WorkingTime", ResourceType = typeof(ResourceScr))]    
             public TimeSpan WorkingTime { get; set; }
 
+            public Int64 TimeZoneShiftTicks { get; set; }
+        
+            [NotMapped]
             [Display(Name = "TimeZone", ResourceType = typeof(ResourceScr))]
-            public TimeSpan TimeZoneShift { get; set; }
+            public TimeSpan TimeZoneShift {
+                get { return TimeSpan.FromTicks(TimeZoneShiftTicks); }
+                set { TimeZoneShiftTicks = value.Ticks; }
+            }
             public virtual ApplicationUser User { get; set; }
 
             public UserSetting()
