@@ -40,7 +40,7 @@ namespace LifeManagement.Logic
         {
             var startEtalon = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
             var diff = now.Add(userSetting.TimeZoneShift) - startEtalon;
-           // return (diff.Ticks > 0);
+           //return (diff.Ticks > 0);
             return (diff.Ticks > 0 && diff < _updateInterval);
         }
 
@@ -83,12 +83,12 @@ namespace LifeManagement.Logic
         {
             var closeEtalon = new DateTime(now.Year, now.Month, now.Day, 23, 59, 0);
             var diff = closeEtalon - now.Add(userSetting.TimeZoneShift);
-            //return (diff < _updateInterval && diff.Ticks > 0);
-            return (diff < _updateInterval);
+            return (diff < _updateInterval && diff.Ticks > 0);
+     //       return true;
         }
         private async System.Threading.Tasks.Task CloseListForDay(DateTime now)
         {
-            
+            db.Configuration.LazyLoadingEnabled = false;
             var userSettingsAll = db.UserSettings.ToList();
             var userSettings = new List<UserSetting>();
             foreach (var settings in userSettingsAll)
@@ -133,14 +133,15 @@ namespace LifeManagement.Logic
                     }
                     archive.LevelOnEnd = task.CompleteLevel;
                 }
-                var archiveListTmp = db.Archives.Include(x => x.Task).Where(x => listForDay.Archive.Contains(x)).ToList();
-                foreach (var archive in archiveListTmp)
-                {
-                    if (!tasks.Contains(archive.Task))
-                    {
-                        listForDay.Archive.Remove(archive);
-                    }
-                }
+                
+                //var archiveListTmp = db.Archives.Include(x => x.Task).Where(x => listForDay.Archive.Contains(x)).ToList();
+                //foreach (var archive in archiveListTmp)
+                //{
+                //    if (!tasks.Contains(archive.Task))
+                //    {
+                //        listForDay.Archive.Remove(archive);
+                //    }
+                //}
                 listForDay.Events = db.Records.OfType<Event>().Where(
                     x =>
                         (x.StartDate.Value.Year <= now.Year && x.StartDate.Value.Month <= now.Month && x.StartDate.Value.Year <= now.Month)
