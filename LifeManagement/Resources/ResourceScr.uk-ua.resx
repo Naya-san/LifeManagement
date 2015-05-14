@@ -244,7 +244,7 @@
     <value>Нагадування</value>
   </data>
   <data name="slogan" xml:space="preserve">
-    <value>Контролюй свій час!</value>
+    <value>Контролюй свій час з нами!</value>
   </data>
   <data name="Projects" xml:space="preserve">
     <value>Проекти</value>
@@ -638,5 +638,17 @@
   </data>
   <data name="HelpMoreInfoAndEdit" xml:space="preserve">
     <value>Переглянути і змінити детальну інформацію</value>
+  </data>
+  <data name="advEfficiency" xml:space="preserve">
+    <value>Слідкуйте за своїми щоденними досягненнями та надихайтеся на підкорення нових вершин.</value>
+  </data>
+  <data name="advFilter" xml:space="preserve">
+    <value>Зручна система фільтрів і ранжирування завдань і подій.</value>
+  </data>
+  <data name="advList" xml:space="preserve">
+    <value>Не знаєте чим зайнятися? Ми складемо розклад для Вас.</value>
+  </data>
+  <data name="Anotation" xml:space="preserve">
+    <value>Ваш надійний помічник для організації часу!</value>
   </data>
 </root>

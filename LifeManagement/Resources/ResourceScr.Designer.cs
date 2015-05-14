@@ -106,6 +106,33 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Keep track of your daily achievements and be inspired to conquer new heights..
+        /// </summary>
+        public static string advEfficiency {
+            get {
+                return ResourceManager.GetString("advEfficiency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Easy system of filters and ranking of tasks and events..
+        /// </summary>
+        public static string advFilter {
+            get {
+                return ResourceManager.GetString("advFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You do not know what activities choose, do you? We will draw up a todo-list for you..
+        /// </summary>
+        public static string advList {
+            get {
+                return ResourceManager.GetString("advList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Have you forgot the details of your task? Write a remark for it!.
         /// </summary>
         public static string advRemark {
@@ -156,6 +183,15 @@ namespace LifeManagement.Resources {
         public static string AllTask {
             get {
                 return ResourceManager.GetString("AllTask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your handy assistant for the organization of time!.
+        /// </summary>
+        public static string Anotation {
+            get {
+                return ResourceManager.GetString("Anotation", resourceCulture);
             }
         }
         
@@ -1285,7 +1321,7 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Take control of your time!.
+        ///   Looks up a localized string similar to Take control of your time with us!.
         /// </summary>
         public static string slogan {
             get {
@@ -1303,7 +1339,7 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Продуктивність.
+        ///   Looks up a localized string similar to Your efficiency.
         /// </summary>
         public static string Statistics {
             get {
@@ -1312,7 +1348,7 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Рівень успішності на день.
+        ///   Looks up a localized string similar to Level of success per day.
         /// </summary>
         public static string StatisticsSuccess {
             get {
@@ -1321,7 +1357,7 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Викнаних завдань на день.
+        ///   Looks up a localized string similar to Compleated tasks per day.
         /// </summary>
         public static string StatisticsTasksPerDay {
             get {

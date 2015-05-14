@@ -235,7 +235,7 @@
     <value>Your ToDo list is empty</value>
   </data>
   <data name="slogan" xml:space="preserve">
-    <value>Take control of your time!</value>
+    <value>Take control of your time with us!</value>
   </data>
   <data name="advReminders" xml:space="preserve">
     <value>Reminders will always help you to be in the right place at the right time</value>
@@ -610,13 +610,13 @@
     <value>Quantity of tasks</value>
   </data>
   <data name="Statistics" xml:space="preserve">
-    <value>Продуктивність</value>
+    <value>Your efficiency</value>
   </data>
   <data name="StatisticsSuccess" xml:space="preserve">
-    <value>Рівень успішності на день</value>
+    <value>Level of success per day</value>
   </data>
   <data name="StatisticsTasksPerDay" xml:space="preserve">
-    <value>Викнаних завдань на день</value>
+    <value>Compleated tasks per day</value>
   </data>
   <data name="SuccessLevel" xml:space="preserve">
     <value>Success level</value>
@@ -644,5 +644,17 @@
   </data>
   <data name="HelpMoreInfoAndEdit" xml:space="preserve">
     <value>See more information and edit</value>
+  </data>
+  <data name="advEfficiency" xml:space="preserve">
+    <value>Keep track of your daily achievements and be inspired to conquer new heights.</value>
+  </data>
+  <data name="advFilter" xml:space="preserve">
+    <value>Easy system of filters and ranking of tasks and events.</value>
+  </data>
+  <data name="advList" xml:space="preserve">
+    <value>You do not know what activities choose, do you? We will draw up a todo-list for you.</value>
+  </data>
+  <data name="Anotation" xml:space="preserve">
+    <value>Your handy assistant for the organization of time!</value>
   </data>
 </root>

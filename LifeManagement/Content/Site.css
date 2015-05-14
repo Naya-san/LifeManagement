@@ -872,26 +872,47 @@ input[type="submit"].invisibleInput:hover {
 
 /*Main page*/
 .Contol{
-    background: url(/Content/Images/time_loading.png) 0px no-repeat;
-    height: 500px;
-    width: 500px;
-    horiz-align: center;
+    background: url(/Content/Images/PromoLogoBig.png) 0px no-repeat;
+    height: 300px;
+    width: 450px;
 }
 .remainder{
-    background: url(/Content/Images/reminder.png) 0px no-repeat;
-    height: 500px;
-    width: 500px;
-    horiz-align: center;
+    background: url(/Content/Images/bell.png) 0px no-repeat;
+    height: 140px;
+    width: 100px;
+    padding-left: 120px;
 }
 .todo-list{
-    background: url(/Content/Images/todo-list.png) 0px no-repeat;
-    height: 500px;
-    width: 500px;
-    horiz-align: center;
+    background: url(/Content/Images/list_32.png) 0px no-repeat;
+    height: 140px;
+    width: 100px;
+    padding-left: 120px;
 }
-.main {
-    width: 100%;
-    height: auto;
+.filter{
+    background: url(/Content/Images/filter.png) 0px no-repeat;
+    height: 140px;
+    width: 100px;
+    padding-left: 120px;
+}
+.increase{
+    background: url(/Content/Images/increase.png) 0px no-repeat;
+    height: 140px;
+    width: 100px;
+    padding-left: 120px;
+}
+.promotext {
+   width: 450px;
+   height: auto;
+}
+table.promo {
+    margin: auto;
+}
+table.promo td {
+    font-size: 16px;
+}
+table.promo td.footer {
+    font-size: 16px;
+    text-align: center;
 }
 /*Radio button*/
 /* hide input */

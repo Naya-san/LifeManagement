@@ -4,25 +4,21 @@
 @using LifeManagement.Resources
 
 <div id="content">
-    <div class="LMсol-md-12">
-        <h1>Life Management</h1>
-        <div class="Contol"></div>
-        <p>@ResourceScr.slogan</p>
-    </div>
-    
-    <div class="rowLM">
-
-        <div class="LMсol-md-6">
-            <h2>@ResourceScr.Remarks</h2>
-            <div class="todo-list"></div>
-            <p>
-                @ResourceScr.advRemark
-            </p>
-        </div>
-        <div class="LMсol-md-6">
-            <h2>@ResourceScr.Reminders</h2>
-            <div class="remainder"></div>
-            <p>@ResourceScr.advReminders</p>
-        </div>
-    </div>
+    <table class="promo">
+        <tr>
+            <td class="Contol"></td>
+            <td class="promotext"><h1>Life Management</h1><br>@ResourceScr.Anotation</td>
+        </tr>
+        <tr>
+            <td class="todo-list">@ResourceScr.advList</td>
+            <td class="increase">@ResourceScr.advEfficiency</td>
+        </tr>
+        <tr>
+            <td class="filter">@ResourceScr.advFilter</td>
+            <td class="remainder">@ResourceScr.advReminders</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="footer">@ResourceScr.slogan</td>
+        </tr>
+    </table>
 </div>

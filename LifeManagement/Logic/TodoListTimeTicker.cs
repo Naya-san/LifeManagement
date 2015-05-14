@@ -133,15 +133,20 @@ namespace LifeManagement.Logic
                     }
                     archive.LevelOnEnd = task.CompleteLevel;
                 }
-                
+                var archiveListTmp = new List<Archive>();
+                foreach (var archive in listForDay.Archive)
+                {
+                    archiveListTmp.Add(archive);
+                }
                 //var archiveListTmp = db.Archives.Include(x => x.Task).Where(x => listForDay.Archive.Contains(x)).ToList();
-                //foreach (var archive in archiveListTmp)
-                //{
-                //    if (!tasks.Contains(archive.Task))
-                //    {
-                //        listForDay.Archive.Remove(archive);
-                //    }
-                //}
+                foreach (var archive in archiveListTmp)
+                {
+                    if (!tasks.Contains(archive.Task) &&  archive.Task.CompleteLevel == archive.LevelOnStart)
+                    {
+                        listForDay.Archive.Remove(archive);
+                        db.Archives.Remove(archive);
+                    }
+                }
                 listForDay.Events = db.Records.OfType<Event>().Where(
                     x =>
                         (x.StartDate.Value.Year <= now.Year && x.StartDate.Value.Month <= now.Month && x.StartDate.Value.Year <= now.Month)
@@ -170,7 +175,6 @@ namespace LifeManagement.Logic
             var freeTimeForTasks = settings.WorkingTime - TimeSpan.FromMinutes(minutesForEvents);
             double minutesForTasks  = listForDay.Archive.Sum(archive => settings.GetMinComplexityRange(archive.Task.Complexity).TotalMinutes*(archive.LevelOnEnd - archive.LevelOnStart)/100.0);
             return  (minutesForTasks*100)/ freeTimeForTasks.TotalMinutes;
-
         }
     }
 }
