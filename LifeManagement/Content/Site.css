@@ -914,6 +914,37 @@ table.promo td.footer {
     font-size: 16px;
     text-align: center;
 }
+/*Promo parts*/
+.rest{
+    background: url(/Content/Images/catWellcome2.png) 0px no-repeat;
+    height: 150px;
+    width: 150px;
+    float: right;
+}
+.LMсol-md-8>h2 {
+    margin-top: 0;
+}
+.login{
+    background: url(/Content/Images/catWellcome4.png) 0px no-repeat;
+    height: 150px;
+    width: 150px;
+    float: left;
+    margin-top: 30px;
+}
+.signUp{
+    background: url(/Content/Images/catWellcome.png) 0px no-repeat;
+    height: 150px;
+    width: 150px;
+    float: left;
+    margin-top: 35px;
+}
+.changepassword{
+    background: url(/Content/Images/catWellcome3.png) 0px no-repeat;
+    height: 150px;
+    width: 150px;
+    float: left;
+    margin-top: 42px;
+}
 /*Radio button*/
 /* hide input */
 input.radio:empty {
@@ -987,6 +1018,10 @@ input.radio:focus ~ label:before {
     border-top: #f8f1d4 solid 5px;
 }
 /*Tabs*/
-/*.body-contentLifeManagment .ui-widget-content {
-    background-color: #f8f1d4 !important;
+.body-contentLifeManagment .ui-widget-content {
+    /*background-color: #f8f1d4 !important;*/
+    border: 0;
+}
+/*.body-contentLifeManagment .ui-state-active {
+     background-color: #f8f1d4 !important;
 }*/

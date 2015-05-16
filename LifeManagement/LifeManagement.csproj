@@ -319,6 +319,8 @@
     <Content Include="Content\Images\CatRest.png" />
     <Content Include="Content\Images\catWellcome.png" />
     <Content Include="Content\Images\catWellcome2.png" />
+    <Content Include="Content\Images\catWellcome3.png" />
+    <Content Include="Content\Images\catWellcome4.png" />
     <Content Include="Content\Images\chackCell.png" />
     <Content Include="Content\Images\chackCellChaked.png" />
     <Content Include="Content\Images\check.png" />
