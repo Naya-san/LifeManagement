@@ -181,7 +181,7 @@
     <value>Приоритет</value>
   </data>
   <data name="TaskProject" xml:space="preserve">
-    <value>Проект</value>
+    <value>Цель</value>
   </data>
   <data name="TaskStartDate" xml:space="preserve">
     <value>Начать выполнение с</value>
@@ -223,7 +223,7 @@
     <value>до</value>
   </data>
   <data name="addProject" xml:space="preserve">
-    <value>Добавит проект</value>
+    <value>Добавит цель</value>
   </data>
   <data name="advRemark" xml:space="preserve">
     <value>Забыли все тонкости вашей задачи? Напишите к ней заметку!</value>
@@ -247,7 +247,7 @@
     <value>Возьми время под контроль с нами!</value>
   </data>
   <data name="Projects" xml:space="preserve">
-    <value>Проекты</value>
+    <value>Цели</value>
   </data>
   <data name="addSubtask" xml:space="preserve">
     <value>Добавить подзадачу</value>
@@ -286,7 +286,7 @@
     <value>Название</value>
   </data>
   <data name="ParentProject" xml:space="preserve">
-    <value>Родительский проект</value>
+    <value>Основная цель</value>
   </data>
   <data name="ErrorRegulExpr" xml:space="preserve">
     <value>Это поле может содержать только буквы, цифры, подчеркивания и знаки препинания</value>
@@ -298,7 +298,7 @@
     <value>Строка привышает позволеную длину</value>
   </data>
   <data name="createProject" xml:space="preserve">
-    <value>Новый проект</value>
+    <value>Новая цель</value>
   </data>
   <data name="DeleteQustion" xml:space="preserve">
     <value>Уверены, что хотите удалить</value>
@@ -319,7 +319,7 @@
     <value>Продолжительность</value>
   </data>
   <data name="project" xml:space="preserve">
-    <value>проект</value>
+    <value>цель</value>
   </data>
   <data name="task" xml:space="preserve">
     <value>задание</value>
@@ -394,7 +394,7 @@
     <value>тэг</value>
   </data>
   <data name="newProject" xml:space="preserve">
-    <value>Новый проект</value>
+    <value>Новая цель</value>
   </data>
   <data name="IsUrgent" xml:space="preserve">
     <value>Срочно</value>
@@ -490,7 +490,7 @@
     <value>Тема</value>
   </data>
   <data name="More" xml:space="preserve">
-    <value>Хотите еще настроек?</value>
+    <value>Еще настроек?</value>
   </data>
   <data name="SearchResult" xml:space="preserve">
     <value>Результат поиска</value>
@@ -565,7 +565,7 @@
     <value>Начало</value>
   </data>
   <data name="Date" xml:space="preserve">
-    <value>Date for planning</value>
+    <value>Дата планирования</value>
   </data>
   <data name="ParallelismPercentage" xml:space="preserve">
     <value>Сколько процентов внимания требуют фоновые события</value>

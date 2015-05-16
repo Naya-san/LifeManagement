@@ -909,6 +909,8 @@ table.promo {
 }
 table.promo td {
     font-size: 16px;
+    text-align: justify;
+    padding-right: 35px;
 }
 table.promo td.footer {
     font-size: 16px;
@@ -936,7 +938,7 @@ table.promo td.footer {
     height: 150px;
     width: 150px;
     float: left;
-    margin-top: 35px;
+    margin-top: 10px;
 }
 .changepassword{
     background: url(/Content/Images/catWellcome3.png) 0px no-repeat;
@@ -1025,3 +1027,7 @@ input.radio:focus ~ label:before {
 /*.body-contentLifeManagment .ui-state-active {
      background-color: #f8f1d4 !important;
 }*/
+.tableHead {
+  font-weight: 600;
+  color: #888;  
+}

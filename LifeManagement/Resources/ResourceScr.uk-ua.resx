@@ -181,7 +181,7 @@
     <value>Пріорітет</value>
   </data>
   <data name="TaskProject" xml:space="preserve">
-    <value>Проект</value>
+    <value>Ціль</value>
   </data>
   <data name="TaskStartDate" xml:space="preserve">
     <value>Почати виконання з</value>
@@ -223,7 +223,7 @@
     <value>до</value>
   </data>
   <data name="addProject" xml:space="preserve">
-    <value>Створити проект</value>
+    <value>Створити ціль</value>
   </data>
   <data name="advRemark" xml:space="preserve">
     <value>Забули всі тонкощі вашого завдання? Напишіть до нього нотатки!</value>
@@ -232,7 +232,7 @@
     <value>Нагадування допоможуть завжди бути в потрібний час і в потрібному місці!</value>
   </data>
   <data name="greeting" xml:space="preserve">
-    <value>Вітаемо</value>
+    <value>Вітаємо</value>
   </data>
   <data name="noTodo" xml:space="preserve">
     <value>На сьогодні ще нічого не заплановано</value>
@@ -247,7 +247,7 @@
     <value>Контролюй свій час з нами!</value>
   </data>
   <data name="Projects" xml:space="preserve">
-    <value>Проекти</value>
+    <value>Цілі</value>
   </data>
   <data name="addSubtask" xml:space="preserve">
     <value>Додати підзадачу</value>
@@ -286,7 +286,7 @@
     <value>Назва</value>
   </data>
   <data name="ParentProject" xml:space="preserve">
-    <value>Батьківський проект</value>
+    <value>Головна ціль</value>
   </data>
   <data name="ErrorRegulExpr" xml:space="preserve">
     <value>Це поле може містити тільки букви, цифри, підкреслення і розділові знаки</value>
@@ -298,7 +298,7 @@
     <value>Рядок занадто довгий</value>
   </data>
   <data name="createProject" xml:space="preserve">
-    <value>Новий проект</value>
+    <value>Нова ціль</value>
   </data>
   <data name="DeleteQustion" xml:space="preserve">
     <value>Впевнені, що хочете видалити</value>
@@ -319,7 +319,7 @@
     <value>Часова оцінка</value>
   </data>
   <data name="project" xml:space="preserve">
-    <value>проект</value>
+    <value>ціль</value>
   </data>
   <data name="task" xml:space="preserve">
     <value>завдання</value>
@@ -328,7 +328,7 @@
     <value>Ступінь готовності</value>
   </data>
   <data name="noAvailableTasks" xml:space="preserve">
-    <value>У вас немає термінових завдань. Ви можете прочитати цікаву книгу, зайнятися спортом або просто відпочити.</value>
+    <value>У вас немає завдань, з яких можна скласти розклад. Ви можете прочитати цікаву книгу, зайнятися спортом або просто відпочити.</value>
   </data>
   <data name="itsPast" xml:space="preserve">
     <value>Будь ласка,  не вказуйте час, що вже в минулому</value>
@@ -367,7 +367,7 @@
     <value>Мітки</value>
   </data>
   <data name="AllEvents" xml:space="preserve">
-    <value>Всі заходи</value>
+    <value>Всі події</value>
   </data>
   <data name="AllTask" xml:space="preserve">
     <value>Всі завдання</value>
@@ -394,7 +394,7 @@
     <value>мітку</value>
   </data>
   <data name="newProject" xml:space="preserve">
-    <value>Новий проект</value>
+    <value>Нова ціль</value>
   </data>
   <data name="IsUrgent" xml:space="preserve">
     <value>Терміново</value>
@@ -445,10 +445,10 @@
     <value>За тиждень</value>
   </data>
   <data name="newEvent" xml:space="preserve">
-    <value>Новий захід</value>
+    <value>Нова подія</value>
   </data>
   <data name="NoDueDate" xml:space="preserve">
-    <value>Без сроків</value>
+    <value>Без часових обмежень</value>
   </data>
   <data name="E2w" xml:space="preserve">
     <value>Кожні два тижні</value>
@@ -478,7 +478,7 @@
     <value>Зберегти зміни для всіх</value>
   </data>
   <data name="Event" xml:space="preserve">
-    <value>захід</value>
+    <value>подія</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>Повідомлення</value>
@@ -490,7 +490,7 @@
     <value>Тема</value>
   </data>
   <data name="More" xml:space="preserve">
-    <value>Хочеться ще налаштувань?</value>
+    <value>Ще налаштувань?</value>
   </data>
   <data name="SearchResult" xml:space="preserve">
     <value>Результат пошуку</value>
@@ -505,7 +505,7 @@
     <value>Новий пароль і підтвердження пароля різні.</value>
   </data>
   <data name="ConfirmNewPassword" xml:space="preserve">
-    <value>Підтвердження нового пароля</value>
+    <value>Повторіть новий пароль</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Новий пароль</value>

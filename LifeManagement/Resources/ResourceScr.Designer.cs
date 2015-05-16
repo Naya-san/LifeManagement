@@ -70,7 +70,7 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add project.
+        ///   Looks up a localized string similar to Add goal.
         /// </summary>
         public static string addProject {
             get {
@@ -421,7 +421,7 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New project.
+        ///   Looks up a localized string similar to New goal.
         /// </summary>
         public static string createProject {
             get {
@@ -979,7 +979,7 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New project.
+        ///   Looks up a localized string similar to New goal.
         /// </summary>
         public static string newProject {
             get {
@@ -1132,7 +1132,7 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Parent project.
+        ///   Looks up a localized string similar to Main goal.
         /// </summary>
         public static string ParentProject {
             get {
@@ -1159,7 +1159,7 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to project.
+        ///   Looks up a localized string similar to goal.
         /// </summary>
         public static string project {
             get {
@@ -1168,7 +1168,7 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Projects.
+        ///   Looks up a localized string similar to Goals.
         /// </summary>
         public static string Projects {
             get {
@@ -1510,7 +1510,7 @@ namespace LifeManagement.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Project.
+        ///   Looks up a localized string similar to Goal.
         /// </summary>
         public static string TaskProject {
             get {

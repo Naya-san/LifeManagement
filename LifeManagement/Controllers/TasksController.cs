@@ -594,7 +594,7 @@ namespace LifeManagement.Controllers
                             records.Where(
                                 x =>
                                     (x.StartDate != null && x.StartDate.Value.Date <= dueDate && ((x.EndDate.HasValue && x.EndDate.Value >= dueDate) || !x.EndDate.HasValue)) ||
-                                    (x.EndDate != null && x.EndDate.Value.Date == dueDate && !x.StartDate.HasValue)).ToList();
+                                    (x.EndDate != null && x.EndDate.Value.Date == dueDate && !x.StartDate.HasValue)).OrderByDescending(x=>x.IsImportant).ThenBy(x=>x.EndDate).ToList();
                     }
                 case RecordFilter.Overdue:
                     return

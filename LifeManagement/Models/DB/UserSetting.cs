@@ -53,7 +53,7 @@ namespace LifeManagement.Models.DB
             ComplexityHightTo = new TimeSpan(10, 30, 0);
             ParallelismPercentage = 30;
             WorkingTime = new TimeSpan(16, 0, 0);
-            TimeZoneShift = new TimeSpan(0,2,0);
+            TimeZoneShift = new TimeSpan(0, 2, 0);
         }
 
         public TimeSpan[] GetRange(Complexity complexity)

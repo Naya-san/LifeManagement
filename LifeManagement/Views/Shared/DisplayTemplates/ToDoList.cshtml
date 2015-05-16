@@ -1,12 +1,25 @@
 ﻿@using LifeManagement.Extensions
 @model LifeManagement.ViewModels.ToDoList
 <table class="table">
+    <tr class="tableHead">
+        <td>
+            @LifeManagement.Resources.ResourceScr.Name
+
+        </td>
+        <td>
+            @LifeManagement.Resources.ResourceScr.Important
+        </td>
+        <td>
+           @LifeManagement.Resources.ResourceScr.TaskComplexity
+        </td>
+    </tr>
+
     @for (int i = 0; i < Model.TasksTodo.Count; i++)
     {
         <tr>
             <td>
-                @Html.DisplayFor(m=>m.TasksTodo[i].Name)
-     
+                @Html.DisplayFor(m => m.TasksTodo[i].Name)
+
             </td>
             <td>
                 @if (Model.TasksTodo[i].IsImportant)
@@ -15,7 +28,7 @@
                 }
             </td>
             <td>
-               @Model.TasksTodo[i].Complexity.ToLocalizedString()
+                @Model.TasksTodo[i].Complexity.ToLocalizedString()
             </td>
         </tr>
     }

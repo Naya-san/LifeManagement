@@ -181,7 +181,7 @@
     <value>Priority</value>
   </data>
   <data name="TaskProject" xml:space="preserve">
-    <value>Project</value>
+    <value>Goal</value>
   </data>
   <data name="TaskStartDate" xml:space="preserve">
     <value>Start Date</value>
@@ -223,7 +223,7 @@
     <value>to</value>
   </data>
   <data name="addProject" xml:space="preserve">
-    <value>Add project</value>
+    <value>Add goal</value>
   </data>
   <data name="advRemark" xml:space="preserve">
     <value>Have you forgot the details of your task? Write a remark for it!</value>
@@ -247,7 +247,7 @@
     <value>Reminders</value>
   </data>
   <data name="Projects" xml:space="preserve">
-    <value>Projects</value>
+    <value>Goals</value>
   </data>
   <data name="addSubtask" xml:space="preserve">
     <value>Add subtask</value>
@@ -292,7 +292,7 @@
     <value>Name</value>
   </data>
   <data name="ParentProject" xml:space="preserve">
-    <value>Parent project</value>
+    <value>Main goal</value>
   </data>
   <data name="ErrorRegulExpr" xml:space="preserve">
     <value>This field can only contain letters, numbers, underscores and punctuation</value>
@@ -304,7 +304,7 @@
     <value>String is too long</value>
   </data>
   <data name="createProject" xml:space="preserve">
-    <value>New project</value>
+    <value>New goal</value>
   </data>
   <data name="DeleteQustion" xml:space="preserve">
     <value>Are you sure you want to delete</value>
@@ -325,7 +325,7 @@
     <value>Time estimation</value>
   </data>
   <data name="project" xml:space="preserve">
-    <value>project</value>
+    <value>goal</value>
   </data>
   <data name="task" xml:space="preserve">
     <value>task</value>
@@ -400,7 +400,7 @@
     <value>tag</value>
   </data>
   <data name="newProject" xml:space="preserve">
-    <value>New project</value>
+    <value>New goal</value>
   </data>
   <data name="IsUrgent" xml:space="preserve">
     <value>Is urgent</value>

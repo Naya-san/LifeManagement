@@ -28,26 +28,41 @@ namespace LifeManagement.Logic
             while (true)
             {
                 DateTime now = DateTime.UtcNow;
-                CreateNewListForDay(now);
+                await CreateNewListForDay(now);
                 await CloseListForDay(now);
                
                 Thread.Sleep(_updateInterval);
             }
         }
 
-
         private bool IsStartEtalon(DateTime now, UserSetting userSetting)
         {
             var startEtalon = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
             var diff = now.Add(userSetting.TimeZoneShift) - startEtalon;
-           //return (diff.Ticks > 0);
+       //     return (diff.Ticks > 0);
             return (diff.Ticks > 0 && diff < _updateInterval);
         }
 
-        private  void CreateNewListForDay(DateTime now)
+        private async System.Threading.Tasks.Task CreateNewListForDay(DateTime now)
         {
-            var userSettingsAll = db.UserSettings.ToList();
+            var userSettingsAll = new List<UserSetting>();
             var userSettings = new List<UserSetting>();
+            var users = db.Users.ToList();
+            foreach (var user in users)
+            {
+                var user1 = user;
+                var settings = await db.UserSettings.FirstOrDefaultAsync(x => x.UserId == user1.Id);
+                if (settings == null)
+                {
+                    settings = new UserSetting(user.Id);
+                    db.UserSettings.Add(settings);
+                    userSettings.Add(settings);
+                }
+                else
+                {
+                    userSettingsAll.Add(settings);
+                }
+            }
             foreach (var settings in userSettingsAll)
             {
                 if (IsStartEtalon(now, settings))
@@ -76,15 +91,15 @@ namespace LifeManagement.Logic
                 }
                 db.ListsForDays.Add(listForDay);
             }
-            db.SaveChanges();
+            await db.SaveChangesAsync();
         }
 
         private bool IsCloseEtalon(DateTime now, UserSetting userSetting)
         {
             var closeEtalon = new DateTime(now.Year, now.Month, now.Day, 23, 59, 0);
             var diff = closeEtalon - now.Add(userSetting.TimeZoneShift);
+        //    return true;
             return (diff < _updateInterval && diff.Ticks > 0);
-     //       return true;
         }
         private async System.Threading.Tasks.Task CloseListForDay(DateTime now)
         {
@@ -127,24 +142,28 @@ namespace LifeManagement.Logic
                     var archive = listForDay.Archive.FirstOrDefault(x => x.TaskId == task.Id);
                     if (archive == null)
                     {
-                        archive = new Archive(task);
-                        archive.LevelOnStart = 0;
+                        archive = new Archive(task) {LevelOnStart = 0};
                         listForDay.Archive.Add(archive);
+                        db.Archives.Add(archive);
                     }
                     archive.LevelOnEnd = task.CompleteLevel;
                 }
-                var archiveListTmp = new List<Archive>();
-                foreach (var archive in listForDay.Archive)
-                {
-                    archiveListTmp.Add(archive);
-                }
-                //var archiveListTmp = db.Archives.Include(x => x.Task).Where(x => listForDay.Archive.Contains(x)).ToList();
+                var archiveListTmp = listForDay.Archive.ToList();
                 foreach (var archive in archiveListTmp)
                 {
-                    if (!tasks.Contains(archive.Task) &&  archive.Task.CompleteLevel == archive.LevelOnStart)
+                    var archive1 = archive;
+                    var task = await db.Records.OfType<Task>().FirstAsync(x => x.Id == archive1.TaskId);
+                    if (!tasks.Contains(task))
                     {
-                        listForDay.Archive.Remove(archive);
-                        db.Archives.Remove(archive);
+                        if (task.CompleteLevel == archive.LevelOnStart)
+                        {
+                            listForDay.Archive.Remove(archive);
+                            db.Archives.Remove(archive);
+                        }
+                        else
+                        {
+                            archive.LevelOnEnd = task.CompleteLevel;
+                        }
                     }
                 }
                 listForDay.Events = db.Records.OfType<Event>().Where(

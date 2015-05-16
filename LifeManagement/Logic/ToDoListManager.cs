@@ -65,6 +65,20 @@ namespace LifeManagement.Logic
             return varients;
         }
 
+
+        private static List<ToDoList> BuildToDoListsFromBlock(List<ToDoList>[][] blocks, UserSetting userSettings)
+        {
+            var varients = new List<ToDoList>();
+            for (int i = 0; i < blocks.Count(); i++)
+            {
+                varients.Add(new ToDoList(userSettings));
+                var tmp = new List<List<ToDoList>>();
+
+
+            }
+            return varients;
+        }
+
         private static int ChooseBestRow(List<List<ToDoList>> blocks)
         {
             var indexRow = 0;
@@ -225,9 +239,9 @@ namespace LifeManagement.Logic
                 .ThenBy(x => x.EndDate)
                 .GroupBy(x => x.Complexity)
                 .ToList();
-            var blocks = (from @group in applicantTaskGroups select GenerateBlocksFromGroups(@group, listSetting.TimeToFill.TotalMinutes / applicantTaskGroups.Count, userSettings)).ToList();
+      //      var blocks = (from @group in applicantTaskGroups select GenerateBlocksFromGroups(@group, listSetting.TimeToFill.TotalMinutes / applicantTaskGroups.Count, userSettings)).ToList();
             //var blocks = new List<List<ToDoList>>();
-            //var minutEtalon = listSetting.TimeToFill.TotalMinutes/applicantTaskGroups.Count;
+            //var minutEtalon = listSetting.TimeToFill.TotalMinutes / applicantTaskGroups.Count;
             //var totalMinuts = minutEtalon;
             //int i = 0;
             //foreach (var @group in applicantTaskGroups)
@@ -243,7 +257,16 @@ namespace LifeManagement.Logic
             //    }
             //    i++;
             //}
-
+            var blocks = new List<ToDoList>[applicantTaskGroups.Count][];
+            var minutEtalon = listSetting.TimeToFill.TotalMinutes / applicantTaskGroups.Count;
+            for (int i = 0; i < applicantTaskGroups.Count; i++)
+            {
+                blocks[i] = new List<ToDoList>[applicantTaskGroups.Count];
+                for (int j = 0; j < applicantTaskGroups.Count; j++)
+                {
+                    blocks[i][j] = GenerateBlocksFromGroups(applicantTaskGroups[i], minutEtalon*(j+1), userSettings);
+                }
+            }
             return BuildToDoListsFromBlock(blocks, userSettings);
         }
      

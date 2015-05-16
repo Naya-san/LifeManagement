@@ -149,7 +149,7 @@ namespace LifeManagement.Controllers
             var userId = User.Identity.GetUserId();
             const int N = 7;
             string[][] values = new [] { new string[7], new string[7]};
-            var startDate = DateTime.UtcNow.Date.AddDays(-1*(N-1));
+            var startDate = DateTime.UtcNow.Date.AddDays(-1*N);
             for (int i = 0; i < N; i++)
             {
                 values[0][i] = startDate.ToString("d");
@@ -167,12 +167,12 @@ namespace LifeManagement.Controllers
             var userId = User.Identity.GetUserId();
             const int N = 7;
             string[][] values = new[] { new string[7], new string[7] };
-            var startDate = DateTime.UtcNow.Date.AddDays(-1 * (N - 1));
+            var startDate = DateTime.UtcNow.Date.AddDays(-1 * N);
             for (int i = 0; i < N; i++)
             {
                 values[0][i] = startDate.ToString("d");
                 var list = db.ListsForDays.FirstOrDefault(x => x.UserId == userId && x.Date == startDate);
-                values[1][i] = (list == null) ? "0.0" : list.CompleteLevel.ToString();
+                values[1][i] = (list == null) ? "0" : list.CompleteLevel.ToString("##.");
                 startDate = startDate.AddDays(1);
             }
             return values;
