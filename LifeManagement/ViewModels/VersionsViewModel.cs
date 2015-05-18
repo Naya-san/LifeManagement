@@ -7,9 +7,9 @@ namespace LifeManagement.ViewModels
 {
     public class VersionsViewModel
     {
-        public IList<ToDoList> ToDoLists { get; set; }
+        public List<ToDoList> ToDoLists { get; set; }
 
-        public VersionsViewModel(IList<ToDoList>  toDoLists)
+        public VersionsViewModel(List<ToDoList>  toDoLists)
         {
             ToDoLists = toDoLists;
         }
@@ -25,11 +25,32 @@ namespace LifeManagement.ViewModels
             {
                 return true;
             }
-            if (ToDoLists[0] == null || ToDoLists[0].TimeEstimate.Ticks == 0)
+            if (Count() == 0)
             {
                 return true;
             }
             return false;
+        }
+
+        public void Add(VersionsViewModel versions)
+        {
+            if (versions != null && !versions.IsEmpty())
+            {
+                ToDoLists.AddRange(versions.ToDoLists);   
+            }
+        }
+
+        public int Count()
+        {
+            int count = 0;
+            foreach (var todo in ToDoLists)
+            {
+                if (todo != null && todo.TasksTodo.Any() )
+                {
+                    count++;
+                }
+            }
+            return count;
         }
     }
 }

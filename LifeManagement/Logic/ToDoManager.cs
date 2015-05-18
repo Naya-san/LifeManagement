@@ -11,47 +11,53 @@ using LifeManagement.ViewModels;
 
 namespace LifeManagement.Logic
 {
-    public static class ToDoManager
+    public class ToDoManager
     {
         private static readonly double SuccessLevel = 65.5;
         private static readonly double factor = 1.25;
-        private static ApplicationDbContext db = new ApplicationDbContext();
-
-        private static TimeSpan TimeTillTomorrow(TaskListSettingsViewModel listSetting)
+        private  ApplicationDbContext db = new ApplicationDbContext();
+        private TaskListSettingsViewModel listSettings;
+        private UserSetting userSetting;
+        public ToDoManager(TaskListSettingsViewModel listSetting)
         {
-            var todayCheck = DateTime.UtcNow;
-            return listSetting.Date.AddDays(1).Subtract(todayCheck);
+            listSettings = listSetting;
+            userSetting = db.UserSettings.FirstOrDefault(x => x.UserId == listSettings.UserId) ?? new UserSetting(listSettings.UserId);
         }
 
-        public static VersionsViewModel Generate(TaskListSettingsViewModel listSetting)
+        private TimeSpan TimeTillTomorrow()
         {
-            var settings = db.UserSettings.FirstOrDefault(x => x.UserId == listSetting.UserId) ?? new UserSetting(listSetting.UserId);
+            var todayCheck = DateTime.UtcNow;
+            return listSettings.Date.AddDays(1).Subtract(todayCheck);
+        }
+
+        public VersionsViewModel Generate()
+        {
+           
             var recordsOnDate =
-                db.Records.Where(x => x.UserId == listSetting.UserId &&
+                db.Records.Where(x => x.UserId == listSettings.UserId &&
                     (
-                     (x.StartDate.HasValue && x.StartDate.Value.Day <= listSetting.Date.Day && x.StartDate.Value.Month <= listSetting.Date.Month && x.StartDate.Value.Year <= listSetting.Date.Year)
+                     (x.StartDate.HasValue && x.StartDate.Value.Day <= listSettings.Date.Day && x.StartDate.Value.Month <= listSettings.Date.Month && x.StartDate.Value.Year <= listSettings.Date.Year)
                         ||
-                     (!x.StartDate.HasValue && x.EndDate.HasValue && x.EndDate.Value.Day == listSetting.Date.Day && x.EndDate.Value.Month == listSetting.Date.Month && x.EndDate.Value.Year == listSetting.Date.Year)
+                     (!x.StartDate.HasValue && x.EndDate.HasValue && x.EndDate.Value.Day == listSettings.Date.Day && x.EndDate.Value.Month == listSettings.Date.Month && x.EndDate.Value.Year == listSettings.Date.Year)
                     )
                 ).ToList();
 
-            var freeTime = settings.WorkingTime.Subtract(new TimeSpan(recordsOnDate.Sum(record => record.CalculateTimeLeft(settings).Ticks)));
+            var freeTime = userSetting.WorkingTime.Subtract(new TimeSpan(recordsOnDate.Sum(record => record.CalculateTimeLeft(userSetting).Ticks)));
             var todayCheck = DateTime.UtcNow;
 
-            if (freeTime.Ticks <= 0 || (todayCheck.Date == listSetting.Date && TimeTillTomorrow(listSetting) < settings.GetMinComplexityRange(Complexity.Low)))
+            if (freeTime.Ticks <= 0 || (todayCheck.Date == listSettings.Date && TimeTillTomorrow() < userSetting.GetMinComplexityRange(Complexity.Low)))
             {
                 throw new Exception(ResourceScr.ErrorNoTime);
             }
-            listSetting.TimeToFill = (freeTime.Ticks < listSetting.TimeToFill.Ticks) ? freeTime : listSetting.TimeToFill;
-            listSetting.TimeToFill = (todayCheck.Date == listSetting.Date && TimeTillTomorrow(listSetting) < listSetting.TimeToFill) ? TimeTillTomorrow(listSetting) : listSetting.TimeToFill;
+            listSettings.TimeToFill = (freeTime.Ticks < listSettings.TimeToFill.Ticks) ? freeTime : listSettings.TimeToFill;
+            listSettings.TimeToFill = (todayCheck.Date == listSettings.Date && TimeTillTomorrow() < listSettings.TimeToFill) ? TimeTillTomorrow() : listSettings.TimeToFill;
             
         }
 
-        private static async System.Threading.Tasks.Task<VersionsViewModel> GreedyAlgorithm(TaskListSettingsViewModel listSetting)
+        private async System.Threading.Tasks.Task<VersionsViewModel> GreedyAlgorithm()
         {
-            var userSettings = await db.UserSettings.FirstOrDefaultAsync(x => x.UserId == listSetting.UserId) ?? new UserSetting();
             var applicantTaskGroups = db.Records
-                .Where(x => x.UserId == listSetting.UserId)
+                .Where(x => x.UserId == listSettings.UserId)
                 .OfType<Task>()
                 .Where(
                         x => !x.CompletedOn.HasValue &&
@@ -61,12 +67,12 @@ namespace LifeManagement.Logic
                             (
                                 x.EndDate.HasValue
                                 &&
-                                x.EndDate > listSetting.Date
+                                x.EndDate > listSettings.Date
                                 &&
-                                (!x.StartDate.HasValue || (x.StartDate.HasValue && x.StartDate > listSetting.Date && x.IsImportant))
+                                (!x.StartDate.HasValue || (x.StartDate.HasValue && x.StartDate > listSettings.Date && (x.IsImportant || IsUrgent(x))))
                             )
                             ||
-                            (x.StartDate.HasValue && x.StartDate > listSetting.Date && x.IsImportant)
+                            (x.StartDate.HasValue && x.StartDate > listSettings.Date && (x.IsImportant || IsUrgent(x)))
                         )
                  )
                 .OrderByDescending(x => x.IsImportant)
@@ -75,33 +81,44 @@ namespace LifeManagement.Logic
                 .GroupBy(x => x.Complexity)
                 .OrderByDescending(x => x.Key)
                 .ToList();
-            VersionsViewModel versions = null;
+            var versions = new VersionsViewModel();
             foreach (var @group in applicantTaskGroups)
             {
-                versions = GenerateFirstEtap(@group, listSetting.TimeToFill, userSettings);
-                if (!versions.IsEmpty())
+                versions.Add(GenerateFirstEtap(@group));
+                if (versions.Count() > 4)
                 {
                     break;
                 }
             }
 
+
             return versions;
         }
 
-        private static VersionsViewModel GenerateFirstEtap(IGrouping<Complexity, Task> group,
-            TimeSpan timeLimit, UserSetting userSettings)
+        private VersionsViewModel GenerateFirstEtap(IGrouping<Complexity, Task> group)
         {
             var versions = new VersionsViewModel();
-            foreach (var task in group)
+            var tasks = group.OrderByDescending(x => x.CalculateTimeLeft(userSetting)).ToList();
+            foreach (var task in tasks)
             {
-                if (task.CalculateTimeLeft(userSettings).Ticks < timeLimit.Ticks*factor)
+                if (task.CalculateTimeLeft(userSetting).Ticks < listSettings.TimeToFill.Ticks*factor || (task.IsImportant && IsUrgent(task)))
                 {
-                    var list = new ToDoList(userSettings);
+                    var list = new ToDoList(userSetting);
                     list.AddTask(task);
                     versions.ToDoLists.Add(list);
                 }
             }
             return versions;
+        }
+
+        private bool IsUrgent(Task task)
+        {
+            if (!task.EndDate.HasValue)
+            {
+                return false;
+            }
+
+            return (DateTime.UtcNow.Subtract(task.EndDate.Value).Ticks < task.CalculateTimeLeft(userSetting).Ticks*6);
         }
 
         //private static async System.Threading.Tasks.Task<VersionsViewModel> GreedyAlgorithm(
