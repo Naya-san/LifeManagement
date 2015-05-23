@@ -1,13 +1,10 @@
 ﻿@using LifeManagement.Extensions
 @model LifeManagement.ViewModels.ToDoList
-<table class="table">
+<table class="table variants">
     <tr class="tableHead">
         <td>
             @LifeManagement.Resources.ResourceScr.Name
 
-        </td>
-        <td>
-            @LifeManagement.Resources.ResourceScr.Important
         </td>
         <td>
            @LifeManagement.Resources.ResourceScr.TaskComplexity
@@ -19,13 +16,11 @@
         <tr>
             <td>
                 @Html.DisplayFor(m => m.TasksTodo[i].Name)
-
-            </td>
-            <td>
                 @if (Model.TasksTodo[i].IsImportant)
                 {
                     <div class="Urgent"></div>
                 }
+
             </td>
             <td>
                 @Model.TasksTodo[i].Complexity.ToLocalizedString()

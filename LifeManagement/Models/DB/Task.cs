@@ -87,5 +87,14 @@ namespace LifeManagement.Models.DB
             }
             return this.ConvertTimeToNice();
         }
+
+        public bool IsUrgent(UserSetting userSetting)
+        {
+            if (!EndDate.HasValue)
+            {
+                return false;
+            }
+            return (DateTime.UtcNow.Subtract(EndDate.Value).Ticks < CalculateTimeLeft(userSetting).Ticks * 6);
+        }
     }
 }

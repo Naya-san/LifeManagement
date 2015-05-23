@@ -5,31 +5,33 @@
     ViewBag.Title = "Create";
 }
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontalLM">
-        @Html.ValidationSummary(true)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontalLM">
+            @Html.ValidationSummary(true)
             <div class="LMсol-md-9">
-                @Html.Html5EditorFor(model => model.Subject, htmlAttributes: new { @required = "true", @class = "longer" })
-                @Html.ValidationMessageFor(model => model.Subject)
-            </div>
-        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Subject, htmlAttributes: new {@class = "control-label LMсol-md-3"})
+                    <div class="LMсol-md-9">
+                        @Html.Html5EditorFor(model => model.Subject, htmlAttributes: new {@required = "true", @class = "longer"})
+                        @Html.ValidationMessageFor(model => model.Subject)
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label LMсol-md-3" })
-            <div class="LMсol-md-9">
-                @Html.TextAreaFor(model => model.Message, htmlAttributes: new { @required = "true", @class = "longer"})
-                @Html.ValidationMessageFor(model => model.Message)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Message, htmlAttributes: new {@class = "control-label LMсol-md-3"})
+                    <div class="LMсol-md-9">
+                        @Html.TextAreaFor(model => model.Message, htmlAttributes: new { @required = "true", @class = "longer", @height = "80px", @placeholder=LifeManagement.Resources.ResourceScr.Message })
+                        @Html.ValidationMessageFor(model => model.Message)
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="buttonbar">
-                <input type="submit" value="@LifeManagement.Resources.ResourceScr.Send" class="btn btn-default fullsize" />
-        </div>
-    </div>
-}
+            <div class="feedback"></div>
+                <div class="buttonbar">
+                    <input type="submit" value="@LifeManagement.Resources.ResourceScr.Send" class="btn btn-default fullsize" />
+                </div>
+            </div>
+    }

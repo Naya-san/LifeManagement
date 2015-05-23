@@ -927,7 +927,7 @@ table.promo td.footer {
     margin-top: 0;
 }
 .login{
-    background: url(/Content/Images/catWellcome4.png) 0px no-repeat;
+    background: url(/Content/Images/catWellcome3.png) 0px no-repeat;
     height: 150px;
     width: 150px;
     float: left;
@@ -941,11 +941,21 @@ table.promo td.footer {
     margin-top: 10px;
 }
 .changepassword{
-    background: url(/Content/Images/catWellcome3.png) 0px no-repeat;
+    background: url(/Content/Images/catWellcome5.png) 0px no-repeat;
     height: 150px;
     width: 150px;
     float: left;
     margin-top: 42px;
+}
+.changepasswordWidth {
+    max-width: 550px !important;
+}
+.feedback{
+    background: url(/Content/Images/catWellcome4.png) 0px no-repeat;
+    height: 150px;
+    width: 150px;
+    margin-top: -15px;
+    float: right;
 }
 /*Radio button*/
 /* hide input */
@@ -1030,4 +1040,7 @@ input.radio:focus ~ label:before {
 .tableHead {
   font-weight: 600;
   color: #888;  
+}
+table.variants>tr>td {
+    width: 50%
 }

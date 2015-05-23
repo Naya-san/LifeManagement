@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
 using LifeManagement.Attributes;
+using LifeManagement.Logic;
 using LifeManagement.Models;
 using LifeManagement.Models.DB;
 using Microsoft.AspNet.Identity;
@@ -41,9 +42,9 @@ namespace LifeManagement.Controllers
                 feedback.UserId = User.Identity.GetUserId();
                 db.Feedbacks.Add(feedback);
                 await db.SaveChangesAsync();
+                EmailManager.SendMail(feedback, User.Identity.Name);
                 return Json(new { success = true });
             }
-
             return PartialView("Create", feedback);
         }
 

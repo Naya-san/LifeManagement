@@ -16,6 +16,8 @@ namespace LifeManagement.ViewModels
 
         public UserSetting UserSetting { private set; get; }
 
+        public double Score = 0;
+
         public void AddTask(Task value)
         {
             tasksTodo.Add(value);
@@ -37,5 +39,33 @@ namespace LifeManagement.ViewModels
             UserSetting = userSetting;
         }
 
+        public bool ConteinsTask(Task task)
+        {
+            return TasksTodo.Contains(task);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is ToDoList))
+            {
+                return false;
+            }
+            var todoList = obj as ToDoList;
+            if (todoList.TimeEstimate.Ticks != TimeEstimate.Ticks || tasksTodo.Count != todoList.tasksTodo.Count)
+            {
+                return false;
+            }
+            return !TasksTodo.Where((t, i) => !todoList.ConteinsTask(t) || !tasksTodo.Contains(todoList.TasksTodo[i])).Any();
+        }
+
+        public override int GetHashCode()
+        {
+            return TimeEstimate.Ticks.GetHashCode();
+        }
+
+        public void SortTasks()
+        {
+            tasksTodo = tasksTodo.OrderByDescending(t => t.IsImportant).ThenByDescending(t => t.Complexity).ToList();
+        }
     }
 }

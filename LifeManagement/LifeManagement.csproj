@@ -221,7 +221,10 @@
     <Compile Include="Extensions\RecordExtensions.cs" />
     <Compile Include="Extensions\RepeatPositionExtensions.cs" />
     <Compile Include="Hubs\AlertsHub.cs" />
+    <Compile Include="Logic\EfficiencyCalculator.cs" />
+    <Compile Include="Logic\EmailManager.cs" />
     <Compile Include="Logic\ForTestTicker.cs" />
+    <Compile Include="Logic\GarbageCollectorDB.cs" />
     <Compile Include="Logic\ToDoListManager.cs" />
     <Compile Include="Logic\TodoListTimeTicker.cs" />
     <Compile Include="Logic\ToDoManager.cs" />
@@ -322,6 +325,7 @@
     <Content Include="Content\Images\catWellcome2.png" />
     <Content Include="Content\Images\catWellcome3.png" />
     <Content Include="Content\Images\catWellcome4.png" />
+    <Content Include="Content\Images\catWellcome5.png" />
     <Content Include="Content\Images\chackCell.png" />
     <Content Include="Content\Images\chackCellChaked.png" />
     <Content Include="Content\Images\check.png" />

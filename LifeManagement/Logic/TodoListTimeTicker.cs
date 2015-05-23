@@ -173,27 +173,9 @@ namespace LifeManagement.Logic
                         (x.EndDate.Value.Year >= now.Year && x.EndDate.Value.Month >= now.Month && x.EndDate.Value.Day >= now.Day)
                         )
                         .ToList();
-                listForDay.CompleteLevel = await CalculateCompleateLevel(now, listForDay);
+                listForDay.CompleteLevel = EfficiencyCalculator.CalculateCompleateLevel(now, listForDay);
             }
             await db.SaveChangesAsync();
-        }
-
-        private async Task<double> CalculateCompleateLevel(DateTime now, ListForDay listForDay)
-        {
-            var settings = await db.UserSettings.FirstOrDefaultAsync(x => x.UserId == listForDay.UserId);
-            var nowS = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
-            double minutesForEvents  = 0;
-            foreach (var @event in listForDay.Events)
-            {
-                minutesForEvents +=(((@event.EndDate.Value > now) ? now : @event.EndDate.Value) - (((@event.StartDate.Value < nowS) ? nowS : @event.StartDate.Value))).TotalMinutes;
-                if (@event.OnBackground)
-                {
-                    minutesForEvents *= settings.ParallelismPercentage / 100.0;
-                }
-            }
-            var freeTimeForTasks = settings.WorkingTime - TimeSpan.FromMinutes(minutesForEvents);
-            double minutesForTasks  = listForDay.Archive.Sum(archive => settings.GetMinComplexityRange(archive.Task.Complexity).TotalMinutes*(archive.LevelOnEnd - archive.LevelOnStart)/100.0);
-            return  (minutesForTasks*100)/ freeTimeForTasks.TotalMinutes;
         }
     }
 }

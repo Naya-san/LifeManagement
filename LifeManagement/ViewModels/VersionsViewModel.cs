@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using LifeManagement.Logic;
+using LifeManagement.Models.DB;
 
 namespace LifeManagement.ViewModels
 {
@@ -42,15 +44,7 @@ namespace LifeManagement.ViewModels
 
         public int Count()
         {
-            int count = 0;
-            foreach (var todo in ToDoLists)
-            {
-                if (todo != null && todo.TasksTodo.Any() )
-                {
-                    count++;
-                }
-            }
-            return count;
+            return ToDoLists.Count(todo => todo != null && todo.TasksTodo.Any());
         }
     }
 }

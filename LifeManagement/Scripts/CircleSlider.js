@@ -19,9 +19,21 @@
             }
         });
     };
+    var idMouseDown = "";
+    $("div.body-contentLifeManagment").bind("mouseup", function () {
+            if (idMouseDown !== "") {
+                var curentTask = $("div").find("[data-id='" + idMouseDown + "']").first();
+                idMouseDown = "";
+                refrashTask(curentTask);
+            }
+        });
     $("div.taskComleateLevel")
-        .bind("mouseup", function () {
-            refrashTask($(this));
+        //.bind("mouseup", function () {
+        //    refrashTask($(this));
+        //})
+        .bind("mousedown", function () {
+            idMouseDown = $(this).data('id');
+           // refrashTask($(this));
         })
         .bind("touchend.k", function () {
             refrashTask($(this));
@@ -34,10 +46,15 @@
                 refrashTask(elem);
             }, 500));         
         });
+    $("input.knob").bind("change", function () {
+        var father = $(this).parent("div").parent("div.taskComleateLevel");
+        refrashTask(father);
+    });
+
     $(".knob").knob({
-        change: function (value) {
-          //  console.log("change : " + value);
-        },        
+        //change: function (value) {
+        //   console.log("change : " + value);
+        //},        
         /*format : function (value) {
             return value + '%';
         },*/

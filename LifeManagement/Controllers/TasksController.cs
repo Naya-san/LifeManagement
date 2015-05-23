@@ -192,7 +192,9 @@ namespace LifeManagement.Controllers
             var version = new VersionsViewModel();
             try
             {
-                version.ToDoLists = await ToDoListManager.Generate(listSetting);
+             //   version.ToDoLists = await ToDoListManager.Generate(listSetting);
+                var algorithm = new ToDoManager(listSetting);
+                version = await algorithm.Generate();
             }
             catch (Exception exception)
             {

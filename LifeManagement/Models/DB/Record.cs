@@ -29,6 +29,7 @@ using System.ComponentModel.DataAnnotations;
 using LifeManagement.Enums;
 using LifeManagement.Resources;
 using System.Web.Mvc;
+using Microsoft.Owin.Security.Provider;
 
 namespace LifeManagement.Models.DB
 {
@@ -71,6 +72,22 @@ namespace LifeManagement.Models.DB
             Alerts = new List<Alert>();
             Tags = new List<Tag>();
             ListForDays = new List<ListForDay>();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Record))
+            {
+                return false;
+            }
+            var task = obj as Record;
+
+            return task.Id.Equals(Id);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
         }
     }
 }
