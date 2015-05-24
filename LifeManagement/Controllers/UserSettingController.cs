@@ -33,7 +33,6 @@ namespace LifeManagement.Controllers
                 db.UserSettings.Add(usersetting);
                 await db.SaveChangesAsync();
             }
-            ViewBag.TimeZoneShift = CreateTimeZoneList(usersetting.TimeZoneShift);
             return PartialView("Edit", usersetting);
         }
 
@@ -43,7 +42,7 @@ namespace LifeManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,UserId,ComplexityLowFrom,ComplexityLowTo,ComplexityMediumTo,ComplexityHightTo,ParallelismPercentage,WorkingTime,TimeZoneShift")] UserSetting usersetting)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,UserId,ComplexityLowFrom,ComplexityLowTo,ComplexityMediumTo,ComplexityHightTo,ParallelismPercentage,WorkingTime,TimeZoneShiftTicks")] UserSetting usersetting)
         {
             if (ModelState.IsValid)
             {
@@ -51,7 +50,6 @@ namespace LifeManagement.Controllers
                 await db.SaveChangesAsync();
                 return Json(new { success = true });
             }
-            ViewBag.TimeZoneShift = CreateTimeZoneList(usersetting.TimeZoneShift);
             return PartialView("Edit", usersetting);
         }
 

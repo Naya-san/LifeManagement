@@ -388,7 +388,7 @@
     <value>Завтра</value>
   </data>
   <data name="newTag" xml:space="preserve">
-    <value>Новий тег</value>
+    <value>Нова мітка</value>
   </data>
   <data name="tag" xml:space="preserve">
     <value>мітку</value>
@@ -436,7 +436,7 @@
     <value>У Вас немає нагадувань</value>
   </data>
   <data name="None" xml:space="preserve">
-    <value>Не потрібне</value>
+    <value>Не треба</value>
   </data>
   <data name="Simultaneously" xml:space="preserve">
     <value>В той же час</value>

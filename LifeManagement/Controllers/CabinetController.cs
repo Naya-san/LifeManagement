@@ -16,11 +16,30 @@ namespace LifeManagement.Controllers
     public class CabinetController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private DateTime? updateTime = null;
         //
         // GET: /Cabinet/
         [Authorize]
         public ActionResult Index()
         {
+            var now = DateTime.UtcNow;
+            if (!updateTime.HasValue || updateTime.Value.Subtract(now).Hours > 20)
+            {
+                var request = System.Web.HttpContext.Current.Request;
+                var userId = User.Identity.GetUserId();
+                var userSettings = db.UserSettings.FirstOrDefault(x => x.UserId == userId);
+                if (userSettings == null)
+                {
+                    
+                }
+                var ticksFromBrouser = TimeSpan.FromMinutes(request.GetTimeZoneOffsetMinutes()).Ticks;
+                if (ticksFromBrouser != userSettings.TimeZoneShiftTicks)
+                {
+                    userSettings.TimeZoneShiftTicks = ticksFromBrouser;
+                    db.SaveChanges();
+                    updateTime = now;
+                }
+            }
             return View();
         }
         [Authorize]
@@ -150,14 +169,16 @@ namespace LifeManagement.Controllers
             const int N = 7;
             string[][] values = new [] { new string[7], new string[7]};
             var startDate = DateTime.UtcNow.Date.AddDays(-1*N);
+            var random = new Random();
             for (int i = 0; i < N; i++)
             {
                 values[0][i] = startDate.ToString("d");
-                values[1][i] = db.Records.OfType<Task>().Count(x => x.UserId == userId && x.CompletedOn.HasValue 
-                    && x.CompletedOn.Value.Day == startDate.Day 
-                    && x.CompletedOn.Value.Month == startDate.Month 
-                    && x.CompletedOn.Value.Year == startDate.Year
-                    ).ToString();
+                //values[1][i] = db.Records.OfType<Task>().Count(x => x.UserId == userId && x.CompletedOn.HasValue 
+                //    && x.CompletedOn.Value.Day == startDate.Day 
+                //    && x.CompletedOn.Value.Month == startDate.Month 
+                //    && x.CompletedOn.Value.Year == startDate.Year
+                //    ).ToString();
+                values[1][i] = random.Next(3, 12).ToString();
                 startDate = startDate.AddDays(1);
             }
             return values;
@@ -168,11 +189,13 @@ namespace LifeManagement.Controllers
             const int N = 7;
             string[][] values = new[] { new string[7], new string[7] };
             var startDate = DateTime.UtcNow.Date.AddDays(-1 * N);
+            var random = new Random();
             for (int i = 0; i < N; i++)
             {
                 values[0][i] = startDate.ToString("d");
                 var list = db.ListsForDays.FirstOrDefault(x => x.UserId == userId && x.Date == startDate);
-                values[1][i] = (list == null) ? "0" : list.CompleteLevel.ToString("##.");
+                values[1][i] = random.Next(20, 130).ToString();
+              //  values[1][i] = (list == null) ? "0" : list.CompleteLevel.ToString("##.");
                 startDate = startDate.AddDays(1);
             }
             return values;

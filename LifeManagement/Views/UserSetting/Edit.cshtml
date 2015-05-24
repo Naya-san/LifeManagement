@@ -3,7 +3,7 @@
 @using LifeManagement.Resources
 @model LifeManagement.Models.DB.UserSetting
 
-<h4>@ResourceScr.ComplexitySettings</h4>
+
 
 
 @using (Html.BeginForm())
@@ -15,8 +15,40 @@
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.TimeZoneShiftTicks)
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.WorkingTime, new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9 formaReadOnly">
+                @Html.Html5EditorFor(model => model.WorkingTime, InputTypes.InputType.Text, htmlAttributes: new
+                {
+                    @required = "true",
+                    @class = " short",
+                    @readonly = "readonly",
+                    @value = @Model.WorkingTime.Hours + ":" + @Model.WorkingTime.Minutes
+                })
+                <input type="text" id="Hours" value="@Model.WorkingTime.Hours" disabled />
+                @LifeManagement.Resources.ResourceScr.hours
+                <input type="text" id="Minutes" value="@Model.WorkingTime.Minutes" disabled />
+                @LifeManagement.Resources.ResourceScr.minutes
+                <br />
+                <div class="sliderLong" id="sliderWorking" data-start-value="@Model.WorkingTime.TotalMinutes"></div>
+                <br />
+                @Html.ValidationMessageFor(model => model.WorkingTime)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ParallelismPercentage, new {@class = "control-label LMсol-md-3"})
+            <div class="LMсol-md-9 formaReadOnly">
+                @Html.Html5EditorFor(model => model.ParallelismPercentage, InputTypes.InputType.Text, htmlAttributes: new {@required = "true", @class = "Percentage short", @readonly = "readonly"})%
+                <br/>
+                <div class="sliderPercentage sliderLong" data-start-value="@Model.ParallelismPercentage"></div>
+                <br/>
+                @Html.ValidationMessageFor(model => model.ParallelismPercentage)
+            </div>
+        </div>
 
+        <strong>@ResourceScr.ComplexitySettings :</strong>
         <div class="form-group">
             @Html.Label(ResourceScr.Low, new { @class = "control-label LMсol-md-3" })
             <div class="LMсol-md-9 formaReadOnly" id="Low">
@@ -46,37 +78,7 @@
                 @Html.ValidationMessageFor(model => model.ComplexityHightTo)
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.WorkingTime, new {@class = "control-label LMсol-md-3"})
-            <div class="LMсol-md-9 formaReadOnly">
-                @Html.Html5EditorFor(model => model.WorkingTime, InputTypes.InputType.Text, htmlAttributes: new
-                {
-                    @required = "true", @class = " short", @readonly = "readonly",
-                    @value = @Model.WorkingTime.Hours + ":" + @Model.WorkingTime.Minutes
-                })
-                <br />
-                <div class="sliderLong" id="sliderWorking" data-start-value="@Model.WorkingTime.TotalMinutes"></div>
-                <br />
-                @Html.ValidationMessageFor(model => model.WorkingTime)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.ParallelismPercentage, new { @class = "control-label LMсol-md-3" })
-            <div class="LMсol-md-9 formaReadOnly">
-                @Html.Html5EditorFor(model => model.ParallelismPercentage, InputTypes.InputType.Text, htmlAttributes: new {@required = "true", @class = "Percentage short", @readonly = "readonly" })%
-                <br />
-                <div class="sliderPercentage sliderLong" data-start-value="@Model.ParallelismPercentage"></div>
-                <br />
-                @Html.ValidationMessageFor(model => model.ParallelismPercentage)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.TimeZoneShift, htmlAttributes: new { @class = "control-label LMсol-md-3" })
-            <div class="LMсol-md-9">
-                @Html.DropDownList("TimeZoneShift")
-                @Html.ValidationMessageFor(model => model.TimeZoneShift)
-            </div>
-        </div>
+       
         <div class="buttonbar">
             <input type="submit" value="@ResourceScr.save" class="btn btn-default fullsize"/>
         </div>

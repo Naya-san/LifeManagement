@@ -1042,5 +1042,14 @@ input.radio:focus ~ label:before {
   color: #888;  
 }
 table.variants>tr>td {
-    width: 50%
+    width: 33.333333%
+}
+#TimeToFill, #WorkingTime{
+   display: none; 
+}
+#Hours, #Minutes {
+    width: 25px;
+}
+.tag {
+    margin-right: 5px;
 }

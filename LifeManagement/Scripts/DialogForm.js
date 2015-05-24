@@ -17,6 +17,8 @@ var initElements = function (val) {
         value: $(".sliderSpend").attr("data-start-value"),
         slide: function (event, ui) {
             $("#TimeToFill").val(toTime(ui.value));
+            $("#Hours").val(Math.floor(ui.value / 60));
+            $("#Minutes").val(ui.value % 60);
             $(".sliderSpend").attr("data-start-value", ui.value);
         }
     });
@@ -27,13 +29,15 @@ var initElements = function (val) {
         value: $("#sliderWorking").attr("data-start-value"),
         slide: function (event, ui) {
             $("#WorkingTime").val(toTime(ui.value));
+            $("#Hours").val(Math.floor(ui.value / 60));
+            $("#Minutes").val(ui.value % 60);
             $("#sliderWorking").attr("data-start-value", ui.value);
         }
     });
     $(".sliderPercentage").slider(console.log($(".sliderSpend").attr("data-start-value")), {
         range: "min",
-        min: 1,
-        max: 100,
+        min: 10,
+        max: 90,
         value: $(".sliderPercentage").attr("data-start-value"),
         slide: function (event, ui) {
             $("#ParallelismPercentage").val(ui.value);

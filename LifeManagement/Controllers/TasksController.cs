@@ -174,7 +174,8 @@ namespace LifeManagement.Controllers
             var settings = new TaskListSettingsViewModel();
             ViewBag.Date = DateTime.Now.Date.ToString("dd.MM.yyyy");
             ViewBag.Time = "00:05";
-
+            ViewBag.Hours = 0;
+            ViewBag.Minutes = 5;
             return PartialView(settings);
         }
 
@@ -183,6 +184,8 @@ namespace LifeManagement.Controllers
         {
             ViewBag.Date = listSetting.Date.ToString("dd.MM.yyyy");
             ViewBag.Time = listSetting.TimeToFill.Hours + ":" + listSetting.TimeToFill.Minutes;
+            ViewBag.Hours = listSetting.TimeToFill.Hours;
+            ViewBag.Minutes = listSetting.TimeToFill.Minutes;
             if (listSetting.Date < DateTime.UtcNow.Date)
             {
                 ModelState.AddModelError("Date", ResourceScr.itsPast);
@@ -192,7 +195,6 @@ namespace LifeManagement.Controllers
             var version = new VersionsViewModel();
             try
             {
-             //   version.ToDoLists = await ToDoListManager.Generate(listSetting);
                 var algorithm = new ToDoManager(listSetting);
                 version = await algorithm.Generate();
             }
@@ -595,8 +597,8 @@ namespace LifeManagement.Controllers
                         return
                             records.Where(
                                 x =>
-                                    (x.StartDate != null && x.StartDate.Value.Date <= dueDate && ((x.EndDate.HasValue && x.EndDate.Value >= dueDate) || !x.EndDate.HasValue)) ||
-                                    (x.EndDate != null && x.EndDate.Value.Date == dueDate && !x.StartDate.HasValue)).OrderByDescending(x=>x.IsImportant).ThenBy(x=>x.EndDate).ToList();
+                                    (x.StartDate != null && request.GetUserLocalTimeFromUtc(x.StartDate.Value).Date <= dueDate && ((x.EndDate.HasValue && x.EndDate.Value >= dueDate) || !x.EndDate.HasValue)) ||
+                                    (x.EndDate != null && request.GetUserLocalTimeFromUtc(x.EndDate.Value).Date == dueDate && !x.StartDate.HasValue)).OrderByDescending(x=>x.IsImportant).ThenBy(x=>x.EndDate).ToList();
                     }
                 case RecordFilter.Overdue:
                     return
@@ -610,7 +612,7 @@ namespace LifeManagement.Controllers
                             records.Where(
                                 x =>
                                     (x.StartDate != null && request.GetUserLocalTimeFromUtc(x.StartDate.Value).Date == dueDate && (x.EndDate == null || (x.EndDate != null && x.EndDate > today))) ||
-                                    (x.EndDate != null && x.EndDate.Value.Date == dueDate)).ToList();
+                                    (x.EndDate != null && x.EndDate.Value.Date == dueDate && (!x.StartDate.HasValue || request.GetUserLocalTimeFromUtc(x.StartDate.Value).Date == dueDate))).ToList();
                     }
                 case RecordFilter.Future:
                     {

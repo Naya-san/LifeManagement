@@ -31,7 +31,7 @@
                 <div class="tags">
                     @foreach (var tag in item.Tags)
                     {
-                        @Html.ActionLink(tag.Name, "GetRecords", "Tags", new { id = tag.Id }, null)
+                        @Html.ActionLink(tag.Name, "GetRecords", "Tags", new { id = tag.Id }, htmlAttributes: new {@class="tag"} )
                     }
                 </div>
             </div>
@@ -58,7 +58,7 @@
                 <div class="tags">
                     @foreach (var tag in item.Tags)
                     {
-                        @Html.ActionLink(tag.Name, "GetRecords", "Tags", new { id = tag.Id }, null)
+                        @Html.ActionLink(tag.Name, "GetRecords", "Tags", new { id = tag.Id }, htmlAttributes: new {@class="tag"})
                     }
                 </div>
             </div>

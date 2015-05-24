@@ -16,9 +16,13 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.TimeToFill, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+            @Html.LabelFor(model => model.TimeToFill, htmlAttributes: new {@class = "control-label LMсol-md-3"})
             <div class="LMсol-md-9 formaReadOnly">
-                @Html.Html5EditorFor(model => model.TimeToFill, htmlAttributes: new { @class = "longer", @value = ViewBag.Time })
+                @Html.Html5EditorFor(model => model.TimeToFill, htmlAttributes: new {@value = ViewBag.Time})
+                <input type="text" id="Hours" value="@ViewBag.Hours" disabled />
+                @LifeManagement.Resources.ResourceScr.hours
+                <input type="text" id="Minutes" value="@ViewBag.Minutes" disabled />
+                @LifeManagement.Resources.ResourceScr.minutes
                 <div class="sliderSpend sliderLong"></div>
                 <br>
                 @Html.ValidationMessageFor(model => model.TimeToFill)

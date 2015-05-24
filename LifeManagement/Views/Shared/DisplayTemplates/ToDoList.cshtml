@@ -4,8 +4,8 @@
     <tr class="tableHead">
         <td>
             @LifeManagement.Resources.ResourceScr.Name
-
         </td>
+        <td>@LifeManagement.Resources.ResourceScr.TaskProject</td>
         <td>
            @LifeManagement.Resources.ResourceScr.TaskComplexity
         </td>
@@ -20,8 +20,8 @@
                 {
                     <div class="Urgent"></div>
                 }
-
             </td>
+            <td>@Html.DisplayFor(m => m.TasksTodo[i].Project.Name)</td>
             <td>
                 @Model.TasksTodo[i].Complexity.ToLocalizedString()
             </td>
