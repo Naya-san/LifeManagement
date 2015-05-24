@@ -173,12 +173,12 @@ namespace LifeManagement.Controllers
             for (int i = 0; i < N; i++)
             {
                 values[0][i] = startDate.ToString("d");
-                //values[1][i] = db.Records.OfType<Task>().Count(x => x.UserId == userId && x.CompletedOn.HasValue 
-                //    && x.CompletedOn.Value.Day == startDate.Day 
-                //    && x.CompletedOn.Value.Month == startDate.Month 
-                //    && x.CompletedOn.Value.Year == startDate.Year
-                //    ).ToString();
-                values[1][i] = random.Next(3, 12).ToString();
+                values[1][i] = db.Records.OfType<Task>().Count(x => x.UserId == userId && x.CompletedOn.HasValue
+                    && x.CompletedOn.Value.Day == startDate.Day
+                    && x.CompletedOn.Value.Month == startDate.Month
+                    && x.CompletedOn.Value.Year == startDate.Year
+                    ).ToString();
+              //  values[1][i] = random.Next(3, 12).ToString();
                 startDate = startDate.AddDays(1);
             }
             return values;
@@ -194,8 +194,8 @@ namespace LifeManagement.Controllers
             {
                 values[0][i] = startDate.ToString("d");
                 var list = db.ListsForDays.FirstOrDefault(x => x.UserId == userId && x.Date == startDate);
-                values[1][i] = random.Next(20, 130).ToString();
-              //  values[1][i] = (list == null) ? "0" : list.CompleteLevel.ToString("##.");
+                //values[1][i] = random.Next(20, 130).ToString();
+                values[1][i] = (list == null) ? "0" : list.CompleteLevel.ToString("##.");
                 startDate = startDate.AddDays(1);
             }
             return values;
