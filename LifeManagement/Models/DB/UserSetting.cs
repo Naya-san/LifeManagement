@@ -74,8 +74,8 @@ namespace LifeManagement.Models.DB
                     result[1] = ComplexityHightTo;
                     break;
                 default:
-                    result[0] = new TimeSpan(0, 0, 0);
-                    result[1] = new TimeSpan(0,15,0);
+                    result[0] = new TimeSpan(0, 15, 0);
+                    result[1] = new TimeSpan(0,30,0);
                     break;
             }
             return result;
@@ -93,7 +93,7 @@ namespace LifeManagement.Models.DB
                 case Complexity.Hight:
                     return ComplexityHightTo;
                 default:
-                    return new TimeSpan(0, 15, 0);
+                    return new TimeSpan(0, 30, 0);
             }
         }
 
