@@ -13,7 +13,7 @@ namespace LifeManagement
         {
             ConfigureAuth(app);
             app.MapSignalR();
-            TodoListTimeTicker ticker = new TodoListTimeTicker();
+          //  TodoListTimeTicker ticker = new TodoListTimeTicker();
          //   ForTestTicker testTicker = new ForTestTicker();
             // Дополнительные сведения о настройке приложения см. по адресу: http://go.microsoft.com/fwlink/?LinkID=316888
         }
