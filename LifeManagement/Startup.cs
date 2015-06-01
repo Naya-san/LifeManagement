@@ -1,7 +1,10 @@
-﻿using LifeManagement.Logic;
+﻿using LifeManagement.Binder;
+using LifeManagement.Logic;
 using LifeManagement.ViewModels;
 using Microsoft.Owin;
 using Owin;
+using System;
+using System.Web.Mvc;
 
 [assembly: OwinStartup(typeof(LifeManagement.Startup))]
 

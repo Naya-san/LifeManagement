@@ -11,8 +11,20 @@ namespace LifeManagement.Binder
         public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
             var value = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
-            var date = value.ConvertTo(typeof(DateTime), CultureInfo.CurrentCulture);
-            return date;
+            System.Globalization.CultureInfo cultureinfo = new System.Globalization.CultureInfo("ru-ru");
+
+            return value.ConvertTo(typeof(DateTime), cultureinfo);
         }
     }
+    public class NullableDateTimeBinder : IModelBinder
+    {
+        public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        {
+            var value = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+            System.Globalization.CultureInfo cultureinfo = new System.Globalization.CultureInfo("ru-ru");
+            return value == null
+                ? null
+                : value.ConvertTo(typeof(DateTime), cultureinfo);
+        }
+    }  
 }

@@ -48,9 +48,11 @@ namespace LifeManagement.Models.DB
         public string Note { get; set; }
 
         [Display(Name = "TaskStartDate", ResourceType = typeof(ResourceScr))]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? StartDate { get; set; }
 
         [Display(Name = "TaskDueDate", ResourceType = typeof(ResourceScr))]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? EndDate { get; set; }
 
         [Display(Name = "Important", ResourceType = typeof(ResourceScr))]
