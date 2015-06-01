@@ -28,7 +28,13 @@
                 @Html.ValidationMessageFor(model => model.TimeToFill)
             </div>
         </div>
-        
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProjectId, htmlAttributes: new { @class = "control-label LMсol-md-3" })
+            <div class="LMсol-md-9">
+                @Html.DropDownList("ProjectId")
+                @Html.ValidationMessageFor(model => model.ProjectId)
+            </div>
+        </div>
 
         <div class="buttonbar">
             <input type="submit" value="@LifeManagement.Resources.ResourceScr.GenerateList" class="btn btn-default fullsize" />

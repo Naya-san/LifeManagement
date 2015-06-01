@@ -176,22 +176,26 @@ namespace LifeManagement.Controllers
             ViewBag.Time = "00:05";
             ViewBag.Hours = 0;
             ViewBag.Minutes = 5;
+            var userId = User.Identity.GetUserId();
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path");
             return PartialView(settings);
         }
 
         [HttpPost]
-        public async Task<ActionResult> GenerateList([Bind(Include = "Date,TimeToFill")]TaskListSettingsViewModel listSetting)
+        public async Task<ActionResult> GenerateList([Bind(Include = "Date,TimeToFill,ProjectId")]TaskListSettingsViewModel listSetting)
         {
+            var userId = User.Identity.GetUserId();
             ViewBag.Date = listSetting.Date.ToString("dd.MM.yyyy");
             ViewBag.Time = listSetting.TimeToFill.Hours + ":" + listSetting.TimeToFill.Minutes;
             ViewBag.Hours = listSetting.TimeToFill.Hours;
             ViewBag.Minutes = listSetting.TimeToFill.Minutes;
+            ViewBag.ProjectId = new SelectList(db.Projects.Where(x => x.UserId == userId), "Id", "Path");
             if (listSetting.Date < DateTime.UtcNow.Date)
             {
                 ModelState.AddModelError("Date", ResourceScr.itsPast);
                 return PartialView("GenerateList", listSetting);
             }
-            listSetting.UserId = User.Identity.GetUserId();
+            listSetting.UserId = userId;
             var version = new VersionsViewModel();
             try
             {

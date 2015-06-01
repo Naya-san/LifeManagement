@@ -15,6 +15,9 @@ namespace LifeManagement.ViewModels
         [Display(Name = "TimeToFill", ResourceType = typeof(ResourceScr))]
         public TimeSpan TimeToFill { set; get; }
 
+        [Display(Name = "ParentProject", ResourceType = typeof(ResourceScr))]
+        public Guid? ProjectId { set; get; } 
+
         public string UserId { set; get; }
     }
 }
