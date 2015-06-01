@@ -30,7 +30,9 @@ namespace LifeManagement.Controllers
                 var userSettings = db.UserSettings.FirstOrDefault(x => x.UserId == userId);
                 if (userSettings == null)
                 {
-                    
+                    userSettings = new UserSetting(userId);
+                    db.UserSettings.Add(userSettings);
+                    db.SaveChanges();
                 }
                 var ticksFromBrouser = TimeSpan.FromMinutes(request.GetTimeZoneOffsetMinutes()).Ticks;
                 if (ticksFromBrouser != userSettings.TimeZoneShiftTicks)

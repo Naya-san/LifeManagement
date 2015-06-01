@@ -26,12 +26,12 @@ namespace LifeManagement.Extensions
             string res = "";
             if (record.StartDate.HasValue)
             {
-                res = String.Concat(ResourceScr.from, " ", record.StartDate.Value.ToString("g"), " ");
+                res = String.Concat(ResourceScr.from, " ", record.StartDate.Value.ToString("dd.MM.yyyy HH:mm"), " ");
             }
 
             if (record.EndDate.HasValue)
             {
-                res += String.Concat(ResourceScr.till, " ", record.EndDate.Value.ToString("g"));
+                res += String.Concat(ResourceScr.till, " ", record.EndDate.Value.ToString("dd.MM.yyyy HH:mm"));
             }
 
             return res;

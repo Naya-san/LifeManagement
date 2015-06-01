@@ -199,6 +199,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Binder\LMBinder.cs" />
     <Compile Include="Controllers\AlertsController.cs" />
     <Compile Include="Controllers\CabinetController.cs" />
     <Compile Include="Controllers\FeedbacksController.cs" />
@@ -228,41 +229,9 @@
     <Compile Include="Logic\ToDoListManager.cs" />
     <Compile Include="Logic\TodoListTimeTicker.cs" />
     <Compile Include="Logic\ToDoManager.cs" />
-    <Compile Include="Migrations\201504041457527_NewTableSettings.cs" />
-    <Compile Include="Migrations\201504041457527_NewTableSettings.Designer.cs">
-      <DependentUpon>201504041457527_NewTableSettings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504041508135_TableSettingsUpdate.cs" />
-    <Compile Include="Migrations\201504041508135_TableSettingsUpdate.Designer.cs">
-      <DependentUpon>201504041508135_TableSettingsUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504051712110_Rename.cs" />
-    <Compile Include="Migrations\201504051712110_Rename.Designer.cs">
-      <DependentUpon>201504051712110_Rename.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504130926153_NawSettings.cs" />
-    <Compile Include="Migrations\201504130926153_NawSettings.Designer.cs">
-      <DependentUpon>201504130926153_NawSettings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504220551217_DBUpdate.cs" />
-    <Compile Include="Migrations\201504220551217_DBUpdate.Designer.cs">
-      <DependentUpon>201504220551217_DBUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504220605335_DBUpdate2.cs" />
-    <Compile Include="Migrations\201504220605335_DBUpdate2.Designer.cs">
-      <DependentUpon>201504220605335_DBUpdate2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504261043584_ChangeToEvent.cs" />
-    <Compile Include="Migrations\201504261043584_ChangeToEvent.Designer.cs">
-      <DependentUpon>201504261043584_ChangeToEvent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504261320511_AddArchives.cs" />
-    <Compile Include="Migrations\201504261320511_AddArchives.Designer.cs">
-      <DependentUpon>201504261320511_AddArchives.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505121145338_AIntTicks.cs" />
-    <Compile Include="Migrations\201505121145338_AIntTicks.Designer.cs">
-      <DependentUpon>201505121145338_AIntTicks.cs</DependentUpon>
+    <Compile Include="Migrations\201506011427066_Initial.cs" />
+    <Compile Include="Migrations\201506011427066_Initial.Designer.cs">
+      <DependentUpon>201506011427066_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DB\Archive.cs" />
@@ -438,32 +407,8 @@
     <Content Include="Scripts\availableFields.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EmbeddedResource Include="Migrations\201504041457527_NewTableSettings.resx">
-      <DependentUpon>201504041457527_NewTableSettings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504041508135_TableSettingsUpdate.resx">
-      <DependentUpon>201504041508135_TableSettingsUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504051712110_Rename.resx">
-      <DependentUpon>201504051712110_Rename.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504130926153_NawSettings.resx">
-      <DependentUpon>201504130926153_NawSettings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504220551217_DBUpdate.resx">
-      <DependentUpon>201504220551217_DBUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504220605335_DBUpdate2.resx">
-      <DependentUpon>201504220605335_DBUpdate2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504261043584_ChangeToEvent.resx">
-      <DependentUpon>201504261043584_ChangeToEvent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504261320511_AddArchives.resx">
-      <DependentUpon>201504261320511_AddArchives.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505121145338_AIntTicks.resx">
-      <DependentUpon>201505121145338_AIntTicks.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201506011427066_Initial.resx">
+      <DependentUpon>201506011427066_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ResourceScr.ru-ru.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -484,7 +429,9 @@
     <Content Include="Content\Images\AddTask.psd" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <None Include="Properties\PublishProfiles\life-m.pubxml" />
     <None Include="Properties\PublishProfiles\lifemanagement.pubxml" />
+    <None Include="Properties\PublishProfiles\lifemanagement1.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\excanvas.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
