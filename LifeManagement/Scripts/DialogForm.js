@@ -7,6 +7,12 @@
     }
     return Math.floor(val / 60) + ":" + ((val % 60 > 9) ? val % 60 : "0" + val % 60);
 }
+
+var onDate = function () {
+    console.log("!!!");
+    $("#dateForm").submit();
+};
+
 var initElements = function (val) {
     $(".datepicker").datepicker({ dateFormat: "dd.mm.yy", }, $.datepicker.setDefaults($.datepicker.regional[LocalizeCode]));
     $(".timepicker").timepicker($.timepicker.setDefaults($.timepicker.regional[LocalizeCode]));

@@ -30,8 +30,7 @@ namespace LifeManagement.Logic
         }
 
         public async System.Threading.Tasks.Task<VersionsViewModel> Generate()
-        {
-           
+        {           
             var recordsOnDate =
                 db.Records.Where(x => x.UserId == listSettings.UserId &&
                     (
@@ -120,9 +119,22 @@ namespace LifeManagement.Logic
                     }
                 }
             }
-
+            if (versions.IsEmpty())
+            {
+                versions = new VersionsViewModel();
+                foreach (var task in applicantTasks)
+                {
+                    if (task.ProjectId.Equals(listSettings.ProjectId))
+                    {
+                        var list = new ToDoList(userSetting);
+                        list.AddTask(task);
+                        versions.ToDoLists.Add(list);
+                    }
+                }
+            }
             Sort(versions);
-            return RemoveTheSameVariants(versions);
+            versions = RemoveTheSameVariants(versions);
+            return versions;
         }
         public void Sort(VersionsViewModel versions)
         {

@@ -424,6 +424,7 @@ input[type="search"] {
 .closeBlock, .openBlock {
     padding-left: 15px;
     font-weight: bolder;
+    cursor: pointer;
 }
 ul.tree {
    margin-left: 0; /* Отступ слева в браузере IE и Opera */

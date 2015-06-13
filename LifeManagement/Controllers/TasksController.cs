@@ -624,8 +624,8 @@ namespace LifeManagement.Controllers
                         return
                             records.Where(
                                 x =>
-                                    (x.StartDate != null && x.StartDate.Value.Date > dueDate) ||
-                                    (x.EndDate != null && x.EndDate.Value.Date > dueDate && (x.StartDate == null || (x.StartDate != null && x.StartDate > today)))).ToList();
+                                    (x.StartDate != null && request.GetUserLocalTimeFromUtc(x.StartDate.Value) > dueDate) ||
+                                    (x.EndDate != null && request.GetUserLocalTimeFromUtc(x.EndDate.Value) > dueDate)).ToList();
                     }
                 case RecordFilter.NoDueDate:
                     return

@@ -86,7 +86,7 @@ namespace LifeManagement.Controllers
             var records =
                 db.Records.Where(x => x.UserId == userId && 
                     ((
-                    (x.StartDate.HasValue && x.StartDate.Value.Day <= FocusDate.Day && x.StartDate.Value.Month <= FocusDate.Month && x.StartDate.Value.Year <= FocusDate.Year) 
+                    (x.StartDate.HasValue && x.StartDate.Value <= FocusDate) 
                     && ((x.EndDate.HasValue && x.EndDate.Value >= FocusDate) || !x.EndDate.HasValue)) 
                     || 
                     (!x.StartDate.HasValue && x.EndDate.HasValue && x.EndDate.Value >= FocusDate))).ToList();

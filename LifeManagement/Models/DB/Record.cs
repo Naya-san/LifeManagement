@@ -40,7 +40,7 @@ namespace LifeManagement.Models.DB
 
 
         [Required(ErrorMessageResourceName = "ErrorRequired", ErrorMessageResourceType = typeof(ResourceScr))]
-        [StringLength(25, ErrorMessageResourceName = "ErrorStrLen", ErrorMessageResourceType = typeof(ResourceScr))]
+        [StringLength(40, ErrorMessageResourceName = "ErrorStrLen", ErrorMessageResourceType = typeof(ResourceScr))]
         [Display(Name = "Name", ResourceType = typeof(ResourceScr))]
         public string Name { get; set; }
         [StringLength(700, ErrorMessageResourceName = "ErrorStrLen", ErrorMessageResourceType = typeof(ResourceScr))]

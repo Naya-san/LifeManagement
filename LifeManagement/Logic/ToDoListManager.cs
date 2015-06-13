@@ -73,8 +73,6 @@ namespace LifeManagement.Logic
             {
                 varients.Add(new ToDoList(userSettings));
                 var tmp = new List<List<ToDoList>>();
-
-
             }
             return varients;
         }

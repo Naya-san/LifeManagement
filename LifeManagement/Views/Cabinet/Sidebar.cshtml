@@ -20,10 +20,10 @@
             <li>@Html.ActionLink(@ResourceScr.AllTask, "AllTasks", "Cabinet")</li>
             <li>@Html.ActionLink(@ResourceScr.AllEvents, "AllEvents", "Cabinet")</li>  
             <li>
-                @using (@Html.BeginForm("TimetableOnDate", "Cabinet", FormMethod.Post))
+                @using (@Html.BeginForm("TimetableOnDate", "Cabinet", FormMethod.Post, htmlAttributes: new {@id = "dateForm" }))
                 {
                     <input type="submit" value="@ResourceScr.onDate" class="invisibleInput" />
-                    <input class="datepicker invisibleInput CalendarIcon" value="@DateTime.Today.AddDays(1).ToString("dd.MM.yyyy")" type="text" name="FocusDate" />
+                    <input class="datepicker invisibleInput CalendarIcon" onchange="onDate()" value="@(Session["FocusDate"] ?? DateTime.Today.AddDays(1).ToString("dd.MM.yyyy"))" type="text" name="FocusDate" />
                 }
 
             </li>          
